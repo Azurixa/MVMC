@@ -17,9 +17,16 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::middleware('auth:api')->get('/abc', function (Request $request) {
-    return $request->user()->id;
-});
+// Create new smt.
+Route::middleware('auth:api')->post('/user/create/category', 'ApiController@createCategory');
+Route::middleware('auth:api')->post('/user/create/product', 'ApiController@createProduct');
+
+// Get user categories
+Route::middleware('auth:api')->get('/user/categories', 'ApiController@getUserCategories');
+// Get all user products
+Route::middleware('auth:api')->get('/user/products', 'ApiController@getAllUserProducts');
+// Get user products by categories
+Route::middleware('auth:api')->get('/user/products/{categoryId}', 'ApiController@getUserProducts');
 
 // Login route
 Route::post('/login', 'ApiController@login');
