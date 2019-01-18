@@ -19,8 +19,8 @@ class ApiController extends Controller
             $res = $client->request('POST', url('/oauth/token'), [
                 'form_params' => [
                     'grant_type' => 'password',
-                    'client_id' => 2,
-                    'client_secret' => 'P016iqfCjZuiao8Lc9XVyrgrG6vNjufDK0Ysld6L',
+                    'client_id' => env('PASSPORT_USER_ID'),
+                    'client_secret' => env('PASSPORT_USER_SECRET'),
                     'username' => $request->input('username'),
                     'password' => $request->input('password')
                 ]
