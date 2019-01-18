@@ -201,6 +201,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'userDashboard',
   created: function created() {
@@ -261,7 +283,7 @@ __webpack_require__.r(__webpack_exports__);
       var formData = new FormData();
       formData.append('id', categoryId);
       fetch('/api/user/delete/category', {
-        method: 'DELETE',
+        method: 'POST',
         headers: {
           'Authorization': this.token
         },
@@ -311,7 +333,7 @@ __webpack_require__.r(__webpack_exports__);
       var formData = new FormData();
       formData.append('id', brandId);
       fetch('/api/user/delete/brand', {
-        method: 'DELETE',
+        method: 'POST',
         headers: {
           'Authorization': this.token
         },
@@ -356,6 +378,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (data) {
         _this8.formData.newProduct.name = '';
         _this8.formData.newProduct.categoryId = '';
+        _this8.formData.newProduct.brandId = '';
         _this8.formData.newProduct.description = '';
 
         _this8.getCategoriesAndProducts();
@@ -367,7 +390,7 @@ __webpack_require__.r(__webpack_exports__);
       var formData = new FormData();
       formData.append('id', productId);
       fetch('/api/user/delete/product', {
-        method: 'DELETE',
+        method: 'POST',
         headers: {
           'Authorization': this.token
         },
@@ -1002,332 +1025,389 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("p", [_vm._v("\n        Welcome!\n    ")]),
+  return _c("div", { attrs: { id: "projectpan" } }, [
+    _vm._m(0),
     _vm._v(" "),
-    _c("div", { staticClass: "card p-2 my-1" }, [
-      _c("p", { staticClass: "mb-0" }, [_vm._v("Your collection:")]),
-      _vm._v(" "),
-      _c(
-        "ul",
-        _vm._l(_vm.allProducts, function(item) {
-          return _c("li", [
-            _vm._v("\n                " + _vm._s(item.category.name) + " "),
-            _c(
-              "span",
-              {
-                staticClass: "badge badge-danger",
-                on: {
-                  click: function($event) {
-                    _vm.deleteCategory(item.category.id)
-                  }
-                }
-              },
-              [_vm._v("X")]
-            ),
-            _vm._v(" "),
-            _c(
-              "ul",
-              _vm._l(item.products, function(product) {
-                return _c("li", [
-                  _c("span", { staticClass: "badge badge-info" }, [
-                    _vm._v(_vm._s(product.brand))
-                  ]),
-                  _vm._v(" " + _vm._s(product.name) + " "),
-                  _c(
-                    "span",
-                    {
-                      staticClass: "badge badge-danger",
-                      on: {
-                        click: function($event) {
-                          _vm.deleteProduct(product.id)
-                        }
-                      }
-                    },
-                    [_vm._v("X")]
-                  )
-                ])
-              }),
-              0
-            )
-          ])
-        }),
-        0
-      )
-    ]),
+    _vm._m(1),
     _vm._v(" "),
-    _c("div", { staticClass: "card p-2" }, [
-      _c("div", { staticClass: "card p-2 mb-2" }, [
-        _c("p", [
-          _vm._v("\n                Create new category:\n            ")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "d-flex" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.formData.newCategory.name,
-                expression: "formData.newCategory.name"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { placeholder: "Name of new category" },
-            domProps: { value: _vm.formData.newCategory.name },
-            on: {
-              keyup: function($event) {
-                if (
-                  !("button" in $event) &&
-                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                ) {
-                  return null
-                }
-                _vm.createCategory()
-              },
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.formData.newCategory, "name", $event.target.value)
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary",
-              on: {
-                click: function($event) {
-                  _vm.createCategory()
-                }
-              }
-            },
-            [_vm._v("Add")]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card p-2 mb-2" }, [
-        _c("p", [_vm._v("\n                Create new brand:\n            ")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "d-flex" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.formData.newBrand.name,
-                expression: "formData.newBrand.name"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { placeholder: "Name of new category" },
-            domProps: { value: _vm.formData.newBrand.name },
-            on: {
-              keyup: function($event) {
-                if (
-                  !("button" in $event) &&
-                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                ) {
-                  return null
-                }
-                _vm.createBrand()
-              },
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.formData.newBrand, "name", $event.target.value)
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary",
-              on: {
-                click: function($event) {
-                  _vm.createBrand()
-                }
-              }
-            },
-            [_vm._v("Add")]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card p-2" }, [
-        _c("p", [
-          _vm._v("\n                Create new product:\n            ")
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _c("div", { staticClass: "form-group" }, [
-            _c("p", { staticClass: "mb-0" }, [_vm._v("Category:")]),
+    _c("div", { staticClass: "toolbox" }, [
+      _c("div", { staticClass: "inside" }, [
+        _c("div", { staticClass: "card p-2 m-auto" }, [
+          _c("div", { staticClass: "card p-2 mb-2" }, [
+            _c("p", [
+              _vm._v(
+                "\n                        Create new category:\n                    "
+              )
+            ]),
             _vm._v(" "),
-            _c(
-              "select",
-              {
+            _c("div", { staticClass: "d-flex" }, [
+              _c("input", {
                 directives: [
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.formData.newProduct.categoryId,
-                    expression: "formData.newProduct.categoryId"
+                    value: _vm.formData.newCategory.name,
+                    expression: "formData.newCategory.name"
                   }
                 ],
                 staticClass: "form-control",
+                attrs: { placeholder: "Name" },
+                domProps: { value: _vm.formData.newCategory.name },
                 on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
+                  keyup: function($event) {
+                    if (
+                      !("button" in $event) &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    _vm.createCategory()
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
                     _vm.$set(
-                      _vm.formData.newProduct,
-                      "categoryId",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                      _vm.formData.newCategory,
+                      "name",
+                      $event.target.value
                     )
                   }
                 }
-              },
-              _vm._l(_vm.categories, function(category) {
-                return _c("option", { domProps: { value: category.id } }, [
-                  _vm._v(_vm._s(category.name))
-                ])
               }),
-              0
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("p", { staticClass: "mb-0" }, [_vm._v("Brand:")]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.formData.newProduct.brandId,
-                    expression: "formData.newProduct.brandId"
-                  }
-                ],
-                staticClass: "form-control",
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.formData.newProduct,
-                      "brandId",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
-                }
-              },
-              _vm._l(_vm.brands, function(brand) {
-                return _c("option", { domProps: { value: brand.id } }, [
-                  _vm._v(_vm._s(brand.name))
-                ])
-              }),
-              0
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("input", {
-              directives: [
+              _vm._v(" "),
+              _c(
+                "button",
                 {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.formData.newProduct.name,
-                  expression: "formData.newProduct.name"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { placeholder: "Name of new product" },
-              domProps: { value: _vm.formData.newProduct.name },
-              on: {
-                keyup: function($event) {
-                  if (
-                    !("button" in $event) &&
-                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                  ) {
-                    return null
+                  staticClass: "btn btn-primary",
+                  on: {
+                    click: function($event) {
+                      _vm.createCategory()
+                    }
                   }
-                  _vm.createProduct()
                 },
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.formData.newProduct, "name", $event.target.value)
-                }
-              }
-            })
+                [_vm._v("Add")]
+              )
+            ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("textarea", {
-              directives: [
+          _c("div", { staticClass: "card p-2 mb-2" }, [
+            _c("p", [
+              _vm._v(
+                "\n                        Create new brand:\n                    "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "d-flex" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.formData.newBrand.name,
+                    expression: "formData.newBrand.name"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { placeholder: "Name" },
+                domProps: { value: _vm.formData.newBrand.name },
+                on: {
+                  keyup: function($event) {
+                    if (
+                      !("button" in $event) &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    _vm.createBrand()
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.formData.newBrand, "name", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
                 {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.formData.newProduct.description,
-                  expression: "formData.newProduct.description"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { placeholder: "Product description" },
-              domProps: { value: _vm.formData.newProduct.description },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+                  staticClass: "btn btn-primary",
+                  on: {
+                    click: function($event) {
+                      _vm.createBrand()
+                    }
                   }
-                  _vm.$set(
-                    _vm.formData.newProduct,
-                    "description",
-                    $event.target.value
-                  )
-                }
-              }
-            })
+                },
+                [_vm._v("Add")]
+              )
+            ])
           ]),
           _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary",
-              on: {
-                click: function($event) {
-                  _vm.createProduct()
-                }
-              }
-            },
-            [_vm._v("Add new product")]
-          )
+          _c("div", { staticClass: "card p-2" }, [
+            _c("p", [
+              _vm._v(
+                "\n                        Create new product:\n                    "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "category" } }, [
+                  _vm._v("Category")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.formData.newProduct.categoryId,
+                        expression: "formData.newProduct.categoryId"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "category" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.formData.newProduct,
+                          "categoryId",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.categories, function(category) {
+                    return _c("option", { domProps: { value: category.id } }, [
+                      _vm._v(_vm._s(category.name))
+                    ])
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "brand" } }, [_vm._v("Brand")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.formData.newProduct.brandId,
+                        expression: "formData.newProduct.brandId"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "brand" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.formData.newProduct,
+                          "brandId",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.brands, function(brand) {
+                    return _c("option", { domProps: { value: brand.id } }, [
+                      _vm._v(_vm._s(brand.name))
+                    ])
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.formData.newProduct.name,
+                      expression: "formData.newProduct.name"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { placeholder: "Name of new product" },
+                  domProps: { value: _vm.formData.newProduct.name },
+                  on: {
+                    keyup: function($event) {
+                      if (
+                        !("button" in $event) &&
+                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                      ) {
+                        return null
+                      }
+                      _vm.createProduct()
+                    },
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.formData.newProduct,
+                        "name",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.formData.newProduct.description,
+                      expression: "formData.newProduct.description"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { placeholder: "Product description" },
+                  domProps: { value: _vm.formData.newProduct.description },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.formData.newProduct,
+                        "description",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  on: {
+                    click: function($event) {
+                      _vm.createProduct()
+                    }
+                  }
+                },
+                [_vm._v("Add new product")]
+              )
+            ])
+          ])
         ])
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row m-0" }, [
+      _c("div", { staticClass: "col-lg-3" }, [
+        _c("div", { staticClass: "card p-2 my-1" }, [
+          _c("p", { staticClass: "mb-0" }, [_vm._v("Your collection:")]),
+          _vm._v(" "),
+          _c(
+            "ul",
+            _vm._l(_vm.allProducts, function(item) {
+              return _c("li", [
+                _c(
+                  "span",
+                  {
+                    staticClass: "category",
+                    attrs: { onClick: "$(this).next().toggle()" }
+                  },
+                  [_vm._v(_vm._s(item.category.name))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  _vm._l(item.products, function(product) {
+                    return _c("li", [
+                      _c("span", { staticClass: "badge badge-info" }, [
+                        _vm._v(_vm._s(product.brand))
+                      ]),
+                      _vm._v(
+                        " : " +
+                          _vm._s(product.name) +
+                          "\n                            "
+                      )
+                    ])
+                  }),
+                  0
+                )
+              ])
+            }),
+            0
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(2)
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "toolbox-show",
+        attrs: { onClick: "$('.toolbox-what').toggle()" }
+      },
+      [_c("i", { staticClass: "bx bx-plus m-0" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "toolbox-what" }, [
+      _c("p", [_vm._v("New category")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("New brand")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("New product")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-9" }, [
+      _c("p", [_vm._v("\n                Welcome!\n            ")])
+    ])
+  }
+]
 render._withStripped = true
 
 

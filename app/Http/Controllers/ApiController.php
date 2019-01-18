@@ -158,7 +158,7 @@ class ApiController extends Controller
         $id = $request->post('id');
 
         // Delete product
-        Product::where(['user_id' => $userId, 'id' => $id])->delete();
+        Product::where(['creator_id' => $userId, 'id' => $id])->delete();
 
         return json_encode(['message' => 'Product ' . $id . ' for user ' . $userId . ' deleted!']);
     }
@@ -179,12 +179,14 @@ class ApiController extends Controller
             // Get all products
             $products = Product::where('category_id', $cat['id'])->get();
 
+            $productsFormated = array();
+
             foreach ($products as $product) {
-                $productsFormated = array();
                 $brand = Brand::where('id', $product['brand_id'])->firstOrFail();
                 array_push($productsFormated, [
                     'id' => $product['id'],
                     'brand' => $brand['name'],
+                    'brand_id' => $brand['id'],
                     'name' => $product['name'],
                     'description' => $product['description'],
                     'photos' => $product['photos']
