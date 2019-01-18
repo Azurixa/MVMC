@@ -17,16 +17,21 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-// Create new smt.
+// Create
 Route::middleware('auth:api')->post('/user/create/category', 'ApiController@createCategory');
+Route::middleware('auth:api')->post('/user/create/brand', 'ApiController@createBrand');
 Route::middleware('auth:api')->post('/user/create/product', 'ApiController@createProduct');
 
-// Get user categories
-Route::middleware('auth:api')->get('/user/categories', 'ApiController@getUserCategories');
-// Get all user products
-Route::middleware('auth:api')->get('/user/products', 'ApiController@getAllUserProducts');
-// Get user products by categories
-Route::middleware('auth:api')->get('/user/products/{categoryId}', 'ApiController@getUserProducts');
+// Delete
+Route::middleware('auth:api')->delete('/user/delete/category', 'ApiController@deleteCategory');
+Route::middleware('auth:api')->delete('/user/delete/brand', 'ApiController@deleteBrand');
+Route::middleware('auth:api')->delete('/user/delete/product', 'ApiController@deleteProduct');
+
+// Get
+Route::middleware('auth:api')->get('/user/categories', 'ApiController@getCategories');
+Route::middleware('auth:api')->get('/user/brands', 'ApiController@getBrands');
+Route::middleware('auth:api')->get('/user/products', 'ApiController@getAllProducts');
+//Route::middleware('auth:api')->get('/user/products/{sortBy}', 'ApiController@getProducts');
 
 // Login route
 Route::post('/login', 'ApiController@login');
