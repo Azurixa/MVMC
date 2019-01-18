@@ -92,7 +92,7 @@
                     },
                     body: formData,
                 }).then(res => res.json()).then(data => {
-                    this.formData.newCategoryName = '';
+                    this.formData.newCategory.name = '';
                     this.getCategoriesAndProducts();
                 });
             },
@@ -114,6 +114,7 @@
                 }).then(res => res.json()).then(data => {
                     this.formData.newProduct.name = '';
                     this.formData.newProduct.categoryId = '';
+                    this.formData.newProduct.description = '';
                     this.getCategoriesAndProducts();
                 });
             },
