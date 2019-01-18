@@ -217,7 +217,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         return res.json();
       }).then(function (data) {
-        _this2.formData.newCategoryName = '';
+        _this2.formData.newCategory.name = '';
 
         _this2.getCategoriesAndProducts();
       });
@@ -242,6 +242,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (data) {
         _this3.formData.newProduct.name = '';
         _this3.formData.newProduct.categoryId = '';
+        _this3.formData.newProduct.description = '';
 
         _this3.getCategoriesAndProducts();
       });
