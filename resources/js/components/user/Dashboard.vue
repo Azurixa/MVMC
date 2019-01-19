@@ -92,7 +92,7 @@
             <div class="activity-box">
 
                 <div class="product-show" v-show="productShow.visible">
-                    <h1></h1>
+                    <h1>{{productShow.productData.name}}</h1>
                 </div>
 
 
@@ -273,10 +273,11 @@
                     headers: {
                         'Authorization': this.token,
                     },
-                }).then(res => res.json()).then(data => this.productShow.productData = data);
-                console.log(itemId);
+                }).then(res => res.json()).then(data => {
+                    this.productShow.productData = data;
+                    this.productShow.visible = true;
+                });
             },
-
         }
     }
 </script>

@@ -432,9 +432,9 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         return res.json();
       }).then(function (data) {
-        return _this11.productShow.productData = data;
+        _this11.productShow.productData = data;
+        _this11.productShow.visible = true;
       });
-      console.log(itemId);
     }
   }
 });
@@ -1411,7 +1411,7 @@ var render = function() {
             ],
             staticClass: "product-show"
           },
-          [_c("h1")]
+          [_c("h1", [_vm._v(_vm._s(_vm.productShow.productData.name))])]
         )
       ])
     ])

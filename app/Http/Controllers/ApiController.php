@@ -164,8 +164,7 @@ class ApiController extends Controller
         $product = Product::where(['creator_id' => $userId, 'id' => $id])->firstOrFail();
         $brand = Brand::where('id', $product['brand_id'])->first();
         $category = Category::where('id', $product['category_id'])->first();
-        $toReturn = array();
-        array_push($toReturn, [
+        $toReturn = [
             'id' => $product->id,
             'name' => $product->name,
             'description' => $product->description,
@@ -177,7 +176,7 @@ class ApiController extends Controller
             'last_use' => $product->last_use,
             'brand' => $brand,
             'category' => $category
-        ]);
+        ];
 
         return $toReturn;
     }
