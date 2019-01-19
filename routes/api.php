@@ -34,5 +34,8 @@ Route::middleware('auth:api')->get('/user/products', 'ApiController@getAllProduc
 Route::middleware('auth:api')->get('/user/product/{id}', 'ApiController@getProduct');
 //Route::middleware('auth:api')->get('/user/products/{sortBy}', 'ApiController@getProducts');
 
+// Editing
+Route::middleware('auth:api')->post('/user/update/product/{id}/{field}', 'ApiController@updateProduct');
+
 // Login route
 Route::post('/login', 'ApiController@login');

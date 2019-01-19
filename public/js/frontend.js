@@ -224,6 +224,84 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'userDashboard',
   created: function created() {
@@ -257,7 +335,19 @@ __webpack_require__.r(__webpack_exports__);
       },
       productShow: {
         visible: false,
-        productData: {}
+        productData: {
+          brand: {}
+        },
+        editForm: {
+          nameVisible: false,
+          descriptionVisible: false,
+          firstImpressionsVisible: false,
+          ratingVisible: false,
+          updatesVisible: false,
+          remainingAmountVisible: false,
+          whatEditing: '',
+          value: ''
+        }
       }
     };
   },
@@ -434,6 +524,58 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (data) {
         _this11.productShow.productData = data;
         _this11.productShow.visible = true;
+      });
+    },
+    // FRONT END
+    showEdit: function showEdit(what) {
+      if (this.productShow.editForm.whatEditing !== '') {
+        this.productShow.editForm.nameVisible = false;
+        this.productShow.editForm.descriptionVisible = false;
+        this.productShow.editForm.firstImpressionsVisible = false;
+        this.productShow.editForm.ratingVisible = false;
+        this.productShow.editForm.updatesVisible = false;
+        this.productShow.editForm.photosVisible = false;
+        this.productShow.editForm.remainingAmountVisible = false;
+        this.productShow.editForm.value = '';
+        this.productShow.editForm.whatEditing = '';
+      } else {
+        if (what === 'name') {
+          this.productShow.editForm.nameVisible = true;
+          this.productShow.editForm.value = this.productShow.productData.name;
+        }
+
+        if (what === 'description') {
+          this.productShow.editForm.descriptionVisible = true;
+          this.productShow.editForm.value = this.productShow.productData.description;
+        }
+
+        if (what === 'first_impressions') {
+          this.productShow.editForm.firstImpressionsVisible = true;
+          this.productShow.editForm.value = this.productShow.productData.first_impressions;
+        }
+
+        this.productShow.editForm.whatEditing = what;
+      }
+    },
+    editConfirm: function editConfirm() {
+      var _this12 = this;
+
+      var formData = new FormData();
+      formData.append('value', this.productShow.editForm.value);
+      fetch('/api/user/update/product/' + this.productShow.productData.id + '/' + this.productShow.editForm.whatEditing, {
+        method: 'POST',
+        headers: {
+          'Authorization': this.token
+        },
+        body: formData
+      }).then(function (res) {
+        return res.json();
+      }).then(function (data) {
+        _this12.showEdit();
+
+        _this12.showItem(_this12.productShow.productData.id);
+
+        _this12.getCategoriesAndProducts();
       });
     }
   }
@@ -1369,12 +1511,13 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "ul",
+                { attrs: { shown: "" } },
                 _vm._l(item.products, function(product) {
                   return _c("li", [
-                    _c("span", { staticClass: "brand" }, [
+                    _c("span", { staticClass: "brand badge badge-info" }, [
                       _vm._v(_vm._s(product.brand))
                     ]),
-                    _vm._v(" : "),
+                    _vm._v(" "),
                     _c(
                       "span",
                       {
@@ -1411,7 +1554,322 @@ var render = function() {
             ],
             staticClass: "product-show"
           },
-          [_c("h1", [_vm._v(_vm._s(_vm.productShow.productData.name))])]
+          [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("div", { staticClass: "body" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-lg-9" }, [
+                  _c("h1", { staticClass: "mb-4" }, [
+                    _vm._v(
+                      "\n                                " +
+                        _vm._s(_vm.productShow.productData.brand.name) +
+                        "\n                                "
+                    ),
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.productShow.editForm.nameVisible,
+                            expression: "!productShow.editForm.nameVisible"
+                          }
+                        ],
+                        on: {
+                          click: function($event) {
+                            _vm.showEdit("name")
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(_vm.productShow.productData.name) +
+                            "\n                        "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.productShow.editForm.nameVisible,
+                            expression: "productShow.editForm.nameVisible"
+                          }
+                        ],
+                        staticClass: "edit-form"
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.productShow.editForm.value,
+                              expression: "productShow.editForm.value"
+                            }
+                          ],
+                          staticClass: "edit-form name",
+                          attrs: { type: "text" },
+                          domProps: { value: _vm.productShow.editForm.value },
+                          on: {
+                            keyup: function($event) {
+                              if (
+                                !("button" in $event) &&
+                                _vm._k(
+                                  $event.keyCode,
+                                  "enter",
+                                  13,
+                                  $event.key,
+                                  "Enter"
+                                )
+                              ) {
+                                return null
+                              }
+                              _vm.editConfirm()
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.productShow.editForm,
+                                "value",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            on: {
+                              click: function($event) {
+                                _vm.editConfirm()
+                              }
+                            }
+                          },
+                          [_vm._v("Edit")]
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("h4", [
+                      _vm._v(
+                        "\n                                    Description\n                                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.productShow.editForm.descriptionVisible,
+                            expression:
+                              "!productShow.editForm.descriptionVisible"
+                          }
+                        ],
+                        on: {
+                          click: function($event) {
+                            _vm.showEdit("description")
+                          }
+                        }
+                      },
+                      [
+                        _vm.productShow.productData.description === null
+                          ? _c("span", [
+                              _vm._v(
+                                "\n                                        Add description...\n                                    "
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(
+                          "\n                                    " +
+                            _vm._s(_vm.productShow.productData.description) +
+                            "\n                                "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.productShow.editForm.descriptionVisible,
+                            expression:
+                              "productShow.editForm.descriptionVisible"
+                          }
+                        ],
+                        staticClass: "edit-form pb-3"
+                      },
+                      [
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.productShow.editForm.value,
+                              expression: "productShow.editForm.value"
+                            }
+                          ],
+                          staticClass: "description",
+                          domProps: { value: _vm.productShow.editForm.value },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.productShow.editForm,
+                                "value",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            on: {
+                              click: function($event) {
+                                _vm.editConfirm()
+                              }
+                            }
+                          },
+                          [_vm._v("Edit")]
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("h4", [
+                      _vm._v(
+                        "\n                                    First impressions\n                                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.productShow.editForm
+                              .firstImpressionsVisible,
+                            expression:
+                              "!productShow.editForm.firstImpressionsVisible"
+                          }
+                        ],
+                        on: {
+                          click: function($event) {
+                            _vm.showEdit("first_impressions")
+                          }
+                        }
+                      },
+                      [
+                        _vm.productShow.productData.first_impressions === null
+                          ? _c("span", [
+                              _vm._v(
+                                "\n                                Add first impressions...\n                            "
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(
+                          "\n                                    " +
+                            _vm._s(
+                              _vm.productShow.productData.first_impressions
+                            ) +
+                            "\n                                "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value:
+                              _vm.productShow.editForm.firstImpressionsVisible,
+                            expression:
+                              "productShow.editForm.firstImpressionsVisible"
+                          }
+                        ],
+                        staticClass: "edit-form pb-3"
+                      },
+                      [
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.productShow.editForm.value,
+                              expression: "productShow.editForm.value"
+                            }
+                          ],
+                          staticClass: "description",
+                          domProps: { value: _vm.productShow.editForm.value },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.productShow.editForm,
+                                "value",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            on: {
+                              click: function($event) {
+                                _vm.editConfirm()
+                              }
+                            }
+                          },
+                          [_vm._v("Edit")]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-3 stats text-right" }, [
+                  _c("div", { staticClass: "uses_count ml-auto" }, [
+                    _vm._v(_vm._s(_vm.productShow.productData.uses_count))
+                  ])
+                ])
+              ])
+            ])
+          ]
         )
       ])
     ])
@@ -1426,7 +1884,7 @@ var staticRenderFns = [
       "div",
       {
         staticClass: "toolbox-show",
-        attrs: { onClick: "$('.toolbox').toggle()" }
+        attrs: { onClick: "$('.toolbox-what').toggle()" }
       },
       [_c("i", { staticClass: "bx bx-plus m-0" })]
     )
@@ -1442,6 +1900,94 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("p", [_vm._v("New product")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "carousel slide",
+        attrs: { id: "carouselExampleControls", "data-ride": "carousel" }
+      },
+      [
+        _c("div", { staticClass: "carousel-inner" }, [
+          _c("div", { staticClass: "carousel-item active" }, [
+            _c("img", {
+              staticClass: "d-block w-75 mx-auto",
+              attrs: {
+                src:
+                  "http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg",
+                alt: "First slide"
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "carousel-item" }, [
+            _c("img", {
+              staticClass: "d-block w-75 mx-auto",
+              attrs: {
+                src:
+                  "http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg",
+                alt: "Second slide"
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "carousel-item" }, [
+            _c("img", {
+              staticClass: "d-block w-75 mx-auto",
+              attrs: {
+                src:
+                  "http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg",
+                alt: "Third slide"
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "carousel-control-prev",
+            attrs: {
+              href: "#carouselExampleControls",
+              role: "button",
+              "data-slide": "prev"
+            }
+          },
+          [
+            _c("span", {
+              staticClass: "carousel-control-prev-icon",
+              attrs: { "aria-hidden": "true" }
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "carousel-control-next",
+            attrs: {
+              href: "#carouselExampleControls",
+              role: "button",
+              "data-slide": "next"
+            }
+          },
+          [
+            _c("span", {
+              staticClass: "carousel-control-next-icon",
+              attrs: { "aria-hidden": "true" }
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
+          ]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true

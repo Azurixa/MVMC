@@ -1,7 +1,7 @@
 <template>
     <div id="projectpan">
 
-        <div class="toolbox-show" onClick="$('.toolbox').toggle()">
+        <div class="toolbox-show" onClick="$('.toolbox-what').toggle()">
             <i class="bx bx-plus m-0"></i>
         </div>
         <div class="toolbox-what">
@@ -79,10 +79,11 @@
                 <ul>
                     <li v-for="item in allProducts">
                         <span onClick="this.nextSibling.nextSibling.toggleAttribute('shown')" class="category">{{item.category.name}}</span>
-                        <ul>
+                        <ul shown>
                             <li v-for="product in item.products">
-                                <span class="brand">{{product.brand}}</span> : <span @click="showItem(product.id)"
-                                                                                     class="item">{{product.name}}</span>
+                                <span class="brand badge badge-info">{{product.brand}}</span> <span
+                                    @click="showItem(product.id)"
+                                    class="item">{{product.name}}</span>
                             </li>
                         </ul>
                     </li>
@@ -92,10 +93,87 @@
             <div class="activity-box">
 
                 <div class="product-show" v-show="productShow.visible">
-                    <h1>{{productShow.productData.name}}</h1>
+
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img class="d-block w-75 mx-auto" src="http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg" alt="First slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-75 mx-auto" src="http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg" alt="Second slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-75 mx-auto" src="http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg" alt="Third slide">
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+
+                    <div class="body">
+                        <div class="row">
+
+                            <div class="col-lg-9">
+
+                                <h1 class="mb-4">
+                                    {{productShow.productData.brand.name}}
+                                    <span @click="showEdit('name')" v-show="!productShow.editForm.nameVisible">
+                                {{productShow.productData.name}}
+                            </span>
+                                    <div class="edit-form" v-show="productShow.editForm.nameVisible">
+                                        <input type="text" class="edit-form name" v-model="productShow.editForm.value"
+                                               @keyup.enter="editConfirm()">
+                                        <button class="btn btn-primary" @click="editConfirm()">Edit</button>
+                                    </div>
+                                </h1>
+                                <div>
+                                    <h4>
+                                        Description
+                                    </h4>
+                                    <p @click="showEdit('description')"
+                                       v-show="!productShow.editForm.descriptionVisible">
+                                        <span v-if="productShow.productData.description === null">
+                                            Add description...
+                                        </span>
+                                        {{productShow.productData.description}}
+                                    </p>
+                                    <div class="edit-form pb-3" v-show="productShow.editForm.descriptionVisible">
+                                        <textarea class="description" v-model="productShow.editForm.value"></textarea>
+                                        <button class="btn btn-primary" @click="editConfirm()">Edit</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4>
+                                        First impressions
+                                    </h4>
+                                    <p @click="showEdit('first_impressions')"
+                                       v-show="!productShow.editForm.firstImpressionsVisible">
+                                <span v-if="productShow.productData.first_impressions === null">
+                                    Add first impressions...
+                                </span>
+                                        {{productShow.productData.first_impressions}}
+                                    </p>
+                                    <div class="edit-form pb-3" v-show="productShow.editForm.firstImpressionsVisible">
+                                        <textarea class="description" v-model="productShow.editForm.value"></textarea>
+                                        <button class="btn btn-primary" @click="editConfirm()">Edit</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-3 stats text-right">
+                                <div class="uses_count ml-auto">{{productShow.productData.uses_count}}</div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -135,7 +213,19 @@
                 },
                 productShow: {
                     visible: false,
-                    productData: {},
+                    productData: {
+                        brand: {},
+                    },
+                    editForm: {
+                        nameVisible: false,
+                        descriptionVisible: false,
+                        firstImpressionsVisible: false,
+                        ratingVisible: false,
+                        updatesVisible: false,
+                        remainingAmountVisible: false,
+                        whatEditing: '',
+                        value: '',
+                    },
                 }
             }
         },
@@ -276,6 +366,53 @@
                 }).then(res => res.json()).then(data => {
                     this.productShow.productData = data;
                     this.productShow.visible = true;
+                });
+            },
+
+            // FRONT END
+
+            showEdit(what) {
+
+                if (this.productShow.editForm.whatEditing !== '') {
+                    this.productShow.editForm.nameVisible = false;
+                    this.productShow.editForm.descriptionVisible = false;
+                    this.productShow.editForm.firstImpressionsVisible = false;
+                    this.productShow.editForm.ratingVisible = false;
+                    this.productShow.editForm.updatesVisible = false;
+                    this.productShow.editForm.photosVisible = false;
+                    this.productShow.editForm.remainingAmountVisible = false;
+                    this.productShow.editForm.value = '';
+                    this.productShow.editForm.whatEditing = '';
+                } else {
+                    if (what === 'name') {
+                        this.productShow.editForm.nameVisible = true;
+                        this.productShow.editForm.value = this.productShow.productData.name;
+                    }
+                    if (what === 'description') {
+                        this.productShow.editForm.descriptionVisible = true;
+                        this.productShow.editForm.value = this.productShow.productData.description;
+                    }
+                    if (what === 'first_impressions') {
+                        this.productShow.editForm.firstImpressionsVisible = true;
+                        this.productShow.editForm.value = this.productShow.productData.first_impressions;
+                    }
+                    this.productShow.editForm.whatEditing = what;
+                }
+            },
+
+            editConfirm() {
+                const formData = new FormData();
+                formData.append('value', this.productShow.editForm.value);
+                fetch('/api/user/update/product/' + this.productShow.productData.id + '/' + this.productShow.editForm.whatEditing, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': this.token,
+                    },
+                    body: formData,
+                }).then(res => res.json()).then(data => {
+                    this.showEdit();
+                    this.showItem(this.productShow.productData.id);
+                    this.getCategoriesAndProducts();
                 });
             },
         }

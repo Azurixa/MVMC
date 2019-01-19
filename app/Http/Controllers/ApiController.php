@@ -153,6 +153,17 @@ class ApiController extends Controller
         return json_encode(['message' => 'Product ' . $name . ' for category ' . $categoryId . ' created!']);
     }
 
+    public function updateProduct ($id, $field, Request $request) {
+        $userId = $request->user()->id;
+
+        // Update product
+        $product = Product::where(['creator_id' => $userId, 'id' => $id])->firstOrFail();
+        $product->$field = $request->post('value');
+        $product->save();
+
+        return json_encode(['message' => 'Product ' . $id . ' at ' . $field . ' updated!']);
+    }
+
     /**
      * @param $id
      * @param Request $request
@@ -164,13 +175,18 @@ class ApiController extends Controller
         $product = Product::where(['creator_id' => $userId, 'id' => $id])->firstOrFail();
         $brand = Brand::where('id', $product['brand_id'])->first();
         $category = Category::where('id', $product['category_id'])->first();
+        $photos = [
+            'http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg',
+            'http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg',
+            'http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg'
+        ];
         $toReturn = [
             'id' => $product->id,
             'name' => $product->name,
             'description' => $product->description,
             'first_impressions' => $product->first_impressions,
             'updates' => $product->updates,
-            'photos' => $product->photos,
+            'photos' => $photos,
             'remaining_amount' => $product->remaining_amount,
             'uses_count' => $product->uses_count,
             'last_use' => $product->last_use,
