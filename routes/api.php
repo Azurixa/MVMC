@@ -31,6 +31,7 @@ Route::middleware('auth:api')->post('/user/delete/product', 'ApiController@delet
 Route::middleware('auth:api')->get('/user/categories', 'ApiController@getCategories');
 Route::middleware('auth:api')->get('/user/brands', 'ApiController@getBrands');
 Route::middleware('auth:api')->get('/user/products', 'ApiController@getAllProducts');
+Route::middleware('auth:api')->get('/user/product/{id}', 'ApiController@getProduct');
 //Route::middleware('auth:api')->get('/user/products/{sortBy}', 'ApiController@getProducts');
 
 // Login route

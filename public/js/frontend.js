@@ -223,6 +223,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'userDashboard',
   created: function created() {
@@ -253,6 +254,10 @@ __webpack_require__.r(__webpack_exports__);
           name: '',
           description: ''
         }
+      },
+      productShow: {
+        visible: false,
+        productData: {}
       }
     };
   },
@@ -415,6 +420,20 @@ __webpack_require__.r(__webpack_exports__);
         return res.json();
       }).then(function (data) {
         return _this10.allProducts = data;
+      });
+    },
+    showItem: function showItem(itemId) {
+      var _this11 = this;
+
+      fetch('/api/user/product/' + itemId, {
+        headers: {
+          'Authorization': this.token
+        }
+      }).then(function (res) {
+        return res.json();
+      }).then(function (data) {
+        _this11.productShow.productData = data;
+        _this11.productShow.visible = true;
       });
     }
   }
@@ -1328,48 +1347,73 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "row m-0" }, [
-      _c("div", { staticClass: "col-lg-3" }, [
-        _c("div", { staticClass: "card p-2 my-1" }, [
-          _c("p", { staticClass: "mb-0" }, [_vm._v("Your collection:")]),
-          _vm._v(" "),
-          _c(
-            "ul",
-            _vm._l(_vm.allProducts, function(item) {
-              return _c("li", [
-                _c(
-                  "span",
-                  {
-                    staticClass: "category",
-                    attrs: { onClick: "$(this).next().toggle()" }
-                  },
-                  [_vm._v(_vm._s(item.category.name))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "ul",
-                  _vm._l(item.products, function(product) {
-                    return _c("li", [
-                      _c("span", { staticClass: "badge badge-info" }, [
-                        _vm._v(_vm._s(product.brand))
-                      ]),
-                      _vm._v(
-                        " : " +
-                          _vm._s(product.name) +
-                          "\n                            "
-                      )
-                    ])
-                  }),
-                  0
-                )
-              ])
-            }),
-            0
-          )
-        ])
+    _c("div", { staticClass: "row m-0 main-box" }, [
+      _c("div", { staticClass: "collection" }, [
+        _c("p", { staticClass: "h2" }, [_vm._v("Collection")]),
+        _vm._v(" "),
+        _c(
+          "ul",
+          _vm._l(_vm.allProducts, function(item) {
+            return _c("li", [
+              _c(
+                "span",
+                {
+                  staticClass: "category",
+                  attrs: {
+                    onClick:
+                      "this.nextSibling.nextSibling.toggleAttribute('shown')"
+                  }
+                },
+                [_vm._v(_vm._s(item.category.name))]
+              ),
+              _vm._v(" "),
+              _c(
+                "ul",
+                _vm._l(item.products, function(product) {
+                  return _c("li", [
+                    _c("span", { staticClass: "brand" }, [
+                      _vm._v(_vm._s(product.brand))
+                    ]),
+                    _vm._v(" : "),
+                    _c(
+                      "span",
+                      {
+                        staticClass: "item",
+                        on: {
+                          click: function($event) {
+                            _vm.showItem(product.id)
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(product.name))]
+                    )
+                  ])
+                }),
+                0
+              )
+            ])
+          }),
+          0
+        )
       ]),
       _vm._v(" "),
-      _vm._m(2)
+      _c("div", { staticClass: "activity-box" }, [
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.productShow.visible,
+                expression: "productShow.visible"
+              }
+            ],
+            staticClass: "product-show"
+          },
+          [_c("h1", [_vm._v(_vm._s(_vm.productShow.productData.name))])]
+        )
+      ])
     ])
   ])
 }
@@ -1382,7 +1426,7 @@ var staticRenderFns = [
       "div",
       {
         staticClass: "toolbox-show",
-        attrs: { onClick: "$('.toolbox-what').toggle()" }
+        attrs: { onClick: "$('.toolbox').toggle()" }
       },
       [_c("i", { staticClass: "bx bx-plus m-0" })]
     )
@@ -1397,14 +1441,6 @@ var staticRenderFns = [
       _c("p", [_vm._v("New brand")]),
       _vm._v(" "),
       _c("p", [_vm._v("New product")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-9" }, [
-      _c("p", [_vm._v("\n                Welcome!\n            ")])
     ])
   }
 ]

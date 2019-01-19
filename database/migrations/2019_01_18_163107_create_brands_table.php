@@ -17,6 +17,7 @@ class CreateBrandsTable extends Migration
             $table->increments('id');
             $table->integer('creator_id');
             $table->string('name');
+            $table->integer('rating')->default(0);
             $table->timestamps();
         });
     }

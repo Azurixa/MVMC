@@ -1,7 +1,7 @@
 <template>
     <div id="projectpan">
 
-        <div class="toolbox-show" onClick="$('.toolbox-what').toggle()">
+        <div class="toolbox-show" onClick="$('.toolbox').toggle()">
             <i class="bx bx-plus m-0"></i>
         </div>
         <div class="toolbox-what">
@@ -72,28 +72,29 @@
             </div>
         </div>
 
-        <div class="row m-0">
+        <div class="row m-0 main-box">
 
-            <div class="col-lg-3">
-                <div class="card p-2 my-1">
-                    <p class="mb-0">Your collection:</p>
-                    <ul>
-                        <li v-for="item in allProducts">
-                            <span onClick="$(this).next().toggle()" class="category">{{item.category.name}}</span>
-                            <ul>
-                                <li v-for="product in item.products">
-                                    <span class="badge badge-info">{{product.brand}}</span> : {{product.name}}
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+            <div class="collection">
+                <p class="h2">Collection</p>
+                <ul>
+                    <li v-for="item in allProducts">
+                        <span onClick="this.nextSibling.nextSibling.toggleAttribute('shown')" class="category">{{item.category.name}}</span>
+                        <ul>
+                            <li v-for="product in item.products">
+                                <span class="brand">{{product.brand}}</span> : <span @click="showItem(product.id)"
+                                                                                     class="item">{{product.name}}</span>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
 
-            <div class="col-lg-9">
-                <p>
-                    Welcome!
-                </p>
+            <div class="activity-box">
+
+                <div class="product-show" v-show="productShow.visible">
+                    <h1>{{productShow.productData.name}}</h1>
+                </div>
+
 
             </div>
         </div>
@@ -131,6 +132,10 @@
                         name: '',
                         description: '',
                     },
+                },
+                productShow: {
+                    visible: false,
+                    productData: {},
                 }
             }
         },
@@ -261,6 +266,17 @@
                         'Authorization': this.token,
                     },
                 }).then(res => res.json()).then(data => this.allProducts = data);
+            },
+
+            showItem(itemId) {
+                fetch('/api/user/product/' + itemId, {
+                    headers: {
+                        'Authorization': this.token,
+                    },
+                }).then(res => res.json()).then(data => {
+                    this.productShow.productData = data;
+                    this.productShow.visible = true;
+                });
             },
         }
     }

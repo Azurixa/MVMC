@@ -19,8 +19,16 @@ class CreateProductsTable extends Migration
             $table->integer('category_id');
             $table->integer('brand_id');
             $table->string('name');
-            $table->text('description');
-            $table->text('photos');
+            $table->text('description')->nullable();
+            $table->text('first_impressions')->nullable();
+            $table->integer('rating')->default(0);
+            $table->text('updates')->nullable();
+            $table->text('photos')->nullable();
+            $table->integer('remaining_amount')->default(100);
+            $table->integer('uses_count')->default(0);
+            $table->timestamp('bought_at')->nullable();
+            $table->timestamp('last_use')->nullable();
+            $table->integer('expire_months')->default(0);
             $table->timestamps();
         });
     }

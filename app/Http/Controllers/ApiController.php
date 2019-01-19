@@ -33,7 +33,7 @@ class ApiController extends Controller
             return $res;
         } catch (GuzzleException $e) {
             $data = [
-                'message' => 'User unauthorized'
+                'message' => 'User unauthorized...'
             ];
             echo json_encode($data);
         }
@@ -153,6 +153,38 @@ class ApiController extends Controller
         return json_encode(['message' => 'Product ' . $name . ' for category ' . $categoryId . ' created!']);
     }
 
+    /**
+     * @param $id
+     * @param Request $request
+     * @return array
+     */
+    public function getProduct ($id, Request $request)
+    {
+        $userId = $request->user()->id;
+        $product = Product::where(['creator_id' => $userId, 'id' => $id])->firstOrFail();
+        $brand = Brand::where('id', $product['brand_id'])->first();
+        $category = Category::where('id', $product['category_id'])->first();
+        $toReturn = [
+            'id' => $product->id,
+            'name' => $product->name,
+            'description' => $product->description,
+            'first_impressions' => $product->first_impressions,
+            'updates' => $product->updates,
+            'photos' => $product->photos,
+            'remaining_amount' => $product->remaining_amount,
+            'uses_count' => $product->uses_count,
+            'last_use' => $product->last_use,
+            'brand' => $brand,
+            'category' => $category
+        ];
+
+        return $toReturn;
+    }
+
+    /**
+     * @param Request $request
+     * @return string
+     */
     public function deleteProduct(Request $request) {
         $userId = $request->user()->id;
         $id = $request->post('id');
