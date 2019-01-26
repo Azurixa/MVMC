@@ -302,6 +302,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'userDashboard',
   created: function created() {
@@ -336,7 +371,8 @@ __webpack_require__.r(__webpack_exports__);
       productShow: {
         visible: false,
         productData: {
-          brand: {}
+          brand: {},
+          photos: {}
         },
         editForm: {
           visible: false,
@@ -463,7 +499,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('description', this.formData.newProduct.description);
       formData.append('categoryId', this.formData.newProduct.categoryId);
       formData.append('brandId', this.formData.newProduct.brandId);
-      formData.append('photo', 'TODO');
+      formData.append('photo', '');
       fetch('/api/user/create/product', {
         method: 'POST',
         headers: {
@@ -526,11 +562,15 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (data) {
         _this11.productShow.productData = data;
         _this11.productShow.visible = true;
+        setTimeout(function () {
+          _this11.refreshGallery();
+        }, 100);
       });
     },
     // FRONT END
     showEdit: function showEdit(what) {
       if (this.productShow.editForm.whatEditing !== '') {
+        this.productShow.editForm.visible = false;
         this.productShow.editForm.nameVisible = false;
         this.productShow.editForm.descriptionVisible = false;
         this.productShow.editForm.firstImpressionsVisible = false;
@@ -541,6 +581,8 @@ __webpack_require__.r(__webpack_exports__);
         this.productShow.editForm.value = '';
         this.productShow.editForm.whatEditing = '';
       } else {
+        this.productShow.editForm.visible = true;
+
         if (what === 'name') {
           this.productShow.editForm.nameVisible = true;
           this.productShow.editForm.value = this.productShow.productData.name;
@@ -554,6 +596,11 @@ __webpack_require__.r(__webpack_exports__);
         if (what === 'first_impressions') {
           this.productShow.editForm.firstImpressionsVisible = true;
           this.productShow.editForm.value = this.productShow.productData.first_impressions;
+        }
+
+        if (what === 'remaining_amount') {
+          this.productShow.editForm.remainingAmountVisible = true;
+          this.productShow.editForm.value = this.productShow.productData.remaining_amount;
         }
 
         this.productShow.editForm.whatEditing = what;
@@ -580,24 +627,53 @@ __webpack_require__.r(__webpack_exports__);
         _this12.getCategoriesAndProducts();
       });
     },
+    // Gallery handling
+    refreshGallery: function refreshGallery() {
+      var photos = document.querySelectorAll('.gallery-image');
+      photos.forEach(function (photo) {
+        photo.classList.add('hide');
+      });
+
+      if (photos.length > 2) {
+        photos[0].classList.add('prev');
+        photos[0].classList.remove('hide');
+        photos[1].classList.add('present');
+        photos[1].classList.remove('hide');
+        photos[2].classList.add('next');
+        photos[2].classList.remove('hide');
+      } else if (photos.length === 2) {
+        photos[0].classList.add('present');
+        photos[0].classList.remove('hide');
+        photos[1].classList.add('next');
+        photos[1].classList.remove('hide');
+      } else if (photos.length === 1) {
+        photos[0].classList.add('present');
+        photos[0].classList.remove('hide');
+      }
+
+      console.log('Gallery refreshed!');
+    },
     // Adding photo
     handleFileUpload: function handleFileUpload() {
       this.productShow.editForm.file = this.$refs.file.files[0];
     },
-    submitFile: function submitFile() {
+    addPhoto: function addPhoto() {
+      var _this13 = this;
+
       var formData = new FormData();
-      formData.append('file', this.productShow.editForm.file);
+      formData.append('photo', this.productShow.editForm.file);
       fetch('/api/user/update/product/' + this.productShow.productData.id + '/addPhoto', {
         method: 'POST',
         headers: {
-          'Authorization': this.token,
-          'Content-Type': 'multipart/form-data;boundary=----WebKitFormBoundaryyrV7KO0BoCBuDbTL'
+          'Authorization': this.token
         },
         body: formData
       }).then(function (res) {
         return res.json();
       }).then(function (data) {
-        return console.log(data);
+        _this13.showItem(_this13.productShow.productData.id);
+
+        _this13.getCategoriesAndProducts();
       });
     }
   }
@@ -1570,6 +1646,319 @@ var render = function() {
               {
                 name: "show",
                 rawName: "v-show",
+                value: _vm.productShow.editForm.visible,
+                expression: "productShow.editForm.visible"
+              }
+            ],
+            staticClass: "edit-box"
+          },
+          [
+            _c("div", { staticClass: "form card p-4" }, [
+              _c("i", {
+                staticClass: "bx bx-x close",
+                on: {
+                  click: function($event) {
+                    _vm.showEdit("")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("h2", { staticClass: "mb-4" }, [
+                _vm._v(
+                  "\n                        Edit product\n                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.productShow.editForm.nameVisible,
+                      expression: "productShow.editForm.nameVisible"
+                    }
+                  ]
+                },
+                [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.productShow.editForm.value,
+                          expression: "productShow.editForm.value"
+                        }
+                      ],
+                      staticClass: "form-control mb-2",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.productShow.editForm.value },
+                      on: {
+                        keyup: function($event) {
+                          if (
+                            !("button" in $event) &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          _vm.editConfirm()
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.productShow.editForm,
+                            "value",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        on: {
+                          click: function($event) {
+                            _vm.editConfirm()
+                          }
+                        }
+                      },
+                      [_vm._v("Edit name")]
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.productShow.editForm.descriptionVisible,
+                      expression: "productShow.editForm.descriptionVisible"
+                    }
+                  ]
+                },
+                [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.productShow.editForm.value,
+                          expression: "productShow.editForm.value"
+                        }
+                      ],
+                      staticClass: "description form-control mb-2",
+                      domProps: { value: _vm.productShow.editForm.value },
+                      on: {
+                        keydown: function($event) {
+                          if (
+                            !("button" in $event) &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          _vm.editConfirm()
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.productShow.editForm,
+                            "value",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        on: {
+                          click: function($event) {
+                            _vm.editConfirm()
+                          }
+                        }
+                      },
+                      [_vm._v("Edit description")]
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.productShow.editForm.firstImpressionsVisible,
+                      expression: "productShow.editForm.firstImpressionsVisible"
+                    }
+                  ]
+                },
+                [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.productShow.editForm.value,
+                        expression: "productShow.editForm.value"
+                      }
+                    ],
+                    staticClass: "description form-control mb-2",
+                    domProps: { value: _vm.productShow.editForm.value },
+                    on: {
+                      keydown: function($event) {
+                        if (
+                          !("button" in $event) &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        _vm.editConfirm()
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.productShow.editForm,
+                          "value",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function($event) {
+                          _vm.editConfirm()
+                        }
+                      }
+                    },
+                    [_vm._v("Edit first impressions")]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.productShow.editForm.remainingAmountVisible,
+                      expression: "productShow.editForm.remainingAmountVisible"
+                    }
+                  ]
+                },
+                [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.productShow.editForm.value,
+                          expression: "productShow.editForm.value"
+                        }
+                      ],
+                      staticClass: "form-control mb-2",
+                      attrs: { type: "number", min: "0", max: "100" },
+                      domProps: { value: _vm.productShow.editForm.value },
+                      on: {
+                        keydown: function($event) {
+                          if (
+                            !("button" in $event) &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          _vm.editConfirm()
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.productShow.editForm,
+                            "value",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        on: {
+                          click: function($event) {
+                            _vm.editConfirm()
+                          }
+                        }
+                      },
+                      [_vm._v("Edit remaining amount")]
+                    )
+                  ])
+                ]
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
                 value: _vm.productShow.visible,
                 expression: "productShow.visible"
               }
@@ -1577,12 +1966,25 @@ var render = function() {
             staticClass: "product-show"
           },
           [
-            _c("div", { staticClass: "edit-box" }),
-            _vm._v(" "),
-            _vm._m(2),
+            _c(
+              "div",
+              { staticClass: "gallery" },
+              _vm._l(_vm.productShow.productData.photos, function(photo) {
+                return _c(
+                  "div",
+                  {
+                    staticClass: "gallery-image",
+                    style: { "background-image": "url(" + photo + ")" },
+                    attrs: { onclick: "gallery(this)" }
+                  },
+                  [_vm._m(2, true)]
+                )
+              }),
+              0
+            ),
             _vm._v(" "),
             _c("div", { staticClass: "body" }, [
-              _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "row mx-1" }, [
                 _c("div", { staticClass: "col-lg-9" }, [
                   _c("h1", { staticClass: "mb-4" }, [
                     _vm._v(
@@ -1601,84 +2003,14 @@ var render = function() {
                           }
                         }
                       },
-                      [_c("i", { staticClass: "bx bxs-edit" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.productShow.editForm.nameVisible,
-                            expression: "productShow.editForm.nameVisible"
-                          }
-                        ],
-                        staticClass: "edit-form"
-                      },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.productShow.editForm.value,
-                              expression: "productShow.editForm.value"
-                            }
-                          ],
-                          staticClass: "edit-form name",
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.productShow.editForm.value },
-                          on: {
-                            keyup: function($event) {
-                              if (
-                                !("button" in $event) &&
-                                _vm._k(
-                                  $event.keyCode,
-                                  "enter",
-                                  13,
-                                  $event.key,
-                                  "Enter"
-                                )
-                              ) {
-                                return null
-                              }
-                              _vm.editConfirm()
-                            },
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.productShow.editForm,
-                                "value",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-primary",
-                            on: {
-                              click: function($event) {
-                                _vm.editConfirm()
-                              }
-                            }
-                          },
-                          [_vm._v("Edit")]
-                        )
-                      ]
+                      [_c("i", { staticClass: "bx bx-highlight" })]
                     )
                   ]),
                   _vm._v(" "),
                   _c("div", [
                     _c("h4", [
                       _vm._v(
-                        "\n                                    Description "
+                        "\n                                    Description\n                                    "
                       ),
                       _c(
                         "span",
@@ -1689,7 +2021,7 @@ var render = function() {
                             }
                           }
                         },
-                        [_c("i", { staticClass: "bx bxs-edit" })]
+                        [_c("i", { staticClass: "bx bx-highlight" })]
                       )
                     ]),
                     _vm._v(" "),
@@ -1706,68 +2038,13 @@ var render = function() {
                           _vm._s(_vm.productShow.productData.description) +
                           "\n                                "
                       )
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.productShow.editForm.descriptionVisible,
-                            expression:
-                              "productShow.editForm.descriptionVisible"
-                          }
-                        ],
-                        staticClass: "edit-form pb-3"
-                      },
-                      [
-                        _c("textarea", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.productShow.editForm.value,
-                              expression: "productShow.editForm.value"
-                            }
-                          ],
-                          staticClass: "description",
-                          domProps: { value: _vm.productShow.editForm.value },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.productShow.editForm,
-                                "value",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-primary",
-                            on: {
-                              click: function($event) {
-                                _vm.editConfirm()
-                              }
-                            }
-                          },
-                          [_vm._v("Edit")]
-                        )
-                      ]
-                    )
+                    ])
                   ]),
                   _vm._v(" "),
                   _c("div", [
                     _c("h4", [
                       _vm._v(
-                        "\n                                    First impressions "
+                        "\n                                    First impressions\n                                    "
                       ),
                       _c(
                         "span",
@@ -1778,7 +2055,7 @@ var render = function() {
                             }
                           }
                         },
-                        [_c("i", { staticClass: "bx bxs-edit" })]
+                        [_c("i", { staticClass: "bx bx-highlight" })]
                       )
                     ]),
                     _vm._v(" "),
@@ -1797,63 +2074,7 @@ var render = function() {
                           ) +
                           "\n                                "
                       )
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value:
-                              _vm.productShow.editForm.firstImpressionsVisible,
-                            expression:
-                              "productShow.editForm.firstImpressionsVisible"
-                          }
-                        ],
-                        staticClass: "edit-form pb-3"
-                      },
-                      [
-                        _c("textarea", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.productShow.editForm.value,
-                              expression: "productShow.editForm.value"
-                            }
-                          ],
-                          staticClass: "description",
-                          domProps: { value: _vm.productShow.editForm.value },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.productShow.editForm,
-                                "value",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-primary",
-                            on: {
-                              click: function($event) {
-                                _vm.editConfirm()
-                              }
-                            }
-                          },
-                          [_vm._v("Edit")]
-                        )
-                      ]
-                    )
+                    ])
                   ]),
                   _vm._v(" "),
                   _c("div", [
@@ -1878,7 +2099,7 @@ var render = function() {
                       {
                         on: {
                           click: function($event) {
-                            _vm.submitFile()
+                            _vm.addPhoto()
                           }
                         }
                       },
@@ -1887,17 +2108,49 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-lg-3 stats" }, [
-                  _c("div", { staticClass: "uses_count ml-auto" }, [
-                    _c("div", { staticClass: "m-0 text-center" }, [
-                      _c("p", { staticClass: "mb-0 h4" }, [
-                        _vm._v(_vm._s(_vm.productShow.productData.uses_count))
-                      ]),
-                      _vm._v(" "),
-                      _c("small", [_vm._v("uses")])
+                _c(
+                  "div",
+                  {
+                    staticClass: "col-lg-3 stats card",
+                    style: {
+                      background:
+                        "linear-gradient( rgba(255, 255, 255) " +
+                        (100 - _vm.productShow.productData.remaining_amount) +
+                        "%, #B525B2 " +
+                        (102 - _vm.productShow.productData.remaining_amount) +
+                        "% )"
+                    }
+                  },
+                  [
+                    _c("p", [
+                      _vm._v(
+                        "\n                                remaining_amount\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.showEdit("remaining_amount")
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "bx bx-highlight" })]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "uses_count mx-auto" }, [
+                      _c("div", { staticClass: "m-0 text-center" }, [
+                        _c("p", { staticClass: "mb-0 h4" }, [
+                          _vm._v(_vm._s(_vm.productShow.productData.uses_count))
+                        ]),
+                        _vm._v(" "),
+                        _c("small", [_vm._v("uses")])
+                      ])
                     ])
-                  ])
-                ])
+                  ]
+                )
               ])
             ])
           ]
@@ -1936,42 +2189,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "gallery" }, [
-      _c("div", {
-        staticClass: "prev",
-        staticStyle: {
-          "background-image":
-            "url(https://i.ebayimg.com/images/g/k5cAAOSwNSxVeEJv/s-l300.jpg)"
-        },
-        attrs: { onclick: "gallery(this)" }
-      }),
-      _vm._v(" "),
-      _c("div", {
-        staticClass: "present",
-        staticStyle: {
-          "background-image":
-            "url(http://st.depositphotos.com/1813957/3134/i/950/depositphotos_31343027-stock-photo-turquoise-abstract-grunge-background.jpg)"
-        },
-        attrs: { onclick: "gallery(this)" }
-      }),
-      _vm._v(" "),
-      _c("div", {
-        staticClass: "next",
-        staticStyle: {
-          "background-image":
-            "url(http://hintergrundbild.org/wallpaper/full/d/5/3/33988-widescreen-hintergrundbilder-fuers-iphone-1080x1920.jpg)"
-        },
-        attrs: { onclick: "gallery(this)" }
-      }),
-      _vm._v(" "),
-      _c("div", {
-        staticClass: "hide",
-        staticStyle: {
-          "background-image":
-            "url(https://previews.123rf.com/images/imagesbavaria/imagesbavaria1408/imagesbavaria140800706/31173734-vecchia-priorit%C3%A0-bassa-di-legno-verniciato-in-colore-verde-o-turchese-.jpg)"
-        },
-        attrs: { onclick: "gallery(this)" }
-      })
+    return _c("div", { staticClass: "delete close" }, [
+      _c("i", { staticClass: "bx bxs-trash" })
     ])
   }
 ]

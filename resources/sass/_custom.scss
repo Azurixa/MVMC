@@ -96,23 +96,35 @@
       min-width: 81%;
       height: 100%;
       overflow-y: scroll;
+      position: relative;
+      .edit-box{
+        width: 100%;
+        height: 100%;
+        z-index: 1000;
+        background-color: #000000a0;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .close{
+          position: absolute;
+          right: 10px;
+          top: 10px;
+        }
+        .form{
+          width: 50%;
+        }
+      }
       .product-show{
         width: 80%;
         margin: auto;
-        position: relative;
-        .bxs-edit{
+        .bx-highlight{
           font-size: 1rem;
           color: gray;
           cursor: pointer;
           &:hover{
             color: black;
           }
-        }
-        .edit-box{
-          width: 100%;
-          height: 100%;
-          z-index: 1000;
-          background-color: red;
         }
         .brand-box{
           padding: 1rem;
@@ -135,14 +147,34 @@
           display: flex;
           div{
             height: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
           }
           .prev, .next{
             width: 30%;
             background-color: black;
+            .delete{
+              display: none;
+            }
           }
           .present{
             width: 60%;
             background-color: #1b1e21;
+            position: relative;
+            .delete{
+              height: fit-content;
+              line-height: 1px;
+              display: block;
+              position: absolute;
+              bottom: 5px;
+              right: 5px;
+              font-size: 1.2rem;
+              padding: 4px;
+              border-radius: 50%;
+              background-color: white;
+              color: black;
+            }
           }
           .hide{
             display: none;
@@ -151,6 +183,8 @@
         .body{
           padding: 0.35rem;
           .stats{
+            position: relative;
+            padding: 2rem 0;
             .uses_count{
               width: 60px;
               height: 60px;
@@ -166,17 +200,25 @@
                 top: -5px;
               }
             }
-          }
-          .edit-form{
-            border: 0;
-            display: inline;
-            .name{
-              border-bottom: 3px dotted $primary;
-            }
-            .description{
+            > p{
+              margin: 0;
+              padding: 0;
+              position: absolute;
+              bottom: 9px;
               width: 100%;
-              height: 80px;
-              border: 3px dotted $primary;
+              text-align: center;
+              color: #f4fff3;
+              font-size: 12px;
+            }
+            span{
+              position: absolute;
+              bottom: 9px;
+              right: 9px;
+              background-color: white;
+              color: #000;
+              line-height: 1px;
+              padding: 3px;
+              border-radius: 50%;
             }
           }
         }

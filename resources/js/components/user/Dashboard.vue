@@ -60,8 +60,8 @@
                                        @keyup.enter="createProduct()">
                             </div>
                             <div class="form-group">
-                        <textarea v-model="formData.newProduct.description" class="form-control"
-                                  placeholder="Product description"></textarea>
+                                <textarea v-model="formData.newProduct.description" class="form-control"
+                                          placeholder="Product description"></textarea>
                             </div>
                             <button class="btn btn-primary" @click="createProduct()">Add new product</button>
                         </div>
@@ -92,39 +92,76 @@
 
             <div class="activity-box">
 
+                <div class="edit-box" v-show="productShow.editForm.visible">
+
+                    <div class="form card p-4">
+
+                        <i class='bx bx-x close' @click="showEdit('')"></i>
+
+                        <h2 class="mb-4">
+                            Edit product
+                        </h2>
+
+                        <div v-show="productShow.editForm.nameVisible">
+                            <div class="form-group">
+                                <input type="text" class="form-control mb-2" v-model="productShow.editForm.value"
+                                       @keyup.enter="editConfirm()">
+                                <button class="btn btn-primary" @click="editConfirm()">Edit name</button>
+                            </div>
+                        </div>
+
+                        <div v-show="productShow.editForm.descriptionVisible">
+                            <div class="form-group">
+                                <textarea class="description form-control mb-2" v-model="productShow.editForm.value"
+                                          @keydown.enter="editConfirm()"></textarea>
+                                <button class="btn btn-primary" @click="editConfirm()">Edit description</button>
+                            </div>
+                        </div>
+
+                        <div v-show="productShow.editForm.firstImpressionsVisible">
+                            <textarea class="description form-control mb-2" v-model="productShow.editForm.value"
+                                      @keydown.enter="editConfirm()"></textarea>
+                            <button class="btn btn-primary" @click="editConfirm()">Edit first impressions</button>
+                        </div>
+
+                        <div v-show="productShow.editForm.remainingAmountVisible">
+                            <div class="form-group">
+                                <input class="form-control mb-2" type="number" min="0" max="100"
+                                       v-model="productShow.editForm.value"
+                                       @keydown.enter="editConfirm()">
+                                <button class="btn btn-primary" @click="editConfirm()">Edit remaining amount</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
                 <div class="product-show" v-show="productShow.visible">
 
-                    <div class="edit-box"></div>
-
                     <div class="gallery">
-                        <div class="prev" onclick="gallery(this)"
-                             style="background-image: url(https://i.ebayimg.com/images/g/k5cAAOSwNSxVeEJv/s-l300.jpg)"></div>
-                        <div class="present" onclick="gallery(this)"
-                             style="background-image: url(http://st.depositphotos.com/1813957/3134/i/950/depositphotos_31343027-stock-photo-turquoise-abstract-grunge-background.jpg)"></div>
-                        <div class="next" onclick="gallery(this)"
-                             style="background-image: url(http://hintergrundbild.org/wallpaper/full/d/5/3/33988-widescreen-hintergrundbilder-fuers-iphone-1080x1920.jpg)"></div>
 
-                        <div class="hide" onclick="gallery(this)"
-                             style="background-image: url(https://previews.123rf.com/images/imagesbavaria/imagesbavaria1408/imagesbavaria140800706/31173734-vecchia-priorit%C3%A0-bassa-di-legno-verniciato-in-colore-verde-o-turchese-.jpg)"></div>
+                        <div v-for="photo in productShow.productData.photos" onclick="gallery(this)"
+                             :style="{ 'background-image': 'url(' + photo + ')' }" class="gallery-image">
+                            <div class="delete close">
+                                <i class='bx bxs-trash'></i>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="body">
-                        <div class="row">
+                        <div class="row mx-1">
 
                             <div class="col-lg-9">
 
                                 <h1 class="mb-4">
                                     {{productShow.productData.brand.name}} {{productShow.productData.name}}
-                                    <span @click="showEdit('name')"><i class='bx bxs-edit'></i></span>
-                                    <div class="edit-form" v-show="productShow.editForm.nameVisible">
-                                        <input type="text" class="edit-form name" v-model="productShow.editForm.value"
-                                               @keyup.enter="editConfirm()">
-                                        <button class="btn btn-primary" @click="editConfirm()">Edit</button>
-                                    </div>
+                                    <span @click="showEdit('name')"><i class='bx bx-highlight'></i></span>
                                 </h1>
                                 <div>
                                     <h4>
-                                        Description <span @click="showEdit('description')"><i class='bx bxs-edit'></i></span>
+                                        Description
+                                        <span @click="showEdit('description')"><i class='bx bx-highlight'></i></span>
                                     </h4>
                                     <p>
                                         <span v-if="productShow.productData.description === null">
@@ -132,14 +169,11 @@
                                         </span>
                                         {{productShow.productData.description}}
                                     </p>
-                                    <div class="edit-form pb-3" v-show="productShow.editForm.descriptionVisible">
-                                        <textarea class="description" v-model="productShow.editForm.value"></textarea>
-                                        <button class="btn btn-primary" @click="editConfirm()">Edit</button>
-                                    </div>
                                 </div>
                                 <div>
                                     <h4>
-                                        First impressions <span @click="showEdit('first_impressions')"><i class='bx bxs-edit'></i></span>
+                                        First impressions
+                                        <span @click="showEdit('first_impressions')"><i class='bx bx-highlight'></i></span>
                                     </h4>
                                     <p>
                                         <span v-if="productShow.productData.first_impressions === null">
@@ -147,23 +181,24 @@
                                         </span>
                                         {{productShow.productData.first_impressions}}
                                     </p>
-                                    <div class="edit-form pb-3" v-show="productShow.editForm.firstImpressionsVisible">
-                                        <textarea class="description" v-model="productShow.editForm.value"></textarea>
-                                        <button class="btn btn-primary" @click="editConfirm()">Edit</button>
-                                    </div>
                                 </div>
                                 <div>
                                     <h4>
                                         Add image
                                     </h4>
                                     <input type="file" id="file" ref="file" @change="handleFileUpload()">
-                                    <button @click="submitFile()">asd</button>
+                                    <button @click="addPhoto()">asd</button>
                                 </div>
 
                             </div>
 
-                            <div class="col-lg-3 stats">
-                                <div class="uses_count ml-auto">
+                            <div class="col-lg-3 stats card"
+                                 :style="{background: 'linear-gradient( rgba(255, 255, 255) ' + (100 - productShow.productData.remaining_amount) + '%, #B525B2 ' + (102 - productShow.productData.remaining_amount) + '% )'}">
+                                <p>
+                                    remaining_amount
+                                </p>
+                                <span @click="showEdit('remaining_amount')"><i class='bx bx-highlight'></i></span>
+                                <div class="uses_count mx-auto">
                                     <div class="m-0 text-center">
                                         <p class="mb-0 h4">{{productShow.productData.uses_count}}</p>
                                         <small>uses</small>
@@ -215,6 +250,7 @@
                     visible: false,
                     productData: {
                         brand: {},
+                        photos: {},
                     },
                     editForm: {
                         visible: false,
@@ -319,7 +355,7 @@
                 formData.append('description', this.formData.newProduct.description);
                 formData.append('categoryId', this.formData.newProduct.categoryId);
                 formData.append('brandId', this.formData.newProduct.brandId);
-                formData.append('photo', 'TODO');
+                formData.append('photo', '');
                 fetch('/api/user/create/product', {
                     method: 'POST',
                     headers: {
@@ -368,6 +404,9 @@
                 }).then(res => res.json()).then(data => {
                     this.productShow.productData = data;
                     this.productShow.visible = true;
+                    setTimeout(() => {
+                        this.refreshGallery();
+                    }, 100);
                 });
             },
 
@@ -376,6 +415,7 @@
             showEdit(what) {
 
                 if (this.productShow.editForm.whatEditing !== '') {
+                    this.productShow.editForm.visible = false;
                     this.productShow.editForm.nameVisible = false;
                     this.productShow.editForm.descriptionVisible = false;
                     this.productShow.editForm.firstImpressionsVisible = false;
@@ -386,6 +426,7 @@
                     this.productShow.editForm.value = '';
                     this.productShow.editForm.whatEditing = '';
                 } else {
+                    this.productShow.editForm.visible = true;
                     if (what === 'name') {
                         this.productShow.editForm.nameVisible = true;
                         this.productShow.editForm.value = this.productShow.productData.name;
@@ -397,6 +438,10 @@
                     if (what === 'first_impressions') {
                         this.productShow.editForm.firstImpressionsVisible = true;
                         this.productShow.editForm.value = this.productShow.productData.first_impressions;
+                    }
+                    if (what === 'remaining_amount') {
+                        this.productShow.editForm.remainingAmountVisible = true;
+                        this.productShow.editForm.value = this.productShow.productData.remaining_amount;
                     }
                     this.productShow.editForm.whatEditing = what;
                 }
@@ -418,22 +463,55 @@
                 });
             },
 
+            // Gallery handling
+
+            refreshGallery() {
+
+                const photos = document.querySelectorAll('.gallery-image');
+
+                photos.forEach((photo) => {
+                    photo.classList.add('hide');
+                });
+
+                if (photos.length > 2) {
+                    photos[0].classList.add('prev');
+                    photos[0].classList.remove('hide');
+                    photos[1].classList.add('present');
+                    photos[1].classList.remove('hide');
+                    photos[2].classList.add('next');
+                    photos[2].classList.remove('hide');
+                } else if (photos.length === 2) {
+                    photos[0].classList.add('present');
+                    photos[0].classList.remove('hide');
+                    photos[1].classList.add('next');
+                    photos[1].classList.remove('hide');
+                } else if (photos.length === 1) {
+                    photos[0].classList.add('present');
+                    photos[0].classList.remove('hide');
+                }
+
+                console.log('Gallery refreshed!');
+
+            },
+
             // Adding photo
 
             handleFileUpload() {
                 this.productShow.editForm.file = this.$refs.file.files[0];
             },
-            submitFile() {
+            addPhoto() {
                 const formData = new FormData();
-                formData.append('file', this.productShow.editForm.file);
+                formData.append('photo', this.productShow.editForm.file);
                 fetch('/api/user/update/product/' + this.productShow.productData.id + '/addPhoto', {
                     method: 'POST',
                     headers: {
                         'Authorization': this.token,
-                        'Content-Type': 'multipart/form-data;boundary=----WebKitFormBoundaryyrV7KO0BoCBuDbTL',
                     },
                     body: formData,
-                }).then(res => res.json()).then(data => console.log(data));
+                }).then(res => res.json()).then(data => {
+                    this.showItem(this.productShow.productData.id);
+                    this.getCategoriesAndProducts();
+                });
             },
 
         }

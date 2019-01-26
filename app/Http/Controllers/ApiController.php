@@ -176,18 +176,13 @@ class ApiController extends Controller
         $product = Product::where(['creator_id' => $userId, 'id' => $id])->firstOrFail();
         $brand = Brand::where('id', $product['brand_id'])->first();
         $category = Category::where('id', $product['category_id'])->first();
-        $photos = [
-            'http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg',
-            'http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg',
-            'http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg'
-        ];
         $toReturn = [
             'id' => $product->id,
             'name' => $product->name,
             'description' => $product->description,
             'first_impressions' => $product->first_impressions,
             'updates' => $product->updates,
-            'photos' => $photos,
+            'photos' => Product::getPhotos($id),
             'remaining_amount' => $product->remaining_amount,
             'uses_count' => $product->uses_count,
             'last_use' => $product->last_use,
@@ -200,14 +195,15 @@ class ApiController extends Controller
 
     public function addPhoto($id, Request $request)
     {
-
         $userId = $request->user()->id;
 
-        $image = $request->image->getClientOriginalExtension();
-        $name = str_slug($image->title).'.'.$image->getClientOriginalExtension();
-        Storage::put('images', $image);
+        $image = $request->file('photo');
+        $name = $userId.'_'.str_slug($image->getClientOriginalName()).'.'.$image->getClientOriginalExtension();
+        $image->storeAs('public/products', $name);
 
-        return json_encode(['message' => 'amm']);
+        Product::addPhoto($id, $name);
+
+        return json_encode(['message' => 'Photo added!']);
     }
 
     /**
