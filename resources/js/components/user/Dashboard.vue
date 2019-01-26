@@ -94,26 +94,18 @@
 
                 <div class="product-show" v-show="productShow.visible">
 
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img class="d-block w-75 mx-auto" src="http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg" alt="First slide">
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-75 mx-auto" src="http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg" alt="Second slide">
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-75 mx-auto" src="http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg" alt="Third slide">
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
+                    <div class="edit-box"></div>
+
+                    <div class="gallery">
+                        <div class="prev" onclick="gallery(this)"
+                             style="background-image: url(https://i.ebayimg.com/images/g/k5cAAOSwNSxVeEJv/s-l300.jpg)"></div>
+                        <div class="present" onclick="gallery(this)"
+                             style="background-image: url(http://st.depositphotos.com/1813957/3134/i/950/depositphotos_31343027-stock-photo-turquoise-abstract-grunge-background.jpg)"></div>
+                        <div class="next" onclick="gallery(this)"
+                             style="background-image: url(http://hintergrundbild.org/wallpaper/full/d/5/3/33988-widescreen-hintergrundbilder-fuers-iphone-1080x1920.jpg)"></div>
+
+                        <div class="hide" onclick="gallery(this)"
+                             style="background-image: url(https://previews.123rf.com/images/imagesbavaria/imagesbavaria1408/imagesbavaria140800706/31173734-vecchia-priorit%C3%A0-bassa-di-legno-verniciato-in-colore-verde-o-turchese-.jpg)"></div>
                     </div>
 
                     <div class="body">
@@ -122,10 +114,8 @@
                             <div class="col-lg-9">
 
                                 <h1 class="mb-4">
-                                    {{productShow.productData.brand.name}}
-                                    <span @click="showEdit('name')" v-show="!productShow.editForm.nameVisible">
-                                {{productShow.productData.name}}
-                            </span>
+                                    {{productShow.productData.brand.name}} {{productShow.productData.name}}
+                                    <span @click="showEdit('name')"><i class='bx bxs-edit'></i></span>
                                     <div class="edit-form" v-show="productShow.editForm.nameVisible">
                                         <input type="text" class="edit-form name" v-model="productShow.editForm.value"
                                                @keyup.enter="editConfirm()">
@@ -134,10 +124,9 @@
                                 </h1>
                                 <div>
                                     <h4>
-                                        Description
+                                        Description <span @click="showEdit('description')"><i class='bx bxs-edit'></i></span>
                                     </h4>
-                                    <p @click="showEdit('description')"
-                                       v-show="!productShow.editForm.descriptionVisible">
+                                    <p>
                                         <span v-if="productShow.productData.description === null">
                                             Add description...
                                         </span>
@@ -150,13 +139,12 @@
                                 </div>
                                 <div>
                                     <h4>
-                                        First impressions
+                                        First impressions <span @click="showEdit('first_impressions')"><i class='bx bxs-edit'></i></span>
                                     </h4>
-                                    <p @click="showEdit('first_impressions')"
-                                       v-show="!productShow.editForm.firstImpressionsVisible">
-                                <span v-if="productShow.productData.first_impressions === null">
-                                    Add first impressions...
-                                </span>
+                                    <p>
+                                        <span v-if="productShow.productData.first_impressions === null">
+                                            Add first impressions...
+                                        </span>
                                         {{productShow.productData.first_impressions}}
                                     </p>
                                     <div class="edit-form pb-3" v-show="productShow.editForm.firstImpressionsVisible">
@@ -164,11 +152,23 @@
                                         <button class="btn btn-primary" @click="editConfirm()">Edit</button>
                                     </div>
                                 </div>
+                                <div>
+                                    <h4>
+                                        Add image
+                                    </h4>
+                                    <input type="file" id="file" ref="file" @change="handleFileUpload()">
+                                    <button @click="submitFile()">asd</button>
+                                </div>
 
                             </div>
 
-                            <div class="col-lg-3 stats text-right">
-                                <div class="uses_count ml-auto">{{productShow.productData.uses_count}}</div>
+                            <div class="col-lg-3 stats">
+                                <div class="uses_count ml-auto">
+                                    <div class="m-0 text-center">
+                                        <p class="mb-0 h4">{{productShow.productData.uses_count}}</p>
+                                        <small>uses</small>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
@@ -217,6 +217,7 @@
                         brand: {},
                     },
                     editForm: {
+                        visible: false,
                         nameVisible: false,
                         descriptionVisible: false,
                         firstImpressionsVisible: false,
@@ -224,6 +225,7 @@
                         updatesVisible: false,
                         remainingAmountVisible: false,
                         whatEditing: '',
+                        file: '',
                         value: '',
                     },
                 }
@@ -415,6 +417,25 @@
                     this.getCategoriesAndProducts();
                 });
             },
+
+            // Adding photo
+
+            handleFileUpload() {
+                this.productShow.editForm.file = this.$refs.file.files[0];
+            },
+            submitFile() {
+                const formData = new FormData();
+                formData.append('file', this.productShow.editForm.file);
+                fetch('/api/user/update/product/' + this.productShow.productData.id + '/addPhoto', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': this.token,
+                        'Content-Type': 'multipart/form-data;boundary=----WebKitFormBoundaryyrV7KO0BoCBuDbTL',
+                    },
+                    body: formData,
+                }).then(res => res.json()).then(data => console.log(data));
+            },
+
         }
     }
 </script>

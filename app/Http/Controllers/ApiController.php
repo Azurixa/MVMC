@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Category;
 use App\Product;
 use App\Brand;
+use Illuminate\Support\Facades\Storage;
 
 class ApiController extends Controller
 {
@@ -195,6 +196,18 @@ class ApiController extends Controller
         ];
 
         return $toReturn;
+    }
+
+    public function addPhoto($id, Request $request)
+    {
+
+        $userId = $request->user()->id;
+
+        $image = $request->image->getClientOriginalExtension();
+        $name = str_slug($image->title).'.'.$image->getClientOriginalExtension();
+        Storage::put('images', $image);
+
+        return json_encode(['message' => 'amm']);
     }
 
     /**

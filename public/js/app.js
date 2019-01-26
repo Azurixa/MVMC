@@ -36391,6 +36391,71 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+window.gallery = function (element) {
+  if (element.classList.contains('next')) {
+    var prevEl = element.previousElementSibling;
+    var presentEl = element;
+    var nextEl = element.nextElementSibling;
+
+    if (nextEl !== null && prevEl !== null) {
+      var previerEl = element.previousElementSibling.previousElementSibling;
+
+      if (previerEl !== null) {
+        previerEl.classList.remove('prev');
+        previerEl.classList.add('hide');
+        prevEl.classList.remove('present');
+        prevEl.classList.add('prev');
+        presentEl.classList.remove('next');
+        presentEl.classList.add('present');
+        nextEl.classList.remove('hide');
+        nextEl.classList.add('next');
+      } else {
+        prevEl.classList.remove('present');
+        prevEl.classList.add('prev');
+        presentEl.classList.remove('next');
+        presentEl.classList.add('present');
+        nextEl.classList.remove('hide');
+        nextEl.classList.add('next');
+      }
+    } else {
+      prevEl.classList.remove('present');
+      prevEl.classList.add('prev');
+      presentEl.classList.remove('next');
+      presentEl.classList.add('present');
+    }
+  } else if (element.classList.contains('prev')) {
+    var _prevEl = element.previousElementSibling;
+    var _presentEl = element;
+    var _nextEl = element.nextElementSibling;
+    var nextterEl = element.nextElementSibling.nextElementSibling;
+
+    if (_prevEl !== null) {
+      _prevEl.classList.remove('hide');
+
+      _prevEl.classList.add('prev');
+
+      _presentEl.classList.remove('prev');
+
+      _presentEl.classList.add('present');
+
+      _nextEl.classList.remove('present');
+
+      _nextEl.classList.add('next');
+
+      nextterEl.classList.remove('next');
+      nextterEl.classList.add('hide');
+    } else {
+      _presentEl.classList.remove('prev');
+
+      _presentEl.classList.add('present');
+
+      _nextEl.classList.remove('present');
+
+      _nextEl.classList.add('next');
+    }
+  }
+};
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

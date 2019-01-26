@@ -35,6 +35,7 @@ Route::middleware('auth:api')->get('/user/product/{id}', 'ApiController@getProdu
 //Route::middleware('auth:api')->get('/user/products/{sortBy}', 'ApiController@getProducts');
 
 // Editing
+Route::middleware('auth:api')->post('/user/update/product/{id}/addPhoto', 'ApiController@addPhoto');
 Route::middleware('auth:api')->post('/user/update/product/{id}/{field}', 'ApiController@updateProduct');
 
 // Login route

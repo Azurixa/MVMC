@@ -339,6 +339,7 @@ __webpack_require__.r(__webpack_exports__);
           brand: {}
         },
         editForm: {
+          visible: false,
           nameVisible: false,
           descriptionVisible: false,
           firstImpressionsVisible: false,
@@ -346,6 +347,7 @@ __webpack_require__.r(__webpack_exports__);
           updatesVisible: false,
           remainingAmountVisible: false,
           whatEditing: '',
+          file: '',
           value: ''
         }
       }
@@ -576,6 +578,26 @@ __webpack_require__.r(__webpack_exports__);
         _this12.showItem(_this12.productShow.productData.id);
 
         _this12.getCategoriesAndProducts();
+      });
+    },
+    // Adding photo
+    handleFileUpload: function handleFileUpload() {
+      this.productShow.editForm.file = this.$refs.file.files[0];
+    },
+    submitFile: function submitFile() {
+      var formData = new FormData();
+      formData.append('file', this.productShow.editForm.file);
+      fetch('/api/user/update/product/' + this.productShow.productData.id + '/addPhoto', {
+        method: 'POST',
+        headers: {
+          'Authorization': this.token,
+          'Content-Type': 'multipart/form-data;boundary=----WebKitFormBoundaryyrV7KO0BoCBuDbTL'
+        },
+        body: formData
+      }).then(function (res) {
+        return res.json();
+      }).then(function (data) {
+        return console.log(data);
       });
     }
   }
@@ -1555,6 +1577,8 @@ var render = function() {
             staticClass: "product-show"
           },
           [
+            _c("div", { staticClass: "edit-box" }),
+            _vm._v(" "),
             _vm._m(2),
             _vm._v(" "),
             _c("div", { staticClass: "body" }, [
@@ -1564,32 +1588,20 @@ var render = function() {
                     _vm._v(
                       "\n                                " +
                         _vm._s(_vm.productShow.productData.brand.name) +
+                        " " +
+                        _vm._s(_vm.productShow.productData.name) +
                         "\n                                "
                     ),
                     _c(
                       "span",
                       {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: !_vm.productShow.editForm.nameVisible,
-                            expression: "!productShow.editForm.nameVisible"
-                          }
-                        ],
                         on: {
                           click: function($event) {
                             _vm.showEdit("name")
                           }
                         }
                       },
-                      [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(_vm.productShow.productData.name) +
-                            "\n                        "
-                        )
-                      ]
+                      [_c("i", { staticClass: "bx bxs-edit" })]
                     ),
                     _vm._v(" "),
                     _c(
@@ -1666,43 +1678,35 @@ var render = function() {
                   _c("div", [
                     _c("h4", [
                       _vm._v(
-                        "\n                                    Description\n                                "
+                        "\n                                    Description "
+                      ),
+                      _c(
+                        "span",
+                        {
+                          on: {
+                            click: function($event) {
+                              _vm.showEdit("description")
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "bx bxs-edit" })]
                       )
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "p",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: !_vm.productShow.editForm.descriptionVisible,
-                            expression:
-                              "!productShow.editForm.descriptionVisible"
-                          }
-                        ],
-                        on: {
-                          click: function($event) {
-                            _vm.showEdit("description")
-                          }
-                        }
-                      },
-                      [
-                        _vm.productShow.productData.description === null
-                          ? _c("span", [
-                              _vm._v(
-                                "\n                                        Add description...\n                                    "
-                              )
-                            ])
-                          : _vm._e(),
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm.productShow.productData.description) +
-                            "\n                                "
-                        )
-                      ]
-                    ),
+                    _c("p", [
+                      _vm.productShow.productData.description === null
+                        ? _c("span", [
+                            _vm._v(
+                              "\n                                        Add description...\n                                    "
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(
+                        "\n                                    " +
+                          _vm._s(_vm.productShow.productData.description) +
+                          "\n                                "
+                      )
+                    ]),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -1763,46 +1767,37 @@ var render = function() {
                   _c("div", [
                     _c("h4", [
                       _vm._v(
-                        "\n                                    First impressions\n                                "
+                        "\n                                    First impressions "
+                      ),
+                      _c(
+                        "span",
+                        {
+                          on: {
+                            click: function($event) {
+                              _vm.showEdit("first_impressions")
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "bx bxs-edit" })]
                       )
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "p",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: !_vm.productShow.editForm
-                              .firstImpressionsVisible,
-                            expression:
-                              "!productShow.editForm.firstImpressionsVisible"
-                          }
-                        ],
-                        on: {
-                          click: function($event) {
-                            _vm.showEdit("first_impressions")
-                          }
-                        }
-                      },
-                      [
-                        _vm.productShow.productData.first_impressions === null
-                          ? _c("span", [
-                              _vm._v(
-                                "\n                                Add first impressions...\n                            "
-                              )
-                            ])
-                          : _vm._e(),
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(
-                              _vm.productShow.productData.first_impressions
-                            ) +
-                            "\n                                "
-                        )
-                      ]
-                    ),
+                    _c("p", [
+                      _vm.productShow.productData.first_impressions === null
+                        ? _c("span", [
+                            _vm._v(
+                              "\n                                        Add first impressions...\n                                    "
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(
+                        "\n                                    " +
+                          _vm._s(
+                            _vm.productShow.productData.first_impressions
+                          ) +
+                          "\n                                "
+                      )
+                    ]),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -1859,12 +1854,48 @@ var render = function() {
                         )
                       ]
                     )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("h4", [
+                      _vm._v(
+                        "\n                                    Add image\n                                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      ref: "file",
+                      attrs: { type: "file", id: "file" },
+                      on: {
+                        change: function($event) {
+                          _vm.handleFileUpload()
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.submitFile()
+                          }
+                        }
+                      },
+                      [_vm._v("asd")]
+                    )
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-lg-3 stats text-right" }, [
+                _c("div", { staticClass: "col-lg-3 stats" }, [
                   _c("div", { staticClass: "uses_count ml-auto" }, [
-                    _vm._v(_vm._s(_vm.productShow.productData.uses_count))
+                    _c("div", { staticClass: "m-0 text-center" }, [
+                      _c("p", { staticClass: "mb-0 h4" }, [
+                        _vm._v(_vm._s(_vm.productShow.productData.uses_count))
+                      ]),
+                      _vm._v(" "),
+                      _c("small", [_vm._v("uses")])
+                    ])
                   ])
                 ])
               ])
@@ -1905,89 +1936,43 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "carousel slide",
-        attrs: { id: "carouselExampleControls", "data-ride": "carousel" }
-      },
-      [
-        _c("div", { staticClass: "carousel-inner" }, [
-          _c("div", { staticClass: "carousel-item active" }, [
-            _c("img", {
-              staticClass: "d-block w-75 mx-auto",
-              attrs: {
-                src:
-                  "http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg",
-                alt: "First slide"
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "carousel-item" }, [
-            _c("img", {
-              staticClass: "d-block w-75 mx-auto",
-              attrs: {
-                src:
-                  "http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg",
-                alt: "Second slide"
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "carousel-item" }, [
-            _c("img", {
-              staticClass: "d-block w-75 mx-auto",
-              attrs: {
-                src:
-                  "http://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg",
-                alt: "Third slide"
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "carousel-control-prev",
-            attrs: {
-              href: "#carouselExampleControls",
-              role: "button",
-              "data-slide": "prev"
-            }
-          },
-          [
-            _c("span", {
-              staticClass: "carousel-control-prev-icon",
-              attrs: { "aria-hidden": "true" }
-            }),
-            _vm._v(" "),
-            _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "carousel-control-next",
-            attrs: {
-              href: "#carouselExampleControls",
-              role: "button",
-              "data-slide": "next"
-            }
-          },
-          [
-            _c("span", {
-              staticClass: "carousel-control-next-icon",
-              attrs: { "aria-hidden": "true" }
-            }),
-            _vm._v(" "),
-            _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
-          ]
-        )
-      ]
-    )
+    return _c("div", { staticClass: "gallery" }, [
+      _c("div", {
+        staticClass: "prev",
+        staticStyle: {
+          "background-image":
+            "url(https://i.ebayimg.com/images/g/k5cAAOSwNSxVeEJv/s-l300.jpg)"
+        },
+        attrs: { onclick: "gallery(this)" }
+      }),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "present",
+        staticStyle: {
+          "background-image":
+            "url(http://st.depositphotos.com/1813957/3134/i/950/depositphotos_31343027-stock-photo-turquoise-abstract-grunge-background.jpg)"
+        },
+        attrs: { onclick: "gallery(this)" }
+      }),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "next",
+        staticStyle: {
+          "background-image":
+            "url(http://hintergrundbild.org/wallpaper/full/d/5/3/33988-widescreen-hintergrundbilder-fuers-iphone-1080x1920.jpg)"
+        },
+        attrs: { onclick: "gallery(this)" }
+      }),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "hide",
+        staticStyle: {
+          "background-image":
+            "url(https://previews.123rf.com/images/imagesbavaria/imagesbavaria1408/imagesbavaria140800706/31173734-vecchia-priorit%C3%A0-bassa-di-legno-verniciato-in-colore-verde-o-turchese-.jpg)"
+        },
+        attrs: { onclick: "gallery(this)" }
+      })
+    ])
   }
 ]
 render._withStripped = true
