@@ -653,7 +653,7 @@ __webpack_require__.r(__webpack_exports__);
 
       console.log('Gallery refreshed!');
     },
-    // Adding photo
+    // Photos
     handleFileUpload: function handleFileUpload() {
       this.productShow.editForm.file = this.$refs.file.files[0];
     },
@@ -674,6 +674,20 @@ __webpack_require__.r(__webpack_exports__);
         _this13.showItem(_this13.productShow.productData.id);
 
         _this13.getCategoriesAndProducts();
+      });
+    },
+    removePhoto: function removePhoto(photoIndex) {
+      var _this14 = this;
+
+      fetch('/api/user/delete/product/' + this.productShow.productData.id + '/photo/' + photoIndex, {
+        method: 'POST',
+        headers: {
+          'Authorization': this.token
+        }
+      }).then(function (res) {
+        return res.json();
+      }).then(function (data) {
+        _this14.showItem(_this14.productShow.productData.id);
       });
     }
   }
@@ -1969,7 +1983,10 @@ var render = function() {
             _c(
               "div",
               { staticClass: "gallery" },
-              _vm._l(_vm.productShow.productData.photos, function(photo) {
+              _vm._l(_vm.productShow.productData.photos, function(
+                photo,
+                index
+              ) {
                 return _c(
                   "div",
                   {
@@ -1977,7 +1994,20 @@ var render = function() {
                     style: { "background-image": "url(" + photo + ")" },
                     attrs: { onclick: "gallery(this)" }
                   },
-                  [_vm._m(2, true)]
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "delete close",
+                        on: {
+                          click: function($event) {
+                            _vm.removePhoto(index)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "bx bxs-trash" })]
+                    )
+                  ]
                 )
               }),
               0
@@ -2183,14 +2213,6 @@ var staticRenderFns = [
       _c("p", [_vm._v("New brand")]),
       _vm._v(" "),
       _c("p", [_vm._v("New product")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "delete close" }, [
-      _c("i", { staticClass: "bx bxs-trash" })
     ])
   }
 ]

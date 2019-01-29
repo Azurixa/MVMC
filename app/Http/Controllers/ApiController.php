@@ -68,7 +68,10 @@ class ApiController extends Controller
         $id = $request->post('id');
 
         // Delete category
-        Category::where(['creator_id' => $userId, 'id' => $id])->delete();
+        Category::where([
+            'creator_id' => $userId,
+            'id'         => $id
+        ])->delete();
         Product::where('category_id', $id)->delete();
 
         return json_encode(['message' => 'Category ' . $id . ' for user ' . $userId . ' and all products inside deleted!']);
@@ -112,7 +115,10 @@ class ApiController extends Controller
         $id = $request->post('id');
 
         // Delete brand
-        Brand::where(['creator_id' => $userId, 'id' => $id])->delete();
+        Brand::where([
+            'creator_id' => $userId,
+            'id'         => $id
+        ])->delete();
         Product::where('brand_id', $id)->delete();
 
         return json_encode(['message' => 'Brand ' . $id . ' for user ' . $userId . ' and all products with belong to it deleted!']);
@@ -154,11 +160,15 @@ class ApiController extends Controller
         return json_encode(['message' => 'Product ' . $name . ' for category ' . $categoryId . ' created!']);
     }
 
-    public function updateProduct ($id, $field, Request $request) {
+    public function updateProduct ($id, $field, Request $request)
+    {
         $userId = $request->user()->id;
 
         // Update product
-        $product = Product::where(['creator_id' => $userId, 'id' => $id])->firstOrFail();
+        $product = Product::where([
+            'creator_id' => $userId,
+            'id'         => $id
+        ])->firstOrFail();
         $product->$field = $request->post('value');
         $product->save();
 
@@ -173,32 +183,35 @@ class ApiController extends Controller
     public function getProduct ($id, Request $request)
     {
         $userId = $request->user()->id;
-        $product = Product::where(['creator_id' => $userId, 'id' => $id])->firstOrFail();
+        $product = Product::where([
+            'creator_id' => $userId,
+            'id'         => $id
+        ])->firstOrFail();
         $brand = Brand::where('id', $product['brand_id'])->first();
         $category = Category::where('id', $product['category_id'])->first();
         $toReturn = [
-            'id' => $product->id,
-            'name' => $product->name,
-            'description' => $product->description,
+            'id'                => $product->id,
+            'name'              => $product->name,
+            'description'       => $product->description,
             'first_impressions' => $product->first_impressions,
-            'updates' => $product->updates,
-            'photos' => Product::getPhotos($id),
-            'remaining_amount' => $product->remaining_amount,
-            'uses_count' => $product->uses_count,
-            'last_use' => $product->last_use,
-            'brand' => $brand,
-            'category' => $category
+            'updates'           => $product->updates,
+            'photos'            => Product::getPhotos($id),
+            'remaining_amount'  => $product->remaining_amount,
+            'uses_count'        => $product->uses_count,
+            'last_use'          => $product->last_use,
+            'brand'             => $brand,
+            'category'          => $category
         ];
 
         return $toReturn;
     }
 
-    public function addPhoto($id, Request $request)
+    public function addPhoto ($id, Request $request)
     {
         $userId = $request->user()->id;
 
         $image = $request->file('photo');
-        $name = $userId.'_'.str_slug($image->getClientOriginalName()).'.'.$image->getClientOriginalExtension();
+        $name = $userId . '_' . str_slug($image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
         $image->storeAs('public/products', $name);
 
         Product::addPhoto($id, $name);
@@ -210,14 +223,44 @@ class ApiController extends Controller
      * @param Request $request
      * @return string
      */
-    public function deleteProduct(Request $request) {
+    public function deleteProduct (Request $request)
+    {
         $userId = $request->user()->id;
         $id = $request->post('id');
 
         // Delete product
-        Product::where(['creator_id' => $userId, 'id' => $id])->delete();
+        Product::where([
+            'creator_id' => $userId,
+            'id'         => $id
+        ])->delete();
 
         return json_encode(['message' => 'Product ' . $id . ' for user ' . $userId . ' deleted!']);
+    }
+
+    /**
+     * @param $id
+     * @param $photoIndex
+     * @param Request $request
+     * @return string
+     */
+    public function deleteProductPhoto ($id, $photoIndex, Request $request)
+    {
+        $userId = $request->user()->id;
+
+        $product = Product::where([
+            'creator_id' => $userId,
+            'id'         => $id
+        ]);
+        $newPhotos = '';
+        $productPhotos = Product::getPhotos($id);
+        foreach ($productPhotos as $index => $photo) {
+            if ($index !== $photoIndex) {
+                $newPhotos .= $photo;
+            }
+        }
+        $product->photos = $newPhotos;
+
+        return json_encode(['message' => 'Photo of index '.$photoIndex.' from item '.$id.' removed!']);
     }
 
     /**
@@ -241,12 +284,12 @@ class ApiController extends Controller
             foreach ($products as $product) {
                 $brand = Brand::where('id', $product['brand_id'])->firstOrFail();
                 array_push($productsFormated, [
-                    'id' => $product['id'],
-                    'brand' => $brand['name'],
-                    'brand_id' => $brand['id'],
-                    'name' => $product['name'],
+                    'id'          => $product['id'],
+                    'brand'       => $brand['name'],
+                    'brand_id'    => $brand['id'],
+                    'name'        => $product['name'],
                     'description' => $product['description'],
-                    'photos' => $product['photos']
+                    'photos'      => $product['photos']
                 ]);
             }
             array_push($toReturn, [

@@ -140,9 +140,9 @@
 
                     <div class="gallery">
 
-                        <div v-for="photo in productShow.productData.photos" onclick="gallery(this)"
+                        <div v-for="(photo, index) in productShow.productData.photos" onclick="gallery(this)"
                              :style="{ 'background-image': 'url(' + photo + ')' }" class="gallery-image">
-                            <div class="delete close">
+                            <div class="delete close" @click="removePhoto(index)">
                                 <i class='bx bxs-trash'></i>
                             </div>
                         </div>
@@ -494,7 +494,7 @@
 
             },
 
-            // Adding photo
+            // Photos
 
             handleFileUpload() {
                 this.productShow.editForm.file = this.$refs.file.files[0];
@@ -511,6 +511,16 @@
                 }).then(res => res.json()).then(data => {
                     this.showItem(this.productShow.productData.id);
                     this.getCategoriesAndProducts();
+                });
+            },
+            removePhoto(photoIndex) {
+                fetch('/api/user/delete/product/' + this.productShow.productData.id + '/photo/' + photoIndex, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': this.token,
+                    },
+                }).then(res => res.json()).then(data => {
+                    this.showItem(this.productShow.productData.id);
                 });
             },
 

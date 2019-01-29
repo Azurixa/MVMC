@@ -26,6 +26,7 @@ Route::middleware('auth:api')->post('/user/create/product', 'ApiController@creat
 Route::middleware('auth:api')->post('/user/delete/category', 'ApiController@deleteCategory');
 Route::middleware('auth:api')->post('/user/delete/brand', 'ApiController@deleteBrand');
 Route::middleware('auth:api')->post('/user/delete/product', 'ApiController@deleteProduct');
+Route::middleware('auth:api')->post('/user/delete/product/{id}/photo/{photoIndex}', 'ApiController@deleteProductPhoto');
 
 // Get
 Route::middleware('auth:api')->get('/user/categories', 'ApiController@getCategories');
