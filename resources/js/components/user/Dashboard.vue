@@ -75,7 +75,7 @@
         <div class="row m-0 main-box">
 
             <div class="collection">
-                <p class="h2">Collection</p>
+                <p class="header">Collection</p>
                 <ul>
                     <li v-for="item in allProducts">
                         <span onClick="this.nextSibling.nextSibling.toggleAttribute('shown')" class="category">{{item.category.name}}</span>
@@ -187,7 +187,7 @@
                                         Add image
                                     </h4>
                                     <input type="file" id="file" ref="file" @change="handleFileUpload()">
-                                    <button @click="addPhoto()">asd</button>
+                                    <button @click="addPhoto()">Send Photo</button>
                                 </div>
 
                             </div>

@@ -1589,7 +1589,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "row m-0 main-box" }, [
       _c("div", { staticClass: "collection" }, [
-        _c("p", { staticClass: "h2" }, [_vm._v("Collection")]),
+        _c("p", { staticClass: "header" }, [_vm._v("Collection")]),
         _vm._v(" "),
         _c(
           "ul",
@@ -2103,7 +2103,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("asd")]
+                      [_vm._v("Send Photo")]
                     )
                   ])
                 ]),
