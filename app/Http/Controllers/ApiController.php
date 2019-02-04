@@ -250,17 +250,23 @@ class ApiController extends Controller
         $product = Product::where([
             'creator_id' => $userId,
             'id'         => $id
-        ]);
+        ])->first();
+
         $newPhotos = '';
-        $productPhotos = Product::getPhotos($id);
+        $productPhotos = Product::getPhotos($id, true);
         foreach ($productPhotos as $index => $photo) {
-            if ($index !== $photoIndex) {
-                $newPhotos .= $photo;
+            if ($index != $photoIndex) {
+                if ($index !== (count($productPhotos) - 1)) {
+                    $newPhotos .= $photo.';';
+                } else {
+                    $newPhotos .= $photo;
+                }
             }
         }
         $product->photos = $newPhotos;
+        $product->save();
 
-        return json_encode(['message' => 'Photo of index '.$photoIndex.' from item '.$id.' removed!']);
+        return json_encode(['message' => 'Photo of index '.$newPhotos.' from item '.$id.' removed!']);
     }
 
     /**
