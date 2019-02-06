@@ -7,6 +7,10 @@
 
 require('./bootstrap');
 
+window.reloadAll = () => {
+    $('[data-toggle="tooltip"]').tooltip();
+}
+
 window.gallery = (element) => {
 
     if (element.classList.contains('next')) {

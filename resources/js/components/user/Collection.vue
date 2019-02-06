@@ -142,18 +142,17 @@
 
                         <div v-for="(photo, index) in productShow.productData.photos" onclick="gallery(this)"
                              :style="{ 'background-image': 'url(' + photo + ')' }" class="gallery-image">
-                            <div class="delete close" @click="removePhoto(index)">
+                            <div class="delete close" @click="removePhoto(index)" data-toggle="tooltip" data-placement="left" title="Delete photo">
                                 <i class='bx bxs-trash'></i>
                             </div>
                         </div>
 
                     </div>
-
                     <div class="body">
                         <div class="row p-0 m-0">
 
                             <div class="col-12 p-0">
-                                <div class="progress mt-1" @click="showEdit('remaining_amount')">
+                                <div class="progress mt-1" @click="showEdit('remaining_amount')" data-toggle="tooltip" data-placement="bottom" title="Change remaining amount">
                                     <div class="progress-bar" role="progressbar"
                                          :style="{width: productShow.productData.remaining_amount + '%'}">
                                         {{productShow.productData.remaining_amount}} %
@@ -164,12 +163,12 @@
                             <div class="col-lg-10 p-0">
                                 <h1 class="mb-4">
                                     {{productShow.productData.brand.name}} {{productShow.productData.name}}
-                                    <span @click="showEdit('name')"><i class='bx bx-highlight'></i></span>
+                                    <span @click="showEdit('name')" data-toggle="tooltip" data-placement="bottom" title="Change product name"><i class='bx bx-highlight'></i></span>
                                 </h1>
                                 <div>
                                     <h4>
                                         Description
-                                        <span @click="showEdit('description')"><i class='bx bx-highlight'></i></span>
+                                        <span @click="showEdit('description')" data-toggle="tooltip" data-placement="bottom" title="Change description"><i class='bx bx-highlight'></i></span>
                                     </h4>
                                     <p>
                                         <span v-if="productShow.productData.description === null">
@@ -181,7 +180,7 @@
                                 <div>
                                     <h4>
                                         First impressions
-                                        <span @click="showEdit('first_impressions')"><i
+                                        <span @click="showEdit('first_impressions')" data-toggle="tooltip" data-placement="bottom" title="Change first impressions"><i
                                                 class='bx bx-highlight'></i></span>
                                     </h4>
                                     <p>
@@ -203,7 +202,7 @@
                             <div class="col-lg-2"></div>
 
                             <div class="stats">
-                                <div class="uses_count mx-auto" @click="addProductUse()">
+                                <div class="uses_count mx-auto" @click="addProductUse()" data-toggle="tooltip" data-placement="left" :title="'Last use: ' + productShow.productData.last_use">
                                     <div class="m-0 text-center">
                                         <p class="mb-0 h4">{{productShow.productData.uses_count}}</p>
                                         <small>uses</small>
@@ -410,6 +409,7 @@
                     this.productShow.visible = true;
                     setTimeout(() => {
                         this.refreshGallery();
+                        window.reloadAll();
                     }, 50);
                 });
             },

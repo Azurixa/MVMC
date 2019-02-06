@@ -36391,6 +36391,10 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+window.reloadAll = function () {
+  $('[data-toggle="tooltip"]').tooltip();
+};
+
 window.gallery = function (element) {
   if (element.classList.contains('next')) {
     var prevEl = element.previousElementSibling;

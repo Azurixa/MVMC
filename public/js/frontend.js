@@ -340,7 +340,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -568,6 +567,8 @@ __webpack_require__.r(__webpack_exports__);
         _this11.productShow.visible = true;
         setTimeout(function () {
           _this11.refreshGallery();
+
+          window.reloadAll();
         }, 50);
       });
     },
@@ -1975,6 +1976,11 @@ var render = function() {
                       "div",
                       {
                         staticClass: "delete close",
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-placement": "left",
+                          title: "Delete photo"
+                        },
                         on: {
                           click: function($event) {
                             _vm.removePhoto(index)
@@ -1996,6 +2002,11 @@ var render = function() {
                     "div",
                     {
                       staticClass: "progress mt-1",
+                      attrs: {
+                        "data-toggle": "tooltip",
+                        "data-placement": "bottom",
+                        title: "Change remaining amount"
+                      },
                       on: {
                         click: function($event) {
                           _vm.showEdit("remaining_amount")
@@ -2039,6 +2050,11 @@ var render = function() {
                     _c(
                       "span",
                       {
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-placement": "bottom",
+                          title: "Change product name"
+                        },
                         on: {
                           click: function($event) {
                             _vm.showEdit("name")
@@ -2057,6 +2073,11 @@ var render = function() {
                       _c(
                         "span",
                         {
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-placement": "bottom",
+                            title: "Change description"
+                          },
                           on: {
                             click: function($event) {
                               _vm.showEdit("description")
@@ -2091,6 +2112,11 @@ var render = function() {
                       _c(
                         "span",
                         {
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-placement": "bottom",
+                            title: "Change first impressions"
+                          },
                           on: {
                             click: function($event) {
                               _vm.showEdit("first_impressions")
@@ -2157,6 +2183,12 @@ var render = function() {
                     "div",
                     {
                       staticClass: "uses_count mx-auto",
+                      attrs: {
+                        "data-toggle": "tooltip",
+                        "data-placement": "left",
+                        title:
+                          "Last use: " + _vm.productShow.productData.last_use
+                      },
                       on: {
                         click: function($event) {
                           _vm.addProductUse()

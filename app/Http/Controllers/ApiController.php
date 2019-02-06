@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use GuzzleHttp;
 use GuzzleHttp\Exception\GuzzleException;
@@ -216,6 +217,7 @@ class ApiController extends Controller
         ])->firstOrFail();
 
         $product->uses_count++;
+        $product->last_use = $currentTimestamp = Carbon::now()->toDateTimeString();
         $product->save();
 
         return json_encode(['message' => 'Use count++ for product '.$id.'!']);
