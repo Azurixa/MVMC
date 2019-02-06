@@ -598,8 +598,7 @@ __webpack_require__.r(__webpack_exports__);
         _this11.productShow.productData = data;
         _this11.productShow.visible = true;
         setTimeout(function () {
-          _this11.refreshGallery();
-
+          window.refreshGallery();
           window.reloadAll();
         }, 50);
       });
@@ -679,32 +678,6 @@ __webpack_require__.r(__webpack_exports__);
 
         _this13.getCategoriesAndProducts();
       });
-    },
-    // Gallery handling
-    refreshGallery: function refreshGallery() {
-      var photos = document.querySelectorAll('.gallery-image');
-      photos.forEach(function (photo) {
-        photo.classList.add('hide');
-      });
-
-      if (photos.length > 2) {
-        photos[0].classList.add('prev');
-        photos[0].classList.remove('hide');
-        photos[1].classList.add('present');
-        photos[1].classList.remove('hide');
-        photos[2].classList.add('next');
-        photos[2].classList.remove('hide');
-      } else if (photos.length === 2) {
-        photos[0].classList.add('present');
-        photos[0].classList.remove('hide');
-        photos[1].classList.add('next');
-        photos[1].classList.remove('hide');
-      } else if (photos.length === 1) {
-        photos[0].classList.add('present');
-        photos[0].classList.remove('hide');
-      }
-
-      console.log('Gallery refreshed!');
     },
     // Photos
     handleFileUpload: function handleFileUpload() {

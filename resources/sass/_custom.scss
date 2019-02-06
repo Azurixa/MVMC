@@ -196,13 +196,17 @@
             background-position: center;
           }
           .prev, .next{
-            width: 30%;
+            //width: 30%;
             background-color: black;
             .delete{
               display: none;
             }
           }
           .gallery-image{
+            position: relative;
+            background-color: black;
+            overflow: hidden;
+            transition: width 0.3s;
             &.new{
               background-color: white;
               display: flex;
@@ -213,11 +217,6 @@
                 background: 0;
               }
             }
-          }
-          .present{
-            width: 60%;
-            background-color: #1b1e21;
-            position: relative;
             .delete{
               height: fit-content;
               line-height: 1px;
@@ -233,7 +232,7 @@
             }
           }
           .hide{
-            display: none !important;
+            //display: none !important;
           }
         }
         .body{

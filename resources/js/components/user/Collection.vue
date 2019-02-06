@@ -440,7 +440,7 @@
                     this.productShow.productData = data;
                     this.productShow.visible = true;
                     setTimeout(() => {
-                        this.refreshGallery();
+                        window.refreshGallery();
                         window.reloadAll();
                     }, 50);
                 });
@@ -509,37 +509,6 @@
                     this.showItem(this.productShow.productData.id);
                     this.getCategoriesAndProducts();
                 });
-            },
-
-            // Gallery handling
-
-            refreshGallery() {
-
-                const photos = document.querySelectorAll('.gallery-image');
-
-                photos.forEach((photo) => {
-                    photo.classList.add('hide');
-                });
-
-                if (photos.length > 2) {
-                    photos[0].classList.add('prev');
-                    photos[0].classList.remove('hide');
-                    photos[1].classList.add('present');
-                    photos[1].classList.remove('hide');
-                    photos[2].classList.add('next');
-                    photos[2].classList.remove('hide');
-                } else if (photos.length === 2) {
-                    photos[0].classList.add('present');
-                    photos[0].classList.remove('hide');
-                    photos[1].classList.add('next');
-                    photos[1].classList.remove('hide');
-                } else if (photos.length === 1) {
-                    photos[0].classList.add('present');
-                    photos[0].classList.remove('hide');
-                }
-
-                console.log('Gallery refreshed!');
-
             },
 
             // Photos

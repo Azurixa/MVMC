@@ -36395,70 +36395,134 @@ window.reloadAll = function () {
   $('[data-toggle="tooltip"]').tooltip();
 };
 
+window.refreshGallery = function () {
+  var photos = document.querySelectorAll('.gallery-image');
+  photos.forEach(function (photo) {
+    photo.style.width = '0%';
+  });
+
+  if (photos.length > 2) {
+    photos[0].style.width = '20%';
+    photos[1].style.width = '60%';
+    photos[2].style.width = '20%';
+  } else if (photos.length === 2) {
+    photos[0].style.width = '60%';
+    photos[1].style.width = '20%';
+  } else if (photos.length === 1) {
+    photos[0].style.width = '60%';
+  }
+
+  console.log('Gallery refreshed!');
+};
+
 window.gallery = function (element) {
-  if (element.classList.contains('next')) {
-    var prevEl = element.previousElementSibling;
-    var presentEl = element;
-    var nextEl = element.nextElementSibling;
+  element.style.width = '60%';
+  var prev = element.previousElementSibling;
+  var next = element.nextElementSibling;
 
-    if (nextEl !== null && prevEl !== null) {
-      var previerEl = element.previousElementSibling.previousElementSibling;
+  if (prev !== null) {
+    prev.style.width = '20%';
+    var prever = prev.previousElementSibling;
 
-      if (previerEl !== null) {
-        previerEl.classList.remove('prev');
-        previerEl.classList.add('hide');
-        prevEl.classList.remove('present');
-        prevEl.classList.add('prev');
-        presentEl.classList.remove('next');
-        presentEl.classList.add('present');
-        nextEl.classList.remove('hide');
-        nextEl.classList.add('next');
-      } else {
-        prevEl.classList.remove('present');
-        prevEl.classList.add('prev');
-        presentEl.classList.remove('next');
-        presentEl.classList.add('present');
-        nextEl.classList.remove('hide');
-        nextEl.classList.add('next');
-      }
-    } else {
-      prevEl.classList.remove('present');
-      prevEl.classList.add('prev');
-      presentEl.classList.remove('next');
-      presentEl.classList.add('present');
-    }
-  } else if (element.classList.contains('prev')) {
-    var _prevEl = element.previousElementSibling;
-    var _presentEl = element;
-    var _nextEl = element.nextElementSibling;
-    var nextterEl = element.nextElementSibling.nextElementSibling;
-
-    if (_prevEl !== null) {
-      _prevEl.classList.remove('hide');
-
-      _prevEl.classList.add('prev');
-
-      _presentEl.classList.remove('prev');
-
-      _presentEl.classList.add('present');
-
-      _nextEl.classList.remove('present');
-
-      _nextEl.classList.add('next');
-
-      nextterEl.classList.remove('next');
-      nextterEl.classList.add('hide');
-    } else {
-      _presentEl.classList.remove('prev');
-
-      _presentEl.classList.add('present');
-
-      _nextEl.classList.remove('present');
-
-      _nextEl.classList.add('next');
+    if (next === null && prever !== null) {
+      prever.style.width = '20%';
+    } else if (prever !== null) {
+      prever.style.width = '0%';
     }
   }
-};
+
+  if (next !== null) {
+    next.style.width = '20%';
+    var nexter = next.nextElementSibling;
+
+    if (prev === null && nexter !== null) {
+      nexter.style.width = '20%';
+    } else if (nexter !== null) {
+      nexter.style.width = '0%';
+    }
+  }
+}; // window.gallery = (element) => {
+//
+//     if (element.classList.contains('next')) {
+//
+//         const prevEl = element.previousElementSibling;
+//         const presentEl = element;
+//         const nextEl = element.nextElementSibling;
+//
+//         if (nextEl !== null && prevEl !== null) {
+//
+//             const previerEl = element.previousElementSibling.previousElementSibling;
+//
+//             if (previerEl !== null) {
+//
+//                 previerEl.classList.remove('prev');
+//                 previerEl.classList.add('hide');
+//
+//                 prevEl.classList.remove('present');
+//                 prevEl.classList.add('prev');
+//
+//                 presentEl.classList.remove('next');
+//                 presentEl.classList.add('present');
+//
+//                 nextEl.classList.remove('hide');
+//                 nextEl.classList.add('next');
+//
+//             } else {
+//
+//                 prevEl.classList.remove('present');
+//                 prevEl.classList.add('prev');
+//
+//                 presentEl.classList.remove('next');
+//                 presentEl.classList.add('present');
+//
+//                 nextEl.classList.remove('hide');
+//                 nextEl.classList.add('next');
+//
+//             }
+//
+//         } else {
+//
+//             prevEl.classList.remove('present');
+//             prevEl.classList.add('prev');
+//
+//             presentEl.classList.remove('next');
+//             presentEl.classList.add('present');
+//
+//         }
+//
+//     } else if (element.classList.contains('prev')) {
+//
+//         const prevEl = element.previousElementSibling;
+//         const presentEl = element;
+//         const nextEl = element.nextElementSibling;
+//         const nextterEl = element.nextElementSibling.nextElementSibling;
+//
+//         if (prevEl !== null) {
+//
+//             prevEl.classList.remove('hide');
+//             prevEl.classList.add('prev');
+//
+//             presentEl.classList.remove('prev');
+//             presentEl.classList.add('present');
+//
+//             nextEl.classList.remove('present');
+//             nextEl.classList.add('next');
+//
+//             nextterEl.classList.remove('next');
+//             nextterEl.classList.add('hide');
+//
+//         } else {
+//
+//             presentEl.classList.remove('prev');
+//             presentEl.classList.add('present');
+//
+//             nextEl.classList.remove('present');
+//             nextEl.classList.add('next');
+//
+//         }
+//
+//     }
+// }
 
 /***/ }),
 
