@@ -36392,8 +36392,11 @@ module.exports = function(module) {
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.reloadAll = function () {
-  $('[data-toggle="tooltip"]').tooltip();
+  var el = $('[data-toggle="tooltip"]');
+  el.tooltip('update');
 };
+
+window.opacityLow = '0.3';
 
 window.refreshGallery = function () {
   var photos = document.querySelectorAll('.gallery-image');
@@ -36402,14 +36405,20 @@ window.refreshGallery = function () {
   });
 
   if (photos.length > 2) {
-    photos[0].style.width = '20%';
-    photos[1].style.width = '60%';
+    photos[0].style.width = '60%';
+    photos[0].style.opacity = 1;
+    photos[1].style.width = '20%';
+    photos[1].style.opacity = window.opacityLow;
     photos[2].style.width = '20%';
+    photos[2].style.opacity = window.opacityLow;
   } else if (photos.length === 2) {
     photos[0].style.width = '60%';
+    photos[0].style.opacity = '1';
     photos[1].style.width = '20%';
+    photos[1].style.opacity = window.opacityLow;
   } else if (photos.length === 1) {
     photos[0].style.width = '60%';
+    photos[0].style.opacity = '1';
   }
 
   console.log('Gallery refreshed!');
@@ -36417,15 +36426,18 @@ window.refreshGallery = function () {
 
 window.gallery = function (element) {
   element.style.width = '60%';
+  element.style.opacity = '1';
   var prev = element.previousElementSibling;
   var next = element.nextElementSibling;
 
   if (prev !== null) {
     prev.style.width = '20%';
+    prev.style.opacity = window.opacityLow;
     var prever = prev.previousElementSibling;
 
     if (next === null && prever !== null) {
       prever.style.width = '20%';
+      prever.style.opacity = window.opacityLow;
     } else if (prever !== null) {
       prever.style.width = '0%';
     }
@@ -36433,10 +36445,12 @@ window.gallery = function (element) {
 
   if (next !== null) {
     next.style.width = '20%';
+    next.style.opacity = window.opacityLow;
     var nexter = next.nextElementSibling;
 
     if (prev === null && nexter !== null) {
       nexter.style.width = '20%';
+      nexter.style.opacity = window.opacityLow;
     } else if (nexter !== null) {
       nexter.style.width = '0%';
     }

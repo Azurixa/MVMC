@@ -26,6 +26,7 @@ class CreateProductsTable extends Migration
             $table->text('photos')->nullable();
             $table->integer('remaining_amount')->default(100);
             $table->integer('uses_count')->default(0);
+            $table->boolean('pan')->default(false);
             $table->timestamp('bought_at')->nullable();
             $table->timestamp('last_use')->nullable();
             $table->integer('expire_months')->default(0);

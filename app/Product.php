@@ -13,7 +13,12 @@ class Product extends Model
         $product = Product::find($id);
         $photos = explode(';', $product->photos);
         foreach ($photos as $photo) {
-            array_push($imagesReturn, 'storage/products/'.$photo);
+            if (!$bare){
+                if($photo !== ''){
+                    $ph = explode(':', $photo);
+                    array_unshift($imagesReturn, ['image' => 'storage/products/'.$ph[0], 'date' => $ph[1]]);
+                }
+            }
             array_push($imagesReturnBare, $photo);
         }
         if ($product->photos !== '') {
@@ -27,12 +32,16 @@ class Product extends Model
 
     public static function addPhoto ($id, $photoName)
     {
+        date_default_timezone_set('CET');
+
         $photos = Product::getPhotos($id, true);
         $photosString = '';
+        $date = date('d.m.y');
+
         foreach ($photos as $photo) {
             $photosString .= $photo.';';
         }
-        $photosString .= $photoName;
+        $photosString .= $photoName.':'.$date;
         $product = Product::find($id);
         $product->photos = $photosString;
         $product->save();

@@ -10635,6 +10635,28 @@ a.text-dark:focus {
   padding-bottom: 0.6rem;
 }
 
+#projectpan .main-box .collection > ul ul .product-amount {
+  width: 10px;
+  height: 19px;
+  line-height: 0.9;
+  border: 1px solid rgba(0, 0, 0, 0.85);
+  position: relative;
+  bottom: 1px;
+  display: inline-block;
+  background-color: white;
+  border-radius: 4px;
+}
+
+#projectpan .main-box .collection > ul ul .product-amount .amount {
+  transition: 0.5s all;
+  position: absolute;
+  border-radius: 4px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #26C6DA;
+}
+
 #projectpan .main-box .collection > ul ul .item {
   cursor: pointer;
 }
@@ -10709,6 +10731,7 @@ a.text-dark:focus {
   width: 100%;
   position: relative;
   display: flex;
+  background: #000;
 }
 
 #projectpan .main-box .activity-box .product-show .gallery > div {
@@ -10718,24 +10741,16 @@ a.text-dark:focus {
   background-position: center;
 }
 
-#projectpan .main-box .activity-box .product-show .gallery .prev,
-#projectpan .main-box .activity-box .product-show .gallery .next {
-  background-color: black;
-}
-
-#projectpan .main-box .activity-box .product-show .gallery .prev .delete,
-#projectpan .main-box .activity-box .product-show .gallery .next .delete {
-  display: none;
-}
-
 #projectpan .main-box .activity-box .product-show .gallery .gallery-image {
   position: relative;
   background-color: black;
   overflow: hidden;
-  transition: width 0.3s;
+  transition: all 0.3s;
+  cursor: pointer;
 }
 
 #projectpan .main-box .activity-box .product-show .gallery .gallery-image.new {
+  cursor: default;
   background-color: white;
   display: flex;
   align-items: center;
@@ -10745,6 +10760,28 @@ a.text-dark:focus {
 #projectpan .main-box .activity-box .product-show .gallery .gallery-image.new button {
   border: 0;
   background: 0;
+  cursor: pointer;
+}
+
+#projectpan .main-box .activity-box .product-show .gallery .gallery-image .date {
+  position: absolute;
+  bottom: 9px;
+  left: 9px;
+  color: #000;
+  background-color: white;
+  opacity: 0.5;
+  padding: 4px;
+  transition: 0.3s all;
+  cursor: default;
+  border-radius: 6px;
+}
+
+#projectpan .main-box .activity-box .product-show .gallery .gallery-image .date:hover {
+  opacity: 1;
+}
+
+#projectpan .main-box .activity-box .product-show .gallery .gallery-image .date p {
+  line-height: 13px;
 }
 
 #projectpan .main-box .activity-box .product-show .gallery .gallery-image .delete {

@@ -123,6 +123,26 @@
           list-style: none;
           padding-inline-start: 0.5rem;
           padding-bottom: 0.6rem;
+          .product-amount{
+            width: 10px;
+            height: 19px;
+            line-height: 0.9;
+            border:1px solid rgba(0, 0, 0, 0.85);
+            position: relative;
+            bottom: 1px;
+            display: inline-block;
+            background-color: white;
+            border-radius: 4px;
+            .amount{
+              transition: 0.5s all;
+              position: absolute;
+              border-radius: 4px;
+              left: 0;
+              bottom: 0;
+              width: 100%;
+              background-color: $primary1;
+            }
+          }
           .brand{
             
           }
@@ -189,25 +209,21 @@
           width: 100%;
           position: relative;
           display: flex;
+          background: #000;
           > div{
             height: 100%;
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
           }
-          .prev, .next{
-            //width: 30%;
-            background-color: black;
-            .delete{
-              display: none;
-            }
-          }
           .gallery-image{
             position: relative;
             background-color: black;
             overflow: hidden;
-            transition: width 0.3s;
+            transition: all 0.3s;
+            cursor: pointer;
             &.new{
+              cursor: default;
               background-color: white;
               display: flex;
               align-items: center;
@@ -215,6 +231,25 @@
               button{
                 border: 0;
                 background: 0;
+                cursor: pointer;
+              }
+            }
+            .date{
+              position: absolute;
+              bottom: 9px;
+              left: 9px;
+              color: #000;
+              background-color: white;
+              opacity: 0.5;
+              padding: 4px;
+              transition: 0.3s all;
+              cursor: default;
+              border-radius: 6px;
+              &:hover{
+                opacity: 1;
+              }
+              p{
+                line-height: 13px;
               }
             }
             .delete{
@@ -230,9 +265,6 @@
               background-color: white;
               color: black;
             }
-          }
-          .hide{
-            //display: none !important;
           }
         }
         .body{

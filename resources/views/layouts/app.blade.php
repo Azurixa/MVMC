@@ -29,7 +29,7 @@
 
     <main>
 
-        @include('inc.navbar')
+        <navbar></navbar>
 
         @yield('content')
 

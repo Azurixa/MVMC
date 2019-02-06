@@ -87,9 +87,12 @@
                         <span onClick="this.nextSibling.nextSibling.toggleAttribute('shown')" class="category">{{item.category.name}}</span>
                         <ul shown>
                             <li v-for="product in item.products">
+                                <span class="product-amount">&nbsp;&nbsp;<span class="amount" :style="{height: product.remaining_amount + '%'}"></span></span>
                                 <span class="brand badge badge-info">{{product.brand}}</span> <span
                                     @click="showItem(product.id)"
-                                    class="item">{{product.name}}</span>
+                                    class="item">
+                                    {{product.name}}
+                                </span>
                             </li>
                         </ul>
                     </li>
@@ -149,7 +152,10 @@
                     <div class="gallery">
 
                         <div v-for="(photo, index) in productShow.productData.photos" onclick="gallery(this)"
-                             :style="{ 'background-image': 'url(' + photo + ')' }" class="gallery-image">
+                             :style="{ 'background-image': 'url(' + photo.image + ')' }" class="gallery-image">
+                            <div class="date">
+                                <p class="m-0">{{photo.date}}</p>
+                            </div>
                             <div class="delete close" @click="removePhoto(index)" data-toggle="tooltip"
                                  data-placement="left" title="Delete photo">
                                 <i class='bx bxs-trash'></i>
@@ -163,7 +169,7 @@
                                 <div class="">
                                     <input class="mb-3" type="file" id="file" ref="file" @change="handleFileUpload()">
                                 </div>
-                                <button @click="addPhoto()"><i class="bx bx-plus"></i>Add photo</button>
+                                <button @click="addPhoto()"><i class="bx bx-plus"></i> Add photo</button>
                             </div>
                         </div>
 
@@ -185,13 +191,14 @@
                             </div>
 
                             <!-- Main box of product information -->
-                            <div class="col-lg-10 p-0">
+                            <div class="col-lg-10 px-0 pt-3">
                                 <h1 class="mb-4">
-                                    {{productShow.productData.brand.name}} {{productShow.productData.name}}
+                                    {{productShow.productData.brand.name}} - {{productShow.productData.name}}
                                     <span @click="showEdit('name')" data-toggle="tooltip" data-placement="bottom"
                                           title="Change product name"><i class='bx bx-highlight'></i></span>
                                 </h1>
-                                <div>
+
+                                <div class="mb-4">
                                     <h4>
                                         Description
                                         <span @click="showEdit('description')" data-toggle="tooltip"
@@ -205,6 +212,7 @@
                                         {{productShow.productData.description}}
                                     </p>
                                 </div>
+
                                 <div>
                                     <h4>
                                         First impressions
@@ -526,6 +534,8 @@
                     },
                     body: formData,
                 }).then(res => res.json()).then(data => {
+                    document.getElementById('file').value = '';
+                    this.productShow.editForm.file = '';
                     this.showItem(this.productShow.productData.id);
                     this.getCategoriesAndProducts();
                 });

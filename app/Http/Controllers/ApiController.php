@@ -161,6 +161,12 @@ class ApiController extends Controller
         return json_encode(['message' => 'Product ' . $name . ' for category ' . $categoryId . ' created!']);
     }
 
+    /**
+     * @param $id
+     * @param $field
+     * @param Request $request
+     * @return string
+     */
     public function updateProduct ($id, $field, Request $request)
     {
         $userId = $request->user()->id;
@@ -220,7 +226,7 @@ class ApiController extends Controller
         $product->last_use = $currentTimestamp = Carbon::now()->toDateTimeString();
         $product->save();
 
-        return json_encode(['message' => 'Use count++ for product '.$id.'!']);
+        return json_encode(['message' => 'Use count++ for product ' . $id . '!']);
     }
 
     /**
@@ -279,7 +285,7 @@ class ApiController extends Controller
         foreach ($productPhotos as $index => $photo) {
             if ($index != $photoIndex) {
                 if ($index !== (count($productPhotos) - 1)) {
-                    $newPhotos .= $photo.';';
+                    $newPhotos .= $photo . ';';
                 } else {
                     $newPhotos .= $photo;
                 }
@@ -288,7 +294,7 @@ class ApiController extends Controller
         $product->photos = $newPhotos;
         $product->save();
 
-        return json_encode(['message' => 'Photo of index '.$newPhotos.' from item '.$id.' removed!']);
+        return json_encode(['message' => 'Photo of index ' . $newPhotos . ' from item ' . $id . ' removed!']);
     }
 
     /**
@@ -301,11 +307,11 @@ class ApiController extends Controller
 
         $toReturn = array();
 
-        $categories = Category::where('creator_id', $userId)->get();
+        $categories = Category::where('creator_id', $userId)->orderBy('name')->get();
         foreach ($categories as $cat) {
 
             // Get all products
-            $products = Product::where('category_id', $cat['id'])->get();
+            $products = Product::where('category_id', $cat['id'])->orderby('brand_id')->get();
 
             $productsFormated = array();
 
@@ -317,7 +323,9 @@ class ApiController extends Controller
                     'brand_id'    => $brand['id'],
                     'name'        => $product['name'],
                     'description' => $product['description'],
-                    'photos'      => $product['photos']
+                    'photos'      => $product['photos'],
+                    'remaining_amount'  => $product['remaining_amount'],
+                    'uses_count'  => $product['uses_count']
                 ]);
             }
             array_push($toReturn, [
