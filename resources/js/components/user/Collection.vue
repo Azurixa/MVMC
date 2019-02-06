@@ -150,10 +150,15 @@
                     </div>
 
                     <div class="body">
-                        <div class="row mx-1">
+                        <div class="row p-0 m-0">
 
-                            <div class="col-lg-9">
+                            <div class="col-12 p-0">
+                                <div class="progress mt-1">
+                                    <div class="progress-bar" role="progressbar" :style="{width: productShow.productData.remaining_amount + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
 
+                            <div class="col-lg-9 p-0">
                                 <h1 class="mb-4">
                                     {{productShow.productData.brand.name}} {{productShow.productData.name}}
                                     <span @click="showEdit('name')"><i class='bx bx-highlight'></i></span>
@@ -192,8 +197,7 @@
 
                             </div>
 
-                            <div class="col-lg-3 stats card"
-                                 :style="{background: 'linear-gradient( rgba(255, 255, 255) ' + (100 - productShow.productData.remaining_amount) + '%, #B525B2 ' + (102 - productShow.productData.remaining_amount) + '% )'}">
+                            <div class="col-lg-3 stats card">
                                 <p>
                                     remaining_amount
                                 </p>
@@ -217,7 +221,7 @@
 <script>
 
     export default {
-        name: 'userDashboard',
+        name: 'collection',
         created() {
 
             // Getting categories

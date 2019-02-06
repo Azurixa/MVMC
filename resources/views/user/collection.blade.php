@@ -5,8 +5,7 @@
     {{-- Vue component --}}
     <navbar></navbar>
 
-    <h1>
-        This is user dashboard!
-    </h1>
+    {{-- Vue component --}}
+    <collection></collection>
 
 @endsection
