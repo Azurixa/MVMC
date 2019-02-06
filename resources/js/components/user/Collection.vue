@@ -1,14 +1,19 @@
 <template>
     <div id="projectpan">
 
+        <!-- Toggle of adding new stuff (+) -->
         <div class="toolbox-show" onClick="$('.toolbox').toggle()">
             <i class="bx bx-plus m-0"></i>
         </div>
+
+        <!-- Discontinued for now -->
         <div class="toolbox-what">
             <p>New category</p>
             <p>New brand</p>
             <p>New product</p>
         </div>
+
+        <!-- Box with forms to adding new stuff -->
         <div class="toolbox">
             <div class="inside">
                 <div class="card p-2 m-auto w-50">
@@ -68,7 +73,6 @@
                     </div>
 
                 </div>
-
             </div>
         </div>
 
@@ -136,23 +140,30 @@
                     </div>
                 </div>
 
+                <!-- Product show container -->
                 <div class="product-show" v-show="productShow.visible">
 
+                    <!-- Gallery of product photos -->
                     <div class="gallery">
 
                         <div v-for="(photo, index) in productShow.productData.photos" onclick="gallery(this)"
                              :style="{ 'background-image': 'url(' + photo + ')' }" class="gallery-image">
-                            <div class="delete close" @click="removePhoto(index)" data-toggle="tooltip" data-placement="left" title="Delete photo">
+                            <div class="delete close" @click="removePhoto(index)" data-toggle="tooltip"
+                                 data-placement="left" title="Delete photo">
                                 <i class='bx bxs-trash'></i>
                             </div>
                         </div>
 
                     </div>
+
+                    <!-- Body of product show box -->
                     <div class="body">
                         <div class="row p-0 m-0">
 
+                            <!-- Progress bar of remaining amount -->
                             <div class="col-12 p-0">
-                                <div class="progress mt-1" @click="showEdit('remaining_amount')" data-toggle="tooltip" data-placement="bottom" title="Change remaining amount">
+                                <div class="progress mt-1" @click="showEdit('remaining_amount')" data-toggle="tooltip"
+                                     data-placement="bottom" title="Change remaining amount">
                                     <div class="progress-bar" role="progressbar"
                                          :style="{width: productShow.productData.remaining_amount + '%'}">
                                         {{productShow.productData.remaining_amount}} %
@@ -160,15 +171,19 @@
                                 </div>
                             </div>
 
+                            <!-- Main box of product information -->
                             <div class="col-lg-10 p-0">
                                 <h1 class="mb-4">
                                     {{productShow.productData.brand.name}} {{productShow.productData.name}}
-                                    <span @click="showEdit('name')" data-toggle="tooltip" data-placement="bottom" title="Change product name"><i class='bx bx-highlight'></i></span>
+                                    <span @click="showEdit('name')" data-toggle="tooltip" data-placement="bottom"
+                                          title="Change product name"><i class='bx bx-highlight'></i></span>
                                 </h1>
                                 <div>
                                     <h4>
                                         Description
-                                        <span @click="showEdit('description')" data-toggle="tooltip" data-placement="bottom" title="Change description"><i class='bx bx-highlight'></i></span>
+                                        <span @click="showEdit('description')" data-toggle="tooltip"
+                                              data-placement="bottom" title="Change description"><i
+                                                class='bx bx-highlight'></i></span>
                                     </h4>
                                     <p>
                                         <span v-if="productShow.productData.description === null">
@@ -180,7 +195,8 @@
                                 <div>
                                     <h4>
                                         First impressions
-                                        <span @click="showEdit('first_impressions')" data-toggle="tooltip" data-placement="bottom" title="Change first impressions"><i
+                                        <span @click="showEdit('first_impressions')" data-toggle="tooltip"
+                                              data-placement="bottom" title="Change first impressions"><i
                                                 class='bx bx-highlight'></i></span>
                                     </h4>
                                     <p>
@@ -199,21 +215,31 @@
                                 </div>
 
                             </div>
+
+                            <!-- Empty col for sum cols to 12 -->
                             <div class="col-lg-2"></div>
 
+                            <!-- Absolute container for product uses count -->
                             <div class="stats">
-                                <div class="uses_count mx-auto" @click="addProductUse()" data-toggle="tooltip" data-placement="left" :title="'Last use: ' + productShow.productData.last_use">
+                                <div class="uses_count mx-auto" @click="addProductUse()" data-toggle="tooltip"
+                                     data-placement="left" :title="'Last use: ' + productShow.productData.last_use">
                                     <div class="m-0 text-center">
                                         <p class="mb-0 h4">{{productShow.productData.uses_count}}</p>
                                         <small>uses</small>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
         </div>
+
+
     </div>
 </template>
 
