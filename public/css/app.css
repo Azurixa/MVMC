@@ -10720,13 +10720,19 @@ a.text-dark:focus {
 
 #projectpan .main-box .activity-box .product-show .gallery .prev,
 #projectpan .main-box .activity-box .product-show .gallery .next {
-  width: 30%;
   background-color: black;
 }
 
 #projectpan .main-box .activity-box .product-show .gallery .prev .delete,
 #projectpan .main-box .activity-box .product-show .gallery .next .delete {
   display: none;
+}
+
+#projectpan .main-box .activity-box .product-show .gallery .gallery-image {
+  position: relative;
+  background-color: black;
+  overflow: hidden;
+  transition: width 0.3s;
 }
 
 #projectpan .main-box .activity-box .product-show .gallery .gallery-image.new {
@@ -10741,13 +10747,7 @@ a.text-dark:focus {
   background: 0;
 }
 
-#projectpan .main-box .activity-box .product-show .gallery .present {
-  width: 60%;
-  background-color: #1b1e21;
-  position: relative;
-}
-
-#projectpan .main-box .activity-box .product-show .gallery .present .delete {
+#projectpan .main-box .activity-box .product-show .gallery .gallery-image .delete {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -10761,10 +10761,6 @@ a.text-dark:focus {
   border-radius: 50%;
   background-color: white;
   color: black;
-}
-
-#projectpan .main-box .activity-box .product-show .gallery .hide {
-  display: none !important;
 }
 
 #projectpan .main-box .activity-box .product-show .body .stats {
