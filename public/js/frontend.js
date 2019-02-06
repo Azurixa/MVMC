@@ -366,6 +366,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -1309,14 +1311,14 @@ var render = function() {
     _c("div", { staticClass: "toolbox" }, [
       _c("div", { staticClass: "inside" }, [
         _c("div", { staticClass: "card p-2 m-auto w-50" }, [
-          _c("div", { staticClass: "card p-2 mb-2" }, [
-            _c("p", [
+          _c("div", { staticClass: "card p-2 mb-4" }, [
+            _c("p", { staticClass: "h4" }, [
               _vm._v(
-                "\n                        Create new category:\n                    "
+                "\n                        Create new category\n                    "
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "d-flex" }, [
+            _c("div", { staticClass: "form-group" }, [
               _c("input", {
                 directives: [
                   {
@@ -1350,8 +1352,10 @@ var render = function() {
                     )
                   }
                 }
-              }),
-              _vm._v(" "),
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", [
               _c(
                 "button",
                 {
@@ -1362,19 +1366,19 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Add")]
+                [_vm._v("Add new category")]
               )
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "card p-2 mb-2" }, [
-            _c("p", [
+          _c("div", { staticClass: "card p-2 mb-4" }, [
+            _c("p", { staticClass: "h4" }, [
               _vm._v(
-                "\n                        Create new brand:\n                    "
+                "\n                        Create new brand\n                    "
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "d-flex" }, [
+            _c("div", { staticClass: "form-group" }, [
               _c("input", {
                 directives: [
                   {
@@ -1404,8 +1408,10 @@ var render = function() {
                     _vm.$set(_vm.formData.newBrand, "name", $event.target.value)
                   }
                 }
-              }),
-              _vm._v(" "),
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", [
               _c(
                 "button",
                 {
@@ -1416,22 +1422,22 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Add")]
+                [_vm._v("Add new brand")]
               )
             ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card p-2" }, [
-            _c("p", [
+            _c("p", { staticClass: "h4" }, [
               _vm._v(
-                "\n                        Create new product:\n                    "
+                "\n                        Create new product\n                    "
               )
             ]),
             _vm._v(" "),
             _c("div", [
               _c("div", { staticClass: "form-group" }, [
                 _c("label", { attrs: { for: "category" } }, [
-                  _vm._v("Category")
+                  _vm._v("Category of product")
                 ]),
                 _vm._v(" "),
                 _c(

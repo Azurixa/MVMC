@@ -1,3 +1,25 @@
+// Scrollbar
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0a0a0a;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+// BS classes
 .badge{
   padding: 0.25rem 0.2rem;
   &.badge-info{
@@ -19,6 +41,7 @@
   background-color: $darker;
 }
 
+// Makeup collection
 #projectpan{
   font-family: "Sarabun", sans-serif;
   width: 100%;
@@ -84,6 +107,7 @@
       height: 100%;
       min-width: 19%;
       color: white;
+      overflow-y: scroll;
       .header{
         font-size: 1.25rem;
       }

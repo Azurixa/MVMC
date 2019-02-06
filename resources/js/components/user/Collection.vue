@@ -18,37 +18,39 @@
             <div class="inside">
                 <div class="card p-2 m-auto w-50">
 
-                    <div class="card p-2 mb-2">
-                        <p>
-                            Create new category:
+                    <div class="card p-2 mb-4">
+                        <p class="h4">
+                            Create new category
                         </p>
-                        <div class="d-flex">
-                            <input v-model="formData.newCategory.name" class="form-control"
-                                   placeholder="Name"
+                        <div class="form-group">
+                            <input v-model="formData.newCategory.name" class="form-control" placeholder="Name"
                                    @keyup.enter="createCategory()">
-                            <button class="btn btn-primary" @click="createCategory()">Add</button>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary" @click="createCategory()">Add new category</button>
                         </div>
                     </div>
 
-                    <div class="card p-2 mb-2">
-                        <p>
-                            Create new brand:
+                    <div class="card p-2 mb-4">
+                        <p class="h4">
+                            Create new brand
                         </p>
-                        <div class="d-flex">
-                            <input v-model="formData.newBrand.name" class="form-control"
-                                   placeholder="Name"
+                        <div class="form-group">
+                            <input v-model="formData.newBrand.name" class="form-control" placeholder="Name"
                                    @keyup.enter="createBrand()">
-                            <button class="btn btn-primary" @click="createBrand()">Add</button>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary" @click="createBrand()">Add new brand</button>
                         </div>
                     </div>
 
                     <div class="card p-2">
-                        <p>
-                            Create new product:
+                        <p class="h4">
+                            Create new product
                         </p>
                         <div>
                             <div class="form-group">
-                                <label for="category">Category</label>
+                                <label for="category">Category of product</label>
                                 <select v-model="formData.newProduct.categoryId" class="form-control" id="category">
                                     <option v-for="category in categories" :value=category.id>{{category.name}}</option>
                                 </select>

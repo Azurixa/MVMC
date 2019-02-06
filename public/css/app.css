@@ -10491,6 +10491,28 @@ a.text-dark:focus {
   }
 }
 
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  background: #0a0a0a;
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 .badge {
   padding: 0.25rem 0.2rem;
 }
@@ -10588,6 +10610,7 @@ a.text-dark:focus {
   height: 100%;
   min-width: 19%;
   color: white;
+  overflow-y: scroll;
 }
 
 #projectpan .main-box .collection .header {
