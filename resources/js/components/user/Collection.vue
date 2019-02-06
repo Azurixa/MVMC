@@ -156,6 +156,17 @@
                             </div>
                         </div>
 
+                        <!-- New photo input box -->
+                        <div class="gallery-image new" onclick="gallery(this)">
+                            <div>
+                                <h2>Add new photo</h2>
+                                <div class="">
+                                    <input class="mb-3" type="file" id="file" ref="file" @change="handleFileUpload()">
+                                </div>
+                                <button @click="addPhoto()"><i class="bx bx-plus"></i>Add photo</button>
+                            </div>
+                        </div>
+
                     </div>
 
                     <!-- Body of product show box -->
@@ -207,13 +218,6 @@
                                         </span>
                                         {{productShow.productData.first_impressions}}
                                     </p>
-                                </div>
-                                <div>
-                                    <h4>
-                                        Add image
-                                    </h4>
-                                    <input type="file" id="file" ref="file" @change="handleFileUpload()">
-                                    <button @click="addPhoto()">Send Photo</button>
                                 </div>
 
                             </div>

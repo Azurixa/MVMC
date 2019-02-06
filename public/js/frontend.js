@@ -368,6 +368,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -1992,39 +1996,82 @@ var render = function() {
             _c(
               "div",
               { staticClass: "gallery" },
-              _vm._l(_vm.productShow.productData.photos, function(
-                photo,
-                index
-              ) {
-                return _c(
+              [
+                _vm._l(_vm.productShow.productData.photos, function(
+                  photo,
+                  index
+                ) {
+                  return _c(
+                    "div",
+                    {
+                      staticClass: "gallery-image",
+                      style: { "background-image": "url(" + photo + ")" },
+                      attrs: { onclick: "gallery(this)" }
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "delete close",
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-placement": "left",
+                            title: "Delete photo"
+                          },
+                          on: {
+                            click: function($event) {
+                              _vm.removePhoto(index)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "bx bxs-trash" })]
+                      )
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                _c(
                   "div",
                   {
-                    staticClass: "gallery-image",
-                    style: { "background-image": "url(" + photo + ")" },
+                    staticClass: "gallery-image new",
                     attrs: { onclick: "gallery(this)" }
                   },
                   [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "delete close",
-                        attrs: {
-                          "data-toggle": "tooltip",
-                          "data-placement": "left",
-                          title: "Delete photo"
-                        },
-                        on: {
-                          click: function($event) {
-                            _vm.removePhoto(index)
+                    _c("div", [
+                      _c("h2", [_vm._v("Add new photo")]),
+                      _vm._v(" "),
+                      _c("div", {}, [
+                        _c("input", {
+                          ref: "file",
+                          staticClass: "mb-3",
+                          attrs: { type: "file", id: "file" },
+                          on: {
+                            change: function($event) {
+                              _vm.handleFileUpload()
+                            }
                           }
-                        }
-                      },
-                      [_c("i", { staticClass: "bx bxs-trash" })]
-                    )
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          on: {
+                            click: function($event) {
+                              _vm.addPhoto()
+                            }
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "bx bx-plus" }),
+                          _vm._v("Add photo")
+                        ]
+                      )
+                    ])
                   ]
                 )
-              }),
-              0
+              ],
+              2
             ),
             _vm._v(" "),
             _c("div", { staticClass: "body" }, [
@@ -2175,36 +2222,6 @@ var render = function() {
                           "\n                                "
                       )
                     ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c("h4", [
-                      _vm._v(
-                        "\n                                    Add image\n                                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      ref: "file",
-                      attrs: { type: "file", id: "file" },
-                      on: {
-                        change: function($event) {
-                          _vm.handleFileUpload()
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        on: {
-                          click: function($event) {
-                            _vm.addPhoto()
-                          }
-                        }
-                      },
-                      [_vm._v("Send Photo")]
-                    )
                   ])
                 ]),
                 _vm._v(" "),
