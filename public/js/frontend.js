@@ -568,7 +568,7 @@ __webpack_require__.r(__webpack_exports__);
         _this11.productShow.visible = true;
         setTimeout(function () {
           _this11.refreshGallery();
-        }, 100);
+        }, 50);
       });
     },
     // FRONT END
@@ -631,6 +631,22 @@ __webpack_require__.r(__webpack_exports__);
         _this12.getCategoriesAndProducts();
       });
     },
+    addProductUse: function addProductUse() {
+      var _this13 = this;
+
+      fetch('/api/user/update/product/' + this.productShow.productData.id + '/useAdd', {
+        method: 'POST',
+        headers: {
+          'Authorization': this.token
+        }
+      }).then(function (res) {
+        return res.json();
+      }).then(function (data) {
+        _this13.showItem(_this13.productShow.productData.id);
+
+        _this13.getCategoriesAndProducts();
+      });
+    },
     // Gallery handling
     refreshGallery: function refreshGallery() {
       var photos = document.querySelectorAll('.gallery-image');
@@ -662,7 +678,7 @@ __webpack_require__.r(__webpack_exports__);
       this.productShow.editForm.file = this.$refs.file.files[0];
     },
     addPhoto: function addPhoto() {
-      var _this13 = this;
+      var _this14 = this;
 
       var formData = new FormData();
       formData.append('photo', this.productShow.editForm.file);
@@ -675,13 +691,13 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         return res.json();
       }).then(function (data) {
-        _this13.showItem(_this13.productShow.productData.id);
+        _this14.showItem(_this14.productShow.productData.id);
 
-        _this13.getCategoriesAndProducts();
+        _this14.getCategoriesAndProducts();
       });
     },
     removePhoto: function removePhoto(photoIndex) {
-      var _this14 = this;
+      var _this15 = this;
 
       fetch('/api/user/delete/product/' + this.productShow.productData.id + '/photo/' + photoIndex, {
         method: 'POST',
@@ -691,7 +707,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         return res.json();
       }).then(function (data) {
-        _this14.showItem(_this14.productShow.productData.id);
+        _this15.showItem(_this15.productShow.productData.id);
       });
     }
   }
@@ -1265,7 +1281,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "toolbox" }, [
       _c("div", { staticClass: "inside" }, [
-        _c("div", { staticClass: "card p-2 m-auto" }, [
+        _c("div", { staticClass: "card p-2 m-auto w-50" }, [
           _c("div", { staticClass: "card p-2 mb-2" }, [
             _c("p", [
               _vm._v(
@@ -2137,15 +2153,26 @@ var render = function() {
                 _c("div", { staticClass: "col-lg-2" }),
                 _vm._v(" "),
                 _c("div", { staticClass: "stats" }, [
-                  _c("div", { staticClass: "uses_count mx-auto" }, [
-                    _c("div", { staticClass: "m-0 text-center" }, [
-                      _c("p", { staticClass: "mb-0 h4" }, [
-                        _vm._v(_vm._s(_vm.productShow.productData.uses_count))
-                      ]),
-                      _vm._v(" "),
-                      _c("small", [_vm._v("uses")])
-                    ])
-                  ])
+                  _c(
+                    "div",
+                    {
+                      staticClass: "uses_count mx-auto",
+                      on: {
+                        click: function($event) {
+                          _vm.addProductUse()
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "m-0 text-center" }, [
+                        _c("p", { staticClass: "mb-0 h4" }, [
+                          _vm._v(_vm._s(_vm.productShow.productData.uses_count))
+                        ]),
+                        _vm._v(" "),
+                        _c("small", [_vm._v("uses")])
+                      ])
+                    ]
+                  )
                 ])
               ])
             ])
@@ -2164,7 +2191,7 @@ var staticRenderFns = [
       "div",
       {
         staticClass: "toolbox-show",
-        attrs: { onClick: "$('.toolbox-what').toggle()" }
+        attrs: { onClick: "$('.toolbox').toggle()" }
       },
       [_c("i", { staticClass: "bx bx-plus m-0" })]
     )

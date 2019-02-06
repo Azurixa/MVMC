@@ -206,6 +206,26 @@ class ApiController extends Controller
         return $toReturn;
     }
 
+    public function useAdd ($id, Request $request)
+    {
+        $userId = $request->user()->id;
+
+        $product = Product::where([
+            'creator_id' => $userId,
+            'id'         => $id
+        ])->firstOrFail();
+
+        $product->uses_count++;
+        $product->save();
+
+        return json_encode(['message' => 'Use count++ for product '.$id.'!']);
+    }
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @return string
+     */
     public function addPhoto ($id, Request $request)
     {
         $userId = $request->user()->id;

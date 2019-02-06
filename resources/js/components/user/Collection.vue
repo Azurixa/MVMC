@@ -1,7 +1,7 @@
 <template>
     <div id="projectpan">
 
-        <div class="toolbox-show" onClick="$('.toolbox-what').toggle()">
+        <div class="toolbox-show" onClick="$('.toolbox').toggle()">
             <i class="bx bx-plus m-0"></i>
         </div>
         <div class="toolbox-what">
@@ -11,7 +11,7 @@
         </div>
         <div class="toolbox">
             <div class="inside">
-                <div class="card p-2 m-auto">
+                <div class="card p-2 m-auto w-50">
 
                     <div class="card p-2 mb-2">
                         <p>
@@ -203,7 +203,7 @@
                             <div class="col-lg-2"></div>
 
                             <div class="stats">
-                                <div class="uses_count mx-auto">
+                                <div class="uses_count mx-auto" @click="addProductUse()">
                                     <div class="m-0 text-center">
                                         <p class="mb-0 h4">{{productShow.productData.uses_count}}</p>
                                         <small>uses</small>
@@ -410,7 +410,7 @@
                     this.productShow.visible = true;
                     setTimeout(() => {
                         this.refreshGallery();
-                    }, 100);
+                    }, 50);
                 });
             },
 
@@ -462,6 +462,18 @@
                     body: formData,
                 }).then(res => res.json()).then(data => {
                     this.showEdit();
+                    this.showItem(this.productShow.productData.id);
+                    this.getCategoriesAndProducts();
+                });
+            },
+
+            addProductUse() {
+                fetch('/api/user/update/product/' + this.productShow.productData.id + '/useAdd', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': this.token,
+                    },
+                }).then(res => res.json()).then(data => {
                     this.showItem(this.productShow.productData.id);
                     this.getCategoriesAndProducts();
                 });
