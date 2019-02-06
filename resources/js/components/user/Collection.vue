@@ -153,12 +153,15 @@
                         <div class="row p-0 m-0">
 
                             <div class="col-12 p-0">
-                                <div class="progress mt-1">
-                                    <div class="progress-bar" role="progressbar" :style="{width: productShow.productData.remaining_amount + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress mt-1" @click="showEdit('remaining_amount')">
+                                    <div class="progress-bar" role="progressbar"
+                                         :style="{width: productShow.productData.remaining_amount + '%'}">
+                                        {{productShow.productData.remaining_amount}} %
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="col-lg-9 p-0">
+                            <div class="col-lg-10 p-0">
                                 <h1 class="mb-4">
                                     {{productShow.productData.brand.name}} {{productShow.productData.name}}
                                     <span @click="showEdit('name')"><i class='bx bx-highlight'></i></span>
@@ -178,7 +181,8 @@
                                 <div>
                                     <h4>
                                         First impressions
-                                        <span @click="showEdit('first_impressions')"><i class='bx bx-highlight'></i></span>
+                                        <span @click="showEdit('first_impressions')"><i
+                                                class='bx bx-highlight'></i></span>
                                     </h4>
                                     <p>
                                         <span v-if="productShow.productData.first_impressions === null">
@@ -196,12 +200,9 @@
                                 </div>
 
                             </div>
+                            <div class="col-lg-2"></div>
 
-                            <div class="col-lg-3 stats card">
-                                <p>
-                                    remaining_amount
-                                </p>
-                                <span @click="showEdit('remaining_amount')"><i class='bx bx-highlight'></i></span>
+                            <div class="stats">
                                 <div class="uses_count mx-auto">
                                     <div class="m-0 text-center">
                                         <p class="mb-0 h4">{{productShow.productData.uses_count}}</p>
@@ -209,7 +210,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

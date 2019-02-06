@@ -10500,6 +10500,15 @@ a.text-dark:focus {
   color: #0a0a0a;
 }
 
+.progress {
+  cursor: pointer;
+  height: 1.5rem;
+}
+
+.progress .progress-bar {
+  background-color: #00BCD4;
+}
+
 .navbar {
   height: 60px;
   background-color: #006064;
@@ -10516,7 +10525,7 @@ a.text-dark:focus {
 #projectpan .toolbox-show {
   position: absolute;
   bottom: 20px;
-  right: 35px;
+  left: 20px;
   z-index: 2000;
   background-color: #26C6DA;
   color: white;
@@ -10529,7 +10538,7 @@ a.text-dark:focus {
 #projectpan .toolbox-what {
   position: absolute;
   bottom: 70px;
-  right: 36px;
+  left: 20px;
   display: none;
 }
 
@@ -10723,8 +10732,9 @@ a.text-dark:focus {
 }
 
 #projectpan .main-box .activity-box .product-show .body .stats {
-  position: relative;
-  padding: 2rem 0;
+  position: absolute;
+  bottom: 25px;
+  right: 30px;
 }
 
 #projectpan .main-box .activity-box .product-show .body .stats .uses_count {
@@ -10733,7 +10743,7 @@ a.text-dark:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #4DD0E1;
+  background-color: #00838F;
   color: white;
   border-radius: 50%;
 }

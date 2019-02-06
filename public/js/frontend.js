@@ -1976,24 +1976,42 @@ var render = function() {
             _c("div", { staticClass: "body" }, [
               _c("div", { staticClass: "row p-0 m-0" }, [
                 _c("div", { staticClass: "col-12 p-0" }, [
-                  _c("div", { staticClass: "progress mt-1" }, [
-                    _c("div", {
-                      staticClass: "progress-bar",
-                      style: {
-                        width:
-                          _vm.productShow.productData.remaining_amount + "%"
-                      },
-                      attrs: {
-                        role: "progressbar",
-                        "aria-valuenow": "25",
-                        "aria-valuemin": "0",
-                        "aria-valuemax": "100"
+                  _c(
+                    "div",
+                    {
+                      staticClass: "progress mt-1",
+                      on: {
+                        click: function($event) {
+                          _vm.showEdit("remaining_amount")
+                        }
                       }
-                    })
-                  ])
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "progress-bar",
+                          style: {
+                            width:
+                              _vm.productShow.productData.remaining_amount + "%"
+                          },
+                          attrs: { role: "progressbar" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(
+                                _vm.productShow.productData.remaining_amount
+                              ) +
+                              " %\n                                "
+                          )
+                        ]
+                      )
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-lg-9 p-0" }, [
+                _c("div", { staticClass: "col-lg-10 p-0" }, [
                   _c("h1", { staticClass: "mb-4" }, [
                     _vm._v(
                       "\n                                " +
@@ -2116,25 +2134,9 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-lg-3 stats card" }, [
-                  _c("p", [
-                    _vm._v(
-                      "\n                                remaining_amount\n                            "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    {
-                      on: {
-                        click: function($event) {
-                          _vm.showEdit("remaining_amount")
-                        }
-                      }
-                    },
-                    [_c("i", { staticClass: "bx bx-highlight" })]
-                  ),
-                  _vm._v(" "),
+                _c("div", { staticClass: "col-lg-2" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "stats" }, [
                   _c("div", { staticClass: "uses_count mx-auto" }, [
                     _c("div", { staticClass: "m-0 text-center" }, [
                       _c("p", { staticClass: "mb-0 h4" }, [
