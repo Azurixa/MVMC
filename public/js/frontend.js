@@ -2138,7 +2138,11 @@ var render = function() {
                           },
                           on: {
                             click: function($event) {
-                              _vm.removePhoto(index)
+                              _vm.removePhoto(
+                                _vm.productShow.productData.photos.length -
+                                  index -
+                                  1
+                              )
                             }
                           }
                         },

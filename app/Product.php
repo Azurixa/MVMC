@@ -25,7 +25,7 @@ class Product extends Model
             if ($bare){
                 return $imagesReturnBare;
             }
-            return $imagesReturn;
+            return array_reverse($imagesReturn);
         }
         return [];
     }
@@ -38,9 +38,10 @@ class Product extends Model
         $photosString = '';
         $date = date('d.m.y');
 
-        foreach ($photos as $photo) {
+        foreach ($photos as $index => $photo) {
             $photosString .= $photo.';';
         }
+
         $photosString .= $photoName.':'.$date;
 
         $product = Product::find($id);

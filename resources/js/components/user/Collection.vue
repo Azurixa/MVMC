@@ -156,7 +156,7 @@
                             <div class="date">
                                 <p class="m-0">{{photo.date}}</p>
                             </div>
-                            <div class="delete close" @click="removePhoto(index)" data-toggle="tooltip"
+                            <div class="delete close" @click="removePhoto(productShow.productData.photos.length - index - 1)" data-toggle="tooltip"
                                  data-placement="left" title="Delete photo">
                                 <i class='bx bxs-trash'></i>
                             </div>
