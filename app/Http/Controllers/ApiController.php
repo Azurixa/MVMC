@@ -281,20 +281,29 @@ class ApiController extends Controller
         ])->first();
 
         $newPhotos = '';
+
         $productPhotos = Product::getPhotos($id, true);
-        foreach ($productPhotos as $index => $photo) {
-            if ($index != $photoIndex) {
-                if ($index !== (count($productPhotos) - 1)) {
-                    $newPhotos .= $photo . ';';
+        //array_reverse($productPhotos);
+
+        if(count($productPhotos) > 0) {
+            foreach ($productPhotos as $index => $photo) {
+                if ($index != $photoIndex) {
+                    if ($index != (count($productPhotos) - 1)) {
+                        $newPhotos .= $photo.';';
+                    } else {
+                        $newPhotos .= $photo;
+                    }
                 } else {
-                    $newPhotos .= $photo;
+                    if($index == (count($productPhotos) - 1) && count($productPhotos) > 1){
+                        $newPhotos = substr($newPhotos, 0, (strlen($newPhotos) - 1));
+                    }
                 }
             }
         }
         $product->photos = $newPhotos;
         $product->save();
 
-        return json_encode(['message' => 'Photo of index ' . $newPhotos . ' from item ' . $id . ' removed!']);
+        return json_encode(['message' => 'Photo of index ' . $photoIndex . ' from item ' . $id . ' removed!']);
     }
 
     /**

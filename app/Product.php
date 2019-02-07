@@ -16,7 +16,7 @@ class Product extends Model
             if (!$bare){
                 if($photo !== ''){
                     $ph = explode(':', $photo);
-                    array_unshift($imagesReturn, ['image' => 'storage/products/'.$ph[0], 'date' => $ph[1]]);
+                    array_push($imagesReturn, ['image' => 'storage/products/'.$ph[0], 'date' => $ph[1]]);
                 }
             }
             array_push($imagesReturnBare, $photo);
@@ -42,9 +42,11 @@ class Product extends Model
             $photosString .= $photo.';';
         }
         $photosString .= $photoName.':'.$date;
+
         $product = Product::find($id);
         $product->photos = $photosString;
         $product->save();
+
         return 200;
     }
 }
