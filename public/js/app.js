@@ -36420,8 +36420,6 @@ window.refreshGallery = function () {
     photos[0].style.width = '60%';
     photos[0].style.opacity = '1';
   }
-
-  console.log('Gallery refreshed!');
 };
 
 window.gallery = function (element) {

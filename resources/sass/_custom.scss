@@ -271,6 +271,7 @@
           .rating{
             cursor: default;
             span{
+              transition: all 0.3s;
               cursor: pointer;
               &.bx-star{
                 opacity: 0.7;
@@ -286,7 +287,35 @@
           .stats{
             position: absolute;
             bottom: 25px;
-            right: 30px;
+            right: 20px;
+            display: flex;
+            .if-pan{
+              width: 60px;
+              height: 60px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background-color: transparent;
+              border: 2px solid black;
+              margin-right: 10px;
+              border-radius: 50%;
+              cursor: pointer;
+              opacity: 0.85;
+              transition: all 0.3s;
+              &:hover{
+                opacity: 1;
+                background-color: $dark;
+                color: white;
+              }
+              &.true{
+                background-color: $dark;
+                color: white;
+                opacity: 1;
+              }
+              div{
+                line-height: 16px;
+              }
+            }
             .uses_count{
               width: 60px;
               height: 60px;
@@ -297,6 +326,7 @@
               color: white;
               border-radius: 50%;
               cursor: pointer;
+              border: 2px solid black;
               div{
                 line-height: 3px;
                 position: relative;

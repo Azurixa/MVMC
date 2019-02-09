@@ -402,6 +402,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -446,9 +481,9 @@ __webpack_require__.r(__webpack_exports__);
           nameVisible: false,
           descriptionVisible: false,
           firstImpressionsVisible: false,
-          ratingVisible: false,
           updatesVisible: false,
           remainingAmountVisible: false,
+          boughtAtVisible: false,
           whatEditing: '',
           file: '',
           value: ''
@@ -671,6 +706,11 @@ __webpack_require__.r(__webpack_exports__);
           this.productShow.editForm.value = this.productShow.productData.remaining_amount;
         }
 
+        if (what === 'bought_at') {
+          this.productShow.editForm.boughtAtVisible = true;
+          this.productShow.editForm.value = this.productShow.productData.bought_at;
+        }
+
         this.productShow.editForm.whatEditing = what;
       }
     },
@@ -708,12 +748,43 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (data) {
         _this13.showItem(_this13.productShow.productData.id);
 
-        _this13.getCategoriesAndProducts();
+        _this13.getCategoriesAndProducts(); // Animate uses counter
+
+
+        document.getElementById('active-uses-count').classList.add('animated', 'flipInY');
+        setTimeout(function () {
+          document.getElementById('active-uses-count').classList.remove('animated', 'flipInY');
+        }, 1000);
+      });
+    },
+    // Pan
+    panProduct: function panProduct(value) {
+      var _this14 = this;
+
+      var formData = new FormData();
+      formData.append('value', value);
+      fetch('/api/user/update/product/' + this.productShow.productData.id + '/pan', {
+        method: 'POST',
+        headers: {
+          'Authorization': this.token
+        },
+        body: formData
+      }).then(function (res) {
+        return res.json();
+      }).then(function (data) {
+        _this14.showItem(_this14.productShow.productData.id);
+
+        _this14.getCategoriesAndProducts(); // Animate button
+
+
+        if (value === 1) {
+          document.querySelector('.if-pan.true').classList.add('animated', 'tada');
+        }
       });
     },
     // Rating
     rateProduct: function rateProduct(rating) {
-      var _this14 = this;
+      var _this15 = this;
 
       var formData = new FormData();
       formData.append('value', rating);
@@ -726,9 +797,9 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         return res.json();
       }).then(function (data) {
-        _this14.showItem(_this14.productShow.productData.id);
+        _this15.showItem(_this15.productShow.productData.id);
 
-        _this14.getCategoriesAndProducts();
+        _this15.getCategoriesAndProducts();
       });
     },
     // Photos
@@ -736,7 +807,7 @@ __webpack_require__.r(__webpack_exports__);
       this.productShow.editForm.file = this.$refs.file.files[0];
     },
     addPhoto: function addPhoto() {
-      var _this15 = this;
+      var _this16 = this;
 
       var formData = new FormData();
       formData.append('photo', this.productShow.editForm.file);
@@ -750,15 +821,15 @@ __webpack_require__.r(__webpack_exports__);
         return res.json();
       }).then(function (data) {
         document.getElementById('file').value = '';
-        _this15.productShow.editForm.file = '';
+        _this16.productShow.editForm.file = '';
 
-        _this15.showItem(_this15.productShow.productData.id);
+        _this16.showItem(_this16.productShow.productData.id);
 
-        _this15.getCategoriesAndProducts();
+        _this16.getCategoriesAndProducts();
       });
     },
     removePhoto: function removePhoto(photoIndex) {
-      var _this16 = this;
+      var _this17 = this;
 
       fetch('/api/user/delete/product/' + this.productShow.productData.id + '/photo/' + photoIndex, {
         method: 'POST',
@@ -768,7 +839,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         return res.json();
       }).then(function (data) {
-        _this16.showItem(_this16.productShow.productData.id);
+        _this17.showItem(_this17.productShow.productData.id);
       });
     }
   }
@@ -2129,6 +2200,77 @@ var render = function() {
                     )
                   ])
                 ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.productShow.editForm.boughtAtVisible,
+                      expression: "productShow.editForm.boughtAtVisible"
+                    }
+                  ]
+                },
+                [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.productShow.editForm.value,
+                          expression: "productShow.editForm.value"
+                        }
+                      ],
+                      staticClass: "form-control mb-2",
+                      attrs: { type: "date", autofocus: "" },
+                      domProps: { value: _vm.productShow.editForm.value },
+                      on: {
+                        keydown: function($event) {
+                          if (
+                            !("button" in $event) &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          _vm.editConfirm()
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.productShow.editForm,
+                            "value",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        on: {
+                          click: function($event) {
+                            _vm.editConfirm()
+                          }
+                        }
+                      },
+                      [_vm._v("Edit bought date")]
+                    )
+                  ])
+                ]
               )
             ])
           ]
@@ -2279,7 +2421,7 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-lg-10 px-0 pt-3" }, [
+                _c("div", { staticClass: "col-lg-8 px-0 pt-3" }, [
                   _c("h1", { staticClass: "m-0" }, [
                     _vm._v(
                       "\n                                " +
@@ -2378,6 +2520,51 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
+                  _c("p", [
+                    _vm._v(
+                      "\n                                Bought " +
+                        _vm._s(_vm.productShow.productData.bought_at) +
+                        "\n                                "
+                    ),
+                    _c(
+                      "span",
+                      {
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-placement": "bottom",
+                          title: "Change bought date"
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.showEdit("bought_at")
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "bx bx-highlight" })]
+                    ),
+                    _vm._v(
+                      "\n\n                                Expires " +
+                        _vm._s(_vm.productShow.productData.bought_at) +
+                        "\n                                "
+                    ),
+                    _c(
+                      "span",
+                      {
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-placement": "bottom",
+                          title: "Change expire months"
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.showEdit("expire_months")
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "bx bx-highlight" })]
+                    )
+                  ]),
+                  _vm._v(" "),
                   _c("div", { staticClass: "mb-4" }, [
                     _c("h4", [
                       _vm._v(
@@ -2459,16 +2646,66 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-lg-2" }),
-                _vm._v(" "),
                 _c("div", { staticClass: "stats" }, [
+                  _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.productShow.productData.pan,
+                          expression: "!productShow.productData.pan"
+                        }
+                      ],
+                      staticClass: "if-pan",
+                      attrs: {
+                        "data-toggle": "tooltip",
+                        "data-placement": "top",
+                        title: "Tag as panned"
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.panProduct(1)
+                        }
+                      }
+                    },
+                    [_vm._m(2)]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.productShow.productData.pan,
+                          expression: "productShow.productData.pan"
+                        }
+                      ],
+                      staticClass: "if-pan true",
+                      attrs: {
+                        "data-toggle": "tooltip",
+                        "data-placement": "top",
+                        title: "Tag as not panned"
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.panProduct(0)
+                        }
+                      }
+                    },
+                    [_vm._m(3)]
+                  ),
+                  _vm._v(" "),
                   _c(
                     "div",
                     {
                       staticClass: "uses_count mx-auto",
                       attrs: {
                         "data-toggle": "tooltip",
-                        "data-placement": "left",
+                        "data-placement": "top",
                         title: "Add use"
                       },
                       on: {
@@ -2479,9 +2716,19 @@ var render = function() {
                     },
                     [
                       _c("div", { staticClass: "m-0 text-center" }, [
-                        _c("p", { staticClass: "mb-0 h4" }, [
-                          _vm._v(_vm._s(_vm.productShow.productData.uses_count))
-                        ]),
+                        _c(
+                          "p",
+                          {
+                            staticClass: "mb-0 h4",
+                            attrs: { id: "active-uses-count" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(_vm.productShow.productData.uses_count)
+                            )
+                          ]
+                        ),
                         _vm._v(" "),
                         _c("small", [_vm._v("uses")])
                       ])
@@ -2525,6 +2772,26 @@ var staticRenderFns = [
       _c("p", [_vm._v("New brand")]),
       _vm._v(" "),
       _c("p", [_vm._v("New product")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "m-0 text-center" }, [
+      _c("p", { staticClass: "m-0" }, [_vm._v("Pan")]),
+      _vm._v(" "),
+      _c("small", [_c("i", { staticClass: "bx bx-x" })])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "m-0 text-center" }, [
+      _c("p", { staticClass: "m-0" }, [_vm._v("Pan")]),
+      _vm._v(" "),
+      _c("i", { staticClass: "bx bx-check" })
     ])
   }
 ]

@@ -88,7 +88,8 @@
                         <span onClick="this.nextSibling.nextSibling.toggleAttribute('shown')" class="category">{{item.category.name}}</span>
                         <ul shown>
                             <li v-for="product in item.products">
-                                <span class="product-amount">&nbsp;&nbsp;<span class="amount" :style="{height: product.remaining_amount + '%'}"></span></span>
+                                <span class="product-amount">&nbsp;&nbsp;<span class="amount"
+                                                                               :style="{height: product.remaining_amount + '%'}"></span></span>
                                 <span class="brand badge badge-info">{{product.brand}}</span> <span
                                     @click="showItem(product.id)"
                                     class="item">
@@ -143,6 +144,14 @@
                             </div>
                         </div>
 
+                        <div v-show="productShow.editForm.boughtAtVisible">
+                            <div class="form-group">
+                                <input class="form-control mb-2" type="date" v-model="productShow.editForm.value"
+                                       @keydown.enter="editConfirm()" autofocus>
+                                <button class="btn btn-primary" @click="editConfirm()">Edit bought date</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -157,7 +166,8 @@
                             <div class="date">
                                 <p class="m-0">{{photo.date}}</p>
                             </div>
-                            <div class="delete close" @click="removePhoto(productShow.productData.photos.length - index - 1)">
+                            <div class="delete close"
+                                 @click="removePhoto(productShow.productData.photos.length - index - 1)">
                                 <i class='bx bxs-trash'></i>
                             </div>
                         </div>
@@ -191,12 +201,13 @@
                             </div>
 
                             <!-- Main box of product information -->
-                            <div class="col-lg-10 px-0 pt-3">
+                            <div class="col-lg-8 px-0 pt-3">
                                 <h1 class="m-0">
                                     {{productShow.productData.brand.name}} - {{productShow.productData.name}}
                                     <span @click="showEdit('name')" data-toggle="tooltip" data-placement="bottom"
                                           title="Change product name"><i class='bx bx-highlight'></i></span>
                                 </h1>
+
                                 <p class="rating">
                                     <span @click="rateProduct(1)"
                                           class="bx"
@@ -218,6 +229,16 @@
                                           class="bx"
                                           :class="{'bxs-star animated tada': productShow.productData.rating > 4, 'bx-star': productShow.productData.rating < 5}">
                                     </span>
+                                </p>
+
+                                <p>
+                                    Bought {{productShow.productData.bought_at}}
+                                    <span @click="showEdit('bought_at')" data-toggle="tooltip" data-placement="bottom"
+                                          title="Change bought date"><i class='bx bx-highlight'></i></span>
+
+                                    Expires {{productShow.productData.bought_at}}
+                                    <span @click="showEdit('expire_months')" data-toggle="tooltip" data-placement="bottom"
+                                          title="Change expire months"><i class='bx bx-highlight'></i></span>
                                 </p>
 
                                 <div class="mb-4">
@@ -252,15 +273,29 @@
 
                             </div>
 
-                            <!-- Empty col for sum cols to 12 -->
-                            <div class="col-lg-2"></div>
-
                             <!-- Absolute container for product uses count -->
                             <div class="stats">
-                                <div class="uses_count mx-auto" @click="addProductUse()" data-toggle="tooltip"
-                                     data-placement="left" title="Add use">
+                                <div class="if-pan" data-toggle="tooltip"
+                                     data-placement="top" title="Tag as panned" v-show="!productShow.productData.pan"
+                                     @click="panProduct(1)">
                                     <div class="m-0 text-center">
-                                        <p class="mb-0 h4">{{productShow.productData.uses_count}}</p>
+                                        <p class="m-0">Pan</p>
+                                        <small><i class='bx bx-x'></i></small>
+                                    </div>
+                                </div>
+                                <div class="if-pan true" data-toggle="tooltip"
+                                     data-placement="top" title="Tag as not panned" v-show="productShow.productData.pan"
+                                     @click="panProduct(0)">
+                                    <div class="m-0 text-center">
+                                        <p class="m-0">Pan</p>
+                                        <i class='bx bx-check'></i>
+                                    </div>
+                                </div>
+                                <div class="uses_count mx-auto" @click="addProductUse()" data-toggle="tooltip"
+                                     data-placement="top" title="Add use">
+                                    <div class="m-0 text-center">
+                                        <p class="mb-0 h4" id="active-uses-count">
+                                            {{productShow.productData.uses_count}}</p>
                                         <small>uses</small>
                                     </div>
                                 </div>
@@ -323,9 +358,9 @@
                         nameVisible: false,
                         descriptionVisible: false,
                         firstImpressionsVisible: false,
-                        ratingVisible: false,
                         updatesVisible: false,
                         remainingAmountVisible: false,
+                        boughtAtVisible: false,
                         whatEditing: '',
                         file: '',
                         value: '',
@@ -510,6 +545,10 @@
                         this.productShow.editForm.remainingAmountVisible = true;
                         this.productShow.editForm.value = this.productShow.productData.remaining_amount;
                     }
+                    if (what === 'bought_at') {
+                        this.productShow.editForm.boughtAtVisible = true;
+                        this.productShow.editForm.value = this.productShow.productData.bought_at;
+                    }
                     this.productShow.editForm.whatEditing = what;
                 }
             },
@@ -539,6 +578,34 @@
                 }).then(res => res.json()).then(data => {
                     this.showItem(this.productShow.productData.id);
                     this.getCategoriesAndProducts();
+
+                    // Animate uses counter
+                    document.getElementById('active-uses-count').classList.add('animated', 'flipInY');
+                    setTimeout(() => {
+                        document.getElementById('active-uses-count').classList.remove('animated', 'flipInY');
+                    }, 1000);
+                });
+            },
+
+            // Pan
+
+            panProduct(value) {
+                const formData = new FormData();
+                formData.append('value', value);
+                fetch('/api/user/update/product/' + this.productShow.productData.id + '/pan', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': this.token,
+                    },
+                    body: formData,
+                }).then(res => res.json()).then(data => {
+                    this.showItem(this.productShow.productData.id);
+                    this.getCategoriesAndProducts();
+
+                    // Animate button
+                    if (value === 1) {
+                        document.querySelector('.if-pan.true').classList.add('animated', 'tada');
+                    }
                 });
             },
 

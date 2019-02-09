@@ -205,10 +205,12 @@ class ApiController extends Controller
             'photos'            => Product::getPhotos($id),
             'remaining_amount'  => $product->remaining_amount,
             'uses_count'        => $product->uses_count,
-            'last_use'          => $product->last_use,
+            'last_use'          => date('d.m.Y', strtotime($product->last_use)),
             'brand'             => $brand,
             'category'          => $category,
-            'rating'            => $product->rating
+            'rating'            => $product->rating,
+            'pan'               => $product->pan,
+            'bought_at'         => date('d.m.Y', strtotime($product->bought_at))
         ];
 
         return $toReturn;
@@ -335,7 +337,8 @@ class ApiController extends Controller
                     'description'      => $product['description'],
                     'photos'           => $product['photos'],
                     'remaining_amount' => $product['remaining_amount'],
-                    'uses_count'       => $product['uses_count']
+                    'uses_count'       => $product['uses_count'],
+                    'pan'              => $product['pan']
                 ]);
             }
             array_push($toReturn, [

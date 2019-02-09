@@ -36,7 +36,7 @@ class Product extends Model
 
         $photos = Product::getPhotos($id, true);
         $photosString = '';
-        $date = date('d.m.y');
+        $date = date('d.m.Y');
 
         foreach ($photos as $index => $photo) {
             $photosString .= $photo.';';
