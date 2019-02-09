@@ -489,7 +489,6 @@ __webpack_require__.r(__webpack_exports__);
           nameVisible: false,
           descriptionVisible: false,
           firstImpressionsVisible: false,
-          updatesVisible: false,
           remainingAmountVisible: false,
           boughtAtVisible: false,
           expireMonthsVisible: false,
@@ -686,10 +685,9 @@ __webpack_require__.r(__webpack_exports__);
         this.productShow.editForm.nameVisible = false;
         this.productShow.editForm.descriptionVisible = false;
         this.productShow.editForm.firstImpressionsVisible = false;
-        this.productShow.editForm.ratingVisible = false;
-        this.productShow.editForm.updatesVisible = false;
-        this.productShow.editForm.photosVisible = false;
         this.productShow.editForm.remainingAmountVisible = false;
+        this.productShow.editForm.boughtAtVisible = false;
+        this.productShow.editForm.expireMonthsVisible = false;
         this.productShow.editForm.value = '';
         this.productShow.editForm.whatEditing = '';
       } else {
