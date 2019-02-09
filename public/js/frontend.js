@@ -380,6 +380,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -389,7 +411,9 @@ __webpack_require__.r(__webpack_exports__);
     this.getCategoriesAndProducts();
     setInterval(function () {
       _this.getCategoriesAndProducts();
-    }, 10000);
+    }, 10000); // Tooltips refresh
+
+    window.reloadAll();
   },
   data: function data() {
     return {
@@ -687,12 +711,32 @@ __webpack_require__.r(__webpack_exports__);
         _this13.getCategoriesAndProducts();
       });
     },
+    // Rating
+    rateProduct: function rateProduct(rating) {
+      var _this14 = this;
+
+      var formData = new FormData();
+      formData.append('value', rating);
+      fetch('/api/user/update/product/' + this.productShow.productData.id + '/rating', {
+        method: 'POST',
+        headers: {
+          'Authorization': this.token
+        },
+        body: formData
+      }).then(function (res) {
+        return res.json();
+      }).then(function (data) {
+        _this14.showItem(_this14.productShow.productData.id);
+
+        _this14.getCategoriesAndProducts();
+      });
+    },
     // Photos
     handleFileUpload: function handleFileUpload() {
       this.productShow.editForm.file = this.$refs.file.files[0];
     },
     addPhoto: function addPhoto() {
-      var _this14 = this;
+      var _this15 = this;
 
       var formData = new FormData();
       formData.append('photo', this.productShow.editForm.file);
@@ -706,15 +750,15 @@ __webpack_require__.r(__webpack_exports__);
         return res.json();
       }).then(function (data) {
         document.getElementById('file').value = '';
-        _this14.productShow.editForm.file = '';
+        _this15.productShow.editForm.file = '';
 
-        _this14.showItem(_this14.productShow.productData.id);
+        _this15.showItem(_this15.productShow.productData.id);
 
-        _this14.getCategoriesAndProducts();
+        _this15.getCategoriesAndProducts();
       });
     },
     removePhoto: function removePhoto(photoIndex) {
-      var _this15 = this;
+      var _this16 = this;
 
       fetch('/api/user/delete/product/' + this.productShow.productData.id + '/photo/' + photoIndex, {
         method: 'POST',
@@ -724,7 +768,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         return res.json();
       }).then(function (data) {
-        _this15.showItem(_this15.productShow.productData.id);
+        _this16.showItem(_this16.productShow.productData.id);
       });
     }
   }
@@ -828,14 +872,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -1832,7 +1868,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control mb-2",
-                      attrs: { type: "text" },
+                      attrs: { type: "text", autofocus: "" },
                       domProps: { value: _vm.productShow.editForm.value },
                       on: {
                         keyup: function($event) {
@@ -1903,6 +1939,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "description form-control mb-2",
+                      attrs: { autofocus: "" },
                       domProps: { value: _vm.productShow.editForm.value },
                       on: {
                         keydown: function($event) {
@@ -1972,6 +2009,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "description form-control mb-2",
+                    attrs: { autofocus: "" },
                     domProps: { value: _vm.productShow.editForm.value },
                     on: {
                       keydown: function($event) {
@@ -2041,7 +2079,12 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control mb-2",
-                      attrs: { type: "number", min: "0", max: "100" },
+                      attrs: {
+                        type: "number",
+                        min: "0",
+                        max: "100",
+                        autofocus: ""
+                      },
                       domProps: { value: _vm.productShow.editForm.value },
                       on: {
                         keydown: function($event) {
@@ -2117,7 +2160,9 @@ var render = function() {
                     "div",
                     {
                       staticClass: "gallery-image",
-                      style: { "background-image": "url(" + photo.image + ")" },
+                      style: {
+                        "background-image": "url(/" + photo.image + ")"
+                      },
                       attrs: { onclick: "gallery(this)" }
                     },
                     [
@@ -2131,11 +2176,6 @@ var render = function() {
                         "div",
                         {
                           staticClass: "delete close",
-                          attrs: {
-                            "data-toggle": "tooltip",
-                            "data-placement": "left",
-                            title: "Delete photo"
-                          },
                           on: {
                             click: function($event) {
                               _vm.removePhoto(
@@ -2240,7 +2280,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-lg-10 px-0 pt-3" }, [
-                  _c("h1", { staticClass: "mb-4" }, [
+                  _c("h1", { staticClass: "m-0" }, [
                     _vm._v(
                       "\n                                " +
                         _vm._s(_vm.productShow.productData.brand.name) +
@@ -2264,6 +2304,78 @@ var render = function() {
                       },
                       [_c("i", { staticClass: "bx bx-highlight" })]
                     )
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "rating" }, [
+                    _c("span", {
+                      staticClass: "bx",
+                      class: {
+                        "bxs-star animated tada":
+                          _vm.productShow.productData.rating > 0,
+                        "bx-star": _vm.productShow.productData.rating < 1
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.rateProduct(1)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", {
+                      staticClass: "bx",
+                      class: {
+                        "bxs-star animated tada":
+                          _vm.productShow.productData.rating > 1,
+                        "bx-star": _vm.productShow.productData.rating < 2
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.rateProduct(2)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", {
+                      staticClass: "bx",
+                      class: {
+                        "bxs-star animated tada":
+                          _vm.productShow.productData.rating > 2,
+                        "bx-star": _vm.productShow.productData.rating < 3
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.rateProduct(3)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", {
+                      staticClass: "bx",
+                      class: {
+                        "bxs-star animated tada":
+                          _vm.productShow.productData.rating > 3,
+                        "bx-star": _vm.productShow.productData.rating < 4
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.rateProduct(4)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", {
+                      staticClass: "bx",
+                      class: {
+                        "bxs-star animated tada":
+                          _vm.productShow.productData.rating > 4,
+                        "bx-star": _vm.productShow.productData.rating < 5
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.rateProduct(5)
+                        }
+                      }
+                    })
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "mb-4" }, [
@@ -2357,8 +2469,7 @@ var render = function() {
                       attrs: {
                         "data-toggle": "tooltip",
                         "data-placement": "left",
-                        title:
-                          "Last use: " + _vm.productShow.productData.last_use
+                        title: "Add use"
                       },
                       on: {
                         click: function($event) {
@@ -2394,7 +2505,12 @@ var staticRenderFns = [
       "div",
       {
         staticClass: "toolbox-show",
-        attrs: { onClick: "$('.toolbox').toggle()" }
+        attrs: {
+          onClick: "$('.toolbox').toggle()",
+          "data-toggle": "tooltip",
+          "data-placement": "right",
+          title: "New..."
+        }
       },
       [_c("i", { staticClass: "bx bx-plus m-0" })]
     )
@@ -2571,7 +2687,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("nav", { staticClass: "navbar navbar-expand-lg navbar-dark" }, [
-    _c("a", { staticClass: "navbar-brand", attrs: { href: "/collection" } }, [
+    _c("a", { staticClass: "navbar-brand text-white" }, [
       _vm._v("\n        " + _vm._s(_vm.user.name) + "\n    ")
     ]),
     _vm._v(" "),
@@ -2612,56 +2728,20 @@ var staticRenderFns = [
         attrs: { id: "navbarSupportedContent" }
       },
       [
-        _c("ul", { staticClass: "navbar-nav" }, [
-          _c("li", { staticClass: "nav-item dropdown" }, [
+        _c("ul", { staticClass: "navbar-nav ml-auto" }, [
+          _c("li", { staticClass: "nav-item" }, [
             _c(
               "a",
-              {
-                staticClass: "nav-link dropdown-toggle",
-                attrs: {
-                  href: "#",
-                  id: "navbarDropdown",
-                  role: "button",
-                  "data-toggle": "dropdown",
-                  "aria-haspopup": "true",
-                  "aria-expanded": "false"
-                }
-              },
-              [_vm._v("\n                    User\n                ")]
-            ),
-            _vm._v(" "),
+              { staticClass: "nav-link", attrs: { href: "/my/dashboard" } },
+              [_vm._v("Dashboard")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
             _c(
-              "div",
-              {
-                staticClass: "dropdown-menu",
-                attrs: { "aria-labelledby": "navbarDropdown" }
-              },
-              [
-                _c(
-                  "a",
-                  {
-                    staticClass: "dropdown-item",
-                    attrs: { href: "/collection" }
-                  },
-                  [_vm._v("My Collection")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "dropdown-divider" }),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { staticClass: "dropdown-item", attrs: { href: "/user" } },
-                  [_vm._v("Dashboard")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "dropdown-divider" }),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { staticClass: "dropdown-item", attrs: { href: "/logout" } },
-                  [_vm._v("Logout")]
-                )
-              ]
+              "a",
+              { staticClass: "nav-link", attrs: { href: "/my/collection" } },
+              [_vm._v("Collection")]
             )
           ])
         ])

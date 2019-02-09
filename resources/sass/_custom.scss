@@ -257,8 +257,8 @@
               line-height: 1px;
               display: block;
               position: absolute;
-              bottom: 5px;
-              right: 5px;
+              bottom: 9px;
+              right: 9px;
               font-size: 1.2rem;
               padding: 4px;
               border-radius: 50%;
@@ -268,6 +268,21 @@
           }
         }
         .body{
+          .rating{
+            cursor: default;
+            span{
+              cursor: pointer;
+              &.bx-star{
+                opacity: 0.7;
+                &:hover{
+                  opacity: 1;
+                }
+              }
+              &.bxs-star{
+                opacity: 1;
+              }
+            }
+          }
           .stats{
             position: absolute;
             bottom: 25px;

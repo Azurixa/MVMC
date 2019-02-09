@@ -207,7 +207,8 @@ class ApiController extends Controller
             'uses_count'        => $product->uses_count,
             'last_use'          => $product->last_use,
             'brand'             => $brand,
-            'category'          => $category
+            'category'          => $category,
+            'rating'            => $product->rating
         ];
 
         return $toReturn;
@@ -285,16 +286,16 @@ class ApiController extends Controller
         $productPhotos = Product::getPhotos($id, true);
         //array_reverse($productPhotos);
 
-        if(count($productPhotos) > 0) {
+        if (count($productPhotos) > 0) {
             foreach ($productPhotos as $index => $photo) {
                 if ($index != $photoIndex) {
                     if ($index != (count($productPhotos) - 1)) {
-                        $newPhotos .= $photo.';';
+                        $newPhotos .= $photo . ';';
                     } else {
                         $newPhotos .= $photo;
                     }
                 } else {
-                    if($index == (count($productPhotos) - 1) && count($productPhotos) > 1){
+                    if ($index == (count($productPhotos) - 1) && count($productPhotos) > 1) {
                         $newPhotos = substr($newPhotos, 0, (strlen($newPhotos) - 1));
                     }
                 }
@@ -327,14 +328,14 @@ class ApiController extends Controller
             foreach ($products as $product) {
                 $brand = Brand::where('id', $product['brand_id'])->firstOrFail();
                 array_push($productsFormated, [
-                    'id'          => $product['id'],
-                    'brand'       => $brand['name'],
-                    'brand_id'    => $brand['id'],
-                    'name'        => $product['name'],
-                    'description' => $product['description'],
-                    'photos'      => $product['photos'],
-                    'remaining_amount'  => $product['remaining_amount'],
-                    'uses_count'  => $product['uses_count']
+                    'id'               => $product['id'],
+                    'brand'            => $brand['name'],
+                    'brand_id'         => $brand['id'],
+                    'name'             => $product['name'],
+                    'description'      => $product['description'],
+                    'photos'           => $product['photos'],
+                    'remaining_amount' => $product['remaining_amount'],
+                    'uses_count'       => $product['uses_count']
                 ]);
             }
             array_push($toReturn, [

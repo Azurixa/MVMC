@@ -2,7 +2,8 @@
     <div id="projectpan">
 
         <!-- Toggle of adding new stuff (+) -->
-        <div class="toolbox-show" onClick="$('.toolbox').toggle()">
+        <div class="toolbox-show" onClick="$('.toolbox').toggle()" data-toggle="tooltip"
+             data-placement="right" title="New...">
             <i class="bx bx-plus m-0"></i>
         </div>
 
@@ -114,7 +115,7 @@
                         <div v-show="productShow.editForm.nameVisible">
                             <div class="form-group">
                                 <input type="text" class="form-control mb-2" v-model="productShow.editForm.value"
-                                       @keyup.enter="editConfirm()">
+                                       @keyup.enter="editConfirm()" autofocus>
                                 <button class="btn btn-primary" @click="editConfirm()">Edit name</button>
                             </div>
                         </div>
@@ -122,14 +123,14 @@
                         <div v-show="productShow.editForm.descriptionVisible">
                             <div class="form-group">
                                 <textarea class="description form-control mb-2" v-model="productShow.editForm.value"
-                                          @keydown.enter="editConfirm()"></textarea>
+                                          @keydown.enter="editConfirm()" autofocus></textarea>
                                 <button class="btn btn-primary" @click="editConfirm()">Edit description</button>
                             </div>
                         </div>
 
                         <div v-show="productShow.editForm.firstImpressionsVisible">
                             <textarea class="description form-control mb-2" v-model="productShow.editForm.value"
-                                      @keydown.enter="editConfirm()"></textarea>
+                                      @keydown.enter="editConfirm()" autofocus></textarea>
                             <button class="btn btn-primary" @click="editConfirm()">Edit first impressions</button>
                         </div>
 
@@ -137,7 +138,7 @@
                             <div class="form-group">
                                 <input class="form-control mb-2" type="number" min="0" max="100"
                                        v-model="productShow.editForm.value"
-                                       @keydown.enter="editConfirm()">
+                                       @keydown.enter="editConfirm()" autofocus>
                                 <button class="btn btn-primary" @click="editConfirm()">Edit remaining amount</button>
                             </div>
                         </div>
@@ -152,12 +153,11 @@
                     <div class="gallery">
 
                         <div v-for="(photo, index) in productShow.productData.photos" onclick="gallery(this)"
-                             :style="{ 'background-image': 'url(' + photo.image + ')' }" class="gallery-image">
+                             :style="{ 'background-image': 'url(/' + photo.image + ')' }" class="gallery-image">
                             <div class="date">
                                 <p class="m-0">{{photo.date}}</p>
                             </div>
-                            <div class="delete close" @click="removePhoto(productShow.productData.photos.length - index - 1)" data-toggle="tooltip"
-                                 data-placement="left" title="Delete photo">
+                            <div class="delete close" @click="removePhoto(productShow.productData.photos.length - index - 1)">
                                 <i class='bx bxs-trash'></i>
                             </div>
                         </div>
@@ -192,11 +192,33 @@
 
                             <!-- Main box of product information -->
                             <div class="col-lg-10 px-0 pt-3">
-                                <h1 class="mb-4">
+                                <h1 class="m-0">
                                     {{productShow.productData.brand.name}} - {{productShow.productData.name}}
                                     <span @click="showEdit('name')" data-toggle="tooltip" data-placement="bottom"
                                           title="Change product name"><i class='bx bx-highlight'></i></span>
                                 </h1>
+                                <p class="rating">
+                                    <span @click="rateProduct(1)"
+                                          class="bx"
+                                          :class="{'bxs-star animated tada': productShow.productData.rating > 0, 'bx-star': productShow.productData.rating < 1}">
+                                    </span>
+                                    <span @click="rateProduct(2)"
+                                          class="bx"
+                                          :class="{'bxs-star animated tada': productShow.productData.rating > 1, 'bx-star': productShow.productData.rating < 2}">
+                                    </span>
+                                    <span @click="rateProduct(3)"
+                                          class="bx"
+                                          :class="{'bxs-star animated tada': productShow.productData.rating > 2, 'bx-star': productShow.productData.rating < 3}">
+                                    </span>
+                                    <span @click="rateProduct(4)"
+                                          class="bx"
+                                          :class="{'bxs-star animated tada': productShow.productData.rating > 3, 'bx-star': productShow.productData.rating < 4}">
+                                    </span>
+                                    <span @click="rateProduct(5)"
+                                          class="bx"
+                                          :class="{'bxs-star animated tada': productShow.productData.rating > 4, 'bx-star': productShow.productData.rating < 5}">
+                                    </span>
+                                </p>
 
                                 <div class="mb-4">
                                     <h4>
@@ -236,7 +258,7 @@
                             <!-- Absolute container for product uses count -->
                             <div class="stats">
                                 <div class="uses_count mx-auto" @click="addProductUse()" data-toggle="tooltip"
-                                     data-placement="left" :title="'Last use: ' + productShow.productData.last_use">
+                                     data-placement="left" title="Add use">
                                     <div class="m-0 text-center">
                                         <p class="mb-0 h4">{{productShow.productData.uses_count}}</p>
                                         <small>uses</small>
@@ -262,12 +284,13 @@
     export default {
         name: 'collection',
         created() {
-
             // Getting categories
             this.getCategoriesAndProducts();
             setInterval(() => {
                 this.getCategoriesAndProducts();
             }, 10000);
+            // Tooltips refresh
+            window.reloadAll();
         },
         data() {
             return {
@@ -513,6 +536,23 @@
                     headers: {
                         'Authorization': this.token,
                     },
+                }).then(res => res.json()).then(data => {
+                    this.showItem(this.productShow.productData.id);
+                    this.getCategoriesAndProducts();
+                });
+            },
+
+            // Rating
+
+            rateProduct(rating) {
+                const formData = new FormData();
+                formData.append('value', rating);
+                fetch('/api/user/update/product/' + this.productShow.productData.id + '/rating', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': this.token,
+                    },
+                    body: formData,
                 }).then(res => res.json()).then(data => {
                     this.showItem(this.productShow.productData.id);
                     this.getCategoriesAndProducts();
