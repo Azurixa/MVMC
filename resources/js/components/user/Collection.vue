@@ -3,15 +3,8 @@
 
         <!-- Toggle of adding new stuff (+) -->
         <div class="toolbox-show" onClick="$('.toolbox').toggle()" data-toggle="tooltip"
-             data-placement="right" title="New...">
+             data-placement="right" title="New">
             <i class="bx bx-plus m-0"></i>
-        </div>
-
-        <!-- Discontinued for now -->
-        <div class="toolbox-what">
-            <p>New category</p>
-            <p>New brand</p>
-            <p>New product</p>
         </div>
 
         <!-- Box with forms to adding new stuff -->
@@ -19,7 +12,10 @@
             <div class="inside">
                 <div class="card p-2 m-auto w-50">
 
+                    <i class='bx bx-x close close-adding' onClick="$('.toolbox').toggle()"></i>
+
                     <div class="card p-2 mb-4">
+
                         <p class="h4">
                             Create new category
                         </p>
@@ -82,7 +78,7 @@
         <div class="row m-0 main-box">
 
             <div class="collection">
-                <p class="header">Collection</p>
+                <p class="header">My collection</p>
                 <ul>
                     <li v-for="item in allProducts">
                         <span onClick="this.nextSibling.nextSibling.toggleAttribute('shown')" class="category">{{item.category.name}}</span>
@@ -211,17 +207,17 @@
                             <!-- Main box of product information -->
                             <div class="col-lg-8 px-0 pt-3">
                                 <h1 class="m-0">
-                                    {{productShow.productData.brand.name}} - {{productShow.productData.name}}
+                                    {{productShow.productData.brand.name}} <strong>{{productShow.productData.name}}</strong>
                                     <span @click="showEdit('name')" data-toggle="tooltip" data-placement="bottom"
                                           title="Change product name"><i class='bx bx-highlight'></i></span>
                                 </h1>
 
-                                <p class="dates m-0">
-                                    Bought {{productShow.productData.bought_at}}
+                                <p class="dates m-0 mb-1">
+                                    Bought <strong>{{productShow.productData.bought_at}}</strong>
                                     <span @click="showEdit('bought_at')" data-toggle="tooltip" data-placement="bottom"
                                           title="Change bought date"><i class='bx bx-highlight'></i></span>
 
-                                    Expires {{productShow.productData.expire_date}}
+                                    Expires <strong>{{productShow.productData.expire_date}}</strong>
                                     <span @click="showEdit('expire_months')" data-toggle="tooltip" data-placement="bottom"
                                           title="Change expire months"><i class='bx bx-highlight'></i></span>
                                 </p>
@@ -333,7 +329,9 @@
                 this.getCategoriesAndProducts();
             }, 10000);
             // Tooltips refresh
-            window.reloadAll();
+            setTimeout( () => {
+                window.reloadAll();
+            }, 500);
         },
         data() {
             return {

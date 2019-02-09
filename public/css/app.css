@@ -10513,6 +10513,33 @@ a.text-dark:focus {
   background: #555;
 }
 
+.navbar-brand {
+  position: relative;
+}
+
+.navbar-brand .expirience {
+  font-size: 12px;
+  position: absolute;
+  left: 1px;
+  bottom: -7px;
+}
+
+.level-progrss {
+  height: 8px;
+}
+
+.level-progrss .progress {
+  height: 8px;
+  border-radius: 0;
+  cursor: default;
+}
+
+.level-progrss .progress .progress-bar {
+  height: 8px;
+  border-radius: 0;
+  font-size: 8px;
+}
+
 .badge {
   padding: 0.25rem 0.2rem;
 }
@@ -10539,7 +10566,7 @@ a.text-dark:focus {
 #projectpan {
   font-family: "Sarabun", sans-serif;
   width: 100%;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 70px);
   padding: 0;
   margin: 0;
 }
@@ -10593,6 +10620,13 @@ a.text-dark:focus {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+#projectpan .toolbox .close-adding {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 8000;
+}
+
 #projectpan .toolbox .inside {
   width: 100%;
   height: 100%;
@@ -10614,7 +10648,8 @@ a.text-dark:focus {
 }
 
 #projectpan .main-box .collection .header {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 #projectpan .main-box .collection > ul {
@@ -10811,6 +10846,7 @@ a.text-dark:focus {
 
 #projectpan .main-box .activity-box .product-show .body .rating span {
   transition: all 0.3s;
+  font-size: 1.3rem;
   cursor: pointer;
 }
 

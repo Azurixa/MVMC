@@ -27,4 +27,21 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Add an $amount [int] of experience to user based on $id [int]
+     *
+     * @param $id
+     * @param $amount
+     */
+    public static function addExperience($id, $amount) {
+        $user = User::find($id);
+        $user->exp += $amount;
+        if ($user->exp >= $user->exp_next){
+            // Next level
+            $user->level++;
+            $user->exp_next += $user->exp_next*1.5;
+        }
+        $user->save();
+    }
 }

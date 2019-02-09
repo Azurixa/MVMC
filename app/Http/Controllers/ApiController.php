@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Category;
 use App\Product;
 use App\Brand;
+use App\User;
 use Illuminate\Support\Facades\Storage;
 
 class ApiController extends Controller
@@ -214,6 +215,8 @@ class ApiController extends Controller
             'expire_months'     => $product->expire_months,
             'expire_date'       => date('d.m.Y', (strtotime($product->bought_at) + 60*60*24*30*$product->expire_months))
         ];
+
+        User::addExperience($userId, 1);
 
         return $toReturn;
     }

@@ -1,30 +1,44 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand text-white">
-            {{user.name}}
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand text-white">
+                <span class="badge badge-info" data-toggle="tooltip"
+                      data-placement="bottom" title="Current makeup level">{{user.level}}</span> {{user.name}}
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/my/dashboard">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/my/collection">Collection</a>
-                </li>
-            </ul>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/my/dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/my/collection">Collection</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="level-progrss">
+            <div class="progress">
+                <div class="progress-bar" :style="{'width': user.exp/user.exp_next * 100 + '%'}" role="progressbar"
+                     :aria-valuenow="user.exp" aria-valuemin="0" :aria-valuemax="user.exp_next">
+                    {{user.exp}} / {{user.exp_next}}
+                </div>
+            </div>
         </div>
-    </nav>
+    </div>
 </template>
 
 <script>
     export default {
         name: 'navbar',
-        data () {
+        data() {
             return {
                 token: localStorage.getItem('token'),
                 user: {},
@@ -32,6 +46,9 @@
         },
         created() {
             this.getUserData();
+            setInterval(() => {
+                this.getUserData();
+            }, 2000);
         },
         methods: {
             getUserData() {

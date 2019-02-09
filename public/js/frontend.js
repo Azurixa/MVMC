@@ -441,10 +441,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -456,7 +452,9 @@ __webpack_require__.r(__webpack_exports__);
       _this.getCategoriesAndProducts();
     }, 10000); // Tooltips refresh
 
-    window.reloadAll();
+    setTimeout(function () {
+      window.reloadAll();
+    }, 500);
   },
   data: function data() {
     return {
@@ -978,6 +976,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'navbar',
   data: function data() {
@@ -987,11 +999,16 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
+    var _this = this;
+
     this.getUserData();
+    setInterval(function () {
+      _this.getUserData();
+    }, 2000);
   },
   methods: {
     getUserData: function getUserData() {
-      var _this = this;
+      var _this2 = this;
 
       fetch('/api/user', {
         headers: {
@@ -1000,7 +1017,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         return res.json();
       }).then(function (data) {
-        return _this.user = data;
+        return _this2.user = data;
       });
     }
   }
@@ -1527,11 +1544,14 @@ var render = function() {
   return _c("div", { attrs: { id: "projectpan" } }, [
     _vm._m(0),
     _vm._v(" "),
-    _vm._m(1),
-    _vm._v(" "),
     _c("div", { staticClass: "toolbox" }, [
       _c("div", { staticClass: "inside" }, [
         _c("div", { staticClass: "card p-2 m-auto w-50" }, [
+          _c("i", {
+            staticClass: "bx bx-x close close-adding",
+            attrs: { onClick: "$('.toolbox').toggle()" }
+          }),
+          _vm._v(" "),
           _c("div", { staticClass: "card p-2 mb-4" }, [
             _c("p", { staticClass: "h4" }, [
               _vm._v(
@@ -1833,7 +1853,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "row m-0 main-box" }, [
       _c("div", { staticClass: "collection" }, [
-        _c("p", { staticClass: "header" }, [_vm._v("Collection")]),
+        _c("p", { staticClass: "header" }, [_vm._v("My collection")]),
         _vm._v(" "),
         _c(
           "ul",
@@ -2509,10 +2529,12 @@ var render = function() {
                     _vm._v(
                       "\n                                " +
                         _vm._s(_vm.productShow.productData.brand.name) +
-                        " - " +
-                        _vm._s(_vm.productShow.productData.name) +
-                        "\n                                "
+                        " "
                     ),
+                    _c("strong", [
+                      _vm._v(_vm._s(_vm.productShow.productData.name))
+                    ]),
+                    _vm._v(" "),
                     _c(
                       "span",
                       {
@@ -2531,12 +2553,12 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("p", { staticClass: "dates m-0" }, [
-                    _vm._v(
-                      "\n                                Bought " +
-                        _vm._s(_vm.productShow.productData.bought_at) +
-                        "\n                                "
-                    ),
+                  _c("p", { staticClass: "dates m-0 mb-1" }, [
+                    _vm._v("\n                                Bought "),
+                    _c("strong", [
+                      _vm._v(_vm._s(_vm.productShow.productData.bought_at))
+                    ]),
+                    _vm._v(" "),
                     _c(
                       "span",
                       {
@@ -2553,11 +2575,11 @@ var render = function() {
                       },
                       [_c("i", { staticClass: "bx bx-highlight" })]
                     ),
-                    _vm._v(
-                      "\n\n                                Expires " +
-                        _vm._s(_vm.productShow.productData.expire_date) +
-                        "\n                                "
-                    ),
+                    _vm._v("\n\n                                Expires "),
+                    _c("strong", [
+                      _vm._v(_vm._s(_vm.productShow.productData.expire_date))
+                    ]),
+                    _vm._v(" "),
                     _c(
                       "span",
                       {
@@ -2753,7 +2775,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._m(2)]
+                    [_vm._m(1)]
                   ),
                   _vm._v(" "),
                   _c(
@@ -2779,7 +2801,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._m(3)]
+                    [_vm._m(2)]
                   ),
                   _vm._v(" "),
                   _c(
@@ -2839,23 +2861,11 @@ var staticRenderFns = [
           onClick: "$('.toolbox').toggle()",
           "data-toggle": "tooltip",
           "data-placement": "right",
-          title: "New..."
+          title: "New"
         }
       },
       [_c("i", { staticClass: "bx bx-plus m-0" })]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "toolbox-what" }, [
-      _c("p", [_vm._v("New category")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("New brand")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("New product")])
-    ])
   },
   function() {
     var _vm = this
@@ -3036,14 +3046,55 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("nav", { staticClass: "navbar navbar-expand-lg navbar-dark" }, [
-    _c("a", { staticClass: "navbar-brand text-white" }, [
-      _vm._v("\n        " + _vm._s(_vm.user.name) + "\n    ")
+  return _c("div", [
+    _c("nav", { staticClass: "navbar navbar-expand-lg navbar-dark" }, [
+      _c("a", { staticClass: "navbar-brand text-white" }, [
+        _c(
+          "span",
+          {
+            staticClass: "badge badge-info",
+            attrs: {
+              "data-toggle": "tooltip",
+              "data-placement": "bottom",
+              title: "Current makeup level"
+            }
+          },
+          [_vm._v(_vm._s(_vm.user.level))]
+        ),
+        _vm._v(" " + _vm._s(_vm.user.name) + "\n        ")
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _vm._m(1)
     ]),
     _vm._v(" "),
-    _vm._m(0),
-    _vm._v(" "),
-    _vm._m(1)
+    _c("div", { staticClass: "level-progrss" }, [
+      _c("div", { staticClass: "progress" }, [
+        _c(
+          "div",
+          {
+            staticClass: "progress-bar",
+            style: { width: (_vm.user.exp / _vm.user.exp_next) * 100 + "%" },
+            attrs: {
+              role: "progressbar",
+              "aria-valuenow": _vm.user.exp,
+              "aria-valuemin": "0",
+              "aria-valuemax": _vm.user.exp_next
+            }
+          },
+          [
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.user.exp) +
+                " / " +
+                _vm._s(_vm.user.exp_next) +
+                "\n            "
+            )
+          ]
+        )
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -3093,6 +3144,12 @@ var staticRenderFns = [
               { staticClass: "nav-link", attrs: { href: "/my/collection" } },
               [_vm._v("Collection")]
             )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c("a", { staticClass: "nav-link", attrs: { href: "/logout" } }, [
+              _vm._v("Logout")
+            ])
           ])
         ])
       ]
