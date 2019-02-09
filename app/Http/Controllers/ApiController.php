@@ -210,7 +210,9 @@ class ApiController extends Controller
             'category'          => $category,
             'rating'            => $product->rating,
             'pan'               => $product->pan,
-            'bought_at'         => date('d.m.Y', strtotime($product->bought_at))
+            'bought_at'         => date('d.m.Y', strtotime($product->bought_at)),
+            'expire_months'     => $product->expire_months,
+            'expire_date'       => date('d.m.Y', (strtotime($product->bought_at) + 60*60*24*30*$product->expire_months))
         ];
 
         return $toReturn;

@@ -183,7 +183,8 @@
         padding: 1rem;
         margin: auto;
         .bx-highlight{
-          font-size: 1rem;
+          font-size: 0.7rem;
+          padding: 0 0.3rem;
           color: gray;
           cursor: pointer;
           &:hover{
@@ -268,6 +269,9 @@
           }
         }
         .body{
+          .dates{
+            font-size: 0.7rem;
+          }
           .rating{
             cursor: default;
             span{

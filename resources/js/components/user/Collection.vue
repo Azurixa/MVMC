@@ -152,6 +152,14 @@
                             </div>
                         </div>
 
+                        <div v-show="productShow.editForm.expireMonthsVisible">
+                            <div class="form-group">
+                                <input class="form-control mb-2" type="number" min="0" v-model="productShow.editForm.value"
+                                       @keydown.enter="editConfirm()" autofocus>
+                                <button class="btn btn-primary" @click="editConfirm()">Edit expire months</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -208,6 +216,16 @@
                                           title="Change product name"><i class='bx bx-highlight'></i></span>
                                 </h1>
 
+                                <p class="dates m-0">
+                                    Bought {{productShow.productData.bought_at}}
+                                    <span @click="showEdit('bought_at')" data-toggle="tooltip" data-placement="bottom"
+                                          title="Change bought date"><i class='bx bx-highlight'></i></span>
+
+                                    Expires {{productShow.productData.expire_date}}
+                                    <span @click="showEdit('expire_months')" data-toggle="tooltip" data-placement="bottom"
+                                          title="Change expire months"><i class='bx bx-highlight'></i></span>
+                                </p>
+
                                 <p class="rating">
                                     <span @click="rateProduct(1)"
                                           class="bx"
@@ -229,16 +247,6 @@
                                           class="bx"
                                           :class="{'bxs-star animated tada': productShow.productData.rating > 4, 'bx-star': productShow.productData.rating < 5}">
                                     </span>
-                                </p>
-
-                                <p>
-                                    Bought {{productShow.productData.bought_at}}
-                                    <span @click="showEdit('bought_at')" data-toggle="tooltip" data-placement="bottom"
-                                          title="Change bought date"><i class='bx bx-highlight'></i></span>
-
-                                    Expires {{productShow.productData.bought_at}}
-                                    <span @click="showEdit('expire_months')" data-toggle="tooltip" data-placement="bottom"
-                                          title="Change expire months"><i class='bx bx-highlight'></i></span>
                                 </p>
 
                                 <div class="mb-4">
@@ -361,6 +369,7 @@
                         updatesVisible: false,
                         remainingAmountVisible: false,
                         boughtAtVisible: false,
+                        expireMonthsVisible: false,
                         whatEditing: '',
                         file: '',
                         value: '',
@@ -548,6 +557,10 @@
                     if (what === 'bought_at') {
                         this.productShow.editForm.boughtAtVisible = true;
                         this.productShow.editForm.value = this.productShow.productData.bought_at;
+                    }
+                    if (what === 'expire_months') {
+                        this.productShow.editForm.expireMonthsVisible = true;
+                        this.productShow.editForm.value = this.productShow.productData.expire_months;
                     }
                     this.productShow.editForm.whatEditing = what;
                 }

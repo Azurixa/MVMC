@@ -437,6 +437,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -484,6 +492,7 @@ __webpack_require__.r(__webpack_exports__);
           updatesVisible: false,
           remainingAmountVisible: false,
           boughtAtVisible: false,
+          expireMonthsVisible: false,
           whatEditing: '',
           file: '',
           value: ''
@@ -709,6 +718,11 @@ __webpack_require__.r(__webpack_exports__);
         if (what === 'bought_at') {
           this.productShow.editForm.boughtAtVisible = true;
           this.productShow.editForm.value = this.productShow.productData.bought_at;
+        }
+
+        if (what === 'expire_months') {
+          this.productShow.editForm.expireMonthsVisible = true;
+          this.productShow.editForm.value = this.productShow.productData.expire_months;
         }
 
         this.productShow.editForm.whatEditing = what;
@@ -2271,6 +2285,77 @@ var render = function() {
                     )
                   ])
                 ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.productShow.editForm.expireMonthsVisible,
+                      expression: "productShow.editForm.expireMonthsVisible"
+                    }
+                  ]
+                },
+                [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.productShow.editForm.value,
+                          expression: "productShow.editForm.value"
+                        }
+                      ],
+                      staticClass: "form-control mb-2",
+                      attrs: { type: "number", min: "0", autofocus: "" },
+                      domProps: { value: _vm.productShow.editForm.value },
+                      on: {
+                        keydown: function($event) {
+                          if (
+                            !("button" in $event) &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          _vm.editConfirm()
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.productShow.editForm,
+                            "value",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        on: {
+                          click: function($event) {
+                            _vm.editConfirm()
+                          }
+                        }
+                      },
+                      [_vm._v("Edit expire months")]
+                    )
+                  ])
+                ]
               )
             ])
           ]
@@ -2448,6 +2533,51 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
+                  _c("p", { staticClass: "dates m-0" }, [
+                    _vm._v(
+                      "\n                                Bought " +
+                        _vm._s(_vm.productShow.productData.bought_at) +
+                        "\n                                "
+                    ),
+                    _c(
+                      "span",
+                      {
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-placement": "bottom",
+                          title: "Change bought date"
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.showEdit("bought_at")
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "bx bx-highlight" })]
+                    ),
+                    _vm._v(
+                      "\n\n                                Expires " +
+                        _vm._s(_vm.productShow.productData.expire_date) +
+                        "\n                                "
+                    ),
+                    _c(
+                      "span",
+                      {
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-placement": "bottom",
+                          title: "Change expire months"
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.showEdit("expire_months")
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "bx bx-highlight" })]
+                    )
+                  ]),
+                  _vm._v(" "),
                   _c("p", { staticClass: "rating" }, [
                     _c("span", {
                       staticClass: "bx",
@@ -2518,51 +2648,6 @@ var render = function() {
                         }
                       }
                     })
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(
-                      "\n                                Bought " +
-                        _vm._s(_vm.productShow.productData.bought_at) +
-                        "\n                                "
-                    ),
-                    _c(
-                      "span",
-                      {
-                        attrs: {
-                          "data-toggle": "tooltip",
-                          "data-placement": "bottom",
-                          title: "Change bought date"
-                        },
-                        on: {
-                          click: function($event) {
-                            _vm.showEdit("bought_at")
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "bx bx-highlight" })]
-                    ),
-                    _vm._v(
-                      "\n\n                                Expires " +
-                        _vm._s(_vm.productShow.productData.bought_at) +
-                        "\n                                "
-                    ),
-                    _c(
-                      "span",
-                      {
-                        attrs: {
-                          "data-toggle": "tooltip",
-                          "data-placement": "bottom",
-                          title: "Change expire months"
-                        },
-                        on: {
-                          click: function($event) {
-                            _vm.showEdit("expire_months")
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "bx bx-highlight" })]
-                    )
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "mb-4" }, [

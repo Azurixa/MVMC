@@ -10700,7 +10700,8 @@ a.text-dark:focus {
 }
 
 #projectpan .main-box .activity-box .product-show .bx-highlight {
-  font-size: 1rem;
+  font-size: 0.7rem;
+  padding: 0 0.3rem;
   color: gray;
   cursor: pointer;
 }
@@ -10798,6 +10799,10 @@ a.text-dark:focus {
   border-radius: 50%;
   background-color: white;
   color: black;
+}
+
+#projectpan .main-box .activity-box .product-show .body .dates {
+  font-size: 0.7rem;
 }
 
 #projectpan .main-box .activity-box .product-show .body .rating {
