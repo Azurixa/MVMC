@@ -140,7 +140,7 @@
       background-color: $dark;
       padding: .5rem 1rem;
       height: 100%;
-      min-width: 19%;
+      width: 19%;
       color: white;
       overflow-y: scroll;
       .header{
@@ -192,7 +192,7 @@
       }
     }
     .activity-box{
-      min-width: 81%;
+      width: 81%;
       height: 100%;
       overflow-y: scroll;
       position: relative;
@@ -242,7 +242,7 @@
           }
         }
         .gallery{
-          height: 400px;
+          height: 60vh;
           width: 100%;
           position: relative;
           display: flex;
@@ -326,13 +326,13 @@
             }
           }
           .stats{
-            position: absolute;
-            bottom: 25px;
+            position: fixed;
+            bottom: 18px;
             right: 20px;
             display: flex;
             .if-pan{
-              width: 60px;
-              height: 60px;
+              width: 50px;
+              height: 50px;
               display: flex;
               align-items: center;
               justify-content: center;
@@ -358,8 +358,8 @@
               }
             }
             .uses_count{
-              width: 60px;
-              height: 60px;
+              width: 50px;
+              height: 50px;
               display: flex;
               align-items: center;
               justify-content: center;

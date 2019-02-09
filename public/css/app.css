@@ -10642,7 +10642,7 @@ a.text-dark:focus {
   background-color: #00838F;
   padding: 0.5rem 1rem;
   height: 100%;
-  min-width: 19%;
+  width: 19%;
   color: white;
   overflow-y: scroll;
 }
@@ -10701,7 +10701,7 @@ a.text-dark:focus {
 }
 
 #projectpan .main-box .activity-box {
-  min-width: 81%;
+  width: 81%;
   height: 100%;
   overflow-y: scroll;
   position: relative;
@@ -10763,7 +10763,7 @@ a.text-dark:focus {
 }
 
 #projectpan .main-box .activity-box .product-show .gallery {
-  height: 400px;
+  height: 60vh;
   width: 100%;
   position: relative;
   display: flex;
@@ -10863,15 +10863,15 @@ a.text-dark:focus {
 }
 
 #projectpan .main-box .activity-box .product-show .body .stats {
-  position: absolute;
-  bottom: 25px;
+  position: fixed;
+  bottom: 18px;
   right: 20px;
   display: flex;
 }
 
 #projectpan .main-box .activity-box .product-show .body .stats .if-pan {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10901,8 +10901,8 @@ a.text-dark:focus {
 }
 
 #projectpan .main-box .activity-box .product-show .body .stats .uses_count {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;

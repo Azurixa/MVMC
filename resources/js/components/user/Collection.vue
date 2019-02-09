@@ -252,7 +252,7 @@
                                               data-placement="bottom" title="Change description"><i
                                                 class='bx bx-highlight'></i></span>
                                     </h4>
-                                    <p>
+                                    <p class="text-justify">
                                         <span v-if="productShow.productData.description === null">
                                             Add description...
                                         </span>
@@ -267,7 +267,7 @@
                                               data-placement="bottom" title="Change first impressions"><i
                                                 class='bx bx-highlight'></i></span>
                                     </h4>
-                                    <p>
+                                    <p class="text-justify">
                                         <span v-if="productShow.productData.first_impressions === null">
                                             Add first impressions...
                                         </span>
@@ -280,7 +280,7 @@
                             <!-- Absolute container for product uses count -->
                             <div class="stats">
                                 <div class="if-pan" data-toggle="tooltip"
-                                     data-placement="top" title="Tag as panned" v-show="!productShow.productData.pan"
+                                     data-placement="top" title="Tag as panned [3xp]" v-show="!productShow.productData.pan"
                                      @click="panProduct(1)">
                                     <div class="m-0 text-center">
                                         <p class="m-0">Pan</p>
@@ -288,7 +288,7 @@
                                     </div>
                                 </div>
                                 <div class="if-pan true" data-toggle="tooltip"
-                                     data-placement="top" title="Tag as not panned" v-show="productShow.productData.pan"
+                                     data-placement="top" title="Tag as not panned [-3xp]" v-show="productShow.productData.pan"
                                      @click="panProduct(0)">
                                     <div class="m-0 text-center">
                                         <p class="m-0">Pan</p>
@@ -296,9 +296,9 @@
                                     </div>
                                 </div>
                                 <div class="uses_count mx-auto" @click="addProductUse()" data-toggle="tooltip"
-                                     data-placement="top" title="Add use">
+                                     data-placement="top" title="Add use [1xp]">
                                     <div class="m-0 text-center">
-                                        <p class="mb-0 h4" id="active-uses-count">
+                                        <p class="mb-0 h5" id="active-uses-count">
                                             {{productShow.productData.uses_count}}</p>
                                         <small>uses</small>
                                     </div>

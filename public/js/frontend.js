@@ -990,6 +990,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'navbar',
   data: function data() {
@@ -2693,7 +2697,7 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c("p", [
+                    _c("p", { staticClass: "text-justify" }, [
                       _vm.productShow.productData.description === null
                         ? _c("span", [
                             _vm._v(
@@ -2732,7 +2736,7 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c("p", [
+                    _c("p", { staticClass: "text-justify" }, [
                       _vm.productShow.productData.first_impressions === null
                         ? _c("span", [
                             _vm._v(
@@ -2767,7 +2771,7 @@ var render = function() {
                       attrs: {
                         "data-toggle": "tooltip",
                         "data-placement": "top",
-                        title: "Tag as panned"
+                        title: "Tag as panned [3xp]"
                       },
                       on: {
                         click: function($event) {
@@ -2793,7 +2797,7 @@ var render = function() {
                       attrs: {
                         "data-toggle": "tooltip",
                         "data-placement": "top",
-                        title: "Tag as not panned"
+                        title: "Tag as not panned [-3xp]"
                       },
                       on: {
                         click: function($event) {
@@ -2811,7 +2815,7 @@ var render = function() {
                       attrs: {
                         "data-toggle": "tooltip",
                         "data-placement": "top",
-                        title: "Add use"
+                        title: "Add use [1xp]"
                       },
                       on: {
                         click: function($event) {
@@ -2824,7 +2828,7 @@ var render = function() {
                         _c(
                           "p",
                           {
-                            staticClass: "mb-0 h4",
+                            staticClass: "mb-0 h5",
                             attrs: { id: "active-uses-count" }
                           },
                           [
@@ -3070,30 +3074,41 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "level-progrss" }, [
-      _c("div", { staticClass: "progress" }, [
-        _c(
-          "div",
-          {
-            staticClass: "progress-bar",
-            style: { width: (_vm.user.exp / _vm.user.exp_next) * 100 + "%" },
-            attrs: {
-              role: "progressbar",
-              "aria-valuenow": _vm.user.exp,
-              "aria-valuemin": "0",
-              "aria-valuemax": _vm.user.exp_next
-            }
-          },
-          [
-            _vm._v(
-              "\n                " +
-                _vm._s(_vm.user.exp) +
-                " / " +
-                _vm._s(_vm.user.exp_next) +
-                "\n            "
-            )
-          ]
-        )
-      ])
+      _c(
+        "div",
+        {
+          staticClass: "progress",
+          attrs: {
+            "data-toggle": "tooltip",
+            "data-placement": "bottom",
+            title: "Current experience / next level"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "progress-bar",
+              style: { width: (_vm.user.exp / _vm.user.exp_next) * 100 + "%" },
+              attrs: {
+                role: "progressbar",
+                "aria-valuenow": _vm.user.exp,
+                "aria-valuemin": "0",
+                "aria-valuemax": _vm.user.exp_next
+              }
+            },
+            [
+              _vm._v(
+                "\n                " +
+                  _vm._s(_vm.user.exp) +
+                  " / " +
+                  _vm._s(_vm.user.exp_next) +
+                  "\n            "
+              )
+            ]
+          )
+        ]
+      )
     ])
   ])
 }

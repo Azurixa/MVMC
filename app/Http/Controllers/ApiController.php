@@ -57,6 +57,8 @@ class ApiController extends Controller
         $category->name = $categoryName;
         $category->save();
 
+        User::addExperience($userId, 2);
+
         return json_encode(['message' => 'Category ' . $categoryName . ' for user ' . $userId . ' created!']);
     }
 
@@ -103,6 +105,8 @@ class ApiController extends Controller
         $brand->creator_id = $userId;
         $brand->name = $name;
         $brand->save();
+
+        User::addExperience($userId, 2);
 
         return json_encode(['message' => 'Brand ' . $name . ' for user ' . $userId . ' created!']);
     }
@@ -159,6 +163,8 @@ class ApiController extends Controller
         $product->photos = $photos;
         $product->save();
 
+        User::addExperience($userId, 5);
+
         return json_encode(['message' => 'Product ' . $name . ' for category ' . $categoryId . ' created!']);
     }
 
@@ -179,6 +185,14 @@ class ApiController extends Controller
         ])->firstOrFail();
         $product->$field = $request->post('value');
         $product->save();
+
+        if($field === 'pan') {
+            if($request->post('value') == 1) {
+                User::addExperience($userId, 3);
+            } else {
+                User::addExperience($userId, -3);
+            }
+        }
 
         return json_encode(['message' => 'Product ' . $id . ' at ' . $field . ' updated!']);
     }
@@ -216,8 +230,6 @@ class ApiController extends Controller
             'expire_date'       => date('d.m.Y', (strtotime($product->bought_at) + 60*60*24*30*$product->expire_months))
         ];
 
-        User::addExperience($userId, 1);
-
         return $toReturn;
     }
 
@@ -233,6 +245,8 @@ class ApiController extends Controller
         $product->uses_count++;
         $product->last_use = $currentTimestamp = Carbon::now()->toDateTimeString();
         $product->save();
+
+        User::addExperience($userId, 1);
 
         return json_encode(['message' => 'Use count++ for product ' . $id . '!']);
     }

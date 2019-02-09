@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <nav class="navbar navbar-expand-lg navbar-dark">
             <a class="navbar-brand text-white">
                 <span class="badge badge-info" data-toggle="tooltip"
@@ -24,14 +25,17 @@
                 </ul>
             </div>
         </nav>
+
         <div class="level-progrss">
-            <div class="progress">
+            <div class="progress" data-toggle="tooltip"
+                 data-placement="bottom" title="Current experience / next level">
                 <div class="progress-bar" :style="{'width': user.exp/user.exp_next * 100 + '%'}" role="progressbar"
                      :aria-valuenow="user.exp" aria-valuemin="0" :aria-valuemax="user.exp_next">
                     {{user.exp}} / {{user.exp_next}}
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 
