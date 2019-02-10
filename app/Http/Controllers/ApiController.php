@@ -261,7 +261,7 @@ class ApiController extends Controller
         $userId = $request->user()->id;
 
         $image = $request->file('photo');
-        $name = $userId . '_' . str_slug($image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
+        $name = $userId . '_' . $id . '_' . str_slug($image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
         $image->storeAs('public/products', $name);
 
         Product::addPhoto($id, $name);
