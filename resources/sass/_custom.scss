@@ -1,7 +1,7 @@
 // Scrollbar
 
 ::-webkit-scrollbar {
-  width: 3px;
+  width: 0px;
 }
 
 /* Track */
@@ -21,6 +21,30 @@
 
 // BS classes
 
+.navbar-collapse{
+  @media screen and (max-width: 992px) {
+    display: block !important;
+    background-color: black;
+    z-index: 900000;
+    height: calc(100vh - 60px - 16px);
+    transition: 0.4s all;
+    position: fixed;
+    right: -300px;
+    top: 76px;
+    &[show]{
+      position: absolute;
+      top: 76px;
+      right: 0;
+      width: 100%;
+    }
+    .navbar-nav{
+      .nav-item{
+        text-align: left;
+      }
+    }
+  }
+}
+
 .navbar-brand{
   position: relative;
   .expirience{
@@ -29,22 +53,35 @@
     left: 1px;
     bottom: -7px;
   }
+  .current-level{
+    position: relative;
+    top: -1px;
+    background-color: $amount !important;
+    font-size: 1rem;
+    line-height: 15px;
+    margin-right: 2px;
+  }
 }
 
 .level-progrss{
-  height: 8px;
+  height: 16px;
+  box-shadow: 0 4px 2px -2px gray;
+  position: relative;
   .progress{
-    height: 8px;
+    height: 16px;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
     cursor: default;
     .progress-bar{
-      height: 8px;
+      height: 16px;
       -webkit-border-radius: 0;
       -moz-border-radius: 0;
       border-radius: 0;
-      font-size: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      background: linear-gradient(to right, #93309c, magenta, yellow, orange, magenta, #93309c);
+      color: black;
     }
   }
 }
@@ -67,22 +104,25 @@
 
 .navbar{
   height: 60px;
-  background-color: $darker;
+  background-color: black;
 }
 
 // Makeup collection
 #projectpan{
   font-family: "Sarabun", sans-serif;
   width: 100%;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 78px);
   padding: 0;
   margin: 0;
+  @media screen and (max-width: 992px) {
+    height: calc(100vh - 76px);
+  }
   .toolbox-show{
     position: absolute;
     bottom: 20px;
     left: 20px;
     z-index: 2000;
-    background-color: $primary1;
+    background-color: black;
     color: white;
     padding: 12px;
     border-radius: 100%;
@@ -117,6 +157,7 @@
     top: 0;
     width: 100%;
     height: 100vh;
+    overflow-y: scroll;
     z-index: 1000;
     background-color: rgba(0, 0, 0, .5);
     .close-adding{
@@ -137,7 +178,9 @@
     height: 100%;
     .collection{
       //background-image: linear-gradient(30deg, $primary1, $primary2);
-      background-color: $dark;
+      //background-color: $dark;
+      background-image: linear-gradient(0deg, $dark, $darker);
+      //background: #009B77;
       padding: .5rem 1rem;
       height: 100%;
       width: 19%;
@@ -152,6 +195,7 @@
         padding-inline-start: 0;
         font-size: 1.2rem;
         font-weight: 500;
+        margin-bottom: 5rem;
         ul{
           font-size: 0.9rem;
           font-weight: 100;
@@ -172,11 +216,11 @@
             .amount{
               transition: 0.5s all;
               position: absolute;
-              border-radius: 4px;
+              border-radius: 3px;
               left: 0;
               bottom: 0;
-              width: 100%;
-              background-color: $primary1;
+              width: 103%;
+              background-color: $amount;
             }
           }
           .brand{
@@ -197,11 +241,11 @@
       overflow-y: scroll;
       position: relative;
       .edit-box{
-        width: 100%;
-        height: 100%;
+        width: 81%;
+        height: calc(100% - 78px);
         z-index: 1000;
         background-color: #000000a0;
-        position: absolute;
+        position: fixed;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -212,6 +256,17 @@
         }
         .form{
           width: 50%;
+        }
+      }
+      .product-show-placeholder{
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.5;
+        p{
+          text-align: center;
         }
       }
       .product-show{
@@ -305,12 +360,18 @@
           }
         }
         .body{
+          .amount{
+            background-color: $amount;
+            font-weight: 700;
+            color: white;
+          }
           .dates{
             font-size: 0.7rem;
           }
           .rating{
             cursor: default;
             span{
+              margin-right: -6px;
               transition: all 0.3s;
               font-size: 1.3rem;
               cursor: pointer;
@@ -329,27 +390,26 @@
             position: fixed;
             bottom: 18px;
             right: 20px;
-            display: flex;
             .if-pan{
               width: 50px;
               height: 50px;
               display: flex;
               align-items: center;
               justify-content: center;
-              background-color: transparent;
-              border: 2px solid black;
-              margin-right: 10px;
+              background-color: darkgray;
+              color: white;
+              margin-bottom: 10px;
               border-radius: 50%;
               cursor: pointer;
               opacity: 0.85;
               transition: all 0.3s;
               &:hover{
                 opacity: 1;
-                background-color: $dark;
+                background-color: black;
                 color: white;
               }
               &.true{
-                background-color: $dark;
+                background-color: black;
                 color: white;
                 opacity: 1;
               }
@@ -363,11 +423,10 @@
               display: flex;
               align-items: center;
               justify-content: center;
-              background-color: $dark;
+              background-color: black;
               color: white;
               border-radius: 50%;
               cursor: pointer;
-              border: 2px solid black;
               div{
                 line-height: 3px;
                 position: relative;

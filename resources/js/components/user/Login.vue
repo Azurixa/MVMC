@@ -65,7 +65,7 @@
                         // Get and save token for API use
                         localStorage.setItem('token', data.token_type + ' ' + data.access_token);
                         // Redirect user
-                        document.location = '/user';
+                        document.location = '/my/collection';
                     } else {
                         console.log('BAD');
                     }

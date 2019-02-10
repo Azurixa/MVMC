@@ -40,7 +40,7 @@ class User extends Authenticatable
         if ($user->exp >= $user->exp_next){
             // Next level
             $user->level++;
-            $user->exp_next += $user->exp_next*0.2;
+            $user->exp_next += $user->exp_next*0.4;
         }
         $user->save();
     }

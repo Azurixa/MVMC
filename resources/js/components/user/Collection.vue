@@ -150,7 +150,8 @@
 
                         <div v-show="productShow.editForm.expireMonthsVisible">
                             <div class="form-group">
-                                <input class="form-control mb-2" type="number" min="0" v-model="productShow.editForm.value"
+                                <input class="form-control mb-2" type="number" min="0"
+                                       v-model="productShow.editForm.value"
                                        @keydown.enter="editConfirm()" autofocus>
                                 <button class="btn btn-primary" @click="editConfirm()">Edit expire months</button>
                             </div>
@@ -160,6 +161,17 @@
                 </div>
 
                 <!-- Product show container -->
+                <div class="product-show-placeholder" v-show="!productShow.visible">
+                    <div>
+                        <h1>
+                            Click product to show it
+                        </h1>
+                        <p>
+                            Or add new products to your collection!
+                        </p>
+                    </div>
+                </div>
+
                 <div class="product-show" v-show="productShow.visible">
 
                     <!-- Gallery of product photos -->
@@ -197,7 +209,7 @@
                             <div class="col-12 p-0">
                                 <div class="progress mt-1" @click="showEdit('remaining_amount')" data-toggle="tooltip"
                                      data-placement="bottom" title="Change remaining amount">
-                                    <div class="progress-bar" role="progressbar"
+                                    <div class="progress-bar amount" role="progressbar"
                                          :style="{width: productShow.productData.remaining_amount + '%'}">
                                         {{productShow.productData.remaining_amount}} %
                                     </div>
@@ -207,22 +219,13 @@
                             <!-- Main box of product information -->
                             <div class="col-lg-8 px-0 pt-3">
                                 <h1 class="m-0">
-                                    {{productShow.productData.brand.name}} <strong>{{productShow.productData.name}}</strong>
+                                    {{productShow.productData.brand.name}}
+                                    <strong>{{productShow.productData.name}}</strong>
                                     <span @click="showEdit('name')" data-toggle="tooltip" data-placement="bottom"
                                           title="Change product name"><i class='bx bx-highlight'></i></span>
                                 </h1>
 
-                                <p class="dates m-0 mb-1">
-                                    Bought <strong>{{productShow.productData.bought_at}}</strong>
-                                    <span @click="showEdit('bought_at')" data-toggle="tooltip" data-placement="bottom"
-                                          title="Change bought date"><i class='bx bx-highlight'></i></span>
-
-                                    Expires <strong>{{productShow.productData.expire_date}}</strong>
-                                    <span @click="showEdit('expire_months')" data-toggle="tooltip" data-placement="bottom"
-                                          title="Change expire months"><i class='bx bx-highlight'></i></span>
-                                </p>
-
-                                <p class="rating">
+                                <p class="rating mb-1">
                                     <span @click="rateProduct(1)"
                                           class="bx"
                                           :class="{'bxs-star animated tada': productShow.productData.rating > 0, 'bx-star': productShow.productData.rating < 1}">
@@ -242,6 +245,55 @@
                                     <span @click="rateProduct(5)"
                                           class="bx"
                                           :class="{'bxs-star animated tada': productShow.productData.rating > 4, 'bx-star': productShow.productData.rating < 5}">
+                                    </span>
+                                    <span @click="rateProduct(6)"
+                                          class="bx"
+                                          :class="{'bxs-star animated tada': productShow.productData.rating > 5, 'bx-star': productShow.productData.rating < 6}">
+                                    </span>
+                                    <span @click="rateProduct(7)"
+                                          class="bx"
+                                          :class="{'bxs-star animated tada': productShow.productData.rating > 6, 'bx-star': productShow.productData.rating < 7}">
+                                    </span>
+                                    <span @click="rateProduct(8)"
+                                          class="bx"
+                                          :class="{'bxs-star animated tada': productShow.productData.rating > 7, 'bx-star': productShow.productData.rating < 8}">
+                                    </span>
+                                    <span @click="rateProduct(9)"
+                                          class="bx"
+                                          :class="{'bxs-star animated tada': productShow.productData.rating > 8, 'bx-star': productShow.productData.rating < 9}">
+                                    </span>
+                                    <span @click="rateProduct(10)"
+                                          class="bx"
+                                          :class="{'bxs-star animated tada': productShow.productData.rating > 9, 'bx-star': productShow.productData.rating < 10}">
+                                    </span>
+                                </p>
+
+                                <p class="dates" v-show="productShow.productData.bought_at === '01.01.1970'">
+                                    Add bought date
+                                    <span @click="showEdit('bought_at')" data-toggle="tooltip" data-placement="bottom" title="Change bought date">
+                                        <i class='bx bx-highlight'></i>
+                                    </span>
+                                    Add expire months
+                                    <span @click="showEdit('expire_months')" data-toggle="tooltip"
+                                          data-placement="bottom"
+                                          title="Change expire months">
+                                        <i class='bx bx-highlight'></i>
+                                    </span>
+                                </p>
+                                <p class="dates" v-show="productShow.productData.bought_at !== '01.01.1970'">
+                                    Bought <strong>{{productShow.productData.bought_at}}</strong>
+                                    <span @click="showEdit('bought_at')" data-toggle="tooltip" data-placement="bottom"
+                                          title="Change bought date">
+                                        <i class='bx bx-highlight'></i>
+                                    </span>
+
+                                    <span :class="{'text-danger': productShow.productData.expired}">
+                                        Expires <strong>{{productShow.productData.expire_date}}</strong>
+                                        <span @click="showEdit('expire_months')" data-toggle="tooltip"
+                                              data-placement="bottom"
+                                              title="Change expire months">
+                                            <i class='bx bx-highlight'></i>
+                                        </span>
                                     </span>
                                 </p>
 
@@ -280,19 +332,19 @@
                             <!-- Absolute container for product uses count -->
                             <div class="stats">
                                 <div class="if-pan" data-toggle="tooltip"
-                                     data-placement="top" title="Tag as panned [3xp]" v-show="!productShow.productData.pan"
+                                     data-placement="top" title="Tag as panned [3xp]"
+                                     v-show="!productShow.productData.pan"
                                      @click="panProduct(1)">
                                     <div class="m-0 text-center">
                                         <p class="m-0">Pan</p>
-                                        <small><i class='bx bx-x'></i></small>
                                     </div>
                                 </div>
                                 <div class="if-pan true" data-toggle="tooltip"
-                                     data-placement="top" title="Tag as not panned [-3xp]" v-show="productShow.productData.pan"
+                                     data-placement="top" title="Tag as not panned [-3xp]"
+                                     v-show="productShow.productData.pan"
                                      @click="panProduct(0)">
                                     <div class="m-0 text-center">
                                         <p class="m-0">Pan</p>
-                                        <i class='bx bx-check'></i>
                                     </div>
                                 </div>
                                 <div class="uses_count mx-auto" @click="addProductUse()" data-toggle="tooltip"
@@ -329,7 +381,7 @@
                 this.getCategoriesAndProducts();
             }, 10000);
             // Tooltips refresh
-            setTimeout( () => {
+            setTimeout(() => {
                 window.reloadAll();
             }, 500);
         },
@@ -356,6 +408,8 @@
                 productShow: {
                     visible: false,
                     productData: {
+                        expired: false,
+                        rating: 0,
                         brand: {},
                         photos: {},
                     },
@@ -511,11 +565,43 @@
                 }).then(res => res.json()).then(data => {
                     this.productShow.productData = data;
                     this.productShow.visible = true;
+                    this.checkExpired();
                     setTimeout(() => {
                         window.refreshGallery();
                         window.reloadAll();
                     }, 50);
                 });
+            },
+
+            checkExpired() {
+
+                const date = new Date();
+                const exDate = this.productShow.productData.expire_date;
+
+                const exDay = exDate.substring(0, 2);
+                const exMonth = exDate.substring(3, 5);
+                const exYear = exDate.substring(6, 10);
+                const nowDay = date.getDate();
+                const nowMonth = date.getMonth() + 1;
+                const nowYear = date.getFullYear();
+
+                console.log(exDay + " " + exMonth + " " + exYear);
+
+                if(nowYear > exYear) {
+                    this.productShow.productData.expired = true;
+                    return 1;
+                } else if (nowYear === exYear) {
+                    if(nowMonth > exMonth) {
+                        this.productShow.productData.expired = true;
+                        return 1;
+                    } else if (nowMonth === exMonth) {
+                        if (nowDay >= exDay) {
+                            this.productShow.productData.expired = true;
+                            return 1;
+                        }
+                    }
+                }
+                this.productShow.productData.expired = false;
             },
 
             // FRONT END

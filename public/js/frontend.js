@@ -441,6 +441,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -479,6 +531,8 @@ __webpack_require__.r(__webpack_exports__);
       productShow: {
         visible: false,
         productData: {
+          expired: false,
+          rating: 0,
           brand: {},
           photos: {}
         },
@@ -670,11 +724,42 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (data) {
         _this11.productShow.productData = data;
         _this11.productShow.visible = true;
+
+        _this11.checkExpired();
+
         setTimeout(function () {
           window.refreshGallery();
           window.reloadAll();
         }, 50);
       });
+    },
+    checkExpired: function checkExpired() {
+      var date = new Date();
+      var exDate = this.productShow.productData.expire_date;
+      var exDay = exDate.substring(0, 2);
+      var exMonth = exDate.substring(3, 5);
+      var exYear = exDate.substring(6, 10);
+      var nowDay = date.getDate();
+      var nowMonth = date.getMonth() + 1;
+      var nowYear = date.getFullYear();
+      console.log(exDay + " " + exMonth + " " + exYear);
+
+      if (nowYear > exYear) {
+        this.productShow.productData.expired = true;
+        return 1;
+      } else if (nowYear === exYear) {
+        if (nowMonth > exMonth) {
+          this.productShow.productData.expired = true;
+          return 1;
+        } else if (nowMonth === exMonth) {
+          if (nowDay >= exDay) {
+            this.productShow.productData.expired = true;
+            return 1;
+          }
+        }
+      }
+
+      this.productShow.productData.expired = false;
     },
     // FRONT END
     showEdit: function showEdit(what) {
@@ -857,6 +942,39 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/GuestNavbar.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/user/GuestNavbar.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/Login.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/user/Login.vue?vue&type=script&lang=js& ***!
@@ -933,7 +1051,7 @@ __webpack_require__.r(__webpack_exports__);
           // Get and save token for API use
           localStorage.setItem('token', data.token_type + ' ' + data.access_token); // Redirect user
 
-          document.location = '/user';
+          document.location = '/my/collection';
         } else {
           console.log('BAD');
         }
@@ -953,6 +1071,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -2390,6 +2511,22 @@ var render = function() {
               {
                 name: "show",
                 rawName: "v-show",
+                value: !_vm.productShow.visible,
+                expression: "!productShow.visible"
+              }
+            ],
+            staticClass: "product-show-placeholder"
+          },
+          [_vm._m(1)]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
                 value: _vm.productShow.visible,
                 expression: "productShow.visible"
               }
@@ -2507,7 +2644,7 @@ var render = function() {
                       _c(
                         "div",
                         {
-                          staticClass: "progress-bar",
+                          staticClass: "progress-bar amount",
                           style: {
                             width:
                               _vm.productShow.productData.remaining_amount + "%"
@@ -2533,7 +2670,7 @@ var render = function() {
                     _vm._v(
                       "\n                                " +
                         _vm._s(_vm.productShow.productData.brand.name) +
-                        " "
+                        "\n                                "
                     ),
                     _c("strong", [
                       _vm._v(_vm._s(_vm.productShow.productData.name))
@@ -2557,52 +2694,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("p", { staticClass: "dates m-0 mb-1" }, [
-                    _vm._v("\n                                Bought "),
-                    _c("strong", [
-                      _vm._v(_vm._s(_vm.productShow.productData.bought_at))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        attrs: {
-                          "data-toggle": "tooltip",
-                          "data-placement": "bottom",
-                          title: "Change bought date"
-                        },
-                        on: {
-                          click: function($event) {
-                            _vm.showEdit("bought_at")
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "bx bx-highlight" })]
-                    ),
-                    _vm._v("\n\n                                Expires "),
-                    _c("strong", [
-                      _vm._v(_vm._s(_vm.productShow.productData.expire_date))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        attrs: {
-                          "data-toggle": "tooltip",
-                          "data-placement": "bottom",
-                          title: "Change expire months"
-                        },
-                        on: {
-                          click: function($event) {
-                            _vm.showEdit("expire_months")
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "bx bx-highlight" })]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "rating" }, [
+                  _c("p", { staticClass: "rating mb-1" }, [
                     _c("span", {
                       staticClass: "bx",
                       class: {
@@ -2671,8 +2763,213 @@ var render = function() {
                           _vm.rateProduct(5)
                         }
                       }
+                    }),
+                    _vm._v(" "),
+                    _c("span", {
+                      staticClass: "bx",
+                      class: {
+                        "bxs-star animated tada":
+                          _vm.productShow.productData.rating > 5,
+                        "bx-star": _vm.productShow.productData.rating < 6
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.rateProduct(6)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", {
+                      staticClass: "bx",
+                      class: {
+                        "bxs-star animated tada":
+                          _vm.productShow.productData.rating > 6,
+                        "bx-star": _vm.productShow.productData.rating < 7
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.rateProduct(7)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", {
+                      staticClass: "bx",
+                      class: {
+                        "bxs-star animated tada":
+                          _vm.productShow.productData.rating > 7,
+                        "bx-star": _vm.productShow.productData.rating < 8
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.rateProduct(8)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", {
+                      staticClass: "bx",
+                      class: {
+                        "bxs-star animated tada":
+                          _vm.productShow.productData.rating > 8,
+                        "bx-star": _vm.productShow.productData.rating < 9
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.rateProduct(9)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", {
+                      staticClass: "bx",
+                      class: {
+                        "bxs-star animated tada":
+                          _vm.productShow.productData.rating > 9,
+                        "bx-star": _vm.productShow.productData.rating < 10
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.rateProduct(10)
+                        }
+                      }
                     })
                   ]),
+                  _vm._v(" "),
+                  _c(
+                    "p",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value:
+                            _vm.productShow.productData.bought_at ===
+                            "01.01.1970",
+                          expression:
+                            "productShow.productData.bought_at === '01.01.1970'"
+                        }
+                      ],
+                      staticClass: "dates"
+                    },
+                    [
+                      _vm._v(
+                        "\n                                Add bought date\n                                "
+                      ),
+                      _c(
+                        "span",
+                        {
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-placement": "bottom",
+                            title: "Change bought date"
+                          },
+                          on: {
+                            click: function($event) {
+                              _vm.showEdit("bought_at")
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "bx bx-highlight" })]
+                      ),
+                      _vm._v(
+                        "\n                                Add expire months\n                                "
+                      ),
+                      _c(
+                        "span",
+                        {
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-placement": "bottom",
+                            title: "Change expire months"
+                          },
+                          on: {
+                            click: function($event) {
+                              _vm.showEdit("expire_months")
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "bx bx-highlight" })]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "p",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value:
+                            _vm.productShow.productData.bought_at !==
+                            "01.01.1970",
+                          expression:
+                            "productShow.productData.bought_at !== '01.01.1970'"
+                        }
+                      ],
+                      staticClass: "dates"
+                    },
+                    [
+                      _vm._v("\n                                Bought "),
+                      _c("strong", [
+                        _vm._v(_vm._s(_vm.productShow.productData.bought_at))
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        {
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-placement": "bottom",
+                            title: "Change bought date"
+                          },
+                          on: {
+                            click: function($event) {
+                              _vm.showEdit("bought_at")
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "bx bx-highlight" })]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        {
+                          class: {
+                            "text-danger": _vm.productShow.productData.expired
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                    Expires "
+                          ),
+                          _c("strong", [
+                            _vm._v(
+                              _vm._s(_vm.productShow.productData.expire_date)
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            {
+                              attrs: {
+                                "data-toggle": "tooltip",
+                                "data-placement": "bottom",
+                                title: "Change expire months"
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.showEdit("expire_months")
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "bx bx-highlight" })]
+                          )
+                        ]
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("div", { staticClass: "mb-4" }, [
                     _c("h4", [
@@ -2779,7 +3076,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._m(1)]
+                    [_vm._m(2)]
                   ),
                   _vm._v(" "),
                   _c(
@@ -2805,7 +3102,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._m(2)]
+                    [_vm._m(3)]
                   ),
                   _vm._v(" "),
                   _c(
@@ -2875,10 +3172,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "m-0 text-center" }, [
-      _c("p", { staticClass: "m-0" }, [_vm._v("Pan")]),
+    return _c("div", [
+      _c("h1", [
+        _vm._v(
+          "\n                        Click product to show it\n                    "
+        )
+      ]),
       _vm._v(" "),
-      _c("small", [_c("i", { staticClass: "bx bx-x" })])
+      _c("p", [
+        _vm._v(
+          "\n                        Or add new products to your collection!\n                    "
+        )
+      ])
     ])
   },
   function() {
@@ -2886,9 +3191,93 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "m-0 text-center" }, [
-      _c("p", { staticClass: "m-0" }, [_vm._v("Pan")]),
+      _c("p", { staticClass: "m-0" }, [_vm._v("Pan")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "m-0 text-center" }, [
+      _c("p", { staticClass: "m-0" }, [_vm._v("Pan")])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/GuestNavbar.vue?vue&type=template&id=215a1022&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/user/GuestNavbar.vue?vue&type=template&id=215a1022& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("nav", { staticClass: "navbar navbar-expand-lg navbar-dark" }, [
+      _c(
+        "a",
+        { staticClass: "navbar-brand text-white", attrs: { href: "/" } },
+        [_vm._v("\n        MVMC\n    ")]
+      ),
       _vm._v(" "),
-      _c("i", { staticClass: "bx bx-check" })
+      _c(
+        "button",
+        {
+          staticClass: "navbar-toggler",
+          attrs: {
+            type: "button",
+            "data-toggle": "collapse",
+            "data-target": "#navbarSupportedContent",
+            "aria-controls": "navbarSupportedContent",
+            "aria-expanded": "false",
+            "aria-label": "Toggle navigation"
+          }
+        },
+        [_c("span", { staticClass: "navbar-toggler-icon" })]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "collapse navbar-collapse",
+          attrs: { id: "navbarSupportedContent" }
+        },
+        [
+          _c("ul", { staticClass: "navbar-nav ml-auto" }, [
+            _c("li", { staticClass: "nav-item" }, [
+              _c("a", { staticClass: "nav-link", attrs: { href: "/login" } }, [
+                _vm._v("Login")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item" }, [
+              _c(
+                "a",
+                { staticClass: "nav-link", attrs: { href: "/register" } },
+                [_vm._v("Register")]
+              )
+            ])
+          ])
+        ]
+      )
     ])
   }
 ]
@@ -3052,11 +3441,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("nav", { staticClass: "navbar navbar-expand-lg navbar-dark" }, [
-      _c("a", { staticClass: "navbar-brand text-white" }, [
+      _c("a", { staticClass: "navbar-brand text-white d-lg-none" }, [
         _c(
           "span",
           {
-            staticClass: "badge badge-info",
+            staticClass: "badge badge-info current-level",
             attrs: {
               "data-toggle": "tooltip",
               "data-placement": "bottom",
@@ -3070,7 +3459,42 @@ var render = function() {
       _vm._v(" "),
       _vm._m(0),
       _vm._v(" "),
-      _vm._m(1)
+      _c(
+        "div",
+        {
+          staticClass: "collapse navbar-collapse",
+          attrs: { id: "navbarSupportedContent" }
+        },
+        [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("ul", { staticClass: "navbar-nav ml-auto" }, [
+            _c(
+              "a",
+              {
+                staticClass: "navbar-brand text-white ml-auto d-none d-lg-block"
+              },
+              [
+                _c(
+                  "span",
+                  {
+                    staticClass: "badge badge-info current-level",
+                    attrs: {
+                      "data-toggle": "tooltip",
+                      "data-placement": "bottom",
+                      title: "Current makeup level"
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.user.level))]
+                ),
+                _vm._v(" " + _vm._s(_vm.user.name) + "\n                ")
+              ]
+            ),
+            _vm._v(" "),
+            _vm._m(2)
+          ])
+        ]
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "level-progrss" }, [
@@ -3123,11 +3547,8 @@ var staticRenderFns = [
         staticClass: "navbar-toggler",
         attrs: {
           type: "button",
-          "data-toggle": "collapse",
-          "data-target": "#navbarSupportedContent",
-          "aria-controls": "navbarSupportedContent",
-          "aria-expanded": "false",
-          "aria-label": "Toggle navigation"
+          onclick:
+            "document.getElementById('navbarSupportedContent').toggleAttribute('show')"
         }
       },
       [_c("span", { staticClass: "navbar-toggler-icon" })]
@@ -3137,38 +3558,25 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "collapse navbar-collapse",
-        attrs: { id: "navbarSupportedContent" }
-      },
-      [
-        _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              { staticClass: "nav-link", attrs: { href: "/my/dashboard" } },
-              [_vm._v("Dashboard")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              { staticClass: "nav-link", attrs: { href: "/my/collection" } },
-              [_vm._v("Collection")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link", attrs: { href: "/logout" } }, [
-              _vm._v("Logout")
-            ])
-          ])
-        ])
-      ]
-    )
+    return _c("ul", { staticClass: "navbar-nav" }, [
+      _c("li", { staticClass: "nav-item" }, [
+        _c(
+          "a",
+          { staticClass: "nav-link", attrs: { href: "/my/collection" } },
+          [_vm._v("My collection")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "/logout" } }, [
+        _vm._v("Logout")
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -14537,6 +14945,78 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/user/GuestNavbar.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/user/GuestNavbar.vue ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _GuestNavbar_vue_vue_type_template_id_215a1022___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GuestNavbar.vue?vue&type=template&id=215a1022& */ "./resources/js/components/user/GuestNavbar.vue?vue&type=template&id=215a1022&");
+/* harmony import */ var _GuestNavbar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GuestNavbar.vue?vue&type=script&lang=js& */ "./resources/js/components/user/GuestNavbar.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _GuestNavbar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _GuestNavbar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _GuestNavbar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _GuestNavbar_vue_vue_type_template_id_215a1022___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _GuestNavbar_vue_vue_type_template_id_215a1022___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/user/GuestNavbar.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/user/GuestNavbar.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/user/GuestNavbar.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GuestNavbar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./GuestNavbar.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/GuestNavbar.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GuestNavbar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GuestNavbar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GuestNavbar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GuestNavbar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GuestNavbar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/user/GuestNavbar.vue?vue&type=template&id=215a1022&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/user/GuestNavbar.vue?vue&type=template&id=215a1022& ***!
+  \*************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GuestNavbar_vue_vue_type_template_id_215a1022___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./GuestNavbar.vue?vue&type=template&id=215a1022& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/GuestNavbar.vue?vue&type=template&id=215a1022&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GuestNavbar_vue_vue_type_template_id_215a1022___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GuestNavbar_vue_vue_type_template_id_215a1022___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/user/Login.vue":
 /*!************************************************!*\
   !*** ./resources/js/components/user/Login.vue ***!
@@ -14695,6 +15175,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 Vue.component('home', __webpack_require__(/*! ./components/Home.vue */ "./resources/js/components/Home.vue").default);
 Vue.component('navbar', __webpack_require__(/*! ./components/user/Navbar.vue */ "./resources/js/components/user/Navbar.vue").default);
+Vue.component('guestNavbar', __webpack_require__(/*! ./components/user/GuestNavbar.vue */ "./resources/js/components/user/GuestNavbar.vue").default);
 Vue.component('userLogin', __webpack_require__(/*! ./components/user/Login.vue */ "./resources/js/components/user/Login.vue").default);
 Vue.component('collection', __webpack_require__(/*! ./components/user/Collection.vue */ "./resources/js/components/user/Collection.vue").default);
 /**

@@ -29,7 +29,11 @@
 
     <main>
 
-        <navbar></navbar>
+        @guest
+            <guest-navbar></guest-navbar>
+        @else
+            <navbar></navbar>
+        @endguest
 
         @yield('content')
 

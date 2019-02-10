@@ -2,23 +2,26 @@
     <div>
 
         <nav class="navbar navbar-expand-lg navbar-dark">
-            <a class="navbar-brand text-white">
-                <span class="badge badge-info" data-toggle="tooltip"
-                      data-placement="bottom" title="Current makeup level">{{user.level}}</span> {{user.name}}
+            <a class="navbar-brand text-white d-lg-none">
+                        <span class="badge badge-info current-level" data-toggle="tooltip"
+                              data-placement="bottom" title="Current makeup level">{{user.level}}</span> {{user.name}}
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" onclick="document.getElementById('navbarSupportedContent').toggleAttribute('show')">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/my/collection">My collection</a>
+                    </li>
+                </ul>
+
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/my/dashboard">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/my/collection">Collection</a>
-                    </li>
+                    <a class="navbar-brand text-white ml-auto d-none d-lg-block">
+                        <span class="badge badge-info current-level" data-toggle="tooltip"
+                      data-placement="bottom" title="Current makeup level">{{user.level}}</span> {{user.name}}
+                    </a>
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Logout</a>
                     </li>
