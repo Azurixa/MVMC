@@ -10674,7 +10674,7 @@ a.text-dark:focus {
 
 @media screen and (max-width: 992px) {
   #projectpan .toolbox {
-    z-index: 11000;
+    z-index: 18000;
   }
 }
 
