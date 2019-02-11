@@ -140,10 +140,11 @@
     @media screen and (max-width: 992px) {
       bottom: 8px;
       left: 8px;
+      font-size: 2rem;
     }
   }
   .toggle-collection{
-    left: 53px;
+    left: 75px;
     bottom: 8px;
     position: fixed;
     z-index: 9000;
@@ -153,6 +154,9 @@
     border-radius: 100%;
     line-height: 0;
     cursor: pointer;
+    @media screen and (max-width: 992px) {
+      font-size: 2rem;
+    }
   }
   .toolbox {
     position: absolute;
@@ -492,10 +496,10 @@
                 opacity: 1;
               }
               @media screen and (max-width: 992px) {
-                width: 40px;
-                height: 40px;
+                width: 56px;
+                height: 56px;
                 margin-bottom: 0;
-                margin-right: 6px;
+                margin-right: 10px;
               }
               div {
                 line-height: 16px;
@@ -512,8 +516,8 @@
               border-radius: 50%;
               cursor: pointer;
               @media screen and (max-width: 992px) {
-                width: 40px;
-                height: 40px;
+                width: 56px;
+                height: 56px;
                 div{
                   #active-uses-count{
                     font-size: 1rem;

@@ -10645,11 +10645,12 @@ a.text-dark:focus {
   #projectpan .toolbox-show {
     bottom: 8px;
     left: 8px;
+    font-size: 2rem;
   }
 }
 
 #projectpan .toggle-collection {
-  left: 53px;
+  left: 75px;
   bottom: 8px;
   position: fixed;
   z-index: 9000;
@@ -10659,6 +10660,12 @@ a.text-dark:focus {
   border-radius: 100%;
   line-height: 0;
   cursor: pointer;
+}
+
+@media screen and (max-width: 992px) {
+  #projectpan .toggle-collection {
+    font-size: 2rem;
+  }
 }
 
 #projectpan .toolbox {
@@ -11079,10 +11086,10 @@ a.text-dark:focus {
 
 @media screen and (max-width: 992px) {
   #projectpan .main-box .activity-box .product-show .body .stats .if-pan {
-    width: 40px;
-    height: 40px;
+    width: 56px;
+    height: 56px;
     margin-bottom: 0;
-    margin-right: 6px;
+    margin-right: 10px;
   }
 }
 
@@ -11104,8 +11111,8 @@ a.text-dark:focus {
 
 @media screen and (max-width: 992px) {
   #projectpan .main-box .activity-box .product-show .body .stats .uses_count {
-    width: 40px;
-    height: 40px;
+    width: 56px;
+    height: 56px;
   }
 
   #projectpan .main-box .activity-box .product-show .body .stats .uses_count div #active-uses-count {

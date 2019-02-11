@@ -12,10 +12,10 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/frontend.js') }}" defer></script>
-    {{--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.bundle.min.js" defer></script>--}}
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}" defer></script>
 
     <!-- Fonts -->
-    <link href="{{ asset('css/boxicons.min.css') }}" rel="stylesheet">
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@1.9.1/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
