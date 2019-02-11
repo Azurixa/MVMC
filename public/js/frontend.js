@@ -3257,12 +3257,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("nav", { staticClass: "navbar navbar-expand-lg navbar-dark" }, [
-      _c(
-        "a",
-        { staticClass: "navbar-brand text-white", attrs: { href: "/" } },
-        [_vm._v("\n        MVMC\n    ")]
-      ),
+    return _c("nav", { staticClass: "navbar navbar-expand-lg navbar-light" }, [
+      _c("a", { staticClass: "navbar-brand", attrs: { href: "/" } }, [
+        _vm._v("\n        Make-up\n    ")
+      ]),
       _vm._v(" "),
       _c(
         "button",

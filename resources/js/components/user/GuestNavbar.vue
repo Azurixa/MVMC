@@ -1,7 +1,7 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand text-white" href="/">
-            MVMC
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="/">
+            Make-up
         </a>
         <button class="navbar-toggler" type="button" onclick="document.getElementById('navbarSupportedContent').toggleAttribute('show')">
             <span class="navbar-toggler-icon"></span>
