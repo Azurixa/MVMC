@@ -31,6 +31,9 @@
     position: fixed;
     right: -300px;
     top: 76px;
+    &.guest{
+      top: 60px !important;
+    }
     &[show] {
       position: absolute;
       top: 76px;

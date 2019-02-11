@@ -3280,7 +3280,7 @@ var staticRenderFns = [
       _c(
         "div",
         {
-          staticClass: "collapse navbar-collapse",
+          staticClass: "collapse navbar-collapse guest",
           attrs: { id: "navbarSupportedContent" }
         },
         [

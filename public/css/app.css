@@ -10525,6 +10525,10 @@ a.text-dark:focus {
     top: 76px;
   }
 
+  .navbar-collapse.guest {
+    top: 60px !important;
+  }
+
   .navbar-collapse[show] {
     position: absolute;
     top: 76px;
