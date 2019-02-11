@@ -10579,6 +10579,12 @@ a.text-dark:focus {
   color: black;
 }
 
+@media screen and (max-width: 992px) {
+  .level-progress .progress .progress-bar {
+    background: linear-gradient(to right, #93309c, magenta, yellow);
+  }
+}
+
 .badge {
   padding: 0.25rem 0.2rem;
 }
@@ -10686,6 +10692,12 @@ a.text-dark:focus {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+@media screen and (max-width: 992px) {
+  #projectpan .toolbox {
+    z-index: 11000;
+  }
+}
+
 #projectpan .toolbox .close-adding {
   position: absolute;
   top: 10px;
@@ -10697,6 +10709,16 @@ a.text-dark:focus {
   width: 100%;
   height: 100%;
   display: flex;
+}
+
+@media screen and (max-width: 992px) {
+  #projectpan .toolbox .inside {
+    padding: 1rem;
+  }
+
+  #projectpan .toolbox .inside .card {
+    width: 90% !important;
+  }
 }
 
 #projectpan .main-box {
@@ -10922,6 +10944,24 @@ a.text-dark:focus {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media screen and (max-width: 992px) {
+  #projectpan .main-box .activity-box .product-show .gallery .gallery-image.new div h2 {
+    margin-left: 1rem;
+    font-size: 1.1rem !important;
+    font-weight: 700;
+  }
+
+  #projectpan .main-box .activity-box .product-show .gallery .gallery-image.new div input {
+    margin-left: 1rem;
+    font-size: 0.7rem !important;
+  }
+
+  #projectpan .main-box .activity-box .product-show .gallery .gallery-image.new div button {
+    margin-left: 1rem !important;
+    font-size: 0.8rem !important;
+  }
 }
 
 #projectpan .main-box .activity-box .product-show .gallery .gallery-image.new button {
