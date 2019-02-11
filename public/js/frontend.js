@@ -493,6 +493,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -949,7 +954,6 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-//
 //
 //
 //
@@ -1669,6 +1673,8 @@ var render = function() {
   return _c("div", { attrs: { id: "projectpan" } }, [
     _vm._m(0),
     _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
     _c("div", { staticClass: "toolbox" }, [
       _c("div", { staticClass: "inside" }, [
         _c("div", { staticClass: "card p-2 m-auto w-50" }, [
@@ -1977,7 +1983,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row m-0 main-box" }, [
-      _c("div", { staticClass: "collection" }, [
+      _c("div", { staticClass: "collection", attrs: { id: "collection" } }, [
         _c("p", { staticClass: "header" }, [_vm._v("My collection")]),
         _vm._v(" "),
         _c(
@@ -2017,6 +2023,10 @@ var render = function() {
                       "span",
                       {
                         staticClass: "item",
+                        attrs: {
+                          onClick:
+                            "document.getElementById('collection').toggleAttribute('show')"
+                        },
                         on: {
                           click: function($event) {
                             _vm.showItem(product.id)
@@ -2517,7 +2527,7 @@ var render = function() {
             ],
             staticClass: "product-show-placeholder"
           },
-          [_vm._m(1)]
+          [_vm._m(2)]
         ),
         _vm._v(" "),
         _c(
@@ -3076,7 +3086,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._m(2)]
+                    [_vm._m(3)]
                   ),
                   _vm._v(" "),
                   _c(
@@ -3102,7 +3112,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._m(3)]
+                    [_vm._m(4)]
                   ),
                   _vm._v(" "),
                   _c(
@@ -3166,6 +3176,22 @@ var staticRenderFns = [
         }
       },
       [_c("i", { staticClass: "bx bx-plus m-0" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "toggle-collection d-block d-lg-none",
+        attrs: {
+          onClick:
+            "document.getElementById('collection').toggleAttribute('show')"
+        }
+      },
+      [_c("i", { staticClass: "bx bx-collection m-0" })]
     )
   },
   function() {
@@ -3244,11 +3270,8 @@ var staticRenderFns = [
           staticClass: "navbar-toggler",
           attrs: {
             type: "button",
-            "data-toggle": "collapse",
-            "data-target": "#navbarSupportedContent",
-            "aria-controls": "navbarSupportedContent",
-            "aria-expanded": "false",
-            "aria-label": "Toggle navigation"
+            onclick:
+              "document.getElementById('navbarSupportedContent').toggleAttribute('show')"
           }
         },
         [_c("span", { staticClass: "navbar-toggler-icon" })]
@@ -3497,7 +3520,7 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "level-progrss" }, [
+    _c("div", { staticClass: "level-progress" }, [
       _c(
         "div",
         {

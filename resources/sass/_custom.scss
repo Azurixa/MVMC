@@ -21,7 +21,7 @@
 
 // BS classes
 
-.navbar-collapse{
+.navbar-collapse {
   @media screen and (max-width: 992px) {
     display: block !important;
     background-color: black;
@@ -31,29 +31,30 @@
     position: fixed;
     right: -300px;
     top: 76px;
-    &[show]{
+    &[show] {
       position: absolute;
       top: 76px;
       right: 0;
       width: 100%;
     }
-    .navbar-nav{
-      .nav-item{
+    .navbar-nav {
+      .nav-item {
         text-align: left;
+        padding: 0.2rem 1rem;
       }
     }
   }
 }
 
-.navbar-brand{
+.navbar-brand {
   position: relative;
-  .expirience{
+  .expirience {
     font-size: 12px;
     position: absolute;
     left: 1px;
     bottom: -7px;
   }
-  .current-level{
+  .current-level {
     position: relative;
     top: -1px;
     background-color: $amount !important;
@@ -63,17 +64,17 @@
   }
 }
 
-.level-progrss{
+.level-progress {
   height: 16px;
   box-shadow: 0 4px 2px -2px gray;
   position: relative;
-  .progress{
+  .progress {
     height: 16px;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
     cursor: default;
-    .progress-bar{
+    .progress-bar {
       height: 16px;
       -webkit-border-radius: 0;
       -moz-border-radius: 0;
@@ -86,29 +87,29 @@
   }
 }
 
-.badge{
+.badge {
   padding: 0.25rem 0.2rem;
-  &.badge-info{
+  &.badge-info {
     background-color: $info;
     color: #0a0a0a;
   }
 }
 
-.progress{
+.progress {
   cursor: pointer;
   height: 1.5rem;
-  .progress-bar{
+  .progress-bar {
     background-color: $primary2;
   }
 }
 
-.navbar{
+.navbar {
   height: 60px;
   background-color: black;
 }
 
 // Makeup collection
-#projectpan{
+#projectpan {
   font-family: "Sarabun", sans-serif;
   width: 100%;
   height: calc(100vh - 78px);
@@ -117,11 +118,27 @@
   @media screen and (max-width: 992px) {
     height: calc(100vh - 76px);
   }
-  .toolbox-show{
-    position: absolute;
+  .toolbox-show {
+    position: fixed;
     bottom: 20px;
     left: 20px;
-    z-index: 2000;
+    z-index: 9000;
+    background-color: black;
+    color: white;
+    padding: 12px;
+    border-radius: 100%;
+    line-height: 0;
+    cursor: pointer;
+    @media screen and (max-width: 992px) {
+      bottom: 8px;
+      left: 8px;
+    }
+  }
+  .toggle-collection{
+    left: 50px;
+    bottom: 8px;
+    position: fixed;
+    z-index: 9000;
     background-color: black;
     color: white;
     padding: 12px;
@@ -129,12 +146,12 @@
     line-height: 0;
     cursor: pointer;
   }
-  .toolbox-what{
+  .toolbox-what {
     position: absolute;
     bottom: 70px;
     left: 20px;
     display: none;
-    p{
+    p {
       padding: .5rem 1rem;
       margin: 0;
       width: 140px;
@@ -142,16 +159,16 @@
       color: white;
       cursor: pointer;
       border-bottom: 1px solid white;
-      &:first-of-type{
+      &:first-of-type {
         border-radius: 12px 12px 0 0;
       }
-      &:last-of-type{
+      &:last-of-type {
         border-bottom: 0;
         border-radius: 0 0 12px 12px;
       }
     }
   }
-  .toolbox{
+  .toolbox {
     position: absolute;
     display: none;
     top: 0;
@@ -160,23 +177,23 @@
     overflow-y: scroll;
     z-index: 1000;
     background-color: rgba(0, 0, 0, .5);
-    .close-adding{
+    .close-adding {
       position: absolute;
       top: 10px;
       right: 10px;
       z-index: 8000;
     }
-    .inside{
+    .inside {
       width: 100%;
       height: 100%;
       display: flex;
     }
   }
 
-  .main-box{
+  .main-box {
     width: 100%;
     height: 100%;
-    .collection{
+    .collection {
       //background-image: linear-gradient(30deg, $primary1, $primary2);
       //background-color: $dark;
       background-image: linear-gradient(0deg, $dark, $darker);
@@ -186,34 +203,49 @@
       width: 19%;
       color: white;
       overflow-y: scroll;
-      .header{
+      @media screen and (max-width: 992px) {
+        z-index: 8000;
+        height: calc(100vh - 60px - 16px);
+        transition: 0.4s all;
+        position: fixed;
+        left: -1000px;
+        top: 76px;
+        width: 100%;
+        &[show] {
+          position: absolute;
+          top: 76px;
+          left: 0;
+          width: 100%;
+        }
+      }
+      .header {
         font-size: 1.5rem;
         font-weight: 700;
       }
-      > ul{
+      > ul {
         list-style: none;
         padding-inline-start: 0;
         font-size: 1.2rem;
         font-weight: 500;
         margin-bottom: 5rem;
-        ul{
+        ul {
           font-size: 0.9rem;
           font-weight: 100;
           display: none;
           list-style: none;
           padding-inline-start: 0.5rem;
           padding-bottom: 0.6rem;
-          .product-amount{
+          .product-amount {
             width: 10px;
             height: 19px;
             line-height: 0.9;
-            border:1px solid rgba(0, 0, 0, 0.85);
+            border: 1px solid rgba(0, 0, 0, 0.85);
             position: relative;
             bottom: 1px;
             display: inline-block;
             background-color: white;
             border-radius: 4px;
-            .amount{
+            .amount {
               transition: 0.5s all;
               position: absolute;
               border-radius: 3px;
@@ -223,110 +255,128 @@
               background-color: $amount;
             }
           }
-          .brand{
-            
+          .brand {
+
           }
-          .item{
+          .item {
             cursor: pointer;
           }
         }
-        ul[shown]{
+        ul[shown] {
           display: block !important;
         }
       }
     }
-    .activity-box{
+    .activity-box {
       width: 81%;
       height: 100%;
       overflow-y: scroll;
       position: relative;
-      .edit-box{
+      @media screen and (max-width: 992px) {
+        width: 100%;
+        h1{
+          font-size: 2rem;
+        }
+      }
+      .edit-box {
         width: 81%;
         height: calc(100% - 78px);
-        z-index: 1000;
+        z-index: 10000;
         background-color: #000000a0;
         position: fixed;
         display: flex;
         align-items: center;
         justify-content: center;
-        .close{
+        @media screen and (max-width: 992px) {
+          width: 100%;
+          .form{
+            width: 90% !important;
+          }
+        }
+        .close {
           position: absolute;
           right: 10px;
           top: 10px;
         }
-        .form{
+        .form {
           width: 50%;
         }
       }
-      .product-show-placeholder{
+      .product-show-placeholder {
         display: flex;
         width: 100%;
         height: 100%;
         align-items: center;
         justify-content: center;
         opacity: 0.5;
-        p{
+        p {
           text-align: center;
         }
       }
-      .product-show{
+      .product-show {
         width: 100%;
         padding: 1rem;
         margin: auto;
-        .bx-highlight{
+        @media screen and (max-width: 992px) {
+          padding: 0;
+        }
+        .bx-highlight {
           font-size: 0.7rem;
           padding: 0 0.3rem;
           color: gray;
           cursor: pointer;
-          &:hover{
+          &:hover {
             color: black;
           }
         }
-        .brand-box{
+        .brand-box {
           padding: 1rem;
-          .brand-logo{
+          .brand-logo {
             width: 100px;
             height: 100px;
             margin: auto;
             border-radius: 50%;
             background-color: black;
           }
-          p{
+          p {
             margin: 0;
             font-size: 24px;
           }
         }
-        .gallery{
+        .gallery {
           height: 60vh;
           width: 100%;
           position: relative;
           display: flex;
           background: #000;
-          > div{
+          @media screen and (max-width: 992px) {
+            height: 30vh;
+          }
+          > div {
             height: 100%;
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
           }
-          .gallery-image{
+          .gallery-image {
             position: relative;
             background-color: black;
             overflow: hidden;
             transition: all 0.3s;
             cursor: pointer;
-            &.new{
+            &.new {
               cursor: default;
               background-color: white;
               display: flex;
               align-items: center;
               justify-content: center;
-              button{
+              button {
                 border: 0;
                 background: 0;
                 cursor: pointer;
               }
             }
-            .date{
+            .date {
               position: absolute;
               bottom: 9px;
               left: 9px;
@@ -337,14 +387,14 @@
               transition: 0.3s all;
               cursor: default;
               border-radius: 6px;
-              &:hover{
+              &:hover {
                 opacity: 1;
               }
-              p{
+              p {
                 line-height: 13px;
               }
             }
-            .delete{
+            .delete {
               height: fit-content;
               line-height: 1px;
               display: block;
@@ -359,38 +409,52 @@
             }
           }
         }
-        .body{
-          .amount{
+        .body {
+          @media screen and (max-width: 992px) {
+            padding: 0.5rem;
+            h1{
+              font-size: 1.4rem;
+            }
+            h4{
+              font-size: 1.12rem;
+              font-weight: 700;
+            }
+          }
+          .amount {
             background-color: $amount;
             font-weight: 700;
             color: white;
           }
-          .dates{
+          .dates {
             font-size: 0.7rem;
           }
-          .rating{
+          .rating {
             cursor: default;
-            span{
+            span {
               margin-right: -6px;
               transition: all 0.3s;
               font-size: 1.3rem;
               cursor: pointer;
-              &.bx-star{
+              &.bx-star {
                 opacity: 0.7;
-                &:hover{
+                &:hover {
                   opacity: 1;
                 }
               }
-              &.bxs-star{
+              &.bxs-star {
                 opacity: 1;
               }
             }
           }
-          .stats{
+          .stats {
             position: fixed;
             bottom: 18px;
             right: 20px;
-            .if-pan{
+            @media screen and (max-width: 992px) {
+              bottom: 10px;
+              right: 10px;
+            }
+            .if-pan {
               width: 50px;
               height: 50px;
               display: flex;
@@ -403,21 +467,21 @@
               cursor: pointer;
               opacity: 0.85;
               transition: all 0.3s;
-              &:hover{
+              &:hover {
                 opacity: 1;
                 background-color: black;
                 color: white;
               }
-              &.true{
+              &.true {
                 background-color: black;
                 color: white;
                 opacity: 1;
               }
-              div{
+              div {
                 line-height: 16px;
               }
             }
-            .uses_count{
+            .uses_count {
               width: 50px;
               height: 50px;
               display: flex;
@@ -427,13 +491,13 @@
               color: white;
               border-radius: 50%;
               cursor: pointer;
-              div{
+              div {
                 line-height: 3px;
                 position: relative;
                 top: -5px;
               }
             }
-            > p{
+            > p {
               margin: 0;
               padding: 0;
               position: absolute;
@@ -443,7 +507,7 @@
               color: #f4fff3;
               font-size: 12px;
             }
-            span{
+            span {
               position: absolute;
               bottom: 9px;
               right: 9px;
@@ -459,7 +523,8 @@
     }
   }
 
-  .category{
+  .category {
     cursor: pointer;
   }
+
 }

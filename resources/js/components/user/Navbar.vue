@@ -29,7 +29,7 @@
             </div>
         </nav>
 
-        <div class="level-progrss">
+        <div class="level-progress">
             <div class="progress" data-toggle="tooltip"
                  data-placement="bottom" title="Current experience / next level">
                 <div class="progress-bar" :style="{'width': user.exp/user.exp_next * 100 + '%'}" role="progressbar"

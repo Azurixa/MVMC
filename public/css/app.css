@@ -10534,6 +10534,7 @@ a.text-dark:focus {
 
   .navbar-collapse .navbar-nav .nav-item {
     text-align: left;
+    padding: 0.2rem 1rem;
   }
 }
 
@@ -10557,19 +10558,19 @@ a.text-dark:focus {
   margin-right: 2px;
 }
 
-.level-progrss {
+.level-progress {
   height: 16px;
   box-shadow: 0 4px 2px -2px gray;
   position: relative;
 }
 
-.level-progrss .progress {
+.level-progress .progress {
   height: 16px;
   border-radius: 0;
   cursor: default;
 }
 
-.level-progrss .progress .progress-bar {
+.level-progress .progress .progress-bar {
   height: 16px;
   border-radius: 0;
   font-size: 11px;
@@ -10616,10 +10617,30 @@ a.text-dark:focus {
 }
 
 #projectpan .toolbox-show {
-  position: absolute;
+  position: fixed;
   bottom: 20px;
   left: 20px;
-  z-index: 2000;
+  z-index: 9000;
+  background-color: black;
+  color: white;
+  padding: 12px;
+  border-radius: 100%;
+  line-height: 0;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 992px) {
+  #projectpan .toolbox-show {
+    bottom: 8px;
+    left: 8px;
+  }
+}
+
+#projectpan .toggle-collection {
+  left: 50px;
+  bottom: 8px;
+  position: fixed;
+  z-index: 9000;
   background-color: black;
   color: white;
   padding: 12px;
@@ -10692,6 +10713,25 @@ a.text-dark:focus {
   overflow-y: scroll;
 }
 
+@media screen and (max-width: 992px) {
+  #projectpan .main-box .collection {
+    z-index: 8000;
+    height: calc(100vh - 60px - 16px);
+    transition: 0.4s all;
+    position: fixed;
+    left: -1000px;
+    top: 76px;
+    width: 100%;
+  }
+
+  #projectpan .main-box .collection[show] {
+    position: absolute;
+    top: 76px;
+    left: 0;
+    width: 100%;
+  }
+}
+
 #projectpan .main-box .collection .header {
   font-size: 1.5rem;
   font-weight: 700;
@@ -10753,15 +10793,35 @@ a.text-dark:focus {
   position: relative;
 }
 
+@media screen and (max-width: 992px) {
+  #projectpan .main-box .activity-box {
+    width: 100%;
+  }
+
+  #projectpan .main-box .activity-box h1 {
+    font-size: 2rem;
+  }
+}
+
 #projectpan .main-box .activity-box .edit-box {
   width: 81%;
   height: calc(100% - 78px);
-  z-index: 1000;
+  z-index: 10000;
   background-color: #000000a0;
   position: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media screen and (max-width: 992px) {
+  #projectpan .main-box .activity-box .edit-box {
+    width: 100%;
+  }
+
+  #projectpan .main-box .activity-box .edit-box .form {
+    width: 90% !important;
+  }
 }
 
 #projectpan .main-box .activity-box .edit-box .close {
@@ -10791,6 +10851,12 @@ a.text-dark:focus {
   width: 100%;
   padding: 1rem;
   margin: auto;
+}
+
+@media screen and (max-width: 992px) {
+  #projectpan .main-box .activity-box .product-show {
+    padding: 0;
+  }
 }
 
 #projectpan .main-box .activity-box .product-show .bx-highlight {
@@ -10827,6 +10893,12 @@ a.text-dark:focus {
   position: relative;
   display: flex;
   background: #000;
+}
+
+@media screen and (max-width: 992px) {
+  #projectpan .main-box .activity-box .product-show .gallery {
+    height: 30vh;
+  }
 }
 
 #projectpan .main-box .activity-box .product-show .gallery > div {
@@ -10895,6 +10967,21 @@ a.text-dark:focus {
   color: black;
 }
 
+@media screen and (max-width: 992px) {
+  #projectpan .main-box .activity-box .product-show .body {
+    padding: 0.5rem;
+  }
+
+  #projectpan .main-box .activity-box .product-show .body h1 {
+    font-size: 1.4rem;
+  }
+
+  #projectpan .main-box .activity-box .product-show .body h4 {
+    font-size: 1.12rem;
+    font-weight: 700;
+  }
+}
+
 #projectpan .main-box .activity-box .product-show .body .amount {
   background-color: #8fe03b;
   font-weight: 700;
@@ -10932,6 +11019,13 @@ a.text-dark:focus {
   position: fixed;
   bottom: 18px;
   right: 20px;
+}
+
+@media screen and (max-width: 992px) {
+  #projectpan .main-box .activity-box .product-show .body .stats {
+    bottom: 10px;
+    right: 10px;
+  }
 }
 
 #projectpan .main-box .activity-box .product-show .body .stats .if-pan {

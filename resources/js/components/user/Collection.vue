@@ -7,6 +7,11 @@
             <i class="bx bx-plus m-0"></i>
         </div>
 
+        <!-- Mobile collection toggle button -->
+        <div onClick="document.getElementById('collection').toggleAttribute('show')" class="toggle-collection d-block d-lg-none">
+            <i class='bx bx-collection m-0'></i>
+        </div>
+
         <!-- Box with forms to adding new stuff -->
         <div class="toolbox">
             <div class="inside">
@@ -77,7 +82,7 @@
 
         <div class="row m-0 main-box">
 
-            <div class="collection">
+            <div class="collection" id="collection">
                 <p class="header">My collection</p>
                 <ul>
                     <li v-for="item in allProducts">
@@ -87,7 +92,7 @@
                                 <span class="product-amount">&nbsp;&nbsp;<span class="amount"
                                                                                :style="{height: product.remaining_amount + '%'}"></span></span>
                                 <span class="brand badge badge-info">{{product.brand}}</span> <span
-                                    @click="showItem(product.id)"
+                                    @click="showItem(product.id)" onClick="document.getElementById('collection').toggleAttribute('show')"
                                     class="item">
                                     {{product.name}}
                                 </span>
