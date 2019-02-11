@@ -24,7 +24,7 @@
 .navbar-collapse {
   @media screen and (max-width: 992px) {
     display: block !important;
-    background-color: black;
+    background-color: white;
     z-index: 900000;
     height: calc(100vh - 60px - 16px);
     transition: 0.7s all;

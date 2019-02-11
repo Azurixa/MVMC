@@ -10523,7 +10523,7 @@ a.text-dark:focus {
 @media screen and (max-width: 992px) {
   .navbar-collapse {
     display: block !important;
-    background-color: black;
+    background-color: white;
     z-index: 900000;
     height: calc(100vh - 60px - 16px);
     transition: 0.7s all;
