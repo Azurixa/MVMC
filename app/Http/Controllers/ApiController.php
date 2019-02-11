@@ -319,6 +319,8 @@ class ApiController extends Controller
                     if ($index == (count($productPhotos) - 1) && count($productPhotos) > 1) {
                         $newPhotos = substr($newPhotos, 0, (strlen($newPhotos) - 1));
                     }
+                    $name = explode(':', $photo)[0];
+                    Storage::delete('public/products/'.$name);
                 }
             }
         }
