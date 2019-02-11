@@ -1,6 +1,11 @@
 
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Sarabun');
+@font-face {
+  font-family: 'Sarabun';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/Sunburn.ttf') format('truetype');
+}
 
 // Variables
 @import 'variables';

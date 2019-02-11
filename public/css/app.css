@@ -1,4 +1,11 @@
-@import url(https://fonts.googleapis.com/css?family=Sarabun);@charset "UTF-8";
+@charset "UTF-8";
+
+@font-face {
+  font-family: "Sarabun";
+  font-style: normal;
+  font-weight: 400;
+  src: url(/fonts/Sunburn.ttf?b3fb10691b5bc109a45cde49ad330cc9) format("truetype");
+}
 
 /*!
  * Bootstrap v4.2.1 (https://getbootstrap.com/)
@@ -72,7 +79,7 @@ body {
   line-height: 1.6;
   color: #212529;
   text-align: left;
-  background-color: #E0F7FA;
+  background-color: #F6F6F6;
 }
 
 [tabindex="-1"]:focus {
@@ -508,7 +515,7 @@ mark,
 
 .img-thumbnail {
   padding: 0.25rem;
-  background-color: #E0F7FA;
+  background-color: #F6F6F6;
   border: 1px solid #dee2e6;
   border-radius: 0.25rem;
   max-width: 100%;
@@ -1631,7 +1638,7 @@ pre code {
 }
 
 .table .table {
-  background-color: #E0F7FA;
+  background-color: #F6F6F6;
 }
 
 .table-sm th,
@@ -4110,15 +4117,15 @@ input[type=button].btn-block {
 }
 
 .custom-range:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 1px #E0F7FA, 0 0 0 0.2rem rgba(255, 168, 203, 0.25);
+  box-shadow: 0 0 0 1px #F6F6F6, 0 0 0 0.2rem rgba(255, 168, 203, 0.25);
 }
 
 .custom-range:focus::-moz-range-thumb {
-  box-shadow: 0 0 0 1px #E0F7FA, 0 0 0 0.2rem rgba(255, 168, 203, 0.25);
+  box-shadow: 0 0 0 1px #F6F6F6, 0 0 0 0.2rem rgba(255, 168, 203, 0.25);
 }
 
 .custom-range:focus::-ms-thumb {
-  box-shadow: 0 0 0 1px #E0F7FA, 0 0 0 0.2rem rgba(255, 168, 203, 0.25);
+  box-shadow: 0 0 0 1px #F6F6F6, 0 0 0 0.2rem rgba(255, 168, 203, 0.25);
 }
 
 .custom-range::-moz-focus-outer {
@@ -4318,8 +4325,8 @@ input[type=button].btn-block {
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
   color: #495057;
-  background-color: #E0F7FA;
-  border-color: #dee2e6 #dee2e6 #E0F7FA;
+  background-color: #F6F6F6;
+  border-color: #dee2e6 #dee2e6 #F6F6F6;
 }
 
 .nav-tabs .dropdown-menu {
@@ -10519,9 +10526,10 @@ a.text-dark:focus {
     background-color: black;
     z-index: 900000;
     height: calc(100vh - 60px - 16px);
-    transition: 0.4s all;
+    transition: 0.7s all;
     position: fixed;
-    right: -300px;
+    right: -100vh;
+    width: 100%;
     top: 76px;
   }
 
@@ -10533,7 +10541,6 @@ a.text-dark:focus {
     position: absolute;
     top: 76px;
     right: 0;
-    width: 100%;
   }
 
   .navbar-collapse .navbar-nav .nav-item {
@@ -10556,7 +10563,7 @@ a.text-dark:focus {
 .navbar-brand .current-level {
   position: relative;
   top: -1px;
-  background-color: #8fe03b !important;
+  background-color: #e71d43 !important;
   font-size: 1rem;
   line-height: 15px;
   margin-right: 2px;
@@ -10564,8 +10571,9 @@ a.text-dark:focus {
 
 .level-progress {
   height: 16px;
-  box-shadow: 0 4px 2px -2px gray;
+  box-shadow: 0 7px 15px -4px black;
   position: relative;
+  z-index: 15000;
 }
 
 .level-progress .progress {
@@ -10579,14 +10587,8 @@ a.text-dark:focus {
   border-radius: 0;
   font-size: 11px;
   font-weight: 800;
-  background: linear-gradient(to right, #93309c, magenta, yellow, orange, magenta, #93309c);
+  background-color: #e71d43;
   color: black;
-}
-
-@media screen and (max-width: 992px) {
-  .level-progress .progress .progress-bar {
-    background: linear-gradient(to right, #93309c, magenta, yellow);
-  }
 }
 
 .badge {
@@ -10609,7 +10611,7 @@ a.text-dark:focus {
 
 .navbar {
   height: 60px;
-  background-color: black;
+  background-color: #ffffff;
 }
 
 #projectpan {
@@ -10631,7 +10633,7 @@ a.text-dark:focus {
   bottom: 20px;
   left: 20px;
   z-index: 9000;
-  background-color: black;
+  background-color: #e71d43;
   color: white;
   padding: 12px;
   border-radius: 100%;
@@ -10647,42 +10649,16 @@ a.text-dark:focus {
 }
 
 #projectpan .toggle-collection {
-  left: 50px;
+  left: 53px;
   bottom: 8px;
   position: fixed;
   z-index: 9000;
-  background-color: black;
+  background-color: #e71d43;
   color: white;
   padding: 12px;
   border-radius: 100%;
   line-height: 0;
   cursor: pointer;
-}
-
-#projectpan .toolbox-what {
-  position: absolute;
-  bottom: 70px;
-  left: 20px;
-  display: none;
-}
-
-#projectpan .toolbox-what p {
-  padding: 0.5rem 1rem;
-  margin: 0;
-  width: 140px;
-  background-image: linear-gradient(30deg, #F24370, #e539b8);
-  color: white;
-  cursor: pointer;
-  border-bottom: 1px solid white;
-}
-
-#projectpan .toolbox-what p:first-of-type {
-  border-radius: 12px 12px 0 0;
-}
-
-#projectpan .toolbox-what p:last-of-type {
-  border-bottom: 0;
-  border-radius: 0 0 12px 12px;
 }
 
 #projectpan .toolbox {
@@ -10731,7 +10707,7 @@ a.text-dark:focus {
 }
 
 #projectpan .main-box .collection {
-  background-image: linear-gradient(0deg, #F24370, #7205FC);
+  background: #ff4668;
   padding: 0.5rem 1rem;
   height: 100%;
   width: 19%;
@@ -10743,18 +10719,17 @@ a.text-dark:focus {
   #projectpan .main-box .collection {
     z-index: 8000;
     height: calc(100vh - 60px - 16px);
-    transition: 0.4s all;
+    transition: 0.7s all;
     position: fixed;
-    left: -1000px;
-    top: 76px;
+    left: -200vh;
     width: 100%;
+    top: 76px;
   }
 
   #projectpan .main-box .collection[show] {
     position: absolute;
     top: 76px;
     left: 0;
-    width: 100%;
   }
 }
 
@@ -10769,7 +10744,7 @@ a.text-dark:focus {
           padding-inline-start: 0;
   font-size: 1.2rem;
   font-weight: 500;
-  margin-bottom: 5rem;
+  margin-bottom: 3.8rem;
 }
 
 #projectpan .main-box .collection > ul ul {
@@ -10801,7 +10776,7 @@ a.text-dark:focus {
   left: 0;
   bottom: 0;
   width: 103%;
-  background-color: #8fe03b;
+  background-color: #e71d43;
 }
 
 #projectpan .main-box .collection > ul ul .item {
@@ -10882,6 +10857,7 @@ a.text-dark:focus {
 @media screen and (max-width: 992px) {
   #projectpan .main-box .activity-box .product-show {
     padding: 0;
+    padding-bottom: 4.6rem;
   }
 }
 
@@ -10918,12 +10894,12 @@ a.text-dark:focus {
   width: 100%;
   position: relative;
   display: flex;
-  background: #000;
+  background: black;
 }
 
 @media screen and (max-width: 992px) {
   #projectpan .main-box .activity-box .product-show .gallery {
-    height: 30vh;
+    height: 35vh;
   }
 }
 
@@ -11027,7 +11003,7 @@ a.text-dark:focus {
 }
 
 #projectpan .main-box .activity-box .product-show .body .amount {
-  background-color: #8fe03b;
+  background-color: #e71d43;
   font-weight: 700;
   color: white;
 }
@@ -11067,6 +11043,7 @@ a.text-dark:focus {
 
 @media screen and (max-width: 992px) {
   #projectpan .main-box .activity-box .product-show .body .stats {
+    display: flex;
     bottom: 10px;
     right: 10px;
   }
@@ -11089,14 +11066,23 @@ a.text-dark:focus {
 
 #projectpan .main-box .activity-box .product-show .body .stats .if-pan:hover {
   opacity: 1;
-  background-color: black;
+  background-color: #e71d43;
   color: white;
 }
 
 #projectpan .main-box .activity-box .product-show .body .stats .if-pan.true {
-  background-color: black;
+  background-color: #e71d43;
   color: white;
   opacity: 1;
+}
+
+@media screen and (max-width: 992px) {
+  #projectpan .main-box .activity-box .product-show .body .stats .if-pan {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0;
+    margin-right: 6px;
+  }
 }
 
 #projectpan .main-box .activity-box .product-show .body .stats .if-pan div {
@@ -11109,10 +11095,25 @@ a.text-dark:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: black;
+  background-color: #e71d43;
   color: white;
   border-radius: 50%;
   cursor: pointer;
+}
+
+@media screen and (max-width: 992px) {
+  #projectpan .main-box .activity-box .product-show .body .stats .uses_count {
+    width: 40px;
+    height: 40px;
+  }
+
+  #projectpan .main-box .activity-box .product-show .body .stats .uses_count div #active-uses-count {
+    font-size: 1rem;
+  }
+
+  #projectpan .main-box .activity-box .product-show .body .stats .uses_count div small {
+    font-size: 0.7rem;
+  }
 }
 
 #projectpan .main-box .activity-box .product-show .body .stats .uses_count div {

@@ -27,9 +27,10 @@
     background-color: black;
     z-index: 900000;
     height: calc(100vh - 60px - 16px);
-    transition: 0.4s all;
+    transition: 0.7s all;
     position: fixed;
-    right: -300px;
+    right: -100vh;
+    width: 100%;
     top: 76px;
     &.guest{
       top: 60px !important;
@@ -38,7 +39,6 @@
       position: absolute;
       top: 76px;
       right: 0;
-      width: 100%;
     }
     .navbar-nav {
       .nav-item {
@@ -69,8 +69,9 @@
 
 .level-progress {
   height: 16px;
-  box-shadow: 0 4px 2px -2px gray;
+  box-shadow: 0 7px 15px -4px black;
   position: relative;
+  z-index: 15000;
   .progress {
     height: 16px;
     -webkit-border-radius: 0;
@@ -84,10 +85,11 @@
       border-radius: 0;
       font-size: 11px;
       font-weight: 800;
-      background: linear-gradient(to right, #93309c, magenta, yellow, orange, magenta, #93309c);
+      //background: linear-gradient(to right, #93309c, magenta, yellow, orange, magenta, #93309c);
+      background-color: $button;
       color: black;
       @media screen and (max-width: 992px) {
-        background: linear-gradient(to right, #93309c, magenta, yellow);
+        //background: linear-gradient(to right, #93309c, magenta, yellow);
       }
     }
   }
@@ -111,7 +113,7 @@
 
 .navbar {
   height: 60px;
-  background-color: black;
+  background-color: #ffffff;
 }
 
 // Makeup collection
@@ -129,7 +131,7 @@
     bottom: 20px;
     left: 20px;
     z-index: 9000;
-    background-color: black;
+    background-color: $button;
     color: white;
     padding: 12px;
     border-radius: 100%;
@@ -141,38 +143,16 @@
     }
   }
   .toggle-collection{
-    left: 50px;
+    left: 53px;
     bottom: 8px;
     position: fixed;
     z-index: 9000;
-    background-color: black;
+    background-color: $button;
     color: white;
     padding: 12px;
     border-radius: 100%;
     line-height: 0;
     cursor: pointer;
-  }
-  .toolbox-what {
-    position: absolute;
-    bottom: 70px;
-    left: 20px;
-    display: none;
-    p {
-      padding: .5rem 1rem;
-      margin: 0;
-      width: 140px;
-      background-image: linear-gradient(30deg, $primary1, $primary2);
-      color: white;
-      cursor: pointer;
-      border-bottom: 1px solid white;
-      &:first-of-type {
-        border-radius: 12px 12px 0 0;
-      }
-      &:last-of-type {
-        border-bottom: 0;
-        border-radius: 0 0 12px 12px;
-      }
-    }
   }
   .toolbox {
     position: absolute;
@@ -211,8 +191,8 @@
     .collection {
       //background-image: linear-gradient(30deg, $primary1, $primary2);
       //background-color: $dark;
-      background-image: linear-gradient(0deg, $dark, $darker);
-      //background: #009B77;
+      //background-image: linear-gradient(0deg, $dark, $darker);
+      background: #ff4668;
       padding: .5rem 1rem;
       height: 100%;
       width: 19%;
@@ -221,16 +201,15 @@
       @media screen and (max-width: 992px) {
         z-index: 8000;
         height: calc(100vh - 60px - 16px);
-        transition: 0.4s all;
+        transition: 0.7s all;
         position: fixed;
-        left: -1000px;
-        top: 76px;
+        left: -200vh;
         width: 100%;
+        top: 76px;
         &[show] {
           position: absolute;
           top: 76px;
           left: 0;
-          width: 100%;
         }
       }
       .header {
@@ -242,7 +221,7 @@
         padding-inline-start: 0;
         font-size: 1.2rem;
         font-weight: 500;
-        margin-bottom: 5rem;
+        margin-bottom: 3.8rem;
         ul {
           font-size: 0.9rem;
           font-weight: 100;
@@ -334,6 +313,7 @@
         margin: auto;
         @media screen and (max-width: 992px) {
           padding: 0;
+          padding-bottom: 4.6rem;
         }
         .bx-highlight {
           font-size: 0.7rem;
@@ -363,9 +343,9 @@
           width: 100%;
           position: relative;
           display: flex;
-          background: #000;
+          background: black;
           @media screen and (max-width: 992px) {
-            height: 30vh;
+            height: 35vh;
           }
           > div {
             height: 100%;
@@ -483,6 +463,7 @@
             bottom: 18px;
             right: 20px;
             @media screen and (max-width: 992px) {
+              display: flex;
               bottom: 10px;
               right: 10px;
             }
@@ -501,13 +482,19 @@
               transition: all 0.3s;
               &:hover {
                 opacity: 1;
-                background-color: black;
+                background-color: $button;
                 color: white;
               }
               &.true {
-                background-color: black;
+                background-color: $button;
                 color: white;
                 opacity: 1;
+              }
+              @media screen and (max-width: 992px) {
+                width: 40px;
+                height: 40px;
+                margin-bottom: 0;
+                margin-right: 6px;
               }
               div {
                 line-height: 16px;
@@ -519,10 +506,22 @@
               display: flex;
               align-items: center;
               justify-content: center;
-              background-color: black;
+              background-color: $button;
               color: white;
               border-radius: 50%;
               cursor: pointer;
+              @media screen and (max-width: 992px) {
+                width: 40px;
+                height: 40px;
+                div{
+                  #active-uses-count{
+                    font-size: 1rem;
+                  }
+                  small{
+                    font-size: 0.7rem;
+                  }
+                }
+              }
               div {
                 line-height: 3px;
                 position: relative;

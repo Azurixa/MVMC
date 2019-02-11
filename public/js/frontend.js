@@ -3463,8 +3463,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("nav", { staticClass: "navbar navbar-expand-lg navbar-dark" }, [
-      _c("a", { staticClass: "navbar-brand text-white d-lg-none" }, [
+    _c("nav", { staticClass: "navbar navbar-expand-lg navbar-light" }, [
+      _c("a", { staticClass: "navbar-brand d-lg-none" }, [
         _c(
           "span",
           {
@@ -3492,27 +3492,21 @@ var render = function() {
           _vm._m(1),
           _vm._v(" "),
           _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-            _c(
-              "a",
-              {
-                staticClass: "navbar-brand text-white ml-auto d-none d-lg-block"
-              },
-              [
-                _c(
-                  "span",
-                  {
-                    staticClass: "badge badge-info current-level",
-                    attrs: {
-                      "data-toggle": "tooltip",
-                      "data-placement": "bottom",
-                      title: "Current makeup level"
-                    }
-                  },
-                  [_vm._v(_vm._s(_vm.user.level))]
-                ),
-                _vm._v(" " + _vm._s(_vm.user.name) + "\n                ")
-              ]
-            ),
+            _c("a", { staticClass: "navbar-brand ml-auto d-none d-lg-block" }, [
+              _c(
+                "span",
+                {
+                  staticClass: "badge badge-info current-level",
+                  attrs: {
+                    "data-toggle": "tooltip",
+                    "data-placement": "bottom",
+                    title: "Current makeup level"
+                  }
+                },
+                [_vm._v(_vm._s(_vm.user.level))]
+              ),
+              _vm._v(" " + _vm._s(_vm.user.name) + "\n                ")
+            ]),
             _vm._v(" "),
             _vm._m(2)
           ])

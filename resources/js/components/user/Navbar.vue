@@ -1,8 +1,8 @@
 <template>
     <div>
 
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <a class="navbar-brand text-white d-lg-none">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand d-lg-none">
                         <span class="badge badge-info current-level" data-toggle="tooltip"
                               data-placement="bottom" title="Current makeup level">{{user.level}}</span> {{user.name}}
             </a>
@@ -18,7 +18,7 @@
                 </ul>
 
                 <ul class="navbar-nav ml-auto">
-                    <a class="navbar-brand text-white ml-auto d-none d-lg-block">
+                    <a class="navbar-brand ml-auto d-none d-lg-block">
                         <span class="badge badge-info current-level" data-toggle="tooltip"
                       data-placement="bottom" title="Current makeup level">{{user.level}}</span> {{user.name}}
                     </a>
