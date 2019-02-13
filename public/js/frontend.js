@@ -513,6 +513,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -2585,386 +2595,149 @@ var render = function() {
             staticClass: "product-show"
           },
           [
-            _c(
-              "div",
-              { staticClass: "gallery" },
-              [
-                _vm._l(_vm.productShow.productData.photos, function(
-                  photo,
-                  index
-                ) {
-                  return _c(
-                    "div",
-                    {
-                      staticClass: "gallery-image",
-                      style: {
-                        "background-image": "url(/" + photo.image + ")"
-                      },
-                      attrs: { onclick: "gallery(this)" }
-                    },
-                    [
-                      _c("div", { staticClass: "date" }, [
-                        _c("p", { staticClass: "m-0" }, [
-                          _vm._v(_vm._s(photo.date))
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "delete close",
-                          on: {
-                            click: function($event) {
-                              _vm.removePhoto(
-                                _vm.productShow.productData.photos.length -
-                                  index -
-                                  1
-                              )
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "bx bxs-trash" })]
-                      )
-                    ]
-                  )
-                }),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "gallery-image new",
-                    attrs: { onclick: "gallery(this)" }
-                  },
-                  [
-                    _c("div", [
-                      _c("h2", [_vm._v("Add new photo")]),
-                      _vm._v(" "),
-                      _c("div", {}, [
-                        _c("input", {
-                          ref: "file",
-                          staticClass: "mb-3",
-                          attrs: { type: "file", id: "file" },
-                          on: {
-                            change: function($event) {
-                              _vm.handleFileUpload()
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          on: {
-                            click: function($event) {
-                              _vm.addPhoto()
-                            }
-                          }
-                        },
-                        [
-                          _c("i", { staticClass: "bx bx-plus" }),
-                          _vm._v(" Add photo")
-                        ]
-                      )
-                    ])
-                  ]
-                )
-              ],
-              2
-            ),
-            _vm._v(" "),
             _c("div", { staticClass: "body" }, [
               _c("div", { staticClass: "row p-0 m-0" }, [
-                _c("div", { staticClass: "col-12 p-0" }, [
+                _c("div", { staticClass: "col-lg-8 p-0" }, [
                   _c(
                     "div",
-                    {
-                      staticClass: "progress mt-1",
-                      attrs: {
-                        "data-toggle": "tooltip",
-                        "data-placement": "bottom",
-                        title: "Change remaining amount"
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.showEdit("remaining_amount")
-                        }
-                      }
-                    },
+                    { staticClass: "gallery m-2" },
                     [
+                      _vm._l(_vm.productShow.productData.photos, function(
+                        photo,
+                        index
+                      ) {
+                        return _c(
+                          "div",
+                          {
+                            staticClass: "gallery-image",
+                            style: {
+                              "background-image": "url(/" + photo.image + ")"
+                            },
+                            attrs: { onclick: "gallery(this)" }
+                          },
+                          [
+                            _c("div", { staticClass: "date" }, [
+                              _c("p", { staticClass: "m-0" }, [
+                                _vm._v(_vm._s(photo.date))
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "delete close",
+                                on: {
+                                  click: function($event) {
+                                    _vm.removePhoto(
+                                      _vm.productShow.productData.photos
+                                        .length -
+                                        index -
+                                        1
+                                    )
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "bx bxs-trash" })]
+                            )
+                          ]
+                        )
+                      }),
+                      _vm._v(" "),
                       _c(
                         "div",
                         {
-                          staticClass: "progress-bar amount",
-                          style: {
-                            width:
-                              _vm.productShow.productData.remaining_amount + "%"
-                          },
-                          attrs: { role: "progressbar" }
+                          staticClass: "gallery-image new",
+                          attrs: { onclick: "gallery(this)" }
                         },
                         [
-                          _vm._v(
-                            "\n                                    " +
-                              _vm._s(
-                                _vm.productShow.productData.remaining_amount
-                              ) +
-                              " %\n                                "
-                          )
+                          _c("div", [
+                            _c("h2", [_vm._v("Add new photo")]),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c("input", {
+                                ref: "file",
+                                staticClass: "mb-3",
+                                attrs: { type: "file", id: "file" },
+                                on: {
+                                  change: function($event) {
+                                    _vm.handleFileUpload()
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                on: {
+                                  click: function($event) {
+                                    _vm.addPhoto()
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "bx bx-plus" }),
+                                _vm._v(" Add photo")
+                              ]
+                            )
+                          ])
                         ]
                       )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-lg-8 px-0 pt-3" }, [
-                  _c("h1", { staticClass: "m-0" }, [
-                    _vm._v(
-                      "\n                                " +
-                        _vm._s(_vm.productShow.productData.brand.name) +
-                        "\n                                "
-                    ),
-                    _c("strong", [
-                      _vm._v(_vm._s(_vm.productShow.productData.name))
-                    ]),
-                    _vm._v(" "),
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "p-0 m-2" }, [
                     _c(
-                      "span",
+                      "div",
                       {
+                        staticClass: "progress mt-1",
                         attrs: {
                           "data-toggle": "tooltip",
                           "data-placement": "bottom",
-                          title: "Change product name"
+                          title: "Change remaining amount"
                         },
                         on: {
                           click: function($event) {
-                            _vm.showEdit("name")
+                            _vm.showEdit("remaining_amount")
                           }
                         }
                       },
-                      [_c("i", { staticClass: "bx bx-highlight" })]
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "progress-bar amount",
+                            style: {
+                              width:
+                                _vm.productShow.productData.remaining_amount +
+                                "%"
+                            },
+                            attrs: { role: "progressbar" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(
+                                  _vm.productShow.productData.remaining_amount
+                                ) +
+                                " %\n                                    "
+                            )
+                          ]
+                        )
+                      ]
                     )
                   ]),
                   _vm._v(" "),
-                  _c("p", { staticClass: "rating mb-1" }, [
-                    _c("span", {
-                      staticClass: "bx",
-                      class: {
-                        "bxs-star animated tada":
-                          _vm.productShow.productData.rating > 0,
-                        "bx-star": _vm.productShow.productData.rating < 1
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.rateProduct(1)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", {
-                      staticClass: "bx",
-                      class: {
-                        "bxs-star animated tada":
-                          _vm.productShow.productData.rating > 1,
-                        "bx-star": _vm.productShow.productData.rating < 2
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.rateProduct(2)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", {
-                      staticClass: "bx",
-                      class: {
-                        "bxs-star animated tada":
-                          _vm.productShow.productData.rating > 2,
-                        "bx-star": _vm.productShow.productData.rating < 3
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.rateProduct(3)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", {
-                      staticClass: "bx",
-                      class: {
-                        "bxs-star animated tada":
-                          _vm.productShow.productData.rating > 3,
-                        "bx-star": _vm.productShow.productData.rating < 4
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.rateProduct(4)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", {
-                      staticClass: "bx",
-                      class: {
-                        "bxs-star animated tada":
-                          _vm.productShow.productData.rating > 4,
-                        "bx-star": _vm.productShow.productData.rating < 5
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.rateProduct(5)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", {
-                      staticClass: "bx",
-                      class: {
-                        "bxs-star animated tada":
-                          _vm.productShow.productData.rating > 5,
-                        "bx-star": _vm.productShow.productData.rating < 6
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.rateProduct(6)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", {
-                      staticClass: "bx",
-                      class: {
-                        "bxs-star animated tada":
-                          _vm.productShow.productData.rating > 6,
-                        "bx-star": _vm.productShow.productData.rating < 7
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.rateProduct(7)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", {
-                      staticClass: "bx",
-                      class: {
-                        "bxs-star animated tada":
-                          _vm.productShow.productData.rating > 7,
-                        "bx-star": _vm.productShow.productData.rating < 8
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.rateProduct(8)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", {
-                      staticClass: "bx",
-                      class: {
-                        "bxs-star animated tada":
-                          _vm.productShow.productData.rating > 8,
-                        "bx-star": _vm.productShow.productData.rating < 9
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.rateProduct(9)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", {
-                      staticClass: "bx",
-                      class: {
-                        "bxs-star animated tada":
-                          _vm.productShow.productData.rating > 9,
-                        "bx-star": _vm.productShow.productData.rating < 10
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.rateProduct(10)
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "p",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value:
-                            _vm.productShow.productData.bought_at ===
-                            "01.01.1970",
-                          expression:
-                            "productShow.productData.bought_at === '01.01.1970'"
-                        }
-                      ],
-                      staticClass: "dates"
-                    },
-                    [
+                  _c("div", { staticClass: "m-2 card p-3" }, [
+                    _c("h1", [
                       _vm._v(
-                        "\n                                Add bought date\n                                "
+                        "\n                                    " +
+                          _vm._s(_vm.productShow.productData.brand.name) +
+                          "\n                                    "
                       ),
-                      _c(
-                        "span",
-                        {
-                          attrs: {
-                            "data-toggle": "tooltip",
-                            "data-placement": "bottom",
-                            title: "Change bought date"
-                          },
-                          on: {
-                            click: function($event) {
-                              _vm.showEdit("bought_at")
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "bx bx-highlight" })]
-                      ),
-                      _vm._v(
-                        "\n                                Add expire months\n                                "
-                      ),
-                      _c(
-                        "span",
-                        {
-                          attrs: {
-                            "data-toggle": "tooltip",
-                            "data-placement": "bottom",
-                            title: "Change expire months"
-                          },
-                          on: {
-                            click: function($event) {
-                              _vm.showEdit("expire_months")
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "bx bx-highlight" })]
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "p",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value:
-                            _vm.productShow.productData.bought_at !==
-                            "01.01.1970",
-                          expression:
-                            "productShow.productData.bought_at !== '01.01.1970'"
-                        }
-                      ],
-                      staticClass: "dates"
-                    },
-                    [
-                      _vm._v("\n                                Bought "),
                       _c("strong", [
-                        _vm._v(_vm._s(_vm.productShow.productData.bought_at))
+                        _vm._v(_vm._s(_vm.productShow.productData.name))
                       ]),
                       _vm._v(" "),
                       _c(
@@ -2973,56 +2746,349 @@ var render = function() {
                           attrs: {
                             "data-toggle": "tooltip",
                             "data-placement": "bottom",
-                            title: "Change bought date"
+                            title: "Change product name"
                           },
                           on: {
                             click: function($event) {
-                              _vm.showEdit("bought_at")
+                              _vm.showEdit("name")
                             }
                           }
                         },
                         [_c("i", { staticClass: "bx bx-highlight" })]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        {
-                          class: {
-                            "text-danger": _vm.productShow.productData.expired
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                                    Expires "
-                          ),
-                          _c("strong", [
-                            _vm._v(
-                              _vm._s(_vm.productShow.productData.expire_date)
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              attrs: {
-                                "data-toggle": "tooltip",
-                                "data-placement": "bottom",
-                                title: "Change expire months"
-                              },
-                              on: {
-                                click: function($event) {
-                                  _vm.showEdit("expire_months")
-                                }
-                              }
-                            },
-                            [_c("i", { staticClass: "bx bx-highlight" })]
-                          )
-                        ]
                       )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "mb-4" }, [
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "rating mb-1" }, [
+                      _c("span", {
+                        staticClass: "bx",
+                        class: {
+                          "bxs-star animated tada":
+                            _vm.productShow.productData.rating > 0,
+                          "bx-star": _vm.productShow.productData.rating < 1
+                        },
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-placement": "top",
+                          title: "1"
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.rateProduct(1)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "bx",
+                        class: {
+                          "bxs-star animated tada":
+                            _vm.productShow.productData.rating > 1,
+                          "bx-star": _vm.productShow.productData.rating < 2
+                        },
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-placement": "top",
+                          title: "2"
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.rateProduct(2)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "bx",
+                        class: {
+                          "bxs-star animated tada":
+                            _vm.productShow.productData.rating > 2,
+                          "bx-star": _vm.productShow.productData.rating < 3
+                        },
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-placement": "top",
+                          title: "3"
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.rateProduct(3)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "bx",
+                        class: {
+                          "bxs-star animated tada":
+                            _vm.productShow.productData.rating > 3,
+                          "bx-star": _vm.productShow.productData.rating < 4
+                        },
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-placement": "top",
+                          title: "4"
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.rateProduct(4)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "bx",
+                        class: {
+                          "bxs-star animated tada":
+                            _vm.productShow.productData.rating > 4,
+                          "bx-star": _vm.productShow.productData.rating < 5
+                        },
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-placement": "top",
+                          title: "5"
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.rateProduct(5)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "bx",
+                        class: {
+                          "bxs-star animated tada":
+                            _vm.productShow.productData.rating > 5,
+                          "bx-star": _vm.productShow.productData.rating < 6
+                        },
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-placement": "top",
+                          title: "6"
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.rateProduct(6)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "bx",
+                        class: {
+                          "bxs-star animated tada":
+                            _vm.productShow.productData.rating > 6,
+                          "bx-star": _vm.productShow.productData.rating < 7
+                        },
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-placement": "top",
+                          title: "7"
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.rateProduct(7)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "bx",
+                        class: {
+                          "bxs-star animated tada":
+                            _vm.productShow.productData.rating > 7,
+                          "bx-star": _vm.productShow.productData.rating < 8
+                        },
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-placement": "top",
+                          title: "8"
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.rateProduct(8)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "bx",
+                        class: {
+                          "bxs-star animated tada":
+                            _vm.productShow.productData.rating > 8,
+                          "bx-star": _vm.productShow.productData.rating < 9
+                        },
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-placement": "top",
+                          title: "9"
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.rateProduct(9)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "bx",
+                        class: {
+                          "bxs-star animated tada":
+                            _vm.productShow.productData.rating > 9,
+                          "bx-star": _vm.productShow.productData.rating < 10
+                        },
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-placement": "top",
+                          title: "10"
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.rateProduct(10)
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value:
+                              _vm.productShow.productData.bought_at ===
+                              "01.01.1970",
+                            expression:
+                              "productShow.productData.bought_at === '01.01.1970'"
+                          }
+                        ],
+                        staticClass: "dates"
+                      },
+                      [
+                        _vm._v(
+                          "\n                                    Add bought date\n                                    "
+                        ),
+                        _c(
+                          "span",
+                          {
+                            attrs: {
+                              "data-toggle": "tooltip",
+                              "data-placement": "bottom",
+                              title: "Change bought date"
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.showEdit("bought_at")
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "bx bx-highlight" })]
+                        ),
+                        _vm._v(
+                          "\n                                    Add expire months\n                                    "
+                        ),
+                        _c(
+                          "span",
+                          {
+                            attrs: {
+                              "data-toggle": "tooltip",
+                              "data-placement": "bottom",
+                              title: "Change expire months"
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.showEdit("expire_months")
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "bx bx-highlight" })]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value:
+                              _vm.productShow.productData.bought_at !==
+                              "01.01.1970",
+                            expression:
+                              "productShow.productData.bought_at !== '01.01.1970'"
+                          }
+                        ],
+                        staticClass: "dates"
+                      },
+                      [
+                        _vm._v("\n                                    Bought "),
+                        _c("strong", [
+                          _vm._v(_vm._s(_vm.productShow.productData.bought_at))
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            attrs: {
+                              "data-toggle": "tooltip",
+                              "data-placement": "bottom",
+                              title: "Change bought date"
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.showEdit("bought_at")
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "bx bx-highlight" })]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            class: {
+                              "text-danger": _vm.productShow.productData.expired
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    Expires "
+                            ),
+                            _c("strong", [
+                              _vm._v(
+                                _vm._s(_vm.productShow.productData.expire_date)
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                attrs: {
+                                  "data-toggle": "tooltip",
+                                  "data-placement": "bottom",
+                                  title: "Change expire months"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.showEdit("expire_months")
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "bx bx-highlight" })]
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-4 p-0" }, [
+                  _c("div", { staticClass: "m-2 card p-3" }, [
                     _c("h4", [
                       _vm._v(
                         "\n                                    Description\n                                    "
@@ -3061,7 +3127,7 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", [
+                  _c("div", { staticClass: "m-2 card p-3" }, [
                     _c("h4", [
                       _vm._v(
                         "\n                                    First impressions\n                                    "

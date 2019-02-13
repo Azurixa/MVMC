@@ -142,9 +142,128 @@
   .activity-box{
     width: 100%;
     height: 100%;
+    overflow-y: scroll;
 
     .product-show{
       width: 100%;
+
+      .bx-highlight{
+        font-size: 0.9rem;
+        color: darkgray;
+        transition: 0.3s all;
+        cursor: pointer;
+        &:hover{
+          color: black;
+        }
+      }
+
+      .card{
+        display: block;
+
+        p{
+          margin: 0;
+        }
+      }
+
+      .stats{
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background-color: black;
+        padding: 0.5rem;
+        display: flex;
+      }
+
+      .rating{
+        cursor: pointer;
+        span{
+          margin-right: -6.5px;
+          font-size: 1.4rem;
+        }
+      }
+
+      .gallery {
+        height: 60vh;
+        position: relative;
+        display: flex;
+        background: black;
+        @media screen and (max-width: 992px) {
+          height: 35vh;
+        }
+        > div {
+          height: 100%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+        }
+        .gallery-image {
+          position: relative;
+          background-color: black;
+          overflow: hidden;
+          transition: all 0.3s;
+          cursor: pointer;
+          &.new {
+            cursor: default;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            @media screen and (max-width: 992px) {
+              div{
+                h2{
+                  margin-left: 1rem;
+                  font-size: 1.1rem !important;
+                  font-weight: 700;
+                }
+                input{
+                  margin-left: 1rem;
+                  font-size: 0.7rem !important;
+                }
+                button{
+                  margin-left: 1rem !important;
+                  font-size: 0.8rem !important;
+                }
+              }
+            }
+            button {
+              border: 0;
+              background: 0;
+              cursor: pointer;
+            }
+          }
+          .date {
+            position: absolute;
+            bottom: 9px;
+            left: 9px;
+            color: #000;
+            background-color: white;
+            opacity: 0.5;
+            padding: 4px;
+            transition: 0.3s all;
+            cursor: default;
+            border-radius: 6px;
+            &:hover {
+              opacity: 1;
+            }
+            p {
+              line-height: 13px;
+            }
+          }
+          .delete {
+            height: fit-content;
+            line-height: 1px;
+            display: block;
+            position: absolute;
+            bottom: 9px;
+            right: 9px;
+            font-size: 1.2rem;
+            padding: 4px;
+            border-radius: 50%;
+            background-color: white;
+            color: black;
+          }
+        }
+      }
     }
   }
 }
