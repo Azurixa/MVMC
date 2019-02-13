@@ -78,27 +78,26 @@
             </div>
 
             <div class="collection" id="collection">
-                <div class="inside">
-                    <p class="header">My collection</p>
-                    <div class="category" v-for="item in allProducts">
+                <p class="header">My collection</p>
+                <div class="category" v-for="item in allProducts">
                     <span onClick="this.nextSibling.nextSibling.toggleAttribute('show')" class="category">
                         <i class='bx bx-sort'></i> {{item.category.name}}
                     </span>
-                        <div class="row">
-                            <div class="col-lg-3 product" v-for="product in item.products" @click="showItem(product.id)"
-                                 onClick="document.getElementById('collection').toggleAttribute('show')">
-                                <div class="thumbnail"
-                                     :style="{backgroundImage: 'url(/' + product.thumbnail + ')'}"></div>
-                                <div class="progress amount">
-                                    <div class="progress-bar" :style="{width: product.remaining_amount + '%'}"></div>
-                                </div>
-                                <p>
-                                    <span class="brand badge badge-info">{{product.brand}}</span><br>
-                                    <span class="item">
+                    <div class="row">
+                        <div class="col-lg-3 col-6 product" v-for="product in item.products"
+                             @click="showItem(product.id)"
+                             onClick="document.getElementById('collection').toggleAttribute('show')">
+                            <div class="thumbnail"
+                                 :style="{backgroundImage: 'url(/' + product.thumbnail + ')'}"></div>
+                            <div class="progress amount">
+                                <div class="progress-bar" :style="{width: product.remaining_amount + '%'}"></div>
+                            </div>
+                            <p>
+                                <span class="brand badge badge-info">{{product.brand}}</span><br>
+                                <span class="item">
                                     {{product.name}}
                             </span>
-                                </p>
-                            </div>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -242,82 +241,87 @@
                                         <span @click="showEdit('name')" data-toggle="tooltip" data-placement="bottom"
                                               title="Change product name"><i class='bx bx-highlight'></i></span>
                                     </h1>
-                                    <p class="rating mb-1">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+
+                                            <div class="rating mb-1">
                                     <span @click="rateProduct(1)"
                                           class="bx"
                                           :class="{'bxs-star animated tada': productShow.productData.rating > 0, 'bx-star': productShow.productData.rating < 1}"
                                           data-toggle="tooltip" data-placement="top" title="1">
                                     </span>
-                                        <span @click="rateProduct(2)"
-                                              class="bx"
-                                              :class="{'bxs-star animated tada': productShow.productData.rating > 1, 'bx-star': productShow.productData.rating < 2}"
-                                              data-toggle="tooltip" data-placement="top" title="2">
+                                                <span @click="rateProduct(2)"
+                                                      class="bx"
+                                                      :class="{'bxs-star animated tada': productShow.productData.rating > 1, 'bx-star': productShow.productData.rating < 2}"
+                                                      data-toggle="tooltip" data-placement="top" title="2">
                                     </span>
-                                        <span @click="rateProduct(3)"
-                                              class="bx"
-                                              :class="{'bxs-star animated tada': productShow.productData.rating > 2, 'bx-star': productShow.productData.rating < 3}"
-                                              data-toggle="tooltip" data-placement="top" title="3">
+                                                <span @click="rateProduct(3)"
+                                                      class="bx"
+                                                      :class="{'bxs-star animated tada': productShow.productData.rating > 2, 'bx-star': productShow.productData.rating < 3}"
+                                                      data-toggle="tooltip" data-placement="top" title="3">
                                     </span>
-                                        <span @click="rateProduct(4)"
-                                              class="bx"
-                                              :class="{'bxs-star animated tada': productShow.productData.rating > 3, 'bx-star': productShow.productData.rating < 4}"
-                                              data-toggle="tooltip" data-placement="top" title="4">
+                                                <span @click="rateProduct(4)"
+                                                      class="bx"
+                                                      :class="{'bxs-star animated tada': productShow.productData.rating > 3, 'bx-star': productShow.productData.rating < 4}"
+                                                      data-toggle="tooltip" data-placement="top" title="4">
                                     </span>
-                                        <span @click="rateProduct(5)"
-                                              class="bx"
-                                              :class="{'bxs-star animated tada': productShow.productData.rating > 4, 'bx-star': productShow.productData.rating < 5}"
-                                              data-toggle="tooltip" data-placement="top" title="5">
+                                                <span @click="rateProduct(5)"
+                                                      class="bx"
+                                                      :class="{'bxs-star animated tada': productShow.productData.rating > 4, 'bx-star': productShow.productData.rating < 5}"
+                                                      data-toggle="tooltip" data-placement="top" title="5">
                                     </span>
-                                        <span @click="rateProduct(6)"
-                                              class="bx"
-                                              :class="{'bxs-star animated tada': productShow.productData.rating > 5, 'bx-star': productShow.productData.rating < 6}"
-                                              data-toggle="tooltip" data-placement="top" title="6">
+                                                <span @click="rateProduct(6)"
+                                                      class="bx"
+                                                      :class="{'bxs-star animated tada': productShow.productData.rating > 5, 'bx-star': productShow.productData.rating < 6}"
+                                                      data-toggle="tooltip" data-placement="top" title="6">
                                     </span>
-                                        <span @click="rateProduct(7)"
-                                              class="bx"
-                                              :class="{'bxs-star animated tada': productShow.productData.rating > 6, 'bx-star': productShow.productData.rating < 7}"
-                                              data-toggle="tooltip" data-placement="top" title="7">
+                                                <span @click="rateProduct(7)"
+                                                      class="bx"
+                                                      :class="{'bxs-star animated tada': productShow.productData.rating > 6, 'bx-star': productShow.productData.rating < 7}"
+                                                      data-toggle="tooltip" data-placement="top" title="7">
                                     </span>
-                                        <span @click="rateProduct(8)"
-                                              class="bx"
-                                              :class="{'bxs-star animated tada': productShow.productData.rating > 7, 'bx-star': productShow.productData.rating < 8}"
-                                              data-toggle="tooltip" data-placement="top" title="8">
+                                                <span @click="rateProduct(8)"
+                                                      class="bx"
+                                                      :class="{'bxs-star animated tada': productShow.productData.rating > 7, 'bx-star': productShow.productData.rating < 8}"
+                                                      data-toggle="tooltip" data-placement="top" title="8">
                                     </span>
-                                        <span @click="rateProduct(9)"
-                                              class="bx"
-                                              :class="{'bxs-star animated tada': productShow.productData.rating > 8, 'bx-star': productShow.productData.rating < 9}"
-                                              data-toggle="tooltip" data-placement="top" title="9">
+                                                <span @click="rateProduct(9)"
+                                                      class="bx"
+                                                      :class="{'bxs-star animated tada': productShow.productData.rating > 8, 'bx-star': productShow.productData.rating < 9}"
+                                                      data-toggle="tooltip" data-placement="top" title="9">
                                     </span>
-                                        <span @click="rateProduct(10)"
-                                              class="bx"
-                                              :class="{'bxs-star animated tada': productShow.productData.rating > 9, 'bx-star': productShow.productData.rating < 10}"
-                                              data-toggle="tooltip" data-placement="top" title="10">
+                                                <span @click="rateProduct(10)"
+                                                      class="bx"
+                                                      :class="{'bxs-star animated tada': productShow.productData.rating > 9, 'bx-star': productShow.productData.rating < 10}"
+                                                      data-toggle="tooltip" data-placement="top" title="10">
                                     </span>
-                                    </p>
+                                            </div>
 
-                                    <p class="dates" v-show="productShow.productData.bought_at === '01.01.1970'">
-                                        Add bought date
-                                        <span @click="showEdit('bought_at')" data-toggle="tooltip"
-                                              data-placement="bottom"
-                                              title="Change bought date">
+                                            <p class="dates"
+                                               v-show="productShow.productData.bought_at === '01.01.1970'">
+                                                Add bought date
+                                                <span @click="showEdit('bought_at')" data-toggle="tooltip"
+                                                      data-placement="bottom"
+                                                      title="Change bought date">
                                         <i class='bx bx-highlight'></i>
                                     </span>
-                                        Add expire months
-                                        <span @click="showEdit('expire_months')" data-toggle="tooltip"
-                                              data-placement="bottom"
-                                              title="Change expire months">
+                                                Add expire months
+                                                <span @click="showEdit('expire_months')" data-toggle="tooltip"
+                                                      data-placement="bottom"
+                                                      title="Change expire months">
                                         <i class='bx bx-highlight'></i>
                                     </span>
-                                    </p>
-                                    <p class="dates" v-show="productShow.productData.bought_at !== '01.01.1970'">
-                                        Bought <strong>{{productShow.productData.bought_at}}</strong>
-                                        <span @click="showEdit('bought_at')" data-toggle="tooltip"
-                                              data-placement="bottom"
-                                              title="Change bought date">
+                                            </p>
+                                            <p class="dates"
+                                               v-show="productShow.productData.bought_at !== '01.01.1970'">
+                                                Bought <strong>{{productShow.productData.bought_at}}</strong>
+                                                <span @click="showEdit('bought_at')" data-toggle="tooltip"
+                                                      data-placement="bottom"
+                                                      title="Change bought date">
                                         <i class='bx bx-highlight'></i>
                                     </span>
 
-                                        <span :class="{'text-danger': productShow.productData.expired}">
+                                                <span :class="{'text-danger': productShow.productData.expired}">
                                         Expires <strong>{{productShow.productData.expire_date}}</strong>
                                         <span @click="showEdit('expire_months')" data-toggle="tooltip"
                                               data-placement="bottom"
@@ -325,7 +329,42 @@
                                             <i class='bx bx-highlight'></i>
                                         </span>
                                     </span>
-                                    </p>
+                                            </p>
+                                        </div>
+
+                                        <div class="col-lg-6">
+
+                                            <!-- Container for product uses count -->
+                                            <div class="stats">
+                                                <div class="if-pan ml-auto" data-toggle="tooltip"
+                                                     data-placement="top" title="Tag as panned [3xp]"
+                                                     v-show="!productShow.productData.pan"
+                                                     @click="panProduct(1)">
+                                                    <div class="m-0 text-center">
+                                                        <p class="m-0">Pan</p>
+                                                    </div>
+                                                </div>
+                                                <div class="if-pan true ml-auto" data-toggle="tooltip"
+                                                     data-placement="top" title="Tag as not panned [-3xp]"
+                                                     v-show="productShow.productData.pan"
+                                                     @click="panProduct(0)">
+                                                    <div class="m-0 text-center">
+                                                        <p class="m-0">Pan</p>
+                                                    </div>
+                                                </div>
+                                                <div class="uses_count" @click="addProductUse()" data-toggle="tooltip"
+                                                     data-placement="top" title="Add use [1xp]">
+                                                    <div class="m-0 text-center">
+                                                        <p class="mb-0 h5" id="active-uses-count">
+                                                            {{productShow.productData.uses_count}}</p>
+                                                        <small>uses</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
                                 </div>
 
 
@@ -360,34 +399,6 @@
                                         </span>
                                         {{productShow.productData.first_impressions}}
                                     </p>
-                                </div>
-                            </div>
-
-                            <!-- Absolute container for product uses count -->
-                            <div class="stats">
-                                <div class="if-pan" data-toggle="tooltip"
-                                     data-placement="top" title="Tag as panned [3xp]"
-                                     v-show="!productShow.productData.pan"
-                                     @click="panProduct(1)">
-                                    <div class="m-0 text-center">
-                                        <p class="m-0">Pan</p>
-                                    </div>
-                                </div>
-                                <div class="if-pan true" data-toggle="tooltip"
-                                     data-placement="top" title="Tag as not panned [-3xp]"
-                                     v-show="productShow.productData.pan"
-                                     @click="panProduct(0)">
-                                    <div class="m-0 text-center">
-                                        <p class="m-0">Pan</p>
-                                    </div>
-                                </div>
-                                <div class="uses_count mx-auto" @click="addProductUse()" data-toggle="tooltip"
-                                     data-placement="top" title="Add use [1xp]">
-                                    <div class="m-0 text-center">
-                                        <p class="mb-0 h5" id="active-uses-count">
-                                            {{productShow.productData.uses_count}}</p>
-                                        <small>uses</small>
-                                    </div>
                                 </div>
                             </div>
 

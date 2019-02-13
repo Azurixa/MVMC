@@ -23,6 +23,35 @@
 
 // BS classes
 
+// Mobile navigation collapse
+.navbar-collapse {
+  @media screen and (max-width: 992px) {
+    display: block !important;
+    background-color: white;
+    z-index: 900000;
+    height: calc(100vh - 60px - 16px);
+    transition: 0.7s all;
+    position: fixed;
+    right: -200vh;
+    width: 100%;
+    top: 76px;
+    &.guest{
+      top: 60px !important;
+    }
+    &[show] {
+      position: absolute;
+      top: 76px;
+      right: 0;
+    }
+    .navbar-nav {
+      .nav-item {
+        text-align: left;
+        padding: 0.2rem 1rem;
+      }
+    }
+  }
+}
+
 // CUSTOM
 
 .toolbox-show{
@@ -61,27 +90,30 @@
   .collection{
     position: absolute;
     z-index: 600;
-    width: 100%;
     left: -70%;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-right: 2px solid rgba(0, 0, 0, 0.1);
-    height: 100%;
     transition: 0.8s all;
     opacity: 0;
+    background: #f1f1f1;
+    width: 80%;
+    height: 100%;
+    overflow-y: scroll;
+    box-shadow: 2px 0 35px -2px #444;
+    border-right: 2px solid rgba(0, 0, 0, 0.1);
     &[show]{
       left: 0;
       opacity: 1;
     }
-    .inside{
-      background: #f1f1f1;
-      width: 80%;
-      height: 100%;
-      overflow-y: scroll;
+    @media screen and (max-width: 992px) {
+      left: -95%;
+      width: 95%;
     }
 
     .header{
       font-size: 2.2rem;
       padding: 1.2rem 2rem;
+      @media screen and (max-width: 992px) {
+        font-size: 1.9rem;
+      }
     }
 
     .category{
@@ -91,6 +123,9 @@
         display: block;
         transition: 0.3s all;
         padding: 0.7rem 2rem;
+        @media screen and (max-width: 992px) {
+          font-size: 1.4rem;
+        }
         &:hover{
           background-color: rgba(0, 0, 0, 0.1);
         }
@@ -126,6 +161,17 @@
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
+          @media screen and (max-width: 992px) {
+            height: 110px;
+          }
+        }
+
+        .brand{
+
+        }
+
+        .item{
+          font-weight: 600;
         }
 
         .amount{
@@ -194,12 +240,40 @@
       }
 
       .stats{
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
-        background-color: black;
+        //position: absolute;
+        //bottom: 10px;
+        //right: 10px;
         padding: 0.5rem;
         display: flex;
+        .if-pan{
+          margin-right: 8px;
+          &.true{
+            background-color: green;
+          }
+        }
+
+        .uses_count, .if-pan{
+          background-color: beige;
+          cursor: pointer;
+          width: 58px;
+          height: 58px;
+          font-size: 1.3rem;
+          margin-right: 0.5rem;
+          line-height: 18px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          #active-uses-count{
+            position: relative;
+            bottom: -5px;
+          }
+          small{
+            font-size: 0.9rem;
+            position: relative;
+            top: -5px;
+          }
+        }
       }
 
       .rating{
