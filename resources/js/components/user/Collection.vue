@@ -1,86 +1,75 @@
 <template>
     <div id="projectpan">
 
-        <!-- Toggle of adding new stuff (+) -->
-        <div class="toolbox-show" onClick="$('.toolbox').toggle()" data-toggle="tooltip"
-             data-placement="right" title="New">
-            <i class="bx bx-plus m-0"></i>
-        </div>
+        <div class="row m-0 main-box">
 
-        <!-- Mobile collection toggle button -->
-        <div onClick="document.getElementById('collection').toggleAttribute('show')" class="toggle-collection d-block d-lg-none">
-            <i class='bx bx-collection m-0'></i>
-        </div>
+            <!-- Box with forms to adding new stuff -->
+            <div class="toolbox" id="toolbox">
+                <div class="inside">
+                    <div class="card p-2 m-auto">
 
-        <!-- Box with forms to adding new stuff -->
-        <div class="toolbox">
-            <div class="inside">
-                <div class="card p-2 m-auto w-50">
+                        <i class='bx bx-x close close-adding' onClick="document.getElementById('toolbox').toggleAttribute('show')"></i>
 
-                    <i class='bx bx-x close close-adding' onClick="$('.toolbox').toggle()"></i>
+                        <div class="card p-2 mb-4">
 
-                    <div class="card p-2 mb-4">
-
-                        <p class="h4">
-                            Create new category
-                        </p>
-                        <div class="form-group">
-                            <input v-model="formData.newCategory.name" class="form-control" placeholder="Name"
-                                   @keyup.enter="createCategory()">
-                        </div>
-                        <div>
-                            <button class="btn btn-primary" @click="createCategory()">Add new category</button>
-                        </div>
-                    </div>
-
-                    <div class="card p-2 mb-4">
-                        <p class="h4">
-                            Create new brand
-                        </p>
-                        <div class="form-group">
-                            <input v-model="formData.newBrand.name" class="form-control" placeholder="Name"
-                                   @keyup.enter="createBrand()">
-                        </div>
-                        <div>
-                            <button class="btn btn-primary" @click="createBrand()">Add new brand</button>
-                        </div>
-                    </div>
-
-                    <div class="card p-2">
-                        <p class="h4">
-                            Create new product
-                        </p>
-                        <div>
+                            <p class="h4">
+                                Create new category
+                            </p>
                             <div class="form-group">
-                                <label for="category">Category of product</label>
-                                <select v-model="formData.newProduct.categoryId" class="form-control" id="category">
-                                    <option v-for="category in categories" :value=category.id>{{category.name}}</option>
-                                </select>
+                                <input v-model="formData.newCategory.name" class="form-control" placeholder="Name"
+                                       @keyup.enter="createCategory()">
                             </div>
-                            <div class="form-group">
-                                <label for="brand">Brand</label>
-                                <select v-model="formData.newProduct.brandId" class="form-control" id="brand">
-                                    <option v-for="brand in brands" :value=brand.id>{{brand.name}}</option>
-                                </select>
+                            <div>
+                                <button class="btn btn-primary" @click="createCategory()">Add new category</button>
                             </div>
+                        </div>
+
+                        <div class="card p-2 mb-4">
+                            <p class="h4">
+                                Create new brand
+                            </p>
                             <div class="form-group">
-                                <input v-model="formData.newProduct.name" class="form-control"
-                                       placeholder="Name of new product"
-                                       @keyup.enter="createProduct()">
+                                <input v-model="formData.newBrand.name" class="form-control" placeholder="Name"
+                                       @keyup.enter="createBrand()">
                             </div>
-                            <div class="form-group">
+                            <div>
+                                <button class="btn btn-primary" @click="createBrand()">Add new brand</button>
+                            </div>
+                        </div>
+
+                        <div class="card p-2">
+                            <p class="h4">
+                                Create new product
+                            </p>
+                            <div>
+                                <div class="form-group">
+                                    <label for="category">Category of product</label>
+                                    <select v-model="formData.newProduct.categoryId" class="form-control" id="category">
+                                        <option v-for="category in categories" :value=category.id>{{category.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="brand">Brand</label>
+                                    <select v-model="formData.newProduct.brandId" class="form-control" id="brand">
+                                        <option v-for="brand in brands" :value=brand.id>{{brand.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input v-model="formData.newProduct.name" class="form-control"
+                                           placeholder="Name of new product"
+                                           @keyup.enter="createProduct()">
+                                </div>
+                                <div class="form-group">
                                 <textarea v-model="formData.newProduct.description" class="form-control"
                                           placeholder="Product description"></textarea>
+                                </div>
+                                <button class="btn btn-primary" @click="createProduct()">Add new product</button>
                             </div>
-                            <button class="btn btn-primary" @click="createProduct()">Add new product</button>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="row m-0 main-box">
 
             <div class="collection" id="collection">
                 <p class="header">My collection</p>
@@ -369,6 +358,21 @@
                 </div>
 
             </div>
+        </div>
+
+        <div class="footer-box">
+
+            <!-- Collection toggle button -->
+            <div onClick="document.getElementById('collection').toggleAttribute('show')" class="toggle-collection" data-toggle="tooltip" data-placement="top" title="Show collection">
+                <i class='bx bx-collection m-0'></i>
+            </div>
+
+            <!-- Toggle of adding new stuff (+) -->
+            <div onClick="document.getElementById('toolbox').toggleAttribute('show')" class="toggle-toolbox" data-toggle="tooltip"
+                 data-placement="top" title="Show toolbox">
+                <i class='bx bx-window'></i>
+            </div>
+
         </div>
 
 
