@@ -8,7 +8,8 @@
                 <div class="inside">
                     <div class="card p-2 m-auto">
 
-                        <i class='bx bx-x close close-adding' onClick="document.getElementById('toolbox').toggleAttribute('show')"></i>
+                        <i class='bx bx-x close close-adding'
+                           onClick="document.getElementById('toolbox').toggleAttribute('show')"></i>
 
                         <div class="card p-2 mb-4">
 
@@ -45,7 +46,8 @@
                                 <div class="form-group">
                                     <label for="category">Category of product</label>
                                     <select v-model="formData.newProduct.categoryId" class="form-control" id="category">
-                                        <option v-for="category in categories" :value=category.id>{{category.name}}</option>
+                                        <option v-for="category in categories" :value=category.id>{{category.name}}
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -73,22 +75,28 @@
 
             <div class="collection" id="collection">
                 <p class="header">My collection</p>
-                <ul>
-                    <li v-for="item in allProducts">
-                        <span onClick="this.nextSibling.nextSibling.toggleAttribute('shown')" class="category">{{item.category.name}}</span>
-                        <ul shown>
-                            <li v-for="product in item.products">
-                                <span class="product-amount">&nbsp;&nbsp;<span class="amount"
-                                                                               :style="{height: product.remaining_amount + '%'}"></span></span>
-                                <span class="brand badge badge-info">{{product.brand}}</span> <span
-                                    @click="showItem(product.id)" onClick="document.getElementById('collection').toggleAttribute('show')"
-                                    class="item">
+                <div class="category" v-for="item in allProducts">
+                    <span onClick="this.nextSibling.nextSibling.toggleAttribute('show')" class="category">
+                        <i class='bx bx-sort'></i> {{item.category.name}}
+                    </span>
+                    <div class="row">
+                        <div class="col-lg-3 product" v-for="product in item.products" @click="showItem(product.id)"
+                             onClick="document.getElementById('collection').toggleAttribute('show')">
+                            <div class="thumbnail">
+
+                            </div>
+                            <div class="progress amount">
+                                <div class="progress-bar"  :style="{width: product.remaining_amount + '%'}"></div>
+                            </div>
+                            <p>
+                                <span class="brand badge badge-info">{{product.brand}}</span><br>
+                                <span class="item">
                                     {{product.name}}
-                                </span>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                            </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="activity-box">
@@ -264,7 +272,8 @@
 
                                 <p class="dates" v-show="productShow.productData.bought_at === '01.01.1970'">
                                     Add bought date
-                                    <span @click="showEdit('bought_at')" data-toggle="tooltip" data-placement="bottom" title="Change bought date">
+                                    <span @click="showEdit('bought_at')" data-toggle="tooltip" data-placement="bottom"
+                                          title="Change bought date">
                                         <i class='bx bx-highlight'></i>
                                     </span>
                                     Add expire months
@@ -363,12 +372,14 @@
         <div class="footer-box">
 
             <!-- Collection toggle button -->
-            <div onClick="document.getElementById('collection').toggleAttribute('show')" class="toggle-collection" data-toggle="tooltip" data-placement="top" title="Show collection">
+            <div onClick="document.getElementById('collection').toggleAttribute('show')" class="toggle-collection"
+                 data-toggle="tooltip" data-placement="top" title="Show collection">
                 <i class='bx bx-collection m-0'></i>
             </div>
 
             <!-- Toggle of adding new stuff (+) -->
-            <div onClick="document.getElementById('toolbox').toggleAttribute('show')" class="toggle-toolbox" data-toggle="tooltip"
+            <div onClick="document.getElementById('toolbox').toggleAttribute('show')" class="toggle-toolbox"
+                 data-toggle="tooltip"
                  data-placement="top" title="Show toolbox">
                 <i class='bx bx-window'></i>
             </div>
@@ -596,11 +607,11 @@
 
                 console.log(exDay + " " + exMonth + " " + exYear);
 
-                if(nowYear > exYear) {
+                if (nowYear > exYear) {
                     this.productShow.productData.expired = true;
                     return 1;
                 } else if (nowYear === exYear) {
-                    if(nowMonth > exMonth) {
+                    if (nowMonth > exMonth) {
                         this.productShow.productData.expired = true;
                         return 1;
                     } else if (nowMonth === exMonth) {

@@ -10553,7 +10553,8 @@ a.text-dark:focus {
   z-index: 600;
   width: 70%;
   left: -70%;
-  background-color: red;
+  background: #f1f1f1;
+  border-right: 2px solid rgba(0, 0, 0, 0.1);
   height: 100%;
   transition: 0.8s all;
   opacity: 0;
@@ -10562,6 +10563,72 @@ a.text-dark:focus {
 .main-box .collection[show] {
   left: 0;
   opacity: 1;
+}
+
+.main-box .collection .header {
+  font-size: 2.2rem;
+  margin: 1.2rem 2rem;
+}
+
+.main-box .collection .category > span {
+  font-size: 1.7rem;
+  cursor: pointer;
+  display: block;
+  transition: 0.3s all;
+  padding: 0.7rem 2rem;
+}
+
+.main-box .collection .category > span:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.main-box .collection .row {
+  margin: 0;
+  padding: 0 0.4rem;
+  overflow: hidden;
+  height: 0;
+  opacity: 0;
+  transition: 0.3s all;
+}
+
+.main-box .collection .row[show] {
+  height: unset;
+  opacity: 1;
+}
+
+.main-box .collection .row .product {
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: 0.3s all;
+  background: transparent;
+}
+
+.main-box .collection .row .product:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.main-box .collection .row .product .thumbnail {
+  background-color: #606f7b;
+  width: 90%;
+  height: 140px;
+  margin: 0 auto;
+}
+
+.main-box .collection .row .product .amount {
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 0;
+  height: 7px;
+}
+
+.main-box .collection .row .product .amount .progress-bar {
+  border-radius: 0;
+  height: 7px;
+}
+
+.main-box .collection .row .product p {
+  text-align: center;
+  margin: 0;
 }
 
 .main-box .activity-box {
