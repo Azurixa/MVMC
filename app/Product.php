@@ -13,21 +13,35 @@ class Product extends Model
         $product = Product::find($id);
         $photos = explode(';', $product->photos);
         foreach ($photos as $photo) {
-            if (!$bare){
-                if($photo !== ''){
+            if (!$bare) {
+                if ($photo !== '') {
                     $ph = explode(':', $photo);
-                    array_push($imagesReturn, ['image' => 'storage/products/'.$ph[0], 'date' => $ph[1]]);
+                    array_push($imagesReturn, [
+                        'image' => 'storage/products/' . $ph[0],
+                        'date'  => $ph[1]
+                    ]);
                 }
             }
             array_push($imagesReturnBare, $photo);
         }
         if ($product->photos !== '') {
-            if ($bare){
+            if ($bare) {
                 return $imagesReturnBare;
             }
             return array_reverse($imagesReturn);
         }
         return [];
+    }
+
+    public static function getThumbnail ($id)
+    {
+        $product = Product::find($id);
+        $photos = explode(';', $product->photos);
+        if ((count($photos) - 1) > 0) {
+            $ph = explode(':', $photos[count($photos) - 1]);
+            return 'storage/products/'.$ph[0];
+        }
+        return 'storage/products/default.jpg';
     }
 
     public static function addPhoto ($id, $photoName)
@@ -39,10 +53,10 @@ class Product extends Model
         $date = date('d.m.Y');
 
         foreach ($photos as $index => $photo) {
-            $photosString .= $photo.';';
+            $photosString .= $photo . ';';
         }
 
-        $photosString .= $photoName.':'.$date;
+        $photosString .= $photoName . ':' . $date;
 
         $product = Product::find($id);
         $product->photos = $photosString;

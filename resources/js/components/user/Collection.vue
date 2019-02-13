@@ -6,94 +6,99 @@
             <!-- Box with forms to adding new stuff -->
             <div class="toolbox" id="toolbox">
                 <div class="inside">
-                    <div class="card p-2 m-auto">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card p-2 mb-4">
 
-                        <i class='bx bx-x close close-adding'
-                           onClick="document.getElementById('toolbox').toggleAttribute('show')"></i>
-
-                        <div class="card p-2 mb-4">
-
-                            <p class="h4">
-                                Create new category
-                            </p>
-                            <div class="form-group">
-                                <input v-model="formData.newCategory.name" class="form-control" placeholder="Name"
-                                       @keyup.enter="createCategory()">
+                                <p class="h4">
+                                    Create new category
+                                </p>
+                                <div class="form-group">
+                                    <input v-model="formData.newCategory.name" class="form-control" placeholder="Name"
+                                           @keyup.enter="createCategory()">
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary" @click="createCategory()">Add new category</button>
+                                </div>
                             </div>
-                            <div>
-                                <button class="btn btn-primary" @click="createCategory()">Add new category</button>
+
+                            <div class="card p-2 mb-4">
+                                <p class="h4">
+                                    Create new brand
+                                </p>
+                                <div class="form-group">
+                                    <input v-model="formData.newBrand.name" class="form-control" placeholder="Name"
+                                           @keyup.enter="createBrand()">
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary" @click="createBrand()">Add new brand</button>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="card p-2 mb-4">
-                            <p class="h4">
-                                Create new brand
-                            </p>
-                            <div class="form-group">
-                                <input v-model="formData.newBrand.name" class="form-control" placeholder="Name"
-                                       @keyup.enter="createBrand()">
-                            </div>
-                            <div>
-                                <button class="btn btn-primary" @click="createBrand()">Add new brand</button>
-                            </div>
-                        </div>
-
-                        <div class="card p-2">
-                            <p class="h4">
-                                Create new product
-                            </p>
-                            <div>
-                                <div class="form-group">
-                                    <label for="category">Category of product</label>
-                                    <select v-model="formData.newProduct.categoryId" class="form-control" id="category">
-                                        <option v-for="category in categories" :value=category.id>{{category.name}}
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="brand">Brand</label>
-                                    <select v-model="formData.newProduct.brandId" class="form-control" id="brand">
-                                        <option v-for="brand in brands" :value=brand.id>{{brand.name}}</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <input v-model="formData.newProduct.name" class="form-control"
-                                           placeholder="Name of new product"
-                                           @keyup.enter="createProduct()">
-                                </div>
-                                <div class="form-group">
+                        <div class="col-lg-6">
+                            <div class="card p-2">
+                                <p class="h4">
+                                    Create new product
+                                </p>
+                                <div>
+                                    <div class="form-group">
+                                        <label for="category">Category of product</label>
+                                        <select v-model="formData.newProduct.categoryId" class="form-control"
+                                                id="category">
+                                            <option v-for="category in categories" :value=category.id>{{category.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="brand">Brand</label>
+                                        <select v-model="formData.newProduct.brandId" class="form-control" id="brand">
+                                            <option v-for="brand in brands" :value=brand.id>{{brand.name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <input v-model="formData.newProduct.name" class="form-control"
+                                               placeholder="Name of new product"
+                                               @keyup.enter="createProduct()">
+                                    </div>
+                                    <div class="form-group">
                                 <textarea v-model="formData.newProduct.description" class="form-control"
                                           placeholder="Product description"></textarea>
+                                    </div>
+                                    <button class="btn btn-primary" @click="createProduct()">Add new product</button>
                                 </div>
-                                <button class="btn btn-primary" @click="createProduct()">Add new product</button>
                             </div>
                         </div>
-
                     </div>
+
+                    <i class='bx bx-x close close-adding'
+                       onClick="document.getElementById('toolbox').toggleAttribute('show')"></i>
+
                 </div>
             </div>
 
             <div class="collection" id="collection">
-                <p class="header">My collection</p>
-                <div class="category" v-for="item in allProducts">
+                <div class="inside">
+                    <p class="header">My collection</p>
+                    <div class="category" v-for="item in allProducts">
                     <span onClick="this.nextSibling.nextSibling.toggleAttribute('show')" class="category">
                         <i class='bx bx-sort'></i> {{item.category.name}}
                     </span>
-                    <div class="row">
-                        <div class="col-lg-3 product" v-for="product in item.products" @click="showItem(product.id)"
-                             onClick="document.getElementById('collection').toggleAttribute('show')">
-                            <div class="thumbnail">
-
-                            </div>
-                            <div class="progress amount">
-                                <div class="progress-bar" :style="{width: product.remaining_amount + '%'}"></div>
-                            </div>
-                            <p>
-                                <span class="brand badge badge-info">{{product.brand}}</span><br>
-                                <span class="item">
+                        <div class="row">
+                            <div class="col-lg-3 product" v-for="product in item.products" @click="showItem(product.id)"
+                                 onClick="document.getElementById('collection').toggleAttribute('show')">
+                                <div class="thumbnail"
+                                     :style="{backgroundImage: 'url(/' + product.thumbnail + ')'}"></div>
+                                <div class="progress amount">
+                                    <div class="progress-bar" :style="{width: product.remaining_amount + '%'}"></div>
+                                </div>
+                                <p>
+                                    <span class="brand badge badge-info">{{product.brand}}</span><br>
+                                    <span class="item">
                                     {{product.name}}
                             </span>
-                            </p>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -172,6 +177,11 @@
                             Or add new products to your collection!
                         </p>
                     </div>
+                    <div class="tips1">
+                        <p class="m-0">
+                            <i class='bx bx-chevron-down'></i> Show collection / add new items
+                        </p>
+                    </div>
                 </div>
 
                 <div class="product-show" v-show="productShow.visible">
@@ -215,7 +225,8 @@
 
                                 <!-- Progress bar of remaining amount -->
                                 <div class="p-0 m-2">
-                                    <div class="progress mt-1" @click="showEdit('remaining_amount')" data-toggle="tooltip"
+                                    <div class="progress mt-1" @click="showEdit('remaining_amount')"
+                                         data-toggle="tooltip"
                                          data-placement="bottom" title="Change remaining amount">
                                         <div class="progress-bar amount" role="progressbar"
                                              :style="{width: productShow.productData.remaining_amount + '%'}">
@@ -234,43 +245,53 @@
                                     <p class="rating mb-1">
                                     <span @click="rateProduct(1)"
                                           class="bx"
-                                          :class="{'bxs-star animated tada': productShow.productData.rating > 0, 'bx-star': productShow.productData.rating < 1}" data-toggle="tooltip" data-placement="top" title="1">
+                                          :class="{'bxs-star animated tada': productShow.productData.rating > 0, 'bx-star': productShow.productData.rating < 1}"
+                                          data-toggle="tooltip" data-placement="top" title="1">
                                     </span>
                                         <span @click="rateProduct(2)"
                                               class="bx"
-                                              :class="{'bxs-star animated tada': productShow.productData.rating > 1, 'bx-star': productShow.productData.rating < 2}" data-toggle="tooltip" data-placement="top" title="2">
+                                              :class="{'bxs-star animated tada': productShow.productData.rating > 1, 'bx-star': productShow.productData.rating < 2}"
+                                              data-toggle="tooltip" data-placement="top" title="2">
                                     </span>
                                         <span @click="rateProduct(3)"
                                               class="bx"
-                                              :class="{'bxs-star animated tada': productShow.productData.rating > 2, 'bx-star': productShow.productData.rating < 3}" data-toggle="tooltip" data-placement="top" title="3">
+                                              :class="{'bxs-star animated tada': productShow.productData.rating > 2, 'bx-star': productShow.productData.rating < 3}"
+                                              data-toggle="tooltip" data-placement="top" title="3">
                                     </span>
                                         <span @click="rateProduct(4)"
                                               class="bx"
-                                              :class="{'bxs-star animated tada': productShow.productData.rating > 3, 'bx-star': productShow.productData.rating < 4}" data-toggle="tooltip" data-placement="top" title="4">
+                                              :class="{'bxs-star animated tada': productShow.productData.rating > 3, 'bx-star': productShow.productData.rating < 4}"
+                                              data-toggle="tooltip" data-placement="top" title="4">
                                     </span>
                                         <span @click="rateProduct(5)"
                                               class="bx"
-                                              :class="{'bxs-star animated tada': productShow.productData.rating > 4, 'bx-star': productShow.productData.rating < 5}" data-toggle="tooltip" data-placement="top" title="5">
+                                              :class="{'bxs-star animated tada': productShow.productData.rating > 4, 'bx-star': productShow.productData.rating < 5}"
+                                              data-toggle="tooltip" data-placement="top" title="5">
                                     </span>
                                         <span @click="rateProduct(6)"
                                               class="bx"
-                                              :class="{'bxs-star animated tada': productShow.productData.rating > 5, 'bx-star': productShow.productData.rating < 6}" data-toggle="tooltip" data-placement="top" title="6">
+                                              :class="{'bxs-star animated tada': productShow.productData.rating > 5, 'bx-star': productShow.productData.rating < 6}"
+                                              data-toggle="tooltip" data-placement="top" title="6">
                                     </span>
                                         <span @click="rateProduct(7)"
                                               class="bx"
-                                              :class="{'bxs-star animated tada': productShow.productData.rating > 6, 'bx-star': productShow.productData.rating < 7}" data-toggle="tooltip" data-placement="top" title="7">
+                                              :class="{'bxs-star animated tada': productShow.productData.rating > 6, 'bx-star': productShow.productData.rating < 7}"
+                                              data-toggle="tooltip" data-placement="top" title="7">
                                     </span>
                                         <span @click="rateProduct(8)"
                                               class="bx"
-                                              :class="{'bxs-star animated tada': productShow.productData.rating > 7, 'bx-star': productShow.productData.rating < 8}" data-toggle="tooltip" data-placement="top" title="8">
+                                              :class="{'bxs-star animated tada': productShow.productData.rating > 7, 'bx-star': productShow.productData.rating < 8}"
+                                              data-toggle="tooltip" data-placement="top" title="8">
                                     </span>
                                         <span @click="rateProduct(9)"
                                               class="bx"
-                                              :class="{'bxs-star animated tada': productShow.productData.rating > 8, 'bx-star': productShow.productData.rating < 9}" data-toggle="tooltip" data-placement="top" title="9">
+                                              :class="{'bxs-star animated tada': productShow.productData.rating > 8, 'bx-star': productShow.productData.rating < 9}"
+                                              data-toggle="tooltip" data-placement="top" title="9">
                                     </span>
                                         <span @click="rateProduct(10)"
                                               class="bx"
-                                              :class="{'bxs-star animated tada': productShow.productData.rating > 9, 'bx-star': productShow.productData.rating < 10}" data-toggle="tooltip" data-placement="top" title="10">
+                                              :class="{'bxs-star animated tada': productShow.productData.rating > 9, 'bx-star': productShow.productData.rating < 10}"
+                                              data-toggle="tooltip" data-placement="top" title="10">
                                     </span>
                                     </p>
 
@@ -614,8 +635,6 @@
                 const nowDay = date.getDate();
                 const nowMonth = date.getMonth() + 1;
                 const nowYear = date.getFullYear();
-
-                console.log(exDay + " " + exMonth + " " + exYear);
 
                 if (nowYear > exYear) {
                     this.productShow.productData.expired = true;

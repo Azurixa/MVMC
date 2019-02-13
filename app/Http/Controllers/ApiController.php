@@ -359,7 +359,8 @@ class ApiController extends Controller
                     'photos'           => $product['photos'],
                     'remaining_amount' => $product['remaining_amount'],
                     'uses_count'       => $product['uses_count'],
-                    'pan'              => $product['pan']
+                    'pan'              => $product['pan'],
+                    'thumbnail'        => Product::getThumbnail($product['id'])
                 ]);
             }
             array_push($toReturn, [
