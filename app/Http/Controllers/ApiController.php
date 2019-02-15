@@ -266,7 +266,7 @@ class ApiController extends Controller
 
         Product::addPhoto($id, $name);
 
-        return json_encode(['message' => 'Photo added!']);
+        return json_encode(['message' => $image->getClientOriginalName()]);
     }
 
     /**

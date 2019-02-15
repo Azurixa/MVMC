@@ -10520,6 +10520,43 @@ a.text-dark:focus {
   background: #555;
 }
 
+.current-level {
+  background: linear-gradient(30deg, #45145A, #FF5300);
+}
+
+.level-progress .progress {
+  border-radius: 0 !important;
+}
+
+.level-progress .progress .progress-bar {
+  background: linear-gradient(90deg, #45145A, #FF5300);
+}
+
+.progress {
+  border-radius: 12px !important;
+}
+
+.progress.amount {
+  border-radius: 0 !important;
+}
+
+.progress.amount .progress-bar {
+  background: linear-gradient(90deg, #662D8C, #ED1E79);
+}
+
+.progress .progress-bar.amount {
+  background: linear-gradient(90deg, #662D8C, #ED1E79);
+}
+
+.navbar {
+  background-color: #f1f1f1;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.card {
+  border-radius: 12px !important;
+}
+
 @media screen and (max-width: 992px) {
   .navbar-collapse {
     display: block !important;
@@ -10551,8 +10588,9 @@ a.text-dark:focus {
 
 .main-box {
   position: relative;
-  height: calc(100vh - 60px - 12px - 56px);
+  height: calc(100vh - 61px - 12px - 56px);
   overflow-y: scroll;
+  background-color: #f9f9f9;
 }
 
 .main-box .toolbox {
@@ -10700,6 +10738,22 @@ a.text-dark:focus {
   overflow-y: scroll;
 }
 
+.main-box .activity-box .edit-box {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-box .activity-box .edit-box .form {
+  width: 60%;
+}
+
 .main-box .activity-box .product-show-placeholder {
   display: flex;
   align-items: center;
@@ -10752,15 +10806,20 @@ a.text-dark:focus {
 
 .main-box .activity-box .product-show .stats .if-pan {
   margin-right: 8px;
+  background: #E6E6E6;
 }
 
 .main-box .activity-box .product-show .stats .if-pan.true {
-  background-color: green;
+  background: linear-gradient(30deg, #662D8C, #ED1E79);
+  color: #f1f1f1;
+}
+
+.main-box .activity-box .product-show .stats .uses_count {
+  background: linear-gradient(30deg, #808080, #E6E6E6);
 }
 
 .main-box .activity-box .product-show .stats .uses_count,
 .main-box .activity-box .product-show .stats .if-pan {
-  background-color: beige;
   cursor: pointer;
   width: 52px;
   height: 52px;
@@ -10770,6 +10829,7 @@ a.text-dark:focus {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 12px;
 }
 
 .main-box .activity-box .product-show .stats .uses_count #active-uses-count,
@@ -10785,11 +10845,8 @@ a.text-dark:focus {
   top: -5px;
 }
 
-.main-box .activity-box .product-show .rating {
-  cursor: pointer;
-}
-
 .main-box .activity-box .product-show .rating span {
+  cursor: pointer;
   margin-right: -6.5px;
   font-size: 1.4rem;
 }
@@ -10799,6 +10856,7 @@ a.text-dark:focus {
   position: relative;
   display: flex;
   background: black;
+  border-radius: 12px;
 }
 
 @media screen and (max-width: 992px) {
@@ -10892,19 +10950,22 @@ a.text-dark:focus {
 }
 
 .footer-box {
-  background-color: blue;
+  background-color: #f1f1f1;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   width: 100%;
-  height: 56px;
+  height: 55px;
   display: flex;
   padding: 0.5rem 1rem;
 }
 
 .footer-box .toggle-toolbox,
 .footer-box .toggle-collection {
-  background-color: beige;
+  background: linear-gradient(30deg, #662D8C, #ED1E79);
+  color: #f1f1f1;
   cursor: pointer;
   padding: 0 0.4rem;
   font-size: 1.7rem;
   margin-right: 0.5rem;
+  border-radius: 12px;
 }
 

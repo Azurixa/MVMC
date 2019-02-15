@@ -23,6 +23,46 @@
 
 // BS classes
 
+.current-level{
+  background: linear-gradient(30deg, #45145A, #FF5300);
+}
+
+.level-progress{
+  .progress {
+    border-radius: 0 !important;
+
+    .progress-bar{
+      background: linear-gradient(90deg, #45145A, #FF5300);
+    }
+  }
+}
+
+.progress{
+  border-radius: 12px !important;
+  &.amount{
+    border-radius: 0 !important;
+
+    .progress-bar{
+      background: linear-gradient(90deg, #662D8C, #ED1E79);
+    }
+  }
+
+  .progress-bar{
+    &.amount{
+      background: linear-gradient(90deg, #662D8C, #ED1E79);
+    }
+  }
+}
+
+.navbar{
+  background-color: #f1f1f1;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.card{
+  border-radius: 12px !important;
+}
+
 // Mobile navigation collapse
 .navbar-collapse {
   @media screen and (max-width: 992px) {
@@ -60,9 +100,9 @@
 
 .main-box{
   position: relative;
-  height: calc(100vh - 60px - 12px - 56px);
+  height: calc(100vh - 61px - 12px - 56px);
   overflow-y: scroll;
-
+  background-color: #f9f9f9;
 
   // Toolbox
   .toolbox{
@@ -199,6 +239,21 @@
     height: 100%;
     overflow-y: scroll;
 
+    .edit-box{
+      position: absolute;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .form{
+        width: 60%;
+      }
+    }
+
     .product-show-placeholder{
       display: flex;
       align-items: center;
@@ -245,15 +300,21 @@
         //right: 10px;
         padding: 0.5rem;
         display: flex;
+
         .if-pan{
           margin-right: 8px;
+          background: #E6E6E6;
           &.true{
-            background-color: green;
+            background: linear-gradient(30deg, #662D8C, #ED1E79);
+            color: #f1f1f1;
           }
         }
 
+        .uses_count{
+          background: linear-gradient(30deg, #808080, #E6E6E6);
+        }
+
         .uses_count, .if-pan{
-          background-color: beige;
           cursor: pointer;
           width: 52px;
           height: 52px;
@@ -263,11 +324,13 @@
           display: flex;
           align-items: center;
           justify-content: center;
+          border-radius: 12px;
 
           #active-uses-count{
             position: relative;
             bottom: -5px;
           }
+
           small{
             font-size: 0.9rem;
             position: relative;
@@ -277,8 +340,8 @@
       }
 
       .rating{
-        cursor: pointer;
         span{
+          cursor: pointer;
           margin-right: -6.5px;
           font-size: 1.4rem;
         }
@@ -289,15 +352,18 @@
         position: relative;
         display: flex;
         background: black;
+        border-radius: 12px;
         @media screen and (max-width: 992px) {
           height: 35vh;
         }
+
         > div {
           height: 100%;
           background-repeat: no-repeat;
           background-size: cover;
           background-position: center;
         }
+
         .gallery-image {
           position: relative;
           background-color: black;
@@ -371,18 +437,21 @@
 }
 
 .footer-box{
-  background-color: blue;
+  background-color: #f1f1f1;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   width: 100%;
-  height: 56px;
+  height: 55px;
   display: flex;
   padding: .5rem 1rem;
 
   .toggle-toolbox, .toggle-collection{
-    background-color: beige;
+    background: linear-gradient(30deg, #662D8C, #ED1E79);
+    color: #f1f1f1;
     cursor: pointer;
     padding: 0 0.4rem;
     font-size: 1.7rem;
     margin-right: 0.5rem;
+    border-radius: 12px;
   }
 
 }
