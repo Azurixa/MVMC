@@ -10521,8 +10521,9 @@ a.text-dark:focus {
 }
 
 @media screen and (max-width: 992px) {
-  .tooltip {
-    display: none;
+  .tooltip,
+  .tooltip-inner {
+    display: none !important;
   }
 }
 
@@ -10577,7 +10578,7 @@ a.text-dark:focus {
     height: calc(100vh - 60px - 16px);
     transition: 0.7s all;
     position: fixed;
-    right: -200vh;
+    left: -100%;
     width: 100%;
     top: 76px;
   }
@@ -10589,7 +10590,7 @@ a.text-dark:focus {
   .navbar-collapse[show] {
     position: absolute;
     top: 76px;
-    right: 0;
+    left: 0;
   }
 
   .navbar-collapse .navbar-nav .nav-item {
@@ -10648,8 +10649,8 @@ a.text-dark:focus {
 
 @media screen and (max-width: 992px) {
   .main-box .collection {
-    left: -95%;
-    width: 95%;
+    left: -100%;
+    width: 100%;
   }
 }
 
@@ -10803,12 +10804,24 @@ a.text-dark:focus {
   color: black;
 }
 
+@media screen and (max-width: 992px) {
+  .main-box .activity-box .product-show h1 {
+    font-size: 1.8rem;
+  }
+}
+
 .main-box .activity-box .product-show .card {
   display: block;
 }
 
 .main-box .activity-box .product-show .card p {
   margin: 0;
+}
+
+@media screen and (max-width: 992px) {
+  .main-box .activity-box .product-show .dates {
+    font-size: 0.8rem;
+  }
 }
 
 .main-box .activity-box .product-show .stats {
@@ -10968,6 +10981,9 @@ a.text-dark:focus {
   height: 67px;
   display: flex;
   padding: 0.5rem 1rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .footer-box .toggle-toolbox,
@@ -10975,8 +10991,8 @@ a.text-dark:focus {
   background: linear-gradient(30deg, #662D8C, #ED1E79);
   color: #f1f1f1;
   cursor: pointer;
-  padding: 0 0.4rem;
-  font-size: 2.3rem;
+  padding: 0.1rem 0.5rem;
+  font-size: 2.1rem;
   margin-right: 0.5rem;
   border-radius: 12px;
   line-height: 15px;

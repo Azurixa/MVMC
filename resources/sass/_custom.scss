@@ -23,9 +23,9 @@
 
 // BS classes
 
-.tooltip {
+.tooltip, .tooltip-inner {
   @media screen and (max-width: 992px) {
-    display: none;
+    display: none !important;
   }
 }
 .navbar-brand{
@@ -82,7 +82,7 @@
     height: calc(100vh - 60px - 16px);
     transition: 0.7s all;
     position: fixed;
-    right: -200vh;
+    left: -100%;
     width: 100%;
     top: 76px;
     &.guest {
@@ -91,7 +91,7 @@
     &[show] {
       position: absolute;
       top: 76px;
-      right: 0;
+      left: 0;
     }
     .navbar-nav {
       .nav-item {
@@ -153,8 +153,8 @@
       opacity: 1;
     }
     @media screen and (max-width: 992px) {
-      left: -95%;
-      width: 95%;
+      left: -100%;
+      width: 100%;
     }
 
     .header {
@@ -295,11 +295,24 @@
         }
       }
 
+      // Brand + product name
+      h1{
+        @media screen and (max-width: 992px){
+          font-size: 1.8rem;
+        }
+      }
+
       .card {
         display: block;
 
         p {
           margin: 0;
+        }
+      }
+
+      .dates{
+        @media screen and (max-width: 992px){
+          font-size: 0.8rem;
         }
       }
 
@@ -452,13 +465,16 @@
   height: 67px;
   display: flex;
   padding: .5rem 1rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 
   .toggle-toolbox, .toggle-collection {
     background: linear-gradient(30deg, #662D8C, #ED1E79);
     color: #f1f1f1;
     cursor: pointer;
-    padding: 0 0.4rem;
-    font-size: 2.3rem;
+    padding: 0.1rem 0.5rem;
+    font-size: 2.1rem;
     margin-right: 0.5rem;
     border-radius: 12px;
     line-height: 15px;
