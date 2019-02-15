@@ -10520,6 +10520,18 @@ a.text-dark:focus {
   background: #555;
 }
 
+@media screen and (max-width: 992px) {
+  .tooltip {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .navbar-brand {
+    margin-right: 0 !important;
+  }
+}
+
 .current-level {
   background: linear-gradient(30deg, #45145A, #FF5300);
 }
@@ -10588,7 +10600,7 @@ a.text-dark:focus {
 
 .main-box {
   position: relative;
-  height: calc(100vh - 61px - 12px - 56px);
+  height: calc(100vh - 60px - 12px - 68px);
   overflow-y: scroll;
   background-color: #f9f9f9;
 }
@@ -10953,7 +10965,7 @@ a.text-dark:focus {
   background-color: #f1f1f1;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   width: 100%;
-  height: 55px;
+  height: 67px;
   display: flex;
   padding: 0.5rem 1rem;
 }
@@ -10964,8 +10976,18 @@ a.text-dark:focus {
   color: #f1f1f1;
   cursor: pointer;
   padding: 0 0.4rem;
-  font-size: 1.7rem;
+  font-size: 2.3rem;
   margin-right: 0.5rem;
   border-radius: 12px;
+  line-height: 15px;
+}
+
+.footer-box .toggle-toolbox p,
+.footer-box .toggle-collection p {
+  text-align: center;
+  font-size: 7px;
+  margin: 0;
+  position: relative;
+  top: -2px;
 }
 

@@ -555,6 +555,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -1131,6 +1137,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -3398,7 +3406,11 @@ var staticRenderFns = [
             title: "Show collection"
           }
         },
-        [_c("i", { staticClass: "bx bx-collection m-0" })]
+        [
+          _c("i", { staticClass: "bx bx-collection m-0" }),
+          _vm._v(" "),
+          _c("p", [_vm._v("\n                Collection\n            ")])
+        ]
       ),
       _vm._v(" "),
       _c(
@@ -3413,7 +3425,11 @@ var staticRenderFns = [
             title: "Show toolbox"
           }
         },
-        [_c("i", { staticClass: "bx bx-window" })]
+        [
+          _c("i", { staticClass: "bx bx-window" }),
+          _vm._v(" "),
+          _c("p", [_vm._v("\n                Toolbox\n            ")])
+        ]
       )
     ])
   }
@@ -3651,7 +3667,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("nav", { staticClass: "navbar navbar-expand-lg navbar-light" }, [
+      _vm._m(0),
+      _vm._v(" "),
       _c("a", { staticClass: "navbar-brand d-lg-none" }, [
+        _vm._v("\n            " + _vm._s(_vm.user.name) + " "),
         _c(
           "span",
           {
@@ -3663,11 +3682,8 @@ var render = function() {
             }
           },
           [_vm._v(_vm._s(_vm.user.level))]
-        ),
-        _vm._v(" " + _vm._s(_vm.user.name) + "\n        ")
+        )
       ]),
-      _vm._v(" "),
-      _vm._m(0),
       _vm._v(" "),
       _c(
         "div",
