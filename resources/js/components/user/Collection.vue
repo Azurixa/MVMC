@@ -234,7 +234,7 @@
                                     </div>
                                 </div>
 
-                                <div class="m-2 card p-3">
+                                <div class="mx-2 mt-2 mb-0 mb-lg-2 card p-3">
                                     <h1>
                                         {{productShow.productData.brand.name}}
                                         <strong>{{productShow.productData.name}}</strong>
