@@ -23,7 +23,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary" @click="login()">
+                                <button type="submit" class="btn btn-primary" @click="login($event)">
                                     Login
                                 </button>
                             </div>
@@ -47,10 +47,12 @@
             }
         },
         methods: {
-            login() {
+            login(element) {
                 const form = new FormData();
                 form.append('username', this.formData.username);
                 form.append('password', this.formData.password);
+
+                window.buttonState(element.target, 'btn-primary', 'btn-success', '<i class=\'bx bx-loader-alt bx-spin\' ></i> Login in progress');
 
                 fetch('/api/login', {
                     method: 'POST',
@@ -67,7 +69,7 @@
                         // Redirect user
                         document.location = '/my/collection';
                     } else {
-                        console.log('BAD');
+                        window.buttonState(element.target, 'btn-success', 'btn-danger', '<i class=\'bx bx-error-circle\' ></i> Bad credentials!', 2000, 'btn-primary', 'Login');
                     }
                 });
             }

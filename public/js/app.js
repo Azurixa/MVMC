@@ -36391,6 +36391,24 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+window.buttonState = function (element, actualClass, targetClass, targetText) {
+  var time = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
+  var afterTimeoutClass = arguments.length > 5 ? arguments[5] : undefined;
+  var afterTimeoutText = arguments.length > 6 ? arguments[6] : undefined;
+  var buttonText = element.innerHTML;
+  element.classList.remove(actualClass);
+  element.classList.add(targetClass);
+  element.innerHTML = targetText; // Reset button to standard position
+
+  if (time > 0) {
+    setTimeout(function () {
+      element.classList.remove(targetClass);
+      element.classList.add(afterTimeoutClass);
+      element.innerHTML = afterTimeoutText;
+    }, time);
+  }
+};
+
 window.reloadAll = function () {
   var el = $('[data-toggle="tooltip"]');
   el.tooltip('update');

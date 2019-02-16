@@ -417,6 +417,9 @@
             <div onClick="document.getElementById('collection').toggleAttribute('show')" class="toggle-collection"
                  data-toggle="tooltip" data-placement="top" title="Show collection">
                 <i class='bx bx-collection m-0'></i>
+                <p>
+                    Collection
+                </p>
             </div>
 
             <!-- Toggle of adding new stuff (+) -->
@@ -424,6 +427,9 @@
                  data-toggle="tooltip"
                  data-placement="top" title="Show toolbox">
                 <i class='bx bx-window'></i>
+                <p>
+                    Toolbox
+                </p>
             </div>
 
         </div>

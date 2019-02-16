@@ -2,13 +2,15 @@
     <div>
 
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand d-lg-none">
-                        <span class="badge badge-info current-level" data-toggle="tooltip"
-                              data-placement="bottom" title="Current makeup level">{{user.level}}</span> {{user.name}}
-            </a>
+
             <button class="navbar-toggler" type="button" onclick="document.getElementById('navbarSupportedContent').toggleAttribute('show')">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            <a class="navbar-brand d-lg-none">
+                {{user.name}} <span class="badge badge-info current-level" data-toggle="tooltip"
+                                    data-placement="bottom" title="Current makeup level">{{user.level}}</span>
+            </a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">

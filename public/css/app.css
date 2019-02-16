@@ -10520,8 +10520,21 @@ a.text-dark:focus {
   background: #555;
 }
 
+@media screen and (max-width: 992px) {
+  .tooltip,
+  .tooltip-inner {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .navbar-brand {
+    margin-right: 0 !important;
+  }
+}
+
 .current-level {
-  background: linear-gradient(30deg, #45145A, #FF5300);
+  background: linear-gradient(30deg, #F24370, #7205FC);
 }
 
 .level-progress .progress {
@@ -10529,7 +10542,7 @@ a.text-dark:focus {
 }
 
 .level-progress .progress .progress-bar {
-  background: linear-gradient(90deg, #45145A, #FF5300);
+  background: linear-gradient(90deg, #F24370, #7205FC);
 }
 
 .progress {
@@ -10565,7 +10578,7 @@ a.text-dark:focus {
     height: calc(100vh - 60px - 16px);
     transition: 0.7s all;
     position: fixed;
-    right: -200vh;
+    left: -100%;
     width: 100%;
     top: 76px;
   }
@@ -10577,7 +10590,7 @@ a.text-dark:focus {
   .navbar-collapse[show] {
     position: absolute;
     top: 76px;
-    right: 0;
+    left: 0;
   }
 
   .navbar-collapse .navbar-nav .nav-item {
@@ -10588,7 +10601,7 @@ a.text-dark:focus {
 
 .main-box {
   position: relative;
-  height: calc(100vh - 61px - 12px - 56px);
+  height: calc(100vh - 60px - 12px - 68px);
   overflow-y: scroll;
   background-color: #f9f9f9;
 }
@@ -10601,13 +10614,11 @@ a.text-dark:focus {
   background-color: rgba(0, 0, 0, 0.5);
   overflow-y: scroll;
   transition: 0.5s all;
-  opacity: 0;
   z-index: 100;
 }
 
 .main-box .toolbox[show] {
   top: 0;
-  opacity: 1;
 }
 
 .main-box .toolbox .inside {
@@ -10620,7 +10631,6 @@ a.text-dark:focus {
   z-index: 600;
   left: -80%;
   transition: 0.8s all;
-  opacity: 0;
   background: #f1f1f1;
   width: 80%;
   height: 100%;
@@ -10631,13 +10641,12 @@ a.text-dark:focus {
 
 .main-box .collection[show] {
   left: 0;
-  opacity: 1;
 }
 
 @media screen and (max-width: 992px) {
   .main-box .collection {
-    left: -95%;
-    width: 95%;
+    left: -100%;
+    width: 100%;
   }
 }
 
@@ -10754,12 +10763,30 @@ a.text-dark:focus {
   width: 60%;
 }
 
+@media screen and (max-width: 992px) {
+  .main-box .activity-box .edit-box .form {
+    width: 90%;
+  }
+}
+
 .main-box .activity-box .product-show-placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
+}
+
+@media screen and (max-width: 992px) {
+  .main-box .activity-box .product-show-placeholder h1 {
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .main-box .activity-box .product-show-placeholder p {
+    font-size: 1rem;
+  }
 }
 
 .main-box .activity-box .product-show-placeholder h1,
@@ -10791,12 +10818,24 @@ a.text-dark:focus {
   color: black;
 }
 
+@media screen and (max-width: 992px) {
+  .main-box .activity-box .product-show h1 {
+    font-size: 1.8rem;
+  }
+}
+
 .main-box .activity-box .product-show .card {
   display: block;
 }
 
 .main-box .activity-box .product-show .card p {
   margin: 0;
+}
+
+@media screen and (max-width: 992px) {
+  .main-box .activity-box .product-show .dates {
+    font-size: 0.8rem;
+  }
 }
 
 .main-box .activity-box .product-show .stats {
@@ -10953,19 +10992,32 @@ a.text-dark:focus {
   background-color: #f1f1f1;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   width: 100%;
-  height: 55px;
+  height: 67px;
   display: flex;
   padding: 0.5rem 1rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 .footer-box .toggle-toolbox,
 .footer-box .toggle-collection {
-  background: linear-gradient(30deg, #662D8C, #ED1E79);
+  background: linear-gradient(30deg, #F24370, #7205FC);
   color: #f1f1f1;
   cursor: pointer;
-  padding: 0 0.4rem;
-  font-size: 1.7rem;
+  padding: 0.1rem 0.5rem;
+  font-size: 2.1rem;
   margin-right: 0.5rem;
   border-radius: 12px;
+  line-height: 15px;
+}
+
+.footer-box .toggle-toolbox p,
+.footer-box .toggle-collection p {
+  text-align: center;
+  font-size: 7px;
+  margin: 0;
+  position: relative;
+  top: -2px;
 }
 

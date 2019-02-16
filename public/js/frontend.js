@@ -555,6 +555,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -1092,10 +1098,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    login: function login() {
+    login: function login(element) {
       var form = new FormData();
       form.append('username', this.formData.username);
       form.append('password', this.formData.password);
+      window.buttonState(element.target, 'btn-primary', 'btn-success', '<i class=\'bx bx-loader-alt bx-spin\' ></i> Login in progress');
       fetch('/api/login', {
         method: 'POST',
         credentials: 'include',
@@ -1113,7 +1120,7 @@ __webpack_require__.r(__webpack_exports__);
 
           document.location = '/my/collection';
         } else {
-          console.log('BAD');
+          window.buttonState(element.target, 'btn-success', 'btn-danger', '<i class=\'bx bx-error-circle\' ></i> Bad credentials!', 2000, 'btn-primary', 'Login');
         }
       });
     }
@@ -1131,6 +1138,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -3398,7 +3407,11 @@ var staticRenderFns = [
             title: "Show collection"
           }
         },
-        [_c("i", { staticClass: "bx bx-collection m-0" })]
+        [
+          _c("i", { staticClass: "bx bx-collection m-0" }),
+          _vm._v(" "),
+          _c("p", [_vm._v("\n                Collection\n            ")])
+        ]
       ),
       _vm._v(" "),
       _c(
@@ -3413,7 +3426,11 @@ var staticRenderFns = [
             title: "Show toolbox"
           }
         },
-        [_c("i", { staticClass: "bx bx-window" })]
+        [
+          _c("i", { staticClass: "bx bx-window" }),
+          _vm._v(" "),
+          _c("p", [_vm._v("\n                Toolbox\n            ")])
+        ]
       )
     ])
   }
@@ -3609,7 +3626,7 @@ var render = function() {
                     attrs: { type: "submit" },
                     on: {
                       click: function($event) {
-                        _vm.login()
+                        _vm.login($event)
                       }
                     }
                   },
@@ -3651,7 +3668,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("nav", { staticClass: "navbar navbar-expand-lg navbar-light" }, [
+      _vm._m(0),
+      _vm._v(" "),
       _c("a", { staticClass: "navbar-brand d-lg-none" }, [
+        _vm._v("\n            " + _vm._s(_vm.user.name) + " "),
         _c(
           "span",
           {
@@ -3663,11 +3683,8 @@ var render = function() {
             }
           },
           [_vm._v(_vm._s(_vm.user.level))]
-        ),
-        _vm._v(" " + _vm._s(_vm.user.name) + "\n        ")
+        )
       ]),
-      _vm._v(" "),
-      _vm._m(0),
       _vm._v(" "),
       _c(
         "div",
