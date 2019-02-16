@@ -12,6 +12,7 @@ use App\Product;
 use App\Brand;
 use App\User;
 use Illuminate\Support\Facades\Storage;
+use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 
 class ApiController extends Controller
 {
@@ -263,6 +264,7 @@ class ApiController extends Controller
         $image = $request->file('photo');
         $name = $userId . '_' . $id . '_' . str_slug($image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
         $image->storeAs('public/products', $name);
+        ImageOptimizer::optimize(base_path('storage/app/public/products/'.$name));
 
         Product::addPhoto($id, $name);
 
