@@ -473,9 +473,10 @@
   height: 67px;
   display: flex;
   padding: .5rem 1rem;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: 900000;
 
   .toggle-toolbox, .toggle-collection {
     background: linear-gradient(30deg, $dark, $darker);
