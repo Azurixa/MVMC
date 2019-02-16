@@ -10534,7 +10534,7 @@ a.text-dark:focus {
 }
 
 .current-level {
-  background: linear-gradient(30deg, #45145A, #FF5300);
+  background: linear-gradient(30deg, #F24370, #7205FC);
 }
 
 .level-progress .progress {
@@ -10542,7 +10542,7 @@ a.text-dark:focus {
 }
 
 .level-progress .progress .progress-bar {
-  background: linear-gradient(90deg, #45145A, #FF5300);
+  background: linear-gradient(90deg, #F24370, #7205FC);
 }
 
 .progress {
@@ -11000,7 +11000,7 @@ a.text-dark:focus {
 
 .footer-box .toggle-toolbox,
 .footer-box .toggle-collection {
-  background: linear-gradient(30deg, #662D8C, #ED1E79);
+  background: linear-gradient(30deg, #F24370, #7205FC);
   color: #f1f1f1;
   cursor: pointer;
   padding: 0.1rem 0.5rem;

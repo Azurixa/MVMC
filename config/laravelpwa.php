@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'name' => 'LaravelPWA',
+    'name' => 'My Makeup Collection',
     'manifest' => [
-        'name' => env('APP_NAME', 'Project Pan'),
-        'short_name' => 'PP',
-        'start_url' => '/',
+        'name' => env('APP_NAME', 'My Makeup Collection'),
+        'short_name' => 'Makeup Collection',
+        'start_url' => '/my/collection',
         'background_color' => '#f1f1f1',
-        'theme_color' => '#000000',
+        'theme_color' => '#f1f1f1',
         'display' => 'standalone',
         'orientation'=> 'portrait',
         'icons' => [
