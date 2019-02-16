@@ -10614,13 +10614,11 @@ a.text-dark:focus {
   background-color: rgba(0, 0, 0, 0.5);
   overflow-y: scroll;
   transition: 0.5s all;
-  opacity: 0;
   z-index: 100;
 }
 
 .main-box .toolbox[show] {
   top: 0;
-  opacity: 1;
 }
 
 .main-box .toolbox .inside {
@@ -10633,7 +10631,6 @@ a.text-dark:focus {
   z-index: 600;
   left: -80%;
   transition: 0.8s all;
-  opacity: 0;
   background: #f1f1f1;
   width: 80%;
   height: 100%;
@@ -10644,7 +10641,6 @@ a.text-dark:focus {
 
 .main-box .collection[show] {
   left: 0;
-  opacity: 1;
 }
 
 @media screen and (max-width: 992px) {
@@ -10765,6 +10761,12 @@ a.text-dark:focus {
 
 .main-box .activity-box .edit-box .form {
   width: 60%;
+}
+
+@media screen and (max-width: 992px) {
+  .main-box .activity-box .edit-box .form {
+    width: 90%;
+  }
 }
 
 .main-box .activity-box .product-show-placeholder {
@@ -10993,7 +10995,7 @@ a.text-dark:focus {
   height: 67px;
   display: flex;
   padding: 0.5rem 1rem;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
 }

@@ -122,11 +122,9 @@
     background-color: rgba(0, 0, 0, 0.5);
     overflow-y: scroll;
     transition: 0.5s all;
-    opacity: 0;
     z-index: 100;
     &[show] {
       top: 0;
-      opacity: 1;
     }
 
     .inside {
@@ -141,7 +139,6 @@
     z-index: 600;
     left: -80%;
     transition: 0.8s all;
-    opacity: 0;
     background: #f1f1f1;
     width: 80%;
     height: 100%;
@@ -150,7 +147,6 @@
     border-right: 2px solid rgba(0, 0, 0, 0.1);
     &[show] {
       left: 0;
-      opacity: 1;
     }
     @media screen and (max-width: 992px) {
       left: -100%;
@@ -260,6 +256,9 @@
       justify-content: center;
       .form {
         width: 60%;
+        @media screen and (max-width: 992px) {
+          width: 90%;
+        }
       }
     }
 
@@ -475,7 +474,7 @@
   height: 67px;
   display: flex;
   padding: .5rem 1rem;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
 
