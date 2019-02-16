@@ -6,6 +6,21 @@
 
 require('./bootstrap');
 
+window.buttonState = (element, actualClass, targetClass, targetText, time = 0, afterTimeoutClass, afterTimeoutText) => {
+    const buttonText = element.innerHTML;
+    element.classList.remove(actualClass);
+    element.classList.add(targetClass);
+    element.innerHTML = targetText;
+    // Reset button to standard position
+    if (time > 0) {
+        setTimeout(() => {
+            element.classList.remove(targetClass);
+            element.classList.add(afterTimeoutClass);
+            element.innerHTML = afterTimeoutText;
+        }, time);
+    }
+}
+
 window.reloadAll = () => {
     const el = $('[data-toggle="tooltip"]');
     el.tooltip('update');

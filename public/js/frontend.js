@@ -1098,10 +1098,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    login: function login() {
+    login: function login(element) {
       var form = new FormData();
       form.append('username', this.formData.username);
       form.append('password', this.formData.password);
+      window.buttonState(element.target, 'btn-primary', 'btn-success', '<i class=\'bx bx-loader-alt bx-spin\' ></i> Login in progress');
       fetch('/api/login', {
         method: 'POST',
         credentials: 'include',
@@ -1119,7 +1120,7 @@ __webpack_require__.r(__webpack_exports__);
 
           document.location = '/my/collection';
         } else {
-          console.log('BAD');
+          window.buttonState(element.target, 'btn-success', 'btn-danger', '<i class=\'bx bx-error-circle\' ></i> Bad credentials!', 2000, 'btn-primary', 'Login');
         }
       });
     }
@@ -3625,7 +3626,7 @@ var render = function() {
                     attrs: { type: "submit" },
                     on: {
                       click: function($event) {
-                        _vm.login()
+                        _vm.login($event)
                       }
                     }
                   },
