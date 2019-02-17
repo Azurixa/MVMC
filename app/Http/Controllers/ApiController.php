@@ -77,7 +77,7 @@ class ApiController extends Controller
             'creator_id' => $userId,
             'id'         => $id
         ])->delete();
-        Product::where('category_id', $id)->delete();
+        Product::where('category_id', $id)->orderby('name')->delete();
 
         return json_encode(['message' => 'Category ' . $id . ' for user ' . $userId . ' and all products inside deleted!']);
     }
@@ -89,7 +89,7 @@ class ApiController extends Controller
     public function getCategories (Request $request)
     {
         $userId = $request->user()->id;
-        return Category::where('creator_id', $userId)->get();
+        return Category::where('creator_id', $userId)->orderby('name')->get();
     }
 
     /**
@@ -342,6 +342,7 @@ class ApiController extends Controller
     public function getAllProducts (Request $request)
     {
         $userId = $request->user()->id;
+        $allProductsCount = 0;
 
         $toReturn = array();
 
@@ -367,6 +368,7 @@ class ApiController extends Controller
                     'pan'              => $product['pan'],
                     'thumbnail'        => Product::getThumbnail($product['id'])
                 ]);
+                $allProductsCount++;
             }
             array_push($toReturn, [
                 'category' => $cat,

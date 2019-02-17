@@ -78,10 +78,10 @@
             </div>
 
             <div class="collection" id="collection">
-                <p class="header">My collection</p>
+                <p class="header">My collection ({{allProductsCount}})</p>
                 <div class="category" v-for="item in allProducts">
                     <span onClick="this.nextSibling.nextSibling.toggleAttribute('show')" class="category">
-                        <i class='bx bx-sort'></i> {{item.category.name}}
+                        <i class='bx bx-sort'></i> {{item.category.name}} ({{item.products.length}})
                     </span>
                     <div class="row">
                         <div class="col-lg-3 col-6 product" v-for="product in item.products"
@@ -457,6 +457,7 @@
             return {
                 token: localStorage.getItem('token'),
                 allProducts: {},
+                allProductsCount: 0,
                 categories: {},
                 brands: {},
                 formData: {
@@ -622,7 +623,15 @@
                     headers: {
                         'Authorization': this.token,
                     },
-                }).then(res => res.json()).then(data => this.allProducts = data);
+                }).then(res => res.json()).then(data => {
+                    this.allProducts = data;
+
+                    let count = 0;
+                    this.allProducts.forEach( item => {
+                        count += item.products.length;
+                    });
+                    this.allProductsCount = count;
+                });
             },
 
             showItem(itemId) {

@@ -580,6 +580,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       token: localStorage.getItem('token'),
       allProducts: {},
+      allProductsCount: 0,
       categories: {},
       brands: {},
       formData: {
@@ -777,7 +778,14 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         return res.json();
       }).then(function (data) {
-        return _this10.allProducts = data;
+        _this10.allProducts = data;
+        var count = 0;
+
+        _this10.allProducts.forEach(function (item) {
+          count += item.products.length;
+        });
+
+        _this10.allProductsCount = count;
       });
     },
     showItem: function showItem(itemId) {
@@ -2084,7 +2092,9 @@ var render = function() {
         "div",
         { staticClass: "collection", attrs: { id: "collection" } },
         [
-          _c("p", { staticClass: "header" }, [_vm._v("My collection")]),
+          _c("p", { staticClass: "header" }, [
+            _vm._v("My collection (" + _vm._s(_vm.allProductsCount) + ")")
+          ]),
           _vm._v(" "),
           _vm._l(_vm.allProducts, function(item) {
             return _c("div", { staticClass: "category" }, [
@@ -2100,7 +2110,11 @@ var render = function() {
                 [
                   _c("i", { staticClass: "bx bx-sort" }),
                   _vm._v(
-                    " " + _vm._s(item.category.name) + "\n                "
+                    " " +
+                      _vm._s(item.category.name) +
+                      " (" +
+                      _vm._s(item.products.length) +
+                      ")\n                "
                   )
                 ]
               ),
