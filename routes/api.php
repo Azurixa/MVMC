@@ -37,6 +37,7 @@ Route::middleware('auth:api')->get('/user/product/{id}', 'ApiController@getProdu
 
 // Editing
 Route::middleware('auth:api')->post('/user/update/product/{id}/addPhoto', 'ApiController@addPhoto');
+Route::middleware('auth:api')->post('/user/update/product/{id}/setFirstPhoto/{photoIndex}', 'ApiController@setFirstPhoto');
 Route::middleware('auth:api')->post('/user/update/product/{id}/useAdd', 'ApiController@useAdd');
 Route::middleware('auth:api')->post('/user/update/product/{id}/{field}', 'ApiController@updateProduct');
 

@@ -206,6 +206,10 @@
                                              @click="removePhoto(productShow.productData.photos.length - index - 1)">
                                             <i class='bx bxs-trash'></i>
                                         </div>
+                                        <div class="first close"
+                                             @click="setFirstPhoto(productShow.productData.photos.length - index - 1)">
+                                            <i class='bx bx-first-page'></i>
+                                        </div>
                                     </div>
 
                                     <!-- New photo input box -->
@@ -825,6 +829,16 @@
             },
             removePhoto(photoIndex) {
                 fetch('/api/user/delete/product/' + this.productShow.productData.id + '/photo/' + photoIndex, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': this.token,
+                    },
+                }).then(res => res.json()).then(data => {
+                    this.showItem(this.productShow.productData.id);
+                });
+            },
+            setFirstPhoto(photoIndex) {
+                fetch('/api/user/update/product/' + this.productShow.productData.id + '/setFirstPhoto/' + photoIndex, {
                     method: 'POST',
                     headers: {
                         'Authorization': this.token,

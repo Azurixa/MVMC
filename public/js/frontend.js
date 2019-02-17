@@ -564,6 +564,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -1017,6 +1021,20 @@ __webpack_require__.r(__webpack_exports__);
         return res.json();
       }).then(function (data) {
         _this17.showItem(_this17.productShow.productData.id);
+      });
+    },
+    setFirstPhoto: function setFirstPhoto(photoIndex) {
+      var _this18 = this;
+
+      fetch('/api/user/update/product/' + this.productShow.productData.id + '/setFirstPhoto/' + photoIndex, {
+        method: 'POST',
+        headers: {
+          'Authorization': this.token
+        }
+      }).then(function (res) {
+        return res.json();
+      }).then(function (data) {
+        _this18.showItem(_this18.productShow.productData.id);
       });
     }
   }
@@ -2720,6 +2738,24 @@ var render = function() {
                                 }
                               },
                               [_c("i", { staticClass: "bx bxs-trash" })]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "first close",
+                                on: {
+                                  click: function($event) {
+                                    _vm.setFirstPhoto(
+                                      _vm.productShow.productData.photos
+                                        .length -
+                                        index -
+                                        1
+                                    )
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "bx bx-first-page" })]
                             )
                           ]
                         )

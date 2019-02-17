@@ -296,6 +296,46 @@ class ApiController extends Controller
      * @param Request $request
      * @return string
      */
+    public function setFirstPhoto ($id, $photoIndex, Request $request)
+    {
+        $userId = $request->user()->id;
+
+        $product = Product::where([
+            'creator_id' => $userId,
+            'id'         => $id
+        ])->first();
+
+        $newPhotos = '';
+
+        $productPhotos = Product::getPhotos($id, true);
+        //array_reverse($productPhotos);
+
+        if ((count($productPhotos) - 1) > 0) {
+            foreach ($productPhotos as $index => $photo) {
+                if ($index != $photoIndex) {
+                    if ($index != (count($productPhotos) - 1) || $index != 0) {
+                        $newPhotos .= $photo . ';';
+                    } else {
+                        $newPhotos .= $photo;
+                    }
+                }
+            }
+        }
+        $newPhotos .= $productPhotos[$photoIndex];
+        $product->photos = $newPhotos;
+        $product->save();
+
+        User::addExperience($userId, 5);
+
+        return json_encode(['message' => 'Photo of index ' . $photoIndex . ' from item ' . $id . ' set ti first position!']);
+    }
+
+    /**
+     * @param $id
+     * @param $photoIndex
+     * @param Request $request
+     * @return string
+     */
     public function deleteProductPhoto ($id, $photoIndex, Request $request)
     {
         $userId = $request->user()->id;

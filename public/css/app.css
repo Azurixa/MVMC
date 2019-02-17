@@ -10987,6 +10987,22 @@ a.text-dark:focus {
   color: black;
 }
 
+.main-box .activity-box .product-show .gallery .gallery-image .first {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  line-height: 1px;
+  display: block;
+  position: absolute;
+  bottom: 9px;
+  right: 42px;
+  font-size: 1.2rem;
+  padding: 4px;
+  border-radius: 50%;
+  background-color: white;
+  color: black;
+}
+
 .footer-box {
   background-color: #f1f1f1;
   border-top: 1px solid rgba(0, 0, 0, 0.1);

@@ -460,6 +460,19 @@
             background-color: white;
             color: black;
           }
+          .first{
+            height: fit-content;
+            line-height: 1px;
+            display: block;
+            position: absolute;
+            bottom: 9px;
+            right: 42px;
+            font-size: 1.2rem;
+            padding: 4px;
+            border-radius: 50%;
+            background-color: white;
+            color: black;
+          }
         }
       }
     }
