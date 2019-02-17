@@ -210,13 +210,16 @@
 
                                     <!-- New photo input box -->
                                     <div class="gallery-image new" onclick="gallery(this)">
-                                        <div>
+                                        <div v-show="!productShow.editForm.photoSending">
                                             <h2>Add new photo</h2>
                                             <div class="">
                                                 <input class="mb-3" type="file" id="file" ref="file"
                                                        @change="handleFileUpload()">
                                             </div>
                                             <button @click="addPhoto()"><i class="bx bx-plus"></i> Add photo</button>
+                                        </div>
+                                        <div v-show="productShow.editForm.photoSending">
+                                            <h2><i class='bx bx-loader-alt bx-spin' ></i> Sending photo</h2>
                                         </div>
                                     </div>
 
@@ -490,6 +493,7 @@
                         remainingAmountVisible: false,
                         boughtAtVisible: false,
                         expireMonthsVisible: false,
+                        photoSending: false,
                         whatEditing: '',
                         file: '',
                         value: '',
@@ -802,6 +806,7 @@
                 this.productShow.editForm.file = this.$refs.file.files[0];
             },
             addPhoto() {
+                this.productShow.editForm.photoSending = true;
                 const formData = new FormData();
                 formData.append('photo', this.productShow.editForm.file);
                 fetch('/api/user/update/product/' + this.productShow.productData.id + '/addPhoto', {
@@ -815,6 +820,7 @@
                     this.productShow.editForm.file = '';
                     this.showItem(this.productShow.productData.id);
                     this.getCategoriesAndProducts();
+                    this.productShow.editForm.photoSending = false;
                 });
             },
             removePhoto(photoIndex) {

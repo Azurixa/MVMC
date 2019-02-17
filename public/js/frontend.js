@@ -561,6 +561,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -613,6 +616,7 @@ __webpack_require__.r(__webpack_exports__);
           remainingAmountVisible: false,
           boughtAtVisible: false,
           expireMonthsVisible: false,
+          photoSending: false,
           whatEditing: '',
           file: '',
           value: ''
@@ -979,6 +983,7 @@ __webpack_require__.r(__webpack_exports__);
     addPhoto: function addPhoto() {
       var _this16 = this;
 
+      this.productShow.editForm.photoSending = true;
       var formData = new FormData();
       formData.append('photo', this.productShow.editForm.file);
       fetch('/api/user/update/product/' + this.productShow.productData.id + '/addPhoto', {
@@ -996,6 +1001,8 @@ __webpack_require__.r(__webpack_exports__);
         _this16.showItem(_this16.productShow.productData.id);
 
         _this16.getCategoriesAndProducts();
+
+        _this16.productShow.editForm.photoSending = false;
       });
     },
     removePhoto: function removePhoto(photoIndex) {
@@ -2725,37 +2732,67 @@ var render = function() {
                           attrs: { onclick: "gallery(this)" }
                         },
                         [
-                          _c("div", [
-                            _c("h2", [_vm._v("Add new photo")]),
-                            _vm._v(" "),
-                            _c("div", {}, [
-                              _c("input", {
-                                ref: "file",
-                                staticClass: "mb-3",
-                                attrs: { type: "file", id: "file" },
-                                on: {
-                                  change: function($event) {
-                                    _vm.handleFileUpload()
-                                  }
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: !_vm.productShow.editForm.photoSending,
+                                  expression:
+                                    "!productShow.editForm.photoSending"
                                 }
-                              })
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                on: {
-                                  click: function($event) {
-                                    _vm.addPhoto()
-                                  }
-                                }
-                              },
-                              [
-                                _c("i", { staticClass: "bx bx-plus" }),
-                                _vm._v(" Add photo")
                               ]
-                            )
-                          ])
+                            },
+                            [
+                              _c("h2", [_vm._v("Add new photo")]),
+                              _vm._v(" "),
+                              _c("div", {}, [
+                                _c("input", {
+                                  ref: "file",
+                                  staticClass: "mb-3",
+                                  attrs: { type: "file", id: "file" },
+                                  on: {
+                                    change: function($event) {
+                                      _vm.handleFileUpload()
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  on: {
+                                    click: function($event) {
+                                      _vm.addPhoto()
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", { staticClass: "bx bx-plus" }),
+                                  _vm._v(" Add photo")
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.productShow.editForm.photoSending,
+                                  expression:
+                                    "productShow.editForm.photoSending"
+                                }
+                              ]
+                            },
+                            [_vm._m(2)]
+                          )
                         ]
                       )
                     ],
@@ -3212,7 +3249,7 @@ var render = function() {
                                   }
                                 }
                               },
-                              [_vm._m(2)]
+                              [_vm._m(3)]
                             ),
                             _vm._v(" "),
                             _c(
@@ -3238,7 +3275,7 @@ var render = function() {
                                   }
                                 }
                               },
-                              [_vm._m(3)]
+                              [_vm._m(4)]
                             ),
                             _vm._v(" "),
                             _c(
@@ -3374,7 +3411,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(4)
+    _vm._m(5)
   ])
 }
 var staticRenderFns = [
@@ -3405,6 +3442,15 @@ var staticRenderFns = [
         _c("i", { staticClass: "bx bx-chevron-down" }),
         _vm._v(" Show collection / add new items\n                    ")
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h2", [
+      _c("i", { staticClass: "bx bx-loader-alt bx-spin" }),
+      _vm._v(" Sending photo")
     ])
   },
   function() {
