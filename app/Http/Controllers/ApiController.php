@@ -305,7 +305,7 @@ class ApiController extends Controller
             'id'         => $id
         ])->first();
 
-        $newPhotos = '';
+        $newPhotos = null;
 
         $productPhotos = Product::getPhotos($id, true);
         //array_reverse($productPhotos);
