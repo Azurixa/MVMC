@@ -313,7 +313,7 @@ class ApiController extends Controller
         if (count($productPhotos) > 0) {
             foreach ($productPhotos as $index => $photo) {
                 if ($index != $photoIndex) {
-                    if ($index != (count($productPhotos) - 1)) {
+                    if ($index != (count($productPhotos) - 1) || $index != 0) {
                         $newPhotos .= $photo . ';';
                     } else {
                         $newPhotos .= $photo;
