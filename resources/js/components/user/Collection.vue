@@ -218,8 +218,8 @@
                                             </div>
                                             <button @click="addPhoto()"><i class="bx bx-plus"></i> Add photo</button>
                                         </div>
-                                        <div v-show="productShow.editForm.photoSending">
-                                            <h2><i class='bx bx-loader-alt bx-spin' ></i> Sending photo</h2>
+                                        <div v-show="productShow.editForm.photoSending" class="m-0">
+                                            <h2 class="m-0"><i class='bx bx-loader-alt bx-spin' ></i> Sending photo</h2>
                                         </div>
                                     </div>
 

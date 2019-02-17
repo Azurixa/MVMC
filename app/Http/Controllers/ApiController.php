@@ -152,7 +152,7 @@ class ApiController extends Controller
         $categoryId = $request->post('categoryId');
         $brandId = $request->post('brandId');
         $description = $request->post('description');
-        $photos = $request->post('photo');
+        //$photos = $request->post('photo');
 
         // Create new product
         $product = new Product;
@@ -161,7 +161,7 @@ class ApiController extends Controller
         $product->brand_id = $brandId;
         $product->name = $name;
         $product->description = $description;
-        $product->photos = $photos;
+        $product->photos = '';
         $product->save();
 
         User::addExperience($userId, 50);
@@ -305,7 +305,7 @@ class ApiController extends Controller
             'id'         => $id
         ])->first();
 
-        $newPhotos = null;
+        $newPhotos = '';
 
         $productPhotos = Product::getPhotos($id, true);
         //array_reverse($productPhotos);

@@ -37,7 +37,7 @@ class Product extends Model
     {
         $product = Product::find($id);
         $photos = explode(';', $product->photos);
-        if ((count($photos) - 1) > 0) {
+        if ((count($photos)) > 0 && $photos[0] !== '') {
             $ph = explode(':', $photos[count($photos) - 1]);
             return 'storage/products/'.$ph[0];
         }

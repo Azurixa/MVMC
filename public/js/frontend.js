@@ -2789,7 +2789,8 @@ var render = function() {
                                   expression:
                                     "productShow.editForm.photoSending"
                                 }
-                              ]
+                              ],
+                              staticClass: "m-0"
                             },
                             [_vm._m(2)]
                           )
@@ -3448,7 +3449,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h2", [
+    return _c("h2", { staticClass: "m-0" }, [
       _c("i", { staticClass: "bx bx-loader-alt bx-spin" }),
       _vm._v(" Sending photo")
     ])
