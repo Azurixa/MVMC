@@ -54,11 +54,7 @@ class Product extends Model
 
         if (!empty($photos)){
             foreach ($photos as $index => $photo) {
-                if ($index != 0) {
-                    $photosString .= $photo;
-                } else {
-                    $photosString .= $photo . ';';
-                }
+                $photosString .= $photo . ';';
             }
         }
 
