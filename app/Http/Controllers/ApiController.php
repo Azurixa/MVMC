@@ -58,7 +58,7 @@ class ApiController extends Controller
         $category->name = $categoryName;
         $category->save();
 
-        User::addExperience($userId, 2);
+        User::addExperience($userId, 20);
 
         return json_encode(['message' => 'Category ' . $categoryName . ' for user ' . $userId . ' created!']);
     }
@@ -107,7 +107,7 @@ class ApiController extends Controller
         $brand->name = $name;
         $brand->save();
 
-        User::addExperience($userId, 2);
+        User::addExperience($userId, 20);
 
         return json_encode(['message' => 'Brand ' . $name . ' for user ' . $userId . ' created!']);
     }
@@ -164,7 +164,7 @@ class ApiController extends Controller
         $product->photos = $photos;
         $product->save();
 
-        User::addExperience($userId, 5);
+        User::addExperience($userId, 50);
 
         return json_encode(['message' => 'Product ' . $name . ' for category ' . $categoryId . ' created!']);
     }
@@ -247,7 +247,7 @@ class ApiController extends Controller
         $product->last_use = $currentTimestamp = Carbon::now()->toDateTimeString();
         $product->save();
 
-        User::addExperience($userId, 1);
+        User::addExperience($userId, 3);
 
         return json_encode(['message' => 'Use count++ for product ' . $id . '!']);
     }
@@ -267,6 +267,7 @@ class ApiController extends Controller
         ImageOptimizer::optimize(base_path('storage/app/public/products/'.$name));
 
         Product::addPhoto($id, $name);
+        User::addExperience($userId, 9);
 
         return json_encode(['message' => $image->getClientOriginalName()]);
     }
@@ -328,6 +329,8 @@ class ApiController extends Controller
         }
         $product->photos = $newPhotos;
         $product->save();
+
+        User::addExperience($userId, -9);
 
         return json_encode(['message' => 'Photo of index ' . $photoIndex . ' from item ' . $id . ' removed!']);
     }
