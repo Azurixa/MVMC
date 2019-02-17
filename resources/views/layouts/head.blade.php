@@ -38,14 +38,14 @@
 <title>Pan etc</title>
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js?v=0.56') }}" defer></script>
-<script src="{{ asset('js/frontend.js?v=0.56') }}" defer></script>
+<script src="{{ asset('js/app.js?v=0.57') }}" defer></script>
+<script src="{{ asset('js/frontend.js?v=0.57') }}" defer></script>
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}" defer></script>
 
 <!-- Fonts -->
 <link href='https://cdn.jsdelivr.net/npm/boxicons@1.9.1/css/boxicons.min.css' rel='stylesheet'>
 
 <!-- Styles -->
-<link href="{{ asset('css/app.css?v=0.77') }}" rel="stylesheet">
+<link href="{{ asset('css/app.css?v=0.78') }}" rel="stylesheet">
 <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ asset('css/animate.min.css') }}" rel="stylesheet">

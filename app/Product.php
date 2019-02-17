@@ -24,7 +24,7 @@ class Product extends Model
             }
             array_push($imagesReturnBare, $photo);
         }
-        if ($product->photos !== '') {
+        if ($product->photos !== '' && $product->photos !== null) {
             if ($bare) {
                 return $imagesReturnBare;
             }
@@ -52,8 +52,14 @@ class Product extends Model
         $photosString = '';
         $date = date('d.m.Y');
 
-        foreach ($photos as $index => $photo) {
-            $photosString .= $photo . ';';
+        if (!empty($photos)){
+            foreach ($photos as $index => $photo) {
+                if ($index != 0) {
+                    $photosString .= $photo;
+                } else {
+                    $photosString .= $photo . ';';
+                }
+            }
         }
 
         $photosString .= $photoName . ':' . $date;
