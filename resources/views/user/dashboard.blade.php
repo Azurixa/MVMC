@@ -1,9 +1,6 @@
-@extends('layouts.application')
+@extends('layouts.app')
 
 @section('content')
-
-    {{-- Vue component --}}
-    <navbar></navbar>
 
     <h1>
         This is user dashboard!

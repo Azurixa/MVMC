@@ -15,6 +15,8 @@ Route::get('/', 'PagesController@index');
 
 Auth::routes();
 
+Route::get('admin/dashboard', 'AdminController@dashboard');
+
 Route::get('my/dashboard', 'UsersController@dashboard')->name('home');
 Route::get('my/collection', 'UsersController@collection');
 Route::get('/logout', 'UsersController@logout');

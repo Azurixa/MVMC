@@ -1,9 +1,6 @@
-@extends('layouts.application')
+@extends('layouts.app')
 
 @section('content')
-
-    {{-- Vue component --}}
-    <navbar></navbar>
 
     {{-- Vue component --}}
     <collection></collection>
