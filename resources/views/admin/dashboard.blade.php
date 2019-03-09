@@ -2,6 +2,7 @@
 
 @section('content')
 
-    <home></home>
+    <h1>This is admin panel</h1>
 
 @endsection
+

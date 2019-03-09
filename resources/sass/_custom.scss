@@ -28,11 +28,13 @@
     display: none !important;
   }
 }
-.navbar-brand{
+
+.navbar-brand {
   @media screen and (max-width: 992px) {
     margin-right: 0 !important;
   }
 }
+
 .current-level {
   background: linear-gradient(30deg, $dark, $darker);
 }
@@ -42,19 +44,16 @@
     border-radius: 0 !important;
 
     .progress-bar {
-      background: linear-gradient(90deg, $dark, $darker );
+      background: linear-gradient(90deg, $dark, $darker);
     }
   }
 }
 
 .progress {
   border-radius: 12px !important;
-  &.amount {
-    border-radius: 0 !important;
 
-    .progress-bar {
-      background: linear-gradient(90deg, #662D8C, #ED1E79);
-    }
+  .progress-bar {
+    background: linear-gradient(90deg, #662D8C, #ED1E79);
   }
 
   .progress-bar {
@@ -143,7 +142,6 @@
     width: 80%;
     height: 100%;
     overflow-y: scroll;
-    border-right: 2px solid rgba(0, 0, 0, 0.1);
     &[show] {
       left: 0;
     }
@@ -154,7 +152,7 @@
 
     .header {
       font-size: 2.2rem;
-      padding: 1.2rem 2rem;
+      padding: 1.2rem 1rem;
       @media screen and (max-width: 992px) {
         font-size: 1.9rem;
       }
@@ -166,7 +164,7 @@
         cursor: pointer;
         display: block;
         transition: 0.3s all;
-        padding: 0.7rem 2rem;
+        padding: 0.7rem 1rem;
         @media screen and (max-width: 992px) {
           font-size: 1.4rem;
         }
@@ -196,17 +194,33 @@
         &:hover {
           background-color: rgba(0, 0, 0, 0.1);
         }
+        &.empty {
+          .thumbnail {
+            filter: grayscale(100%);
+          }
+        }
 
         .thumbnail {
           background-color: #606f7b;
-          width: 90%;
-          height: 140px;
-          margin: 0 auto;
+          width: 84px;
+          height: 84px;
+          margin-right: 1rem;
+          margin-left: auto;
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
+          border-radius: 14px;
           @media screen and (max-width: 992px) {
-            height: 110px;
+            width: 80px;
+            height: 80px;
+          }
+        }
+
+        .info {
+          width: 75%;
+          margin-left: auto;
+          @media screen and (max-width: 992px) {
+            width: 81%;
           }
         }
 
@@ -219,14 +233,13 @@
         }
 
         .amount {
-          width: 90%;
           margin: 0 auto;
-          border-radius: 0;
-          height: 7px;
+          height: 10px;
+          border-radius: 6px;
 
           .progress-bar {
-            border-radius: 0;
-            height: 7px;
+            height: 10px;
+            border-radius: 6px;
           }
         }
 
@@ -267,13 +280,13 @@
       justify-content: center;
       width: 100%;
       height: 100%;
-      h1{
-        @media screen and (max-width: 992px){
+      h1 {
+        @media screen and (max-width: 992px) {
           font-size: 1.4rem;
         }
       }
-      p{
-        @media screen and (max-width: 992px){
+      p {
+        @media screen and (max-width: 992px) {
           font-size: 1rem;
         }
       }
@@ -304,8 +317,8 @@
       }
 
       // Brand + product name
-      h1{
-        @media screen and (max-width: 992px){
+      h1 {
+        @media screen and (max-width: 992px) {
           font-size: 1.8rem;
         }
       }
@@ -318,8 +331,8 @@
         }
       }
 
-      .dates{
-        @media screen and (max-width: 992px){
+      .dates {
+        @media screen and (max-width: 992px) {
           font-size: 0.8rem;
         }
       }
@@ -400,6 +413,24 @@
           overflow: hidden;
           transition: all 0.3s;
           cursor: pointer;
+          width: 0%;
+          &.active {
+            width: 60%;
+            opacity: 1;
+          }
+          &.secondary {
+            width: 20%;
+            opacity: 0.3;
+            .date {
+              display: none;
+            }
+            .delete {
+              display: none;
+            }
+            .first {
+              display: none;
+            }
+          }
           &.new {
             cursor: default;
             background-color: white;
@@ -460,7 +491,7 @@
             background-color: white;
             color: black;
           }
-          .first{
+          .first {
             height: fit-content;
             line-height: 1px;
             display: block;
@@ -500,7 +531,7 @@
     margin-right: 0.5rem;
     border-radius: 12px;
     line-height: 15px;
-    p{
+    p {
       text-align: center;
       font-size: 7px;
       margin: 0;

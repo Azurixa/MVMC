@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    @include('layouts.head')
+    @include('modules.head')
 </head>
 <body>
 <div id="app">
@@ -9,9 +9,13 @@
     <main>
 
         @guest
-            <guest-navbar></guest-navbar>
+            <navbar level=0></navbar>
         @else
-            <navbar></navbar>
+            @if(Auth::user()->permissions > 9)
+                <navbar level=2></navbar>
+            @else
+                <navbar level=1></navbar>
+            @endif
         @endguest
 
         @yield('content')

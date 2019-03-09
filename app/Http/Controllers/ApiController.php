@@ -13,6 +13,7 @@ use App\Brand;
 use App\User;
 use Illuminate\Support\Facades\Storage;
 use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ApiController extends Controller
 {
@@ -187,8 +188,8 @@ class ApiController extends Controller
         $product->$field = $request->post('value');
         $product->save();
 
-        if($field === 'pan') {
-            if($request->post('value') == 1) {
+        if ($field === 'pan') {
+            if ($request->post('value') == 1) {
                 User::addExperience($userId, 3);
             } else {
                 User::addExperience($userId, -3);
@@ -228,7 +229,7 @@ class ApiController extends Controller
             'pan'               => $product->pan,
             'bought_at'         => date('d.m.Y', strtotime($product->bought_at)),
             'expire_months'     => $product->expire_months,
-            'expire_date'       => date('d.m.Y', (strtotime($product->bought_at) + 60*60*24*30*$product->expire_months))
+            'expire_date'       => date('d.m.Y', (strtotime($product->bought_at) + 60 * 60 * 24 * 30 * $product->expire_months))
         ];
 
         return $toReturn;
@@ -264,12 +265,17 @@ class ApiController extends Controller
         $image = $request->file('photo');
         $name = $userId . '_' . $id . '_' . str_slug($image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
         $image->storeAs('public/products', $name);
-        ImageOptimizer::optimize(base_path('storage/app/public/products/'.$name));
+
+
+        ImageOptimizer::optimize(base_path('storage/app/public/products/' . $name));
+
+        // Create thumbnail
+        Image::make($image->getRealPath())->resize(null, 300, function ($constraint){$constraint->aspectRatio();})->save(public_path('storage/products/thumbnail_' . $name));
 
         Product::addPhoto($id, $name);
         User::addExperience($userId, 9);
 
-        return json_encode(['message' => $image->getClientOriginalName()]);
+        return json_encode(['message' => base_path('storage/app/public/products/' . $name)]);
     }
 
     /**
@@ -322,6 +328,16 @@ class ApiController extends Controller
             }
         }
         $newPhotos .= $productPhotos[$photoIndex];
+
+        if (!file_exists(base_path('storage/app/public/products/thumbnail_' . explode(':', $productPhotos[$photoIndex])[0]))) {
+
+            $fileName = base_path('storage/app/public/products/' . explode(':', $productPhotos[$photoIndex])[0]);
+            $file = fopen($fileName, 'r');
+
+            Image::make($file)->resize(null, 300, function ($constraint){$constraint->aspectRatio();})->save(public_path('storage/products/thumbnail_' . explode(':', $productPhotos[$photoIndex])[0]));
+
+        }
+
         $product->photos = $newPhotos;
         $product->save();
 
@@ -363,7 +379,8 @@ class ApiController extends Controller
                         $newPhotos = substr($newPhotos, 0, (strlen($newPhotos) - 1));
                     }
                     $name = explode(':', $photo)[0];
-                    Storage::delete('public/products/'.$name);
+                    Storage::delete('public/products/' . $name);
+                    Storage::delete('public/products/thumbnail_' . $name);
                 }
             }
         }
@@ -390,11 +407,12 @@ class ApiController extends Controller
         foreach ($categories as $cat) {
 
             // Get all products
-            $products = Product::where('category_id', $cat['id'])->orderby('brand_id')->get();
+            $productsNotEmpty = Product::where('category_id', $cat['id'])->where('remaining_amount', '>', '0')->orderby('brand_id')->get();
+            $productsEmpty = Product::where('category_id', $cat['id'])->where('remaining_amount', '0')->orderby('brand_id')->get();
 
             $productsFormated = array();
 
-            foreach ($products as $product) {
+            foreach ($productsNotEmpty as $product) {
                 $brand = Brand::where('id', $product['brand_id'])->firstOrFail();
                 array_push($productsFormated, [
                     'id'               => $product['id'],
@@ -405,7 +423,28 @@ class ApiController extends Controller
                     'photos'           => $product['photos'],
                     'remaining_amount' => $product['remaining_amount'],
                     'uses_count'       => $product['uses_count'],
+                    'rating'           => $product['rating'],
                     'pan'              => $product['pan'],
+                    'empty'            => false,
+                    'thumbnail'        => Product::getThumbnail($product['id'])
+                ]);
+                $allProductsCount++;
+            }
+
+            foreach ($productsEmpty as $product) {
+                $brand = Brand::where('id', $product['brand_id'])->firstOrFail();
+                array_push($productsFormated, [
+                    'id'               => $product['id'],
+                    'brand'            => $brand['name'],
+                    'brand_id'         => $brand['id'],
+                    'name'             => $product['name'],
+                    'description'      => $product['description'],
+                    'photos'           => $product['photos'],
+                    'remaining_amount' => $product['remaining_amount'],
+                    'uses_count'       => $product['uses_count'],
+                    'rating'           => $product['rating'],
+                    'pan'              => $product['pan'],
+                    'empty'            => true,
                     'thumbnail'        => Product::getThumbnail($product['id'])
                 ]);
                 $allProductsCount++;

@@ -26,159 +26,86 @@ window.reloadAll = () => {
     el.tooltip('update');
 }
 
-window.opacityLow = '0.3';
-
 window.refreshGallery = () => {
 
     const photos = document.querySelectorAll('.gallery-image');
 
     photos.forEach((photo) => {
-        photo.style.width = '0%';
+        photo.classList.remove('secondary');
+        photo.classList.remove('active');
     });
 
     if (photos.length > 2) {
 
-        photos[0].style.width = '60%';
-        photos[0].style.opacity = 1;
+        photos[0].classList.remove('secondary');
+        photos[0].classList.add('active');
 
-        photos[1].style.width = '20%';
-        photos[1].style.opacity = window.opacityLow;
+        photos[1].classList.remove('active');
+        photos[1].classList.add('secondary');
 
-        photos[2].style.width = '20%';
-        photos[2].style.opacity = window.opacityLow;
+        photos[2].classList.remove('active');
+        photos[2].classList.add('secondary');
 
     } else if (photos.length === 2) {
 
-        photos[0].style.width = '60%';
-        photos[0].style.opacity = '1';
+        photos[0].classList.remove('secondary');
+        photos[0].classList.add('active');
 
-        photos[1].style.width = '20%';
-        photos[1].style.opacity = window.opacityLow;
+        photos[1].classList.remove('active');
+        photos[1].classList.add('secondary');
 
     } else if (photos.length === 1) {
-        photos[0].style.width = '60%';
-        photos[0].style.opacity = '1';
+        photos[0].classList.remove('secondary');
+        photos[0].classList.add('active');
     }
 
 }
 
 window.gallery = (element) => {
 
-    element.style.width = '60%';
-    element.style.opacity = '1';
+    element.classList.remove('secondary');
+    element.classList.add('active');
 
     const prev = element.previousElementSibling;
     const next = element.nextElementSibling;
 
     if (prev !== null) {
-        prev.style.width = '20%';
-        prev.style.opacity = window.opacityLow;
+        prev.classList.remove('active');
+        prev.classList.add('secondary');
 
         const prever = prev.previousElementSibling;
 
         if (next === null && prever !== null) {
-            prever.style.width = '20%';
-            prever.style.opacity = window.opacityLow;
+
+            prever.classList.remove('active');
+            prever.classList.add('secondary');
+
         } else if (prever !== null) {
-            prever.style.width = '0%';
+
+            prever.classList.remove('active');
+            prever.classList.remove('secondary');
+
         }
     }
 
     if (next !== null) {
-        next.style.width = '20%';
-        next.style.opacity = window.opacityLow;
+
+        next.classList.remove('active');
+        next.classList.add('secondary');
 
         const nexter = next.nextElementSibling;
 
         if (prev === null && nexter !== null) {
-            nexter.style.width = '20%';
-            nexter.style.opacity = window.opacityLow;
+
+            nexter.classList.remove('active');
+            nexter.classList.add('secondary');
+
         } else if (nexter !== null) {
-            nexter.style.width = '0%';
+
+            nexter.classList.remove('active');
+            nexter.classList.remove('secondary');
+
         }
     }
 
 }
-
-// window.gallery = (element) => {
-//
-//     if (element.classList.contains('next')) {
-//
-//         const prevEl = element.previousElementSibling;
-//         const presentEl = element;
-//         const nextEl = element.nextElementSibling;
-//
-//         if (nextEl !== null && prevEl !== null) {
-//
-//             const previerEl = element.previousElementSibling.previousElementSibling;
-//
-//             if (previerEl !== null) {
-//
-//                 previerEl.classList.remove('prev');
-//                 previerEl.classList.add('hide');
-//
-//                 prevEl.classList.remove('present');
-//                 prevEl.classList.add('prev');
-//
-//                 presentEl.classList.remove('next');
-//                 presentEl.classList.add('present');
-//
-//                 nextEl.classList.remove('hide');
-//                 nextEl.classList.add('next');
-//
-//             } else {
-//
-//                 prevEl.classList.remove('present');
-//                 prevEl.classList.add('prev');
-//
-//                 presentEl.classList.remove('next');
-//                 presentEl.classList.add('present');
-//
-//                 nextEl.classList.remove('hide');
-//                 nextEl.classList.add('next');
-//
-//             }
-//
-//         } else {
-//
-//             prevEl.classList.remove('present');
-//             prevEl.classList.add('prev');
-//
-//             presentEl.classList.remove('next');
-//             presentEl.classList.add('present');
-//
-//         }
-//
-//     } else if (element.classList.contains('prev')) {
-//
-//         const prevEl = element.previousElementSibling;
-//         const presentEl = element;
-//         const nextEl = element.nextElementSibling;
-//         const nextterEl = element.nextElementSibling.nextElementSibling;
-//
-//         if (prevEl !== null) {
-//
-//             prevEl.classList.remove('hide');
-//             prevEl.classList.add('prev');
-//
-//             presentEl.classList.remove('prev');
-//             presentEl.classList.add('present');
-//
-//             nextEl.classList.remove('present');
-//             nextEl.classList.add('next');
-//
-//             nextterEl.classList.remove('next');
-//             nextterEl.classList.add('hide');
-//
-//         } else {
-//
-//             presentEl.classList.remove('prev');
-//             presentEl.classList.add('present');
-//
-//             nextEl.classList.remove('present');
-//             nextEl.classList.add('next');
-//
-//         }
-//
-//     }
-// }

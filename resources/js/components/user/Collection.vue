@@ -83,21 +83,34 @@
                     <span onClick="this.nextSibling.nextSibling.toggleAttribute('show')" class="category">
                         <i class='bx bx-sort'></i> {{item.category.name}} ({{item.products.length}})
                     </span>
-                    <div class="row">
-                        <div class="col-lg-3 col-6 product" v-for="product in item.products"
+                    <div class="row px-0 px-lg-4">
+                        <div class="col-lg-3 col-12 product py-2 py-lg-3" :class="{'empty': product.empty}" v-for="product in item.products"
                              @click="showItem(product.id)"
                              onClick="document.getElementById('collection').toggleAttribute('show')">
-                            <div class="thumbnail"
-                                 :style="{backgroundImage: 'url(/' + product.thumbnail + ')'}"></div>
-                            <div class="progress amount">
-                                <div class="progress-bar" :style="{width: product.remaining_amount + '%'}"></div>
+                            <div class="d-flex align-items-center">
+                                <div class="thumbnail" :style="{backgroundImage: 'url(/' + product.thumbnail + ')'}">
+
+                                </div>
+                                <div class="info">
+                                    <p class="text-left">
+                                        <span class="brand badge badge-dark">{{product.brand}}</span>
+                                        <span class="item">
+                                            {{product.name}}
+                                        </span><br>
+                                        <i class="bx bxs-star"></i>{{product.rating}}
+                                        <i class="bx bx-expand" v-show="product.pan">P</i>
+                                        <i class="bx bxs-plus-circle"></i>{{product.uses_count}}
+                                    </p>
+                                    <div class="progress amount">
+                                        <div class="progress-bar"
+                                             :style="{width: product.remaining_amount + '%'}">
+                                        </div>
+                                    </div>
+                                    <p v-show="product.empty" class="text-dark text-left mb-0">This product is empty</p>
+                                </div>
                             </div>
-                            <p>
-                                <span class="brand badge badge-info">{{product.brand}}</span><br>
-                                <span class="item">
-                                    {{product.name}}
-                            </span>
-                            </p>
+                            <!--<div class="thumbnail"-->
+                            <!--:style="{backgroundImage: 'url(/' + product.thumbnail + ')'}"></div>-->
                         </div>
                     </div>
                 </div>
@@ -223,7 +236,7 @@
                                             <button @click="addPhoto()"><i class="bx bx-plus"></i> Add photo</button>
                                         </div>
                                         <div v-show="productShow.editForm.photoSending" class="m-0">
-                                            <h2 class="m-0"><i class='bx bx-loader-alt bx-spin' ></i> Sending photo</h2>
+                                            <h2 class="m-0"><i class='bx bx-loader-alt bx-spin'></i> Sending photo</h2>
                                         </div>
                                     </div>
 
@@ -635,7 +648,7 @@
                     this.allProducts = data;
 
                     let count = 0;
-                    this.allProducts.forEach( item => {
+                    this.allProducts.forEach(item => {
                         count += item.products.length;
                     });
                     this.allProductsCount = count;
@@ -810,22 +823,24 @@
                 this.productShow.editForm.file = this.$refs.file.files[0];
             },
             addPhoto() {
-                this.productShow.editForm.photoSending = true;
-                const formData = new FormData();
-                formData.append('photo', this.productShow.editForm.file);
-                fetch('/api/user/update/product/' + this.productShow.productData.id + '/addPhoto', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': this.token,
-                    },
-                    body: formData,
-                }).then(res => res.json()).then(data => {
-                    document.getElementById('file').value = '';
-                    this.productShow.editForm.file = '';
-                    this.showItem(this.productShow.productData.id);
-                    this.getCategoriesAndProducts();
-                    this.productShow.editForm.photoSending = false;
-                });
+                if (this.productShow.editForm.file !== '') {
+                    this.productShow.editForm.photoSending = true;
+                    const formData = new FormData();
+                    formData.append('photo', this.productShow.editForm.file);
+                    fetch('/api/user/update/product/' + this.productShow.productData.id + '/addPhoto', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': this.token,
+                        },
+                        body: formData,
+                    }).then(res => res.json()).then(data => {
+                        document.getElementById('file').value = '';
+                        this.productShow.editForm.file = '';
+                        this.showItem(this.productShow.productData.id);
+                        this.getCategoriesAndProducts();
+                        this.productShow.editForm.photoSending = false;
+                    });
+                }
             },
             removePhoto(photoIndex) {
                 fetch('/api/user/delete/product/' + this.productShow.productData.id + '/photo/' + photoIndex, {

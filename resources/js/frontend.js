@@ -13,7 +13,6 @@ window.Vue = require('vue');
 
 Vue.component('home', require('./components/Home.vue').default);
 Vue.component('navbar', require('./components/user/Navbar.vue').default);
-Vue.component('guestNavbar', require('./components/user/GuestNavbar.vue').default);
 Vue.component('userLogin', require('./components/user/Login.vue').default);
 Vue.component('collection', require('./components/user/Collection.vue').default);
 
