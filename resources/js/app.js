@@ -82,6 +82,7 @@ window.gallery = (element) => {
 
         } else if (prever !== null) {
 
+            prever.classList.remove('active');
             prever.classList.remove('secondary');
 
         }
@@ -101,6 +102,7 @@ window.gallery = (element) => {
 
         } else if (nexter !== null) {
 
+            nexter.classList.remove('active');
             nexter.classList.remove('secondary');
 
         }

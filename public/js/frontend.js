@@ -1000,27 +1000,29 @@ __webpack_require__.r(__webpack_exports__);
     addPhoto: function addPhoto() {
       var _this16 = this;
 
-      this.productShow.editForm.photoSending = true;
-      var formData = new FormData();
-      formData.append('photo', this.productShow.editForm.file);
-      fetch('/api/user/update/product/' + this.productShow.productData.id + '/addPhoto', {
-        method: 'POST',
-        headers: {
-          'Authorization': this.token
-        },
-        body: formData
-      }).then(function (res) {
-        return res.json();
-      }).then(function (data) {
-        document.getElementById('file').value = '';
-        _this16.productShow.editForm.file = '';
+      if (this.productShow.editForm.file !== '') {
+        this.productShow.editForm.photoSending = true;
+        var formData = new FormData();
+        formData.append('photo', this.productShow.editForm.file);
+        fetch('/api/user/update/product/' + this.productShow.productData.id + '/addPhoto', {
+          method: 'POST',
+          headers: {
+            'Authorization': this.token
+          },
+          body: formData
+        }).then(function (res) {
+          return res.json();
+        }).then(function (data) {
+          document.getElementById('file').value = '';
+          _this16.productShow.editForm.file = '';
 
-        _this16.showItem(_this16.productShow.productData.id);
+          _this16.showItem(_this16.productShow.productData.id);
 
-        _this16.getCategoriesAndProducts();
+          _this16.getCategoriesAndProducts();
 
-        _this16.productShow.editForm.photoSending = false;
-      });
+          _this16.productShow.editForm.photoSending = false;
+        });
+      }
     },
     removePhoto: function removePhoto(photoIndex) {
       var _this17 = this;

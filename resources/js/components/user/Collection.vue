@@ -823,22 +823,24 @@
                 this.productShow.editForm.file = this.$refs.file.files[0];
             },
             addPhoto() {
-                this.productShow.editForm.photoSending = true;
-                const formData = new FormData();
-                formData.append('photo', this.productShow.editForm.file);
-                fetch('/api/user/update/product/' + this.productShow.productData.id + '/addPhoto', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': this.token,
-                    },
-                    body: formData,
-                }).then(res => res.json()).then(data => {
-                    document.getElementById('file').value = '';
-                    this.productShow.editForm.file = '';
-                    this.showItem(this.productShow.productData.id);
-                    this.getCategoriesAndProducts();
-                    this.productShow.editForm.photoSending = false;
-                });
+                if (this.productShow.editForm.file !== '') {
+                    this.productShow.editForm.photoSending = true;
+                    const formData = new FormData();
+                    formData.append('photo', this.productShow.editForm.file);
+                    fetch('/api/user/update/product/' + this.productShow.productData.id + '/addPhoto', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': this.token,
+                        },
+                        body: formData,
+                    }).then(res => res.json()).then(data => {
+                        document.getElementById('file').value = '';
+                        this.productShow.editForm.file = '';
+                        this.showItem(this.productShow.productData.id);
+                        this.getCategoriesAndProducts();
+                        this.productShow.editForm.photoSending = false;
+                    });
+                }
             },
             removePhoto(photoIndex) {
                 fetch('/api/user/delete/product/' + this.productShow.productData.id + '/photo/' + photoIndex, {

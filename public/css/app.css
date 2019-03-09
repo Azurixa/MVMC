@@ -10713,11 +10713,7 @@ a.text-dark:focus {
   border-radius: 12px !important;
 }
 
-.progress.amount {
-  border-radius: 0 !important;
-}
-
-.progress.amount .progress-bar {
+.progress .progress-bar {
   background: linear-gradient(90deg, #662D8C, #ED1E79);
 }
 
@@ -10908,13 +10904,13 @@ a.text-dark:focus {
 
 .main-box .collection .row .product .amount {
   margin: 0 auto;
-  border-radius: 0;
   height: 10px;
+  border-radius: 6px;
 }
 
 .main-box .collection .row .product .amount .progress-bar {
-  border-radius: 0;
-  height: 7px;
+  height: 10px;
+  border-radius: 6px;
 }
 
 .main-box .collection .row .product p {
@@ -11098,6 +11094,7 @@ a.text-dark:focus {
   overflow: hidden;
   transition: all 0.3s;
   cursor: pointer;
+  width: 0%;
 }
 
 .main-box .activity-box .product-show .gallery .gallery-image.active {
@@ -11108,6 +11105,18 @@ a.text-dark:focus {
 .main-box .activity-box .product-show .gallery .gallery-image.secondary {
   width: 20%;
   opacity: 0.3;
+}
+
+.main-box .activity-box .product-show .gallery .gallery-image.secondary .date {
+  display: none;
+}
+
+.main-box .activity-box .product-show .gallery .gallery-image.secondary .delete {
+  display: none;
+}
+
+.main-box .activity-box .product-show .gallery .gallery-image.secondary .first {
+  display: none;
 }
 
 .main-box .activity-box .product-show .gallery .gallery-image.new {

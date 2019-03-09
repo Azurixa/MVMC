@@ -36649,6 +36649,7 @@ window.gallery = function (element) {
       prever.classList.remove('active');
       prever.classList.add('secondary');
     } else if (prever !== null) {
+      prever.classList.remove('active');
       prever.classList.remove('secondary');
     }
   }
@@ -36662,6 +36663,7 @@ window.gallery = function (element) {
       nexter.classList.remove('active');
       nexter.classList.add('secondary');
     } else if (nexter !== null) {
+      nexter.classList.remove('active');
       nexter.classList.remove('secondary');
     }
   }

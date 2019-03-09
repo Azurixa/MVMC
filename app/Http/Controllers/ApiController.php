@@ -407,7 +407,7 @@ class ApiController extends Controller
         foreach ($categories as $cat) {
 
             // Get all products
-            $productsNotEmpty = Product::where('category_id', $cat['id'])->where('remaining_amount', '>', '1')->orderby('brand_id')->get();
+            $productsNotEmpty = Product::where('category_id', $cat['id'])->where('remaining_amount', '>', '0')->orderby('brand_id')->get();
             $productsEmpty = Product::where('category_id', $cat['id'])->where('remaining_amount', '0')->orderby('brand_id')->get();
 
             $productsFormated = array();
