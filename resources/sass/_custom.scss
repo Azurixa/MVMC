@@ -199,15 +199,16 @@
 
         .thumbnail {
           background-color: #606f7b;
-          width: 70px;
-          height: 70px;
+          width: 84px;
+          height: 84px;
           margin-right: 1rem;
           margin-left: auto;
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
+          border-radius: 14px;
           @media screen and (max-width: 992px) {
-            width: 110px;
+            width: 140px;
             height: 110px;
           }
         }
@@ -231,7 +232,7 @@
         .amount {
           margin: 0 auto;
           border-radius: 0;
-          height: 7px;
+          height: 10px;
 
           .progress-bar {
             border-radius: 0;

@@ -579,8 +579,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -2158,7 +2156,7 @@ var render = function() {
                   return _c(
                     "div",
                     {
-                      staticClass: "col-lg-3 col-12 product py-3 py-lg-4",
+                      staticClass: "col-lg-3 col-12 product py-1 py-lg-4",
                       attrs: {
                         onClick:
                           "document.getElementById('collection').toggleAttribute('show')"
@@ -2180,14 +2178,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "info" }, [
                           _c("p", { staticClass: "text-left" }, [
-                            _c("i", { staticClass: "bx bxs-star" }),
-                            _vm._v(
-                              _vm._s(product.rating) +
-                                "\n                                    "
-                            ),
                             _c(
                               "span",
-                              { staticClass: "brand badge badge-info" },
+                              { staticClass: "brand badge badge-dark" },
                               [_vm._v(_vm._s(product.brand))]
                             ),
                             _vm._v(" "),
@@ -2195,33 +2188,37 @@ var render = function() {
                               _vm._v(
                                 "\n                                        " +
                                   _vm._s(product.name) +
-                                  " |\n                                     "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("small", [
-                              _c(
-                                "i",
-                                {
-                                  directives: [
-                                    {
-                                      name: "show",
-                                      rawName: "v-show",
-                                      value: product.pan,
-                                      expression: "product.pan"
-                                    }
-                                  ],
-                                  staticClass: "bx bx-expand"
-                                },
-                                [_vm._v("P")]
-                              ),
-                              _vm._v(" "),
-                              _c("i", { staticClass: "bx bxs-plus-circle" }),
-                              _vm._v(
-                                _vm._s(product.uses_count) +
                                   "\n                                    "
                               )
-                            ])
+                            ]),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c("i", { staticClass: "bx bxs-star" }),
+                            _vm._v(
+                              _vm._s(product.rating) +
+                                "\n                                    "
+                            ),
+                            _c(
+                              "i",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: product.pan,
+                                    expression: "product.pan"
+                                  }
+                                ],
+                                staticClass: "bx bx-expand"
+                              },
+                              [_vm._v("P")]
+                            ),
+                            _vm._v(" "),
+                            _c("i", { staticClass: "bx bxs-plus-circle" }),
+                            _vm._v(
+                              _vm._s(product.uses_count) +
+                                "\n                                "
+                            )
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "progress amount" }, [

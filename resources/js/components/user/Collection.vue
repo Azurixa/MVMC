@@ -84,7 +84,7 @@
                         <i class='bx bx-sort'></i> {{item.category.name}} ({{item.products.length}})
                     </span>
                     <div class="row">
-                        <div class="col-lg-3 col-12 product py-3 py-lg-4" v-for="product in item.products"
+                        <div class="col-lg-3 col-12 product py-1 py-lg-4" v-for="product in item.products"
                              @click="showItem(product.id)"
                              onClick="document.getElementById('collection').toggleAttribute('show')">
                             <div class="d-flex align-items-center">
@@ -93,15 +93,13 @@
                                 </div>
                                 <div class="info">
                                     <p class="text-left">
-                                        <i class="bx bxs-star"></i>{{product.rating}}
-                                        <span class="brand badge badge-info">{{product.brand}}</span>
+                                        <span class="brand badge badge-dark">{{product.brand}}</span>
                                         <span class="item">
-                                            {{product.name}} |
-                                         </span>
-                                        <small>
-                                            <i class="bx bx-expand" v-show="product.pan">P</i>
-                                            <i class="bx bxs-plus-circle"></i>{{product.uses_count}}
-                                        </small>
+                                            {{product.name}}
+                                        </span><br>
+                                        <i class="bx bxs-star"></i>{{product.rating}}
+                                        <i class="bx bx-expand" v-show="product.pan">P</i>
+                                        <i class="bx bxs-plus-circle"></i>{{product.uses_count}}
                                     </p>
                                     <div class="progress amount">
                                         <div class="progress-bar"
