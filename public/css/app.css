@@ -10795,7 +10795,6 @@ a.text-dark:focus {
   width: 80%;
   height: 100%;
   overflow-y: scroll;
-  border-right: 2px solid rgba(0, 0, 0, 0.1);
 }
 
 .main-box .collection[show] {
@@ -10811,7 +10810,7 @@ a.text-dark:focus {
 
 .main-box .collection .header {
   font-size: 2.2rem;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1rem;
 }
 
 @media screen and (max-width: 992px) {
@@ -10825,7 +10824,7 @@ a.text-dark:focus {
   cursor: pointer;
   display: block;
   transition: 0.3s all;
-  padding: 0.7rem 2rem;
+  padding: 0.7rem 1rem;
 }
 
 @media screen and (max-width: 992px) {
@@ -10882,8 +10881,8 @@ a.text-dark:focus {
 
 @media screen and (max-width: 992px) {
   .main-box .collection .row .product .thumbnail {
-    width: 140px;
-    height: 110px;
+    width: 80px;
+    height: 80px;
   }
 }
 

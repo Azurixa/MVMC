@@ -83,8 +83,8 @@
                     <span onClick="this.nextSibling.nextSibling.toggleAttribute('show')" class="category">
                         <i class='bx bx-sort'></i> {{item.category.name}} ({{item.products.length}})
                     </span>
-                    <div class="row">
-                        <div class="col-lg-3 col-12 product py-2 py-lg-4" :class="{'empty': product.empty}" v-for="product in item.products"
+                    <div class="row px-0 px-lg-4">
+                        <div class="col-lg-3 col-12 product py-2 py-lg-3" :class="{'empty': product.empty}" v-for="product in item.products"
                              @click="showItem(product.id)"
                              onClick="document.getElementById('collection').toggleAttribute('show')">
                             <div class="d-flex align-items-center">

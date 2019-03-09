@@ -142,7 +142,6 @@
     width: 80%;
     height: 100%;
     overflow-y: scroll;
-    border-right: 2px solid rgba(0, 0, 0, 0.1);
     &[show] {
       left: 0;
     }
@@ -153,7 +152,7 @@
 
     .header {
       font-size: 2.2rem;
-      padding: 1.2rem 2rem;
+      padding: 1.2rem 1rem;
       @media screen and (max-width: 992px) {
         font-size: 1.9rem;
       }
@@ -165,7 +164,7 @@
         cursor: pointer;
         display: block;
         transition: 0.3s all;
-        padding: 0.7rem 2rem;
+        padding: 0.7rem 1rem;
         @media screen and (max-width: 992px) {
           font-size: 1.4rem;
         }
@@ -212,8 +211,8 @@
           background-repeat: no-repeat;
           border-radius: 14px;
           @media screen and (max-width: 992px) {
-            width: 140px;
-            height: 110px;
+            width: 80px;
+            height: 80px;
           }
         }
 

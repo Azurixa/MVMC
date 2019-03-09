@@ -2155,12 +2155,12 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "row" },
+                { staticClass: "row px-0 px-lg-4" },
                 _vm._l(item.products, function(product) {
                   return _c(
                     "div",
                     {
-                      staticClass: "col-lg-3 col-12 product py-2 py-lg-4",
+                      staticClass: "col-lg-3 col-12 product py-2 py-lg-3",
                       class: { empty: product.empty },
                       attrs: {
                         onClick:
