@@ -36609,61 +36609,60 @@ window.reloadAll = function () {
   el.tooltip('update');
 };
 
-window.opacityLow = '0.3';
-
 window.refreshGallery = function () {
   var photos = document.querySelectorAll('.gallery-image');
   photos.forEach(function (photo) {
-    photo.style.width = '0%';
+    photo.classList.remove('secondary');
+    photo.classList.remove('active');
   });
 
   if (photos.length > 2) {
-    photos[0].style.width = '60%';
-    photos[0].style.opacity = 1;
-    photos[1].style.width = '20%';
-    photos[1].style.opacity = window.opacityLow;
-    photos[2].style.width = '20%';
-    photos[2].style.opacity = window.opacityLow;
+    photos[0].classList.remove('secondary');
+    photos[0].classList.add('active');
+    photos[1].classList.remove('active');
+    photos[1].classList.add('secondary');
+    photos[2].classList.remove('active');
+    photos[2].classList.add('secondary');
   } else if (photos.length === 2) {
-    photos[0].style.width = '60%';
-    photos[0].style.opacity = '1';
-    photos[1].style.width = '20%';
-    photos[1].style.opacity = window.opacityLow;
+    photos[0].classList.remove('secondary');
+    photos[0].classList.add('active');
+    photos[1].classList.remove('active');
+    photos[1].classList.add('secondary');
   } else if (photos.length === 1) {
-    photos[0].style.width = '60%';
-    photos[0].style.opacity = '1';
+    photos[0].classList.remove('secondary');
+    photos[0].classList.add('active');
   }
 };
 
 window.gallery = function (element) {
-  element.style.width = '60%';
-  element.style.opacity = '1';
+  element.classList.remove('secondary');
+  element.classList.add('active');
   var prev = element.previousElementSibling;
   var next = element.nextElementSibling;
 
   if (prev !== null) {
-    prev.style.width = '20%';
-    prev.style.opacity = window.opacityLow;
+    prev.classList.remove('active');
+    prev.classList.add('secondary');
     var prever = prev.previousElementSibling;
 
     if (next === null && prever !== null) {
-      prever.style.width = '20%';
-      prever.style.opacity = window.opacityLow;
+      prever.classList.remove('active');
+      prever.classList.add('secondary');
     } else if (prever !== null) {
-      prever.style.width = '0%';
+      prever.classList.remove('secondary');
     }
   }
 
   if (next !== null) {
-    next.style.width = '20%';
-    next.style.opacity = window.opacityLow;
+    next.classList.remove('active');
+    next.classList.add('secondary');
     var nexter = next.nextElementSibling;
 
     if (prev === null && nexter !== null) {
-      nexter.style.width = '20%';
-      nexter.style.opacity = window.opacityLow;
+      nexter.classList.remove('active');
+      nexter.classList.add('secondary');
     } else if (nexter !== null) {
-      nexter.style.width = '0%';
+      nexter.classList.remove('secondary');
     }
   }
 };

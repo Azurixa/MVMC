@@ -84,7 +84,7 @@
                         <i class='bx bx-sort'></i> {{item.category.name}} ({{item.products.length}})
                     </span>
                     <div class="row">
-                        <div class="col-lg-3 col-12 product py-1 py-lg-4" v-for="product in item.products"
+                        <div class="col-lg-3 col-12 product py-2 py-lg-4" :class="{'empty': product.empty}" v-for="product in item.products"
                              @click="showItem(product.id)"
                              onClick="document.getElementById('collection').toggleAttribute('show')">
                             <div class="d-flex align-items-center">
@@ -103,8 +103,10 @@
                                     </p>
                                     <div class="progress amount">
                                         <div class="progress-bar"
-                                             :style="{width: product.remaining_amount + '%'}"></div>
+                                             :style="{width: product.remaining_amount + '%'}">
+                                        </div>
                                     </div>
+                                    <p v-show="product.empty" class="text-dark text-left mb-0">This product is empty</p>
                                 </div>
                             </div>
                             <!--<div class="thumbnail"-->

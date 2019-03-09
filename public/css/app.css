@@ -10867,6 +10867,11 @@ a.text-dark:focus {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+.main-box .collection .row .product.empty .thumbnail {
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+}
+
 .main-box .collection .row .product .thumbnail {
   background-color: #606f7b;
   width: 84px;
@@ -11093,6 +11098,16 @@ a.text-dark:focus {
   overflow: hidden;
   transition: all 0.3s;
   cursor: pointer;
+}
+
+.main-box .activity-box .product-show .gallery .gallery-image.active {
+  width: 60%;
+  opacity: 1;
+}
+
+.main-box .activity-box .product-show .gallery .gallery-image.secondary {
+  width: 20%;
+  opacity: 0.3;
 }
 
 .main-box .activity-box .product-show .gallery .gallery-image.new {

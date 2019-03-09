@@ -270,7 +270,7 @@ class ApiController extends Controller
         ImageOptimizer::optimize(base_path('storage/app/public/products/' . $name));
 
         // Create thumbnail
-        Image::make($image->getRealPath())->resize(null, 300)->save(public_path('storage/products/thumbnail_' . $name));
+        Image::make($image->getRealPath())->resize(null, 300, function ($constraint){$constraint->aspectRatio();})->save(public_path('storage/products/thumbnail_' . $name));
 
         Product::addPhoto($id, $name);
         User::addExperience($userId, 9);
@@ -334,7 +334,7 @@ class ApiController extends Controller
             $fileName = base_path('storage/app/public/products/' . explode(':', $productPhotos[$photoIndex])[0]);
             $file = fopen($fileName, 'r');
 
-            Image::make($file)->resize(null, 300)->save(public_path('storage/products/thumbnail_' . explode(':', $productPhotos[$photoIndex])[0]));
+            Image::make($file)->resize(null, 300, function ($constraint){$constraint->aspectRatio();})->save(public_path('storage/products/thumbnail_' . explode(':', $productPhotos[$photoIndex])[0]));
 
         }
 
@@ -407,11 +407,12 @@ class ApiController extends Controller
         foreach ($categories as $cat) {
 
             // Get all products
-            $products = Product::where('category_id', $cat['id'])->orderby('brand_id')->get();
+            $productsNotEmpty = Product::where('category_id', $cat['id'])->where('remaining_amount', '>', '1')->orderby('brand_id')->get();
+            $productsEmpty = Product::where('category_id', $cat['id'])->where('remaining_amount', '0')->orderby('brand_id')->get();
 
             $productsFormated = array();
 
-            foreach ($products as $product) {
+            foreach ($productsNotEmpty as $product) {
                 $brand = Brand::where('id', $product['brand_id'])->firstOrFail();
                 array_push($productsFormated, [
                     'id'               => $product['id'],
@@ -424,6 +425,26 @@ class ApiController extends Controller
                     'uses_count'       => $product['uses_count'],
                     'rating'           => $product['rating'],
                     'pan'              => $product['pan'],
+                    'empty'            => false,
+                    'thumbnail'        => Product::getThumbnail($product['id'])
+                ]);
+                $allProductsCount++;
+            }
+
+            foreach ($productsEmpty as $product) {
+                $brand = Brand::where('id', $product['brand_id'])->firstOrFail();
+                array_push($productsFormated, [
+                    'id'               => $product['id'],
+                    'brand'            => $brand['name'],
+                    'brand_id'         => $brand['id'],
+                    'name'             => $product['name'],
+                    'description'      => $product['description'],
+                    'photos'           => $product['photos'],
+                    'remaining_amount' => $product['remaining_amount'],
+                    'uses_count'       => $product['uses_count'],
+                    'rating'           => $product['rating'],
+                    'pan'              => $product['pan'],
+                    'empty'            => true,
                     'thumbnail'        => Product::getThumbnail($product['id'])
                 ]);
                 $allProductsCount++;

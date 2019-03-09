@@ -579,6 +579,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -2156,7 +2158,8 @@ var render = function() {
                   return _c(
                     "div",
                     {
-                      staticClass: "col-lg-3 col-12 product py-1 py-lg-4",
+                      staticClass: "col-lg-3 col-12 product py-2 py-lg-4",
+                      class: { empty: product.empty },
                       attrs: {
                         onClick:
                           "document.getElementById('collection').toggleAttribute('show')"
@@ -2226,7 +2229,23 @@ var render = function() {
                               staticClass: "progress-bar",
                               style: { width: product.remaining_amount + "%" }
                             })
-                          ])
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "p",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: product.empty,
+                                  expression: "product.empty"
+                                }
+                              ],
+                              staticClass: "text-dark text-left mb-0"
+                            },
+                            [_vm._v("This product is empty")]
+                          )
                         ])
                       ])
                     ]

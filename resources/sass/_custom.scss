@@ -28,11 +28,13 @@
     display: none !important;
   }
 }
-.navbar-brand{
+
+.navbar-brand {
   @media screen and (max-width: 992px) {
     margin-right: 0 !important;
   }
 }
+
 .current-level {
   background: linear-gradient(30deg, $dark, $darker);
 }
@@ -42,7 +44,7 @@
     border-radius: 0 !important;
 
     .progress-bar {
-      background: linear-gradient(90deg, $dark, $darker );
+      background: linear-gradient(90deg, $dark, $darker);
     }
   }
 }
@@ -196,6 +198,11 @@
         &:hover {
           background-color: rgba(0, 0, 0, 0.1);
         }
+        &.empty {
+          .thumbnail {
+            filter: grayscale(100%);
+          }
+        }
 
         .thumbnail {
           background-color: #606f7b;
@@ -213,7 +220,7 @@
           }
         }
 
-        .info{
+        .info {
           width: 75%;
           margin-left: auto;
           @media screen and (max-width: 992px) {
@@ -277,13 +284,13 @@
       justify-content: center;
       width: 100%;
       height: 100%;
-      h1{
-        @media screen and (max-width: 992px){
+      h1 {
+        @media screen and (max-width: 992px) {
           font-size: 1.4rem;
         }
       }
-      p{
-        @media screen and (max-width: 992px){
+      p {
+        @media screen and (max-width: 992px) {
           font-size: 1rem;
         }
       }
@@ -314,8 +321,8 @@
       }
 
       // Brand + product name
-      h1{
-        @media screen and (max-width: 992px){
+      h1 {
+        @media screen and (max-width: 992px) {
           font-size: 1.8rem;
         }
       }
@@ -328,8 +335,8 @@
         }
       }
 
-      .dates{
-        @media screen and (max-width: 992px){
+      .dates {
+        @media screen and (max-width: 992px) {
           font-size: 0.8rem;
         }
       }
@@ -410,6 +417,14 @@
           overflow: hidden;
           transition: all 0.3s;
           cursor: pointer;
+          &.active {
+            width: 60%;
+            opacity: 1;
+          }
+          &.secondary {
+            width: 20%;
+            opacity: 0.3;
+          }
           &.new {
             cursor: default;
             background-color: white;
@@ -470,7 +485,7 @@
             background-color: white;
             color: black;
           }
-          .first{
+          .first {
             height: fit-content;
             line-height: 1px;
             display: block;
@@ -510,7 +525,7 @@
     margin-right: 0.5rem;
     border-radius: 12px;
     line-height: 15px;
-    p{
+    p {
       text-align: center;
       font-size: 7px;
       margin: 0;
