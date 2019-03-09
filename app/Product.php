@@ -39,7 +39,7 @@ class Product extends Model
         $photos = explode(';', $product->photos);
         if ((count($photos)) > 0 && $photos[0] !== '') {
             $ph = explode(':', $photos[count($photos) - 1]);
-            return 'storage/products/'.$ph[0];
+            return 'storage/products/thumbnail_'.$ph[0];
         }
         return 'storage/products/default.jpg';
     }

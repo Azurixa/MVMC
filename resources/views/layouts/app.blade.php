@@ -9,12 +9,12 @@
     <main>
 
         @guest
-            <navbar level="0"></navbar>
+            <navbar level=0></navbar>
         @else
             @if(Auth::user()->permissions > 9)
-                <navbar level="2"></navbar>
+                <navbar level=2></navbar>
             @else
-                <navbar level="1"></navbar>
+                <navbar level=1></navbar>
             @endif
         @endguest
 

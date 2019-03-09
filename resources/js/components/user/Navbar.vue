@@ -70,9 +70,7 @@
 <script>
     export default {
         name: 'navbar',
-        props: {
-            level: Number,
-        },
+        props: ['level'],
         data() {
             return {
                 token: localStorage.getItem('token'),

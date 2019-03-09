@@ -199,14 +199,24 @@
 
         .thumbnail {
           background-color: #606f7b;
-          width: 90%;
-          height: 140px;
-          margin: 0 auto;
+          width: 70px;
+          height: 70px;
+          margin-right: 1rem;
+          margin-left: auto;
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
           @media screen and (max-width: 992px) {
+            width: 110px;
             height: 110px;
+          }
+        }
+
+        .info{
+          width: 75%;
+          margin-left: auto;
+          @media screen and (max-width: 992px) {
+            width: 81%;
           }
         }
 
@@ -219,7 +229,6 @@
         }
 
         .amount {
-          width: 90%;
           margin: 0 auto;
           border-radius: 0;
           height: 7px;

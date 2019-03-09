@@ -13,6 +13,7 @@ use App\Brand;
 use App\User;
 use Illuminate\Support\Facades\Storage;
 use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ApiController extends Controller
 {
@@ -264,12 +265,18 @@ class ApiController extends Controller
         $image = $request->file('photo');
         $name = $userId . '_' . $id . '_' . str_slug($image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
         $image->storeAs('public/products', $name);
+
+
         ImageOptimizer::optimize(base_path('storage/app/public/products/'.$name));
+
+        // Create thumbnail
+        Image::make($image->getRealPath())->resize(null, 300)
+            ->save(public_path('storage/products/thumbnail_'.$name));
 
         Product::addPhoto($id, $name);
         User::addExperience($userId, 9);
 
-        return json_encode(['message' => $image->getClientOriginalName()]);
+        return json_encode(['message' => base_path('storage/app/public/products/'.$name)]);
     }
 
     /**
@@ -364,6 +371,7 @@ class ApiController extends Controller
                     }
                     $name = explode(':', $photo)[0];
                     Storage::delete('public/products/'.$name);
+                    Storage::delete('public/products/thumbnail_'.$name);
                 }
             }
         }
@@ -405,6 +413,7 @@ class ApiController extends Controller
                     'photos'           => $product['photos'],
                     'remaining_amount' => $product['remaining_amount'],
                     'uses_count'       => $product['uses_count'],
+                    'rating'           => $product['rating'],
                     'pan'              => $product['pan'],
                     'thumbnail'        => Product::getThumbnail($product['id'])
                 ]);
