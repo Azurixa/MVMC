@@ -10881,8 +10881,8 @@ a.text-dark:focus {
 
 @media screen and (max-width: 992px) {
   .main-box .collection .row .product .thumbnail {
-    width: 80px;
-    height: 80px;
+    width: 140px;
+    height: 110px;
   }
 }
 
