@@ -423,6 +423,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ActiveProduct',
   data: function data() {
@@ -898,7 +901,7 @@ __webpack_require__.r(__webpack_exports__);
     this.getCategoriesAndProducts();
     setInterval(function () {
       _this.getCategoriesAndProducts();
-    }, 10000); // Tooltips refresh
+    }, 4000); // Tooltips refresh
 
     setTimeout(function () {
       window.reloadAll();
@@ -2816,7 +2819,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "col-lg-4 p-0" }, [
             _c("div", { staticClass: "m-2 card p-3" }, [
-              _c("h4", [
+              _c("h4", { staticClass: "mb-3" }, [
                 _vm._v(
                   "\n                            Description\n                            "
                 ),
@@ -2855,7 +2858,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "m-2 card p-3" }, [
-              _c("h4", [
+              _c("h4", { staticClass: "mb-3" }, [
                 _vm._v(
                   "\n                            First impressions\n                            "
                 ),
@@ -2894,6 +2897,12 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "m-2 card p-3" }, [
+              _c("h4", { staticClass: "mb-3" }, [
+                _vm._v(
+                  "\n                            Product options\n                        "
+                )
+              ]),
+              _vm._v(" "),
               _c(
                 "button",
                 {

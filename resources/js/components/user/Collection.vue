@@ -178,7 +178,7 @@
             this.getCategoriesAndProducts();
             setInterval(() => {
                 this.getCategoriesAndProducts();
-            }, 10000);
+            }, 4000);
             // Tooltips refresh
             setTimeout(() => {
                 window.reloadAll();

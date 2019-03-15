@@ -257,7 +257,7 @@
 
                     <div class="col-lg-4 p-0">
                         <div class="m-2 card p-3">
-                            <h4>
+                            <h4 class="mb-3">
                                 Description
                                 <span @click="showEdit('description')" data-toggle="tooltip"
                                       data-placement="bottom" title="Change description"><i
@@ -272,7 +272,7 @@
                         </div>
 
                         <div class="m-2 card p-3">
-                            <h4>
+                            <h4 class="mb-3">
                                 First impressions
                                 <span @click="showEdit('first_impressions')" data-toggle="tooltip"
                                       data-placement="bottom" title="Change first impressions"><i
@@ -287,6 +287,9 @@
                         </div>
 
                         <div class="m-2 card p-3">
+                            <h4 class="mb-3">
+                                Product options
+                            </h4>
                             <button @click="deleteProduct()" class="btn btn-danger">Delete product</button>
                         </div>
 
