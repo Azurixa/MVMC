@@ -287,6 +287,14 @@ class ApiController extends Controller
         $userId = $request->user()->id;
         $id = $request->post('id');
 
+        $photos = Product::getPhotos($id, true);
+
+        foreach ($photos as $photo) {
+            $name = explode(':', $photo)[0];
+            Storage::delete('public/products/' . $name);
+            Storage::delete('public/products/thumbnail_' . $name);
+        }
+
         // Delete product
         Product::where([
             'creator_id' => $userId,
