@@ -137,7 +137,7 @@
                 </div>
 
                 <!-- Active product box -->
-                <active-product></active-product>
+                <active-product v-show="productShow.visible"></active-product>
 
             </div>
         </div>
@@ -311,20 +311,6 @@
                     this.formData.newProduct.categoryId = '';
                     this.formData.newProduct.brandId = '';
                     this.formData.newProduct.description = '';
-                    this.getCategoriesAndProducts();
-                });
-            },
-
-            deleteProduct(productId) {
-                const formData = new FormData();
-                formData.append('id', productId);
-                fetch('/api/user/delete/product', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': this.token,
-                    },
-                    body: formData,
-                }).then(res => res.json()).then(data => {
                     this.getCategoriesAndProducts();
                 });
             },
