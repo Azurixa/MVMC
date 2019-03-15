@@ -2248,15 +2248,29 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "progress amount" }, [
-                            _c("div", {
-                              staticClass: "progress-bar",
-                              style: { width: product.remaining_amount + "%" }
-                            })
-                          ]),
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: !product.empty,
+                                  expression: "!product.empty"
+                                }
+                              ],
+                              staticClass: "progress amount mr-2"
+                            },
+                            [
+                              _c("div", {
+                                staticClass: "progress-bar",
+                                style: { width: product.remaining_amount + "%" }
+                              })
+                            ]
+                          ),
                           _vm._v(" "),
                           _c(
-                            "p",
+                            "strong",
                             {
                               directives: [
                                 {
@@ -2268,7 +2282,7 @@ var render = function() {
                               ],
                               staticClass: "text-dark text-left mb-0"
                             },
-                            [_vm._v("This product is empty")]
+                            [_vm._v("This product is empty.")]
                           )
                         ])
                       ])

@@ -102,12 +102,12 @@
                                         <i class="bx bx-expand" v-show="product.pan">P</i>
                                         <i class="bx bxs-plus-circle"></i>{{product.uses_count}}
                                     </p>
-                                    <div class="progress amount">
+                                    <div class="progress amount mr-2" v-show="!product.empty">
                                         <div class="progress-bar"
                                              :style="{width: product.remaining_amount + '%'}">
                                         </div>
                                     </div>
-                                    <p v-show="product.empty" class="text-dark text-left mb-0">This product is empty</p>
+                                    <strong v-show="product.empty" class="text-dark text-left mb-0">This product is empty.</strong>
                                 </div>
                             </div>
                             <!--<div class="thumbnail"-->
