@@ -78,13 +78,14 @@
             </div>
 
             <div class="collection" id="collection">
-                <p class="header">My collection ({{allProductsCount}})</p>
+                <p class="header">My collection <small>({{allProductsCount}}/{{allProductsCountEmpty}})</small></p>
                 <div class="category" v-for="item in allProducts">
                     <span onClick="this.nextSibling.nextSibling.toggleAttribute('show')" class="category">
-                        <i class='bx bx-sort'></i> {{item.category.name}} ({{item.products.length}})
+                        <i class='bx bx-sort'></i> {{item.category.name}} <small>({{item.itemsNotEmpty}}/{{item.itemsEmpty}})</small>
                     </span>
                     <div class="row px-0 px-lg-4">
-                        <div class="col-lg-3 col-12 product py-2 py-lg-3" :class="{'empty': product.empty}" v-for="product in item.products"
+                        <div class="col-lg-3 col-12 product py-2 py-lg-3" :class="{'empty': product.empty}"
+                             v-for="product in item.products"
                              @click="showItem(product.id)"
                              onClick="document.getElementById('collection').toggleAttribute('show')">
                             <div class="d-flex align-items-center">
@@ -478,6 +479,7 @@
                 token: localStorage.getItem('token'),
                 allProducts: {},
                 allProductsCount: 0,
+                allProductsCountEmpty: 0,
                 categories: {},
                 brands: {},
                 formData: {
@@ -648,10 +650,17 @@
                     this.allProducts = data;
 
                     let count = 0;
-                    this.allProducts.forEach(item => {
-                        count += item.products.length;
+                    let countEmpty = 0;
+                    this.allProducts[0].products.forEach(item => {
+                        if (!item.empty) {
+                            count++;
+                        } else {
+                            countEmpty++;
+                        }
+                        console.log(1);
                     });
                     this.allProductsCount = count;
+                    this.allProductsCountEmpty = countEmpty;
                 });
             },
 

@@ -581,6 +581,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -601,6 +602,7 @@ __webpack_require__.r(__webpack_exports__);
       token: localStorage.getItem('token'),
       allProducts: {},
       allProductsCount: 0,
+      allProductsCountEmpty: 0,
       categories: {},
       brands: {},
       formData: {
@@ -801,12 +803,20 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (data) {
         _this10.allProducts = data;
         var count = 0;
+        var countEmpty = 0;
 
-        _this10.allProducts.forEach(function (item) {
-          count += item.products.length;
+        _this10.allProducts[0].products.forEach(function (item) {
+          if (!item.empty) {
+            count++;
+          } else {
+            countEmpty++;
+          }
+
+          console.log(1);
         });
 
         _this10.allProductsCount = count;
+        _this10.allProductsCountEmpty = countEmpty;
       });
     },
     showItem: function showItem(itemId) {
@@ -2127,7 +2137,16 @@ var render = function() {
         { staticClass: "collection", attrs: { id: "collection" } },
         [
           _c("p", { staticClass: "header" }, [
-            _vm._v("My collection (" + _vm._s(_vm.allProductsCount) + ")")
+            _vm._v("My collection "),
+            _c("small", [
+              _vm._v(
+                "(" +
+                  _vm._s(_vm.allProductsCount) +
+                  "/" +
+                  _vm._s(_vm.allProductsCountEmpty) +
+                  ")"
+              )
+            ])
           ]),
           _vm._v(" "),
           _vm._l(_vm.allProducts, function(item) {
@@ -2143,13 +2162,16 @@ var render = function() {
                 },
                 [
                   _c("i", { staticClass: "bx bx-sort" }),
-                  _vm._v(
-                    " " +
-                      _vm._s(item.category.name) +
-                      " (" +
-                      _vm._s(item.products.length) +
-                      ")\n                "
-                  )
+                  _vm._v(" " + _vm._s(item.category.name) + " "),
+                  _c("small", [
+                    _vm._v(
+                      "(" +
+                        _vm._s(item.itemsNotEmpty) +
+                        "/" +
+                        _vm._s(item.itemsEmpty) +
+                        ")"
+                    )
+                  ])
                 ]
               ),
               _vm._v(" "),
