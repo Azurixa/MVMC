@@ -399,12 +399,14 @@ class ApiController extends Controller
     public function getAllProducts (Request $request)
     {
         $userId = $request->user()->id;
-        $allProductsCount = 0;
 
         $toReturn = array();
 
         $categories = Category::where('creator_id', $userId)->orderBy('name')->get();
         foreach ($categories as $cat) {
+
+            $allProductsCount = 0;
+            $emptyProductsCount = 0;
 
             // Get all products
             $productsNotEmpty = Product::where('category_id', $cat['id'])->where('remaining_amount', '>', '0')->orderby('brand_id')->get();
@@ -447,11 +449,13 @@ class ApiController extends Controller
                     'empty'            => true,
                     'thumbnail'        => Product::getThumbnail($product['id'])
                 ]);
-                $allProductsCount++;
+                $emptyProductsCount++;
             }
             array_push($toReturn, [
                 'category' => $cat,
-                'products' => $productsFormated
+                'products' => $productsFormated,
+                'itemsNotEmpty' => $allProductsCount,
+                'itemsEmpty' => $emptyProductsCount
             ]);
         }
 
