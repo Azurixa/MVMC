@@ -139,7 +139,7 @@ class ApiController extends Controller
     public function getBrands (Request $request)
     {
         $userId = $request->user()->id;
-        return Brand::where('creator_id', $userId)->get();
+        return Brand::where('creator_id', $userId)->orderby('name')->get();
     }
 
     /**
