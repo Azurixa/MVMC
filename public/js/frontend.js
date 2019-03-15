@@ -1079,12 +1079,14 @@ __webpack_require__.r(__webpack_exports__);
         var count = 0;
         var countEmpty = 0;
 
-        _this9.allProducts[0].products.forEach(function (item) {
-          if (!item.empty) {
-            count++;
-          } else {
-            countEmpty++;
-          }
+        _this9.allProducts.forEach(function (items) {
+          items.products.forEach(function (item) {
+            if (!item.empty) {
+              count++;
+            } else {
+              countEmpty++;
+            }
+          });
         });
 
         _this9.allProductsCount = count;

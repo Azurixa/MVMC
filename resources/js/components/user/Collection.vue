@@ -328,12 +328,14 @@
 
                     let count = 0;
                     let countEmpty = 0;
-                    this.allProducts[0].products.forEach(item => {
-                        if (!item.empty) {
-                            count++;
-                        } else {
-                            countEmpty++;
-                        }
+                    this.allProducts.forEach(items => {
+                        items.products.forEach(item => {
+                            if (!item.empty) {
+                                count++;
+                            } else {
+                                countEmpty++;
+                            }
+                        });
                     });
                     this.allProductsCount = count;
                     this.allProductsCountEmpty = countEmpty;
