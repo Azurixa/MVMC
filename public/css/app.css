@@ -11210,7 +11210,8 @@ a.text-dark:focus {
   height: 67px;
   display: flex;
   padding: 0.5rem 1rem;
-  position: fixed;
+  position: -webkit-sticky;
+  position: sticky;
   bottom: 0;
   width: 100%;
   z-index: 900000;
