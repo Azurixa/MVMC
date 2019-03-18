@@ -426,6 +426,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ActiveProduct',
   data: function data() {
@@ -446,6 +477,8 @@ __webpack_require__.r(__webpack_exports__);
         remainingAmountVisible: false,
         boughtAtVisible: false,
         expireMonthsVisible: false,
+        categoryChangeVisible: false,
+        brandChangeVisible: false,
         photoSending: false,
         whatEditing: '',
         file: '',
@@ -511,6 +544,8 @@ __webpack_require__.r(__webpack_exports__);
         this.editForm.remainingAmountVisible = false;
         this.editForm.boughtAtVisible = false;
         this.editForm.expireMonthsVisible = false;
+        this.editForm.categoryChangeVisible = false;
+        this.editForm.brandChangeVisible = false;
         this.editForm.value = '';
         this.editForm.whatEditing = '';
       } else {
@@ -544,6 +579,16 @@ __webpack_require__.r(__webpack_exports__);
         if (what === 'expire_months') {
           this.editForm.expireMonthsVisible = true;
           this.editForm.value = this.productData.expire_months;
+        }
+
+        if (what === 'category_id') {
+          this.editForm.categoryChangeVisible = true;
+          this.editForm.value = '';
+        }
+
+        if (what === 'brand_id') {
+          this.editForm.brandChangeVisible = true;
+          this.editForm.value = '';
         }
 
         this.editForm.whatEditing = what;
@@ -2219,6 +2264,172 @@ var render = function() {
                 )
               ])
             ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.editForm.categoryChangeVisible,
+                  expression: "editForm.categoryChangeVisible"
+                }
+              ]
+            },
+            [
+              _c("div", [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "category" } }, [
+                    _vm._v("Change category")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.editForm.value,
+                          expression: "editForm.value"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "category" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.editForm,
+                            "value",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    _vm._l(_vm.$parent.categories, function(category) {
+                      return _c(
+                        "option",
+                        { domProps: { value: category.id } },
+                        [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(category.name) +
+                              "\n                            "
+                          )
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    on: {
+                      click: function($event) {
+                        return _vm.editConfirm()
+                      }
+                    }
+                  },
+                  [_vm._v("Edit expire months")]
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.editForm.brandChangeVisible,
+                  expression: "editForm.brandChangeVisible"
+                }
+              ]
+            },
+            [
+              _c("div", [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "category" } }, [
+                    _vm._v("Change brand")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.editForm.value,
+                          expression: "editForm.value"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "brand" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.editForm,
+                            "value",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    _vm._l(_vm.$parent.brands, function(brand) {
+                      return _c("option", { domProps: { value: brand.id } }, [
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(brand.name) +
+                            "\n                            "
+                        )
+                      ])
+                    }),
+                    0
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    on: {
+                      click: function($event) {
+                        return _vm.editConfirm()
+                      }
+                    }
+                  },
+                  [_vm._v("Edit expire months")]
+                )
+              ])
+            ]
           )
         ])
       ]
@@ -2904,6 +3115,32 @@ var render = function() {
                   "\n                            Product options\n                        "
                 )
               ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-info",
+                  on: {
+                    click: function($event) {
+                      return _vm.showEdit("brand_id")
+                    }
+                  }
+                },
+                [_vm._v("Change brand")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-info",
+                  on: {
+                    click: function($event) {
+                      return _vm.showEdit("category_id")
+                    }
+                  }
+                },
+                [_vm._v("Change category")]
+              ),
               _vm._v(" "),
               _c(
                 "button",
