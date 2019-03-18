@@ -455,8 +455,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ActiveProduct',
   data: function data() {
@@ -2281,10 +2279,6 @@ var render = function() {
             [
               _c("div", [
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "category" } }, [
-                    _vm._v("Change category")
-                  ]),
-                  _vm._v(" "),
                   _c(
                     "select",
                     {
@@ -2345,7 +2339,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("Edit expire months")]
+                  [_vm._v("Change category")]
                 )
               ])
             ]
@@ -2366,10 +2360,6 @@ var render = function() {
             [
               _c("div", [
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "category" } }, [
-                    _vm._v("Change brand")
-                  ]),
-                  _vm._v(" "),
                   _c(
                     "select",
                     {
@@ -2426,7 +2416,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("Edit expire months")]
+                  [_vm._v("Change brand")]
                 )
               ])
             ]
@@ -3119,7 +3109,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-info",
+                  staticClass: "btn btn-info btn-block",
                   on: {
                     click: function($event) {
                       return _vm.showEdit("brand_id")
@@ -3132,7 +3122,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-info",
+                  staticClass: "btn btn-info btn-block",
                   on: {
                     click: function($event) {
                       return _vm.showEdit("category_id")
@@ -3145,7 +3135,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-danger",
+                  staticClass: "btn btn-danger btn-block",
                   on: {
                     click: function($event) {
                       return _vm.deleteProduct()

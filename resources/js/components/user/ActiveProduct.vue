@@ -61,7 +61,6 @@
                 <div v-show="editForm.categoryChangeVisible">
                     <div>
                         <div class="form-group">
-                            <label for="category">Change category</label>
                             <select v-model="editForm.value" class="form-control"
                                     id="category">
                                 <option v-for="category in $parent.categories" :value=category.id>
@@ -69,21 +68,20 @@
                                 </option>
                             </select>
                         </div>
-                        <button class="btn btn-primary" @click="editConfirm()">Edit expire months</button>
+                        <button class="btn btn-primary" @click="editConfirm()">Change category</button>
                     </div>
                 </div>
 
                 <div v-show="editForm.brandChangeVisible">
                     <div>
                         <div class="form-group">
-                            <label for="category">Change brand</label>
                             <select v-model="editForm.value" class="form-control" id="brand">
                                 <option v-for="brand in $parent.brands" :value=brand.id>
                                     {{brand.name}}
                                 </option>
                             </select>
                         </div>
-                        <button class="btn btn-primary" @click="editConfirm()">Edit expire months</button>
+                        <button class="btn btn-primary" @click="editConfirm()">Change brand</button>
                     </div>
                 </div>
 
@@ -319,9 +317,9 @@
                             <h4 class="mb-3">
                                 Product options
                             </h4>
-                            <button @click="showEdit('brand_id')" class="btn btn-info">Change brand</button>
-                            <button @click="showEdit('category_id')" class="btn btn-info">Change category</button>
-                            <button @click="deleteProduct()" class="btn btn-danger">Delete product</button>
+                            <button @click="showEdit('brand_id')" class="btn btn-info btn-block">Change brand</button>
+                            <button @click="showEdit('category_id')" class="btn btn-info btn-block">Change category</button>
+                            <button @click="deleteProduct()" class="btn btn-danger btn-block">Delete product</button>
                         </div>
 
                     </div>
