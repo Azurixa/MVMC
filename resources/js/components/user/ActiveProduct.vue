@@ -58,6 +58,33 @@
                     </div>
                 </div>
 
+                <div v-show="editForm.categoryChangeVisible">
+                    <div>
+                        <div class="form-group">
+                            <select v-model="editForm.value" class="form-control"
+                                    id="category">
+                                <option v-for="category in $parent.categories" :value=category.id>
+                                    {{category.name}}
+                                </option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" @click="editConfirm()">Change category</button>
+                    </div>
+                </div>
+
+                <div v-show="editForm.brandChangeVisible">
+                    <div>
+                        <div class="form-group">
+                            <select v-model="editForm.value" class="form-control" id="brand">
+                                <option v-for="brand in $parent.brands" :value=brand.id>
+                                    {{brand.name}}
+                                </option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" @click="editConfirm()">Change brand</button>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -290,7 +317,9 @@
                             <h4 class="mb-3">
                                 Product options
                             </h4>
-                            <button @click="deleteProduct()" class="btn btn-danger">Delete product</button>
+                            <button @click="showEdit('brand_id')" class="btn btn-outline-info btn-block">Change brand</button>
+                            <button @click="showEdit('category_id')" class="btn btn-outline-info btn-block">Change category</button>
+                            <button @click="deleteProduct()" class="btn btn-outline-danger btn-block">Delete product</button>
                         </div>
 
                     </div>
@@ -324,6 +353,8 @@
                     remainingAmountVisible: false,
                     boughtAtVisible: false,
                     expireMonthsVisible: false,
+                    categoryChangeVisible: false,
+                    brandChangeVisible: false,
                     photoSending: false,
                     whatEditing: '',
                     file: '',
@@ -389,6 +420,8 @@
                     this.editForm.remainingAmountVisible = false;
                     this.editForm.boughtAtVisible = false;
                     this.editForm.expireMonthsVisible = false;
+                    this.editForm.categoryChangeVisible = false;
+                    this.editForm.brandChangeVisible = false;
                     this.editForm.value = '';
                     this.editForm.whatEditing = '';
                 } else {
@@ -416,6 +449,14 @@
                     if (what === 'expire_months') {
                         this.editForm.expireMonthsVisible = true;
                         this.editForm.value = this.productData.expire_months;
+                    }
+                    if (what === 'category_id') {
+                        this.editForm.categoryChangeVisible = true;
+                        this.editForm.value = '';
+                    }
+                    if (what === 'brand_id') {
+                        this.editForm.brandChangeVisible = true;
+                        this.editForm.value = '';
                     }
                     this.editForm.whatEditing = what;
                 }
