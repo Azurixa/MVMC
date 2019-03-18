@@ -317,9 +317,9 @@
                             <h4 class="mb-3">
                                 Product options
                             </h4>
-                            <button @click="showEdit('brand_id')" class="btn btn-info btn-block">Change brand</button>
-                            <button @click="showEdit('category_id')" class="btn btn-info btn-block">Change category</button>
-                            <button @click="deleteProduct()" class="btn btn-danger btn-block">Delete product</button>
+                            <button @click="showEdit('brand_id')" class="btn btn-outline-info btn-block">Change brand</button>
+                            <button @click="showEdit('category_id')" class="btn btn-outline-info btn-block">Change category</button>
+                            <button @click="deleteProduct()" class="btn btn-outline-danger btn-block">Delete product</button>
                         </div>
 
                     </div>

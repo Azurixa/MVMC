@@ -3109,7 +3109,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-info btn-block",
+                  staticClass: "btn btn-outline-info btn-block",
                   on: {
                     click: function($event) {
                       return _vm.showEdit("brand_id")
@@ -3122,7 +3122,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-info btn-block",
+                  staticClass: "btn btn-outline-info btn-block",
                   on: {
                     click: function($event) {
                       return _vm.showEdit("category_id")
@@ -3135,7 +3135,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-danger btn-block",
+                  staticClass: "btn btn-outline-danger btn-block",
                   on: {
                     click: function($event) {
                       return _vm.deleteProduct()
