@@ -249,7 +249,7 @@
                                     <!-- Container for product uses count -->
                                     <div class="stats">
                                         <div class="if-pan ml-auto" data-toggle="tooltip"
-                                             data-placement="top" title="Tag as panned [3xp]"
+                                             data-placement="top" title="Tag as panned [15xp]"
                                              v-show="!productData.pan"
                                              @click="panProduct(1)">
                                             <div class="m-0 text-center">
@@ -257,7 +257,7 @@
                                             </div>
                                         </div>
                                         <div class="if-pan true ml-auto" data-toggle="tooltip"
-                                             data-placement="top" title="Tag as not panned [-3xp]"
+                                             data-placement="top" title="Tag as not panned [-15xp]"
                                              v-show="productData.pan"
                                              @click="panProduct(0)">
                                             <div class="m-0 text-center">
@@ -265,7 +265,7 @@
                                             </div>
                                         </div>
                                         <div class="uses_count" @click="addProductUse()" data-toggle="tooltip"
-                                             data-placement="top" title="Add use [1xp]">
+                                             data-placement="top" title="Add use [5xp]">
                                             <div class="m-0 text-center">
                                                 <p class="mb-0 h5" id="active-uses-count">
                                                     {{productData.uses_count}}</p>
