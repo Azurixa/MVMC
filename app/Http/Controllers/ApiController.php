@@ -190,9 +190,9 @@ class ApiController extends Controller
 
         if ($field === 'pan') {
             if ($request->post('value') == 1) {
-                User::addExperience($userId, 3);
+                User::addExperience($userId, 15);
             } else {
-                User::addExperience($userId, -3);
+                User::addExperience($userId, -15);
             }
         }
 
@@ -248,7 +248,7 @@ class ApiController extends Controller
         $product->last_use = $currentTimestamp = Carbon::now()->toDateTimeString();
         $product->save();
 
-        User::addExperience($userId, 3);
+        User::addExperience($userId, 5);
 
         return json_encode(['message' => 'Use count++ for product ' . $id . '!']);
     }
@@ -273,7 +273,7 @@ class ApiController extends Controller
         Image::make($image->getRealPath())->resize(null, 300, function ($constraint){$constraint->aspectRatio();})->save(public_path('storage/products/thumbnail_' . $name));
 
         Product::addPhoto($id, $name);
-        User::addExperience($userId, 9);
+        User::addExperience($userId, 10);
 
         return json_encode(['message' => base_path('storage/app/public/products/' . $name)]);
     }
@@ -349,7 +349,7 @@ class ApiController extends Controller
         $product->photos = $newPhotos;
         $product->save();
 
-        User::addExperience($userId, 5);
+        //User::addExperience($userId, 5);
 
         return json_encode(['message' => 'Photo of index ' . $photoIndex . ' from item ' . $id . ' set ti first position!']);
     }
@@ -395,7 +395,7 @@ class ApiController extends Controller
         $product->photos = $newPhotos;
         $product->save();
 
-        User::addExperience($userId, -9);
+        User::addExperience($userId, -10);
 
         return json_encode(['message' => 'Photo of index ' . $photoIndex . ' from item ' . $id . ' removed!']);
     }

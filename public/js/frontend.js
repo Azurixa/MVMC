@@ -2944,7 +2944,7 @@ var render = function() {
                         attrs: {
                           "data-toggle": "tooltip",
                           "data-placement": "top",
-                          title: "Tag as panned [3xp]"
+                          title: "Tag as panned [15xp]"
                         },
                         on: {
                           click: function($event) {
@@ -2970,7 +2970,7 @@ var render = function() {
                         attrs: {
                           "data-toggle": "tooltip",
                           "data-placement": "top",
-                          title: "Tag as not panned [-3xp]"
+                          title: "Tag as not panned [-15xp]"
                         },
                         on: {
                           click: function($event) {
@@ -2988,7 +2988,7 @@ var render = function() {
                         attrs: {
                           "data-toggle": "tooltip",
                           "data-placement": "top",
-                          title: "Add use [1xp]"
+                          title: "Add use [5xp]"
                         },
                         on: {
                           click: function($event) {
@@ -4082,7 +4082,7 @@ var render = function() {
             [
               _c("div", {
                 staticClass: "progress-bar",
-                style: { width: ((_vm.user.exp % 200) / 200) * 100 + "%" },
+                style: { width: ((_vm.user.exp % 150) / 150) * 100 + "%" },
                 attrs: {
                   role: "progressbar",
                   "aria-valuenow": _vm.user.exp,
