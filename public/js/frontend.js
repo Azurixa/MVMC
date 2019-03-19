@@ -1312,6 +1312,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'navbar',
   props: ['level'],
@@ -4078,19 +4080,23 @@ var render = function() {
               }
             },
             [
+              _c("div", {
+                staticClass: "progress-bar",
+                style: { width: ((_vm.user.exp % 200) / 200) * 100 + "%" },
+                attrs: {
+                  role: "progressbar",
+                  "aria-valuenow": _vm.user.exp,
+                  "aria-valuemin": "0",
+                  "aria-valuemax": _vm.user.exp_next
+                }
+              }),
+              _vm._v(" "),
               _c(
-                "div",
+                "p",
                 {
-                  staticClass: "progress-bar",
-                  style: {
-                    width: (_vm.user.exp / _vm.user.exp_next) * 100 + "%"
-                  },
-                  attrs: {
-                    role: "progressbar",
-                    "aria-valuenow": _vm.user.exp,
-                    "aria-valuemin": "0",
-                    "aria-valuemax": _vm.user.exp_next
-                  }
+                  staticClass:
+                    "position-absolute w-100 text-center text-black m-0 font-weight-bold",
+                  staticStyle: { "text-shadow": "0 0 2px #fff" }
                 },
                 [
                   _vm._v(

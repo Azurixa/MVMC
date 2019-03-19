@@ -57,10 +57,12 @@
         <div class="level-progress" v-if="level > 0">
             <div class="progress" data-toggle="tooltip"
                  data-placement="bottom" title="Current experience / next level">
-                <div class="progress-bar" :style="{'width': user.exp/user.exp_next * 100 + '%'}" role="progressbar"
+                <div class="progress-bar" :style="{'width': ((((user.exp % 150))/150) * 100) + '%'}" role="progressbar"
                      :aria-valuenow="user.exp" aria-valuemin="0" :aria-valuemax="user.exp_next">
-                    {{user.exp}} / {{user.exp_next}}
                 </div>
+                <p class="position-absolute w-100 text-center text-black m-0 font-weight-bold" style="text-shadow: 0 0 2px #fff">
+                    {{user.exp}} / {{user.exp_next}}
+                </p>
             </div>
         </div>
 
