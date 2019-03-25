@@ -926,17 +926,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -1322,6 +1311,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'navbar',
   props: ['level'],
@@ -1342,7 +1332,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   filters: {
-    firstLetter: function firstLetter(value) {
+    firstLetter: function firstLetter() {
+      var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '?';
       return value.charAt(0);
     }
   },
@@ -4371,7 +4362,9 @@ var render = function() {
                 0
               )
             ])
-          })
+          }),
+          _vm._v(" "),
+          _vm._m(0)
         ],
         2
       ),
@@ -4393,7 +4386,7 @@ var render = function() {
               ],
               staticClass: "product-show-placeholder"
             },
-            [_vm._m(0), _vm._v(" "), _vm._m(1)]
+            [_vm._m(1), _vm._v(" "), _vm._m(2)]
           ),
           _vm._v(" "),
           _c("active-product", {
@@ -4409,12 +4402,39 @@ var render = function() {
         ],
         1
       )
-    ]),
-    _vm._v(" "),
-    _vm._m(2)
+    ])
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row m-0", attrs: { show: "" } }, [
+      _c("div", { staticClass: "col-12" }, [_c("hr")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "text-center col-12",
+          attrs: {
+            onClick:
+              "document.getElementById('toolbox').toggleAttribute('show')",
+            "data-toggle": "tooltip",
+            "data-placement": "top",
+            title: "Show toolbox"
+          }
+        },
+        [
+          _c("i", { staticClass: "bx bx-window" }),
+          _vm._v(" "),
+          _c("p", { staticClass: "m-0" }, [
+            _vm._v("\n                        Toolbox\n                    ")
+          ])
+        ]
+      )
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -4441,56 +4461,6 @@ var staticRenderFns = [
       _c("p", { staticClass: "m-0" }, [
         _c("i", { staticClass: "bx bx-chevron-down" }),
         _vm._v(" Show collection / add new items\n                    ")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "footer-box" }, [
-      _c("div", { staticClass: "row m-0" }, [
-        _c(
-          "div",
-          {
-            staticClass: "text-center col-6",
-            attrs: {
-              onClick:
-                "document.getElementById('collection').toggleAttribute('show')",
-              "data-toggle": "tooltip",
-              "data-placement": "top",
-              title: "Show collection"
-            }
-          },
-          [
-            _c("i", { staticClass: "bx bx-collection m-0" }),
-            _vm._v(" "),
-            _c("p", { staticClass: "m-0" }, [
-              _vm._v("\n                    Collection\n                ")
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "text-center col-6",
-            attrs: {
-              onClick:
-                "document.getElementById('toolbox').toggleAttribute('show')",
-              "data-toggle": "tooltip",
-              "data-placement": "top",
-              title: "Show toolbox"
-            }
-          },
-          [
-            _c("i", { staticClass: "bx bx-window" }),
-            _vm._v(" "),
-            _c("p", { staticClass: "m-0" }, [
-              _vm._v("\n                    Toolbox\n                ")
-            ])
-          ]
-        )
       ])
     ])
   }
@@ -4660,31 +4630,51 @@ var render = function() {
             _vm._v("\n            Make-up\n        ")
           ]),
           _vm._v(" "),
-          _vm._m(0),
+          _c(
+            "a",
+            {
+              staticClass: "navbar-brand d-lg-none",
+              attrs: {
+                onclick:
+                  "document.getElementById('navbarSupportedContent').toggleAttribute('show')"
+              }
+            },
+            [_vm._v("\n            Not logged\n        ")]
+          ),
           _vm._v(" "),
-          _vm._m(1)
+          _vm._m(0)
         ])
       : _vm._e(),
     _vm._v(" "),
     _vm.level > 0
       ? _c("nav", { staticClass: "navbar navbar-expand-lg navbar-light" }, [
-          _vm._m(2),
+          _vm._m(1),
           _vm._v(" "),
-          _c("a", { staticClass: "navbar-brand d-lg-none" }, [
-            _vm._v("\n            " + _vm._s(_vm.user.name) + " "),
-            _c(
-              "span",
-              {
-                staticClass: "badge badge-info current-level",
-                attrs: {
-                  "data-toggle": "tooltip",
-                  "data-placement": "bottom",
-                  title: "Current makeup level"
-                }
-              },
-              [_vm._v(_vm._s(_vm.user.level))]
-            )
-          ]),
+          _c(
+            "a",
+            {
+              staticClass: "navbar-brand d-lg-none",
+              attrs: {
+                onclick:
+                  "document.getElementById('navbarSupportedContent').toggleAttribute('show')"
+              }
+            },
+            [
+              _vm._v("\n            " + _vm._s(_vm.user.name) + " "),
+              _c(
+                "span",
+                {
+                  staticClass: "badge badge-info current-level",
+                  attrs: {
+                    "data-toggle": "tooltip",
+                    "data-placement": "bottom",
+                    title: "Current makeup level"
+                  }
+                },
+                [_vm._v(_vm._s(_vm.user.level))]
+              )
+            ]
+          ),
           _vm._v(" "),
           _c(
             "div",
@@ -4740,7 +4730,7 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _vm._m(3)
+                _vm._m(2)
               ]),
               _vm._v(" "),
               _c("ul", { staticClass: "navbar-nav ml-auto" }, [
@@ -4764,7 +4754,7 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _vm._m(4)
+                _vm._m(3)
               ])
             ]
           )
@@ -4806,23 +4796,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "button",
-      {
-        staticClass: "navbar-toggler",
-        attrs: {
-          type: "button",
-          onclick:
-            "document.getElementById('navbarSupportedContent').toggleAttribute('show')"
-        }
-      },
-      [_c("span", { staticClass: "navbar-toggler-icon" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
       "div",
       {
         staticClass: "collapse navbar-collapse guest",
@@ -4855,11 +4828,11 @@ var staticRenderFns = [
         staticClass: "navbar-toggler",
         attrs: {
           type: "button",
-          onclick:
-            "document.getElementById('navbarSupportedContent').toggleAttribute('show')"
+          onClick:
+            "document.getElementById('collection').toggleAttribute('show')"
         }
       },
-      [_c("span", { staticClass: "navbar-toggler-icon" })]
+      [_c("i", { staticClass: "bx bx-collection h3 m-0" })]
     )
   },
   function() {

@@ -5,9 +5,10 @@
             <a class="navbar-brand" href="/">
                 Make-up
             </a>
-            <button class="navbar-toggler" type="button" onclick="document.getElementById('navbarSupportedContent').toggleAttribute('show')">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+
+            <a class="navbar-brand d-lg-none" onclick="document.getElementById('navbarSupportedContent').toggleAttribute('show')">
+                Not logged
+            </a>
 
             <div class="collapse navbar-collapse guest" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
@@ -23,11 +24,11 @@
 
         <nav class="navbar navbar-expand-lg navbar-light" v-if="level > 0">
 
-            <button class="navbar-toggler" type="button" onclick="document.getElementById('navbarSupportedContent').toggleAttribute('show')">
-                <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler" type="button" onClick="document.getElementById('collection').toggleAttribute('show')">
+                <i class="bx bx-collection h3 m-0"></i>
             </button>
 
-            <a class="navbar-brand d-lg-none">
+            <a class="navbar-brand d-lg-none" onclick="document.getElementById('navbarSupportedContent').toggleAttribute('show')">
                 {{user.name}} <span class="badge badge-info current-level" data-toggle="tooltip"
                                     data-placement="bottom" title="Current makeup level">{{user.level}}</span>
             </a>
@@ -94,7 +95,7 @@
             }
         },
         filters: {
-            firstLetter(value) {
+            firstLetter(value = '?') {
                 return value.charAt(0);
             }
         },

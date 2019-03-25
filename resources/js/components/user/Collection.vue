@@ -115,6 +115,21 @@
                         </div>
                     </div>
                 </div>
+                <div class="row m-0" show>
+                    <div class="col-12">
+                        <hr>
+                    </div>
+
+                    <!-- Toggle of adding new stuff (+) -->
+                    <div onClick="document.getElementById('toolbox').toggleAttribute('show')" class="text-center col-12"
+                         data-toggle="tooltip"
+                         data-placement="top" title="Show toolbox">
+                        <i class='bx bx-window'></i>
+                        <p class="m-0">
+                            Toolbox
+                        </p>
+                    </div>
+                </div>
             </div>
 
             <div class="activity-box">
@@ -141,32 +156,6 @@
 
             </div>
         </div>
-
-        <div class="footer-box">
-
-            <div class="row m-0">
-                <!-- Collection toggle button -->
-                <div onClick="document.getElementById('collection').toggleAttribute('show')" class="text-center col-6"
-                     data-toggle="tooltip" data-placement="top" title="Show collection">
-                    <i class='bx bx-collection m-0'></i>
-                    <p class="m-0">
-                        Collection
-                    </p>
-                </div>
-
-                <!-- Toggle of adding new stuff (+) -->
-                <div onClick="document.getElementById('toolbox').toggleAttribute('show')" class="text-center col-6"
-                     data-toggle="tooltip"
-                     data-placement="top" title="Show toolbox">
-                    <i class='bx bx-window'></i>
-                    <p class="m-0">
-                        Toolbox
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
 
     </div>
 </template>
