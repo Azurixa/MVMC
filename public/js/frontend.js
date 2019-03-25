@@ -704,16 +704,18 @@ __webpack_require__.r(__webpack_exports__);
     removePhoto: function removePhoto(photoIndex) {
       var _this7 = this;
 
-      fetch('/api/user/delete/product/' + this.productData.id + '/photo/' + photoIndex, {
-        method: 'POST',
-        headers: {
-          'Authorization': this.token
-        }
-      }).then(function (res) {
-        return res.json();
-      }).then(function (data) {
-        _this7.showItem(_this7.productData.id);
-      });
+      if (window.confirm("Are you sure?")) {
+        fetch('/api/user/delete/product/' + this.productData.id + '/photo/' + photoIndex, {
+          method: 'POST',
+          headers: {
+            'Authorization': this.token
+          }
+        }).then(function (res) {
+          return res.json();
+        }).then(function (data) {
+          _this7.showItem(_this7.productData.id);
+        });
+      }
     },
     setFirstPhoto: function setFirstPhoto(photoIndex) {
       var _this8 = this;
