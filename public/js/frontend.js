@@ -3603,7 +3603,7 @@ var render = function() {
                   return _c(
                     "div",
                     {
-                      staticClass: "col-lg-3 col-12 product",
+                      staticClass: "col-lg-3 col-12 product my-2",
                       class: { empty: product.empty },
                       attrs: {
                         onClick:
@@ -3616,113 +3616,107 @@ var render = function() {
                       }
                     },
                     [
-                      _c(
-                        "div",
-                        { staticClass: "d-flex align-items-center my-2" },
-                        [
-                          _c("div", {
-                            staticClass: "thumbnail",
-                            style: {
-                              backgroundImage: "url(/" + product.thumbnail + ")"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "info" }, [
-                            _c(
-                              "p",
-                              { staticClass: "text-left" },
-                              [
-                                _c(
-                                  "span",
-                                  { staticClass: "brand badge badge-dark" },
-                                  [_vm._v(_vm._s(product.brand))]
-                                ),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "item" }, [
-                                  _vm._v(
-                                    "\n                                        " +
-                                      _vm._s(product.name) +
-                                      "\n                                    "
-                                  )
-                                ]),
-                                _c("br"),
+                      _c("div", { staticClass: "d-flex align-items-center" }, [
+                        _c("div", {
+                          staticClass: "thumbnail",
+                          style: {
+                            backgroundImage: "url(/" + product.thumbnail + ")"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "info" }, [
+                          _c(
+                            "p",
+                            { staticClass: "text-left" },
+                            [
+                              _c(
+                                "span",
+                                { staticClass: "brand badge badge-dark" },
+                                [_vm._v(_vm._s(product.brand))]
+                              ),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "item" }, [
                                 _vm._v(
-                                  "\n                                    " +
-                                    _vm._s(product.rating) +
-                                    " | "
-                                ),
-                                _vm._l(product.rating, function(index) {
-                                  return _c("i", {
-                                    staticClass: "bx bxs-star small-rating"
-                                  })
-                                }),
-                                _c("br"),
-                                _vm._v(" "),
-                                _c("i", { staticClass: "bx bxs-plus-circle" }),
-                                _vm._v(
-                                  _vm._s(product.uses_count) +
+                                  "\n                                        " +
+                                    _vm._s(product.name) +
                                     "\n                                    "
-                                ),
-                                _c(
-                                  "i",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "show",
-                                        rawName: "v-show",
-                                        value: product.pan,
-                                        expression: "product.pan"
-                                      }
-                                    ],
-                                    staticClass: "bx bx-expand"
-                                  },
-                                  [_vm._v("P")]
                                 )
-                              ],
-                              2
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value: !product.empty,
-                                    expression: "!product.empty"
-                                  }
-                                ],
-                                staticClass: "progress amount mr-2"
-                              },
-                              [
-                                _c("div", {
-                                  staticClass: "progress-bar",
-                                  style: {
-                                    width: product.remaining_amount + "%"
-                                  }
+                              ]),
+                              _c("br"),
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(product.rating) +
+                                  " | "
+                              ),
+                              _vm._l(product.rating, function(index) {
+                                return _c("i", {
+                                  staticClass: "bx bxs-star small-rating"
                                 })
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "strong",
-                              {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value: product.empty,
-                                    expression: "product.empty"
-                                  }
-                                ],
-                                staticClass: "text-dark text-left mb-0"
-                              },
-                              [_vm._v("This product is empty.")]
-                            )
-                          ])
-                        ]
-                      )
+                              }),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c("i", { staticClass: "bx bxs-plus-circle" }),
+                              _vm._v(
+                                _vm._s(product.uses_count) +
+                                  "\n                                    "
+                              ),
+                              _c(
+                                "i",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: product.pan,
+                                      expression: "product.pan"
+                                    }
+                                  ],
+                                  staticClass: "bx bx-expand"
+                                },
+                                [_vm._v("P")]
+                              )
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: !product.empty,
+                                  expression: "!product.empty"
+                                }
+                              ],
+                              staticClass: "progress amount mr-2"
+                            },
+                            [
+                              _c("div", {
+                                staticClass: "progress-bar",
+                                style: { width: product.remaining_amount + "%" }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "strong",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: product.empty,
+                                  expression: "product.empty"
+                                }
+                              ],
+                              staticClass: "text-dark text-left mb-0"
+                            },
+                            [_vm._v("This product is empty.")]
+                          )
+                        ])
+                      ])
                     ]
                   )
                 }),
