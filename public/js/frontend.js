@@ -935,6 +935,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -1243,6 +1245,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3591,12 +3598,12 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "row px-0 px-lg-4" },
+                { staticClass: "row px-0 px-lg-4 px-2" },
                 _vm._l(item.products, function(product) {
                   return _c(
                     "div",
                     {
-                      staticClass: "col-lg-3 col-12 product py-2 py-lg-3",
+                      staticClass: "col-lg-3 col-12 product my-2",
                       class: { empty: product.empty },
                       attrs: {
                         onClick:
@@ -3609,97 +3616,113 @@ var render = function() {
                       }
                     },
                     [
-                      _c("div", { staticClass: "d-flex align-items-center" }, [
-                        _c("div", {
-                          staticClass: "thumbnail",
-                          style: {
-                            backgroundImage: "url(/" + product.thumbnail + ")"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "info" }, [
-                          _c("p", { staticClass: "text-left" }, [
+                      _c(
+                        "div",
+                        { staticClass: "d-flex align-items-center my-2" },
+                        [
+                          _c("div", {
+                            staticClass: "thumbnail",
+                            style: {
+                              backgroundImage: "url(/" + product.thumbnail + ")"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "info" }, [
                             _c(
-                              "span",
-                              { staticClass: "brand badge badge-dark" },
-                              [_vm._v(_vm._s(product.brand))]
+                              "p",
+                              { staticClass: "text-left" },
+                              [
+                                _c(
+                                  "span",
+                                  { staticClass: "brand badge badge-dark" },
+                                  [_vm._v(_vm._s(product.brand))]
+                                ),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "item" }, [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(product.name) +
+                                      "\n                                    "
+                                  )
+                                ]),
+                                _c("br"),
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(product.rating) +
+                                    " | "
+                                ),
+                                _vm._l(product.rating, function(index) {
+                                  return _c("i", {
+                                    staticClass: "bx bxs-star small-rating"
+                                  })
+                                }),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("i", { staticClass: "bx bxs-plus-circle" }),
+                                _vm._v(
+                                  _vm._s(product.uses_count) +
+                                    "\n                                    "
+                                ),
+                                _c(
+                                  "i",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: product.pan,
+                                        expression: "product.pan"
+                                      }
+                                    ],
+                                    staticClass: "bx bx-expand"
+                                  },
+                                  [_vm._v("P")]
+                                )
+                              ],
+                              2
                             ),
                             _vm._v(" "),
-                            _c("span", { staticClass: "item" }, [
-                              _vm._v(
-                                "\n                                        " +
-                                  _vm._s(product.name) +
-                                  "\n                                    "
-                              )
-                            ]),
-                            _c("br"),
-                            _vm._v(" "),
-                            _c("i", { staticClass: "bx bxs-star" }),
-                            _vm._v(
-                              _vm._s(product.rating) +
-                                "\n                                    "
-                            ),
                             _c(
-                              "i",
+                              "div",
                               {
                                 directives: [
                                   {
                                     name: "show",
                                     rawName: "v-show",
-                                    value: product.pan,
-                                    expression: "product.pan"
+                                    value: !product.empty,
+                                    expression: "!product.empty"
                                   }
                                 ],
-                                staticClass: "bx bx-expand"
+                                staticClass: "progress amount mr-2"
                               },
-                              [_vm._v("P")]
+                              [
+                                _c("div", {
+                                  staticClass: "progress-bar",
+                                  style: {
+                                    width: product.remaining_amount + "%"
+                                  }
+                                })
+                              ]
                             ),
                             _vm._v(" "),
-                            _c("i", { staticClass: "bx bxs-plus-circle" }),
-                            _vm._v(
-                              _vm._s(product.uses_count) +
-                                "\n                                "
+                            _c(
+                              "strong",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: product.empty,
+                                    expression: "product.empty"
+                                  }
+                                ],
+                                staticClass: "text-dark text-left mb-0"
+                              },
+                              [_vm._v("This product is empty.")]
                             )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: !product.empty,
-                                  expression: "!product.empty"
-                                }
-                              ],
-                              staticClass: "progress amount mr-2"
-                            },
-                            [
-                              _c("div", {
-                                staticClass: "progress-bar",
-                                style: { width: product.remaining_amount + "%" }
-                              })
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "strong",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: product.empty,
-                                  expression: "product.empty"
-                                }
-                              ],
-                              staticClass: "text-dark text-left mb-0"
-                            },
-                            [_vm._v("This product is empty.")]
-                          )
-                        ])
-                      ])
+                          ])
+                        ]
+                      )
                     ]
                   )
                 }),
@@ -3784,43 +3807,49 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "footer-box" }, [
-      _c(
-        "div",
-        {
-          staticClass: "toggle-collection",
-          attrs: {
-            onClick:
-              "document.getElementById('collection').toggleAttribute('show')",
-            "data-toggle": "tooltip",
-            "data-placement": "top",
-            title: "Show collection"
-          }
-        },
-        [
-          _c("i", { staticClass: "bx bx-collection m-0" }),
-          _vm._v(" "),
-          _c("p", [_vm._v("\n                Collection\n            ")])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "toggle-toolbox",
-          attrs: {
-            onClick:
-              "document.getElementById('toolbox').toggleAttribute('show')",
-            "data-toggle": "tooltip",
-            "data-placement": "top",
-            title: "Show toolbox"
-          }
-        },
-        [
-          _c("i", { staticClass: "bx bx-window" }),
-          _vm._v(" "),
-          _c("p", [_vm._v("\n                Toolbox\n            ")])
-        ]
-      )
+      _c("div", { staticClass: "row m-0" }, [
+        _c(
+          "div",
+          {
+            staticClass: "text-center col-6",
+            attrs: {
+              onClick:
+                "document.getElementById('collection').toggleAttribute('show')",
+              "data-toggle": "tooltip",
+              "data-placement": "top",
+              title: "Show collection"
+            }
+          },
+          [
+            _c("i", { staticClass: "bx bx-collection m-0" }),
+            _vm._v(" "),
+            _c("p", { staticClass: "m-0" }, [
+              _vm._v("\n                    Collection\n                ")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "text-center col-6",
+            attrs: {
+              onClick:
+                "document.getElementById('toolbox').toggleAttribute('show')",
+              "data-toggle": "tooltip",
+              "data-placement": "top",
+              title: "Show toolbox"
+            }
+          },
+          [
+            _c("i", { staticClass: "bx bx-window" }),
+            _vm._v(" "),
+            _c("p", { staticClass: "m-0" }, [
+              _vm._v("\n                    Toolbox\n                ")
+            ])
+          ]
+        )
+      ])
     ])
   }
 ]
@@ -4036,7 +4065,9 @@ var render = function() {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                _vm._m(3)
+                _vm._m(3),
+                _vm._v(" "),
+                _vm._m(4)
               ]),
               _vm._v(" "),
               _c("ul", { staticClass: "navbar-nav ml-auto" }, [
@@ -4060,7 +4091,7 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _vm._m(4)
+                _vm._m(5)
               ])
             ]
           )
@@ -4175,6 +4206,16 @@ var staticRenderFns = [
       },
       [_c("span", { staticClass: "navbar-toggler-icon" })]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("div", { staticClass: "d-block d-lg-none" }, [
+        _c("p", { staticClass: "text-center" }, [_vm._v("SIEMAAA")])
+      ])
+    ])
   },
   function() {
     var _vm = this
