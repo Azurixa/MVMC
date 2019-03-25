@@ -10701,16 +10701,8 @@ a.text-dark:focus {
   background: linear-gradient(30deg, #F24370, #7205FC);
 }
 
-.level-progress .progress {
-  border-radius: 0 !important;
-}
-
-.level-progress .progress .progress-bar {
+.level-progress .progress-bar {
   background: linear-gradient(90deg, #F24370, #7205FC);
-}
-
-.progress {
-  border-radius: 12px !important;
 }
 
 .progress .progress-bar {
@@ -10727,7 +10719,7 @@ a.text-dark:focus {
 }
 
 .card {
-  border-radius: 12px !important;
+  border-radius: 14px !important;
 }
 
 @media screen and (max-width: 992px) {
@@ -10852,14 +10844,18 @@ a.text-dark:focus {
 }
 
 .main-box .collection .row .product {
-  padding: 0.5rem;
+  padding: 0 !important;
   cursor: pointer;
   transition: 0.3s all;
   background: transparent;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
 .main-box .collection .row .product:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.02);
 }
 
 .main-box .collection .row .product.empty .thumbnail {
@@ -10897,19 +10893,28 @@ a.text-dark:focus {
   }
 }
 
+.main-box .collection .row .product .brand {
+  position: relative;
+  top: -2px;
+}
+
 .main-box .collection .row .product .item {
   font-weight: 600;
+}
+
+.main-box .collection .row .product .small-rating {
+  margin-right: -2.7px;
 }
 
 .main-box .collection .row .product .amount {
   margin: 0 auto;
   height: 10px;
-  border-radius: 6px;
-}
-
-.main-box .collection .row .product .amount .progress-bar {
-  height: 10px;
-  border-radius: 6px;
+  width: 100%;
+  border-radius: 0 0 14px 14px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #fafafa;
 }
 
 .main-box .collection .row .product p {
@@ -11044,7 +11049,7 @@ a.text-dark:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
+  border-radius: 14px;
 }
 
 .main-box .activity-box .product-show .stats .uses_count #active-uses-count,
@@ -11071,7 +11076,7 @@ a.text-dark:focus {
   position: relative;
   display: flex;
   background: black;
-  border-radius: 12px;
+  border-radius: 14px;
 }
 
 @media screen and (max-width: 992px) {
@@ -11207,9 +11212,7 @@ a.text-dark:focus {
   background-color: #f1f1f1;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   width: 100%;
-  height: 67px;
-  display: flex;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.2rem;
   position: -webkit-sticky;
   position: sticky;
   bottom: 0;
@@ -11225,7 +11228,7 @@ a.text-dark:focus {
   padding: 0.1rem 0.5rem;
   font-size: 2.1rem;
   margin-right: 0.5rem;
-  border-radius: 12px;
+  border-radius: 14px;
   line-height: 15px;
 }
 

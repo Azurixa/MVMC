@@ -83,8 +83,8 @@
                     <span onClick="this.nextSibling.nextSibling.toggleAttribute('show')" class="category">
                         <i class='bx bx-sort'></i> {{item.category.name}} <small>({{item.itemsNotEmpty}}/{{item.itemsEmpty}})</small>
                     </span>
-                    <div class="row px-0 px-lg-4">
-                        <div class="col-lg-3 col-12 product py-2 py-lg-3" :class="{'empty': product.empty}"
+                    <div class="row px-0 px-lg-4 px-3 pb-3">
+                        <div class="col-lg-3 col-12 product mt-3" :class="{'empty': product.empty}"
                              v-for="product in item.products"
                              @click="showItem(product.id)"
                              onClick="document.getElementById('collection').toggleAttribute('show')">
@@ -98,9 +98,9 @@
                                         <span class="item">
                                             {{product.name}}
                                         </span><br>
-                                        <i class="bx bxs-star"></i>{{product.rating}}
-                                        <i class="bx bx-expand" v-show="product.pan">P</i>
+                                        {{product.rating}} | <i class="bx bxs-star small-rating" v-for="index in product.rating"></i><br>
                                         <i class="bx bxs-plus-circle"></i>{{product.uses_count}}
+                                        <i class="bx bx-expand" v-show="product.pan">P</i>
                                     </p>
                                     <div class="progress amount mr-2" v-show="!product.empty">
                                         <div class="progress-bar"
@@ -144,23 +144,25 @@
 
         <div class="footer-box">
 
-            <!-- Collection toggle button -->
-            <div onClick="document.getElementById('collection').toggleAttribute('show')" class="toggle-collection"
-                 data-toggle="tooltip" data-placement="top" title="Show collection">
-                <i class='bx bx-collection m-0'></i>
-                <p>
-                    Collection
-                </p>
-            </div>
+            <div class="row">
+                <!-- Collection toggle button -->
+                <div onClick="document.getElementById('collection').toggleAttribute('show')" class="text-center col-6"
+                     data-toggle="tooltip" data-placement="top" title="Show collection">
+                    <i class='bx bx-collection m-0'></i>
+                    <p>
+                        Collection
+                    </p>
+                </div>
 
-            <!-- Toggle of adding new stuff (+) -->
-            <div onClick="document.getElementById('toolbox').toggleAttribute('show')" class="toggle-toolbox"
-                 data-toggle="tooltip"
-                 data-placement="top" title="Show toolbox">
-                <i class='bx bx-window'></i>
-                <p>
-                    Toolbox
-                </p>
+                <!-- Toggle of adding new stuff (+) -->
+                <div onClick="document.getElementById('toolbox').toggleAttribute('show')" class="text-center col-6"
+                     data-toggle="tooltip"
+                     data-placement="top" title="Show toolbox">
+                    <i class='bx bx-window'></i>
+                    <p>
+                        Toolbox
+                    </p>
+                </div>
             </div>
 
         </div>
