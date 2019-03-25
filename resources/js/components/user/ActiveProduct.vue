@@ -556,14 +556,16 @@
                 }
             },
             removePhoto(photoIndex) {
-                fetch('/api/user/delete/product/' + this.productData.id + '/photo/' + photoIndex, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': this.token,
-                    },
-                }).then(res => res.json()).then(data => {
-                    this.showItem(this.productData.id);
-                });
+                if (window.confirm("Are you sure?")){
+                    fetch('/api/user/delete/product/' + this.productData.id + '/photo/' + photoIndex, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': this.token,
+                        },
+                    }).then(res => res.json()).then(data => {
+                        this.showItem(this.productData.id);
+                    });
+                }
             },
             setFirstPhoto(photoIndex) {
                 fetch('/api/user/update/product/' + this.productData.id + '/setFirstPhoto/' + photoIndex, {
