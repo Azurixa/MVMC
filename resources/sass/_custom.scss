@@ -102,7 +102,7 @@
 
 .main-box {
   position: relative;
-  height: calc(100vh - 60px - 12px - 68px);
+  height: calc(100vh - 60px - 12px - 65px);
   overflow-y: scroll;
   background-color: #f9f9f9;
 
@@ -158,12 +158,9 @@
         cursor: pointer;
         display: block;
         transition: 0.3s all;
-        padding: 0.7rem 1rem;
+        padding: 0.5rem 1rem;
         @media screen and (max-width: 992px) {
           font-size: 1.4rem;
-        }
-        &:hover {
-          background-color: rgba(0, 0, 0, 0.1);
         }
       }
     }
@@ -189,9 +186,6 @@
         border-radius: $brad;
         box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.2);
         position: relative;
-        &:hover {
-          background-color: rgba(0, 0, 0, 0.02);
-        }
         &.empty {
           .thumbnail {
             filter: grayscale(100%);

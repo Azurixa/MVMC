@@ -38,6 +38,11 @@
                         <a class="nav-link text-danger" href="/admin/dashboard">ADMIN</a>
                     </li>
                     <li class="nav-item">
+                        <div class="d-block d-lg-none">
+                            <p class="text-center">SIEMAAA</p>
+                        </div>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/my/collection">My collection</a>
                     </li>
                 </ul>
