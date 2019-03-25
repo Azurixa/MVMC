@@ -6,8 +6,9 @@
                 Make-up
             </a>
 
-            <a class="navbar-brand d-lg-none" onclick="document.getElementById('navbarSupportedContent').toggleAttribute('show')">
-                Not logged
+            <a class="navbar-brand d-lg-none"
+               onclick="document.getElementById('navbarSupportedContent').toggleAttribute('show')">
+                Guest <p class="bx bxs-user-circle m-0"></p>
             </a>
 
             <div class="collapse navbar-collapse guest" id="navbarSupportedContent">
@@ -24,13 +25,18 @@
 
         <nav class="navbar navbar-expand-lg navbar-light" v-if="level > 0">
 
-            <button class="navbar-toggler" type="button" onClick="document.getElementById('collection').toggleAttribute('show')">
+            <button class="navbar-toggler" type="button"
+                    onClick="document.getElementById('collection').toggleAttribute('show')">
                 <i class="bx bx-collection h3 m-0"></i>
             </button>
 
-            <a class="navbar-brand d-lg-none" onclick="document.getElementById('navbarSupportedContent').toggleAttribute('show')">
-                {{user.name}} <span class="badge badge-info current-level" data-toggle="tooltip"
-                                    data-placement="bottom" title="Current makeup level">{{user.level}}</span>
+            <a class="navbar-brand d-lg-none"
+               onclick="document.getElementById('navbarSupportedContent').toggleAttribute('show')">
+                {{user.name}}
+                <span class="badge badge-info current-level" data-toggle="tooltip"
+                      data-placement="bottom" title="Current makeup level">
+                    {{user.level}}
+                </span>
             </a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -44,7 +50,8 @@
                                 <span>{{user.name | firstLetter}}</span>
                             </div>
                             <p class="mb-0 mt-3">{{user.name}} <span class="badge badge-info">{{user.level}}</span></p>
-                            <small>{{user.exp}} / {{user.exp_next}} ({{user.exp_next - user.exp}})</small><br>
+                            <small>{{user.exp}} / {{user.exp_next}} ({{user.exp_next - user.exp}})</small>
+                            <br>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -55,7 +62,7 @@
                 <ul class="navbar-nav ml-auto">
                     <a class="navbar-brand ml-auto d-none d-lg-block">
                         <span class="badge badge-info current-level" data-toggle="tooltip"
-                      data-placement="bottom" title="Current makeup level">{{user.level}}</span> {{user.name}}
+                              data-placement="bottom" title="Current makeup level">{{user.level}}</span> {{user.name}}
                     </a>
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Logout</a>
@@ -112,7 +119,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .avatar{
+    .avatar {
         width: 160px;
         height: 160px;
         margin: 0 auto;

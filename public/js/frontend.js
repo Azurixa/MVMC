@@ -1312,6 +1312,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'navbar',
   props: ['level'],
@@ -4630,25 +4637,15 @@ var render = function() {
             _vm._v("\n            Make-up\n        ")
           ]),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "navbar-brand d-lg-none",
-              attrs: {
-                onclick:
-                  "document.getElementById('navbarSupportedContent').toggleAttribute('show')"
-              }
-            },
-            [_vm._v("\n            Not logged\n        ")]
-          ),
+          _vm._m(0),
           _vm._v(" "),
-          _vm._m(0)
+          _vm._m(1)
         ])
       : _vm._e(),
     _vm._v(" "),
     _vm.level > 0
       ? _c("nav", { staticClass: "navbar navbar-expand-lg navbar-light" }, [
-          _vm._m(1),
+          _vm._m(2),
           _vm._v(" "),
           _c(
             "a",
@@ -4660,7 +4657,9 @@ var render = function() {
               }
             },
             [
-              _vm._v("\n            " + _vm._s(_vm.user.name) + " "),
+              _vm._v(
+                "\n            " + _vm._s(_vm.user.name) + "\n            "
+              ),
               _c(
                 "span",
                 {
@@ -4671,7 +4670,13 @@ var render = function() {
                     title: "Current makeup level"
                   }
                 },
-                [_vm._v(_vm._s(_vm.user.level))]
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.user.level) +
+                      "\n            "
+                  )
+                ]
               )
             ]
           ),
@@ -4725,12 +4730,13 @@ var render = function() {
                             ")"
                         )
                       ]),
+                      _vm._v(" "),
                       _c("br")
                     ]
                   )
                 ]),
                 _vm._v(" "),
-                _vm._m(2)
+                _vm._m(3)
               ]),
               _vm._v(" "),
               _c("ul", { staticClass: "navbar-nav ml-auto" }, [
@@ -4754,7 +4760,7 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _vm._m(3)
+                _vm._m(4)
               ])
             ]
           )
@@ -4791,6 +4797,25 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "navbar-brand d-lg-none",
+        attrs: {
+          onclick:
+            "document.getElementById('navbarSupportedContent').toggleAttribute('show')"
+        }
+      },
+      [
+        _vm._v("\n            Guest "),
+        _c("p", { staticClass: "bx bxs-user-circle m-0" })
+      ]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
