@@ -926,6 +926,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -3862,6 +3869,8 @@ var render = function() {
       _c("div", { staticClass: "toolbox", attrs: { id: "toolbox" } }, [
         _c("div", { staticClass: "inside" }, [
           _c("div", { staticClass: "row" }, [
+            _vm._m(0),
+            _vm._v(" "),
             _c("div", { staticClass: "col-lg-6" }, [
               _c("div", { staticClass: "card p-2 mb-4" }, [
                 _c("p", { staticClass: "h4" }, [
@@ -4252,7 +4261,7 @@ var render = function() {
                   return _c(
                     "div",
                     {
-                      staticClass: "col-lg-3 col-12 product my-2",
+                      staticClass: "col-lg-3 col-12 product my-1",
                       class: { empty: product.empty },
                       attrs: {
                         onClick:
@@ -4371,7 +4380,7 @@ var render = function() {
             ])
           }),
           _vm._v(" "),
-          _vm._m(0)
+          _vm._m(1)
         ],
         2
       ),
@@ -4393,7 +4402,7 @@ var render = function() {
               ],
               staticClass: "product-show-placeholder"
             },
-            [_vm._m(1), _vm._v(" "), _vm._m(2)]
+            [_vm._m(2), _vm._v(" "), _vm._m(3)]
           ),
           _vm._v(" "),
           _c("active-product", {
@@ -4417,16 +4426,42 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-12" }, [
+      _c(
+        "div",
+        {
+          staticClass: "btn btn-info btn-block mb-4 p-2",
+          attrs: {
+            onClick:
+              "document.getElementById('toolbox').toggleAttribute('show');"
+          }
+        },
+        [
+          _c("p", { staticClass: "m-0" }, [
+            _vm._v(
+              "\n                                Close toolbox\n                            "
+            )
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row m-0", attrs: { show: "" } }, [
-      _c("div", { staticClass: "col-12" }, [_c("hr")]),
+      _c("div", { staticClass: "col-12 mb-0 p-0" }, [
+        _c("hr", { staticClass: "mb-0" })
+      ]),
       _vm._v(" "),
       _c(
         "div",
         {
-          staticClass: "text-center col-12",
+          staticClass: "text-center col-12 py-3",
           attrs: {
             onClick:
-              "document.getElementById('toolbox').toggleAttribute('show')",
+              "document.getElementById('toolbox').toggleAttribute('show'); document.getElementById('collection').toggleAttribute('show')",
             "data-toggle": "tooltip",
             "data-placement": "top",
             title: "Show toolbox"

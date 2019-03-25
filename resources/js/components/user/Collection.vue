@@ -7,6 +7,13 @@
             <div class="toolbox" id="toolbox">
                 <div class="inside">
                     <div class="row">
+                        <div class="col-lg-12">
+                            <div class="btn btn-info btn-block mb-4 p-2" onClick="document.getElementById('toolbox').toggleAttribute('show');">
+                                <p class="m-0">
+                                    Close toolbox
+                                </p>
+                            </div>
+                        </div>
                         <div class="col-lg-6">
                             <div class="card p-2 mb-4">
 
@@ -84,7 +91,7 @@
                         <i class='bx bx-sort'></i> {{item.category.name}} <small>({{item.itemsNotEmpty}}/{{item.itemsEmpty}})</small>
                     </span>
                     <div class="row px-0 px-lg-4 px-3">
-                        <div class="col-lg-3 col-12 product my-2" :class="{'empty': product.empty}"
+                        <div class="col-lg-3 col-12 product my-1" :class="{'empty': product.empty}"
                              v-for="product in item.products"
                              @click="showItem(product.id)"
                              onClick="document.getElementById('collection').toggleAttribute('show')">
@@ -116,12 +123,12 @@
                     </div>
                 </div>
                 <div class="row m-0" show>
-                    <div class="col-12">
-                        <hr>
+                    <div class="col-12 mb-0 p-0">
+                        <hr class="mb-0">
                     </div>
 
                     <!-- Toggle of adding new stuff (+) -->
-                    <div onClick="document.getElementById('toolbox').toggleAttribute('show')" class="text-center col-12"
+                    <div onClick="document.getElementById('toolbox').toggleAttribute('show'); document.getElementById('collection').toggleAttribute('show')" class="text-center col-12 py-3"
                          data-toggle="tooltip"
                          data-placement="top" title="Show toolbox">
                         <i class='bx bx-window'></i>
