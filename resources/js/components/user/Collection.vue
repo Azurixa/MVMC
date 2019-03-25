@@ -84,7 +84,7 @@
                         <i class='bx bx-sort'></i> {{item.category.name}} <small>({{item.itemsNotEmpty}}/{{item.itemsEmpty}})</small>
                     </span>
                     <div class="row px-0 px-lg-4 px-2">
-                        <div class="col-lg-3 col-12 product my-2" :class="{'empty': product.empty}"
+                        <div class="col-lg-3 col-12 product" :class="{'empty': product.empty}"
                              v-for="product in item.products"
                              @click="showItem(product.id)"
                              onClick="document.getElementById('collection').toggleAttribute('show')">
