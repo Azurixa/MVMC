@@ -38,8 +38,12 @@
                         <a class="nav-link text-danger" href="/admin/dashboard">ADMIN</a>
                     </li>
                     <li class="nav-item">
-                        <div class="d-block d-lg-none">
-                            <p class="text-center">SIEMAAA</p>
+                        <div class="d-block d-lg-none py-5 text-center">
+                            <div class="avatar">
+                                <span>{{user.name | firstLetter}}</span>
+                            </div>
+                            <p class="mb-0 mt-3">{{user.name}} <span class="badge badge-info">{{user.level}}</span></p>
+                            <small>{{user.exp}} / {{user.exp_next}} ({{user.exp_next - user.exp}})</small><br>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -65,9 +69,6 @@
                 <div class="progress-bar" :style="{'width': ((((user.exp % 150))/150) * 100) + '%'}" role="progressbar"
                      :aria-valuenow="user.exp" aria-valuemin="0" :aria-valuemax="user.exp_next">
                 </div>
-                <p class="position-absolute w-100 text-center text-black m-0 font-weight-bold" style="text-shadow: 0 0 2px #fff">
-                    {{user.exp}} / {{user.exp_next}}
-                </p>
             </div>
         </div>
 
@@ -92,6 +93,11 @@
                 }, 2000);
             }
         },
+        filters: {
+            firstLetter(value) {
+                return value.charAt(0);
+            }
+        },
         methods: {
             getUserData() {
                 fetch('/api/user', {
@@ -103,3 +109,18 @@
         },
     }
 </script>
+
+<style lang="scss" scoped>
+    .avatar{
+        width: 160px;
+        height: 160px;
+        margin: 0 auto;
+        border-radius: 50%;
+        background: #0f6674;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 50px;
+    }
+</style>

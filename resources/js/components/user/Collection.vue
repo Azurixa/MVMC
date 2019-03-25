@@ -83,7 +83,7 @@
                     <span onClick="this.nextSibling.nextSibling.toggleAttribute('show')" class="category">
                         <i class='bx bx-sort'></i> {{item.category.name}} <small>({{item.itemsNotEmpty}}/{{item.itemsEmpty}})</small>
                     </span>
-                    <div class="row px-0 px-lg-4 px-2">
+                    <div class="row px-0 px-lg-4 px-3">
                         <div class="col-lg-3 col-12 product my-2" :class="{'empty': product.empty}"
                              v-for="product in item.products"
                              @click="showItem(product.id)"
@@ -98,7 +98,7 @@
                                         <span class="item">
                                             {{product.name}}
                                         </span><br>
-                                        {{product.rating}} | <i class="bx bxs-star small-rating" v-for="index in product.rating"></i><br>
+                                        <i class="bx bxs-star small-rating" v-for="index in product.rating"></i> | {{product.rating}}<br>
                                         <i class="bx bxs-plus-circle"></i>{{product.uses_count}}
                                         <i class="bx bx-expand" v-show="product.pan">P</i>
                                     </p>
