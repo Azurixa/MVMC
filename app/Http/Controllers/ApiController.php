@@ -11,6 +11,7 @@ use App\Category;
 use App\Product;
 use App\Brand;
 use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -423,7 +424,7 @@ class ApiController extends Controller
             $productsFormated = array();
 
             foreach ($productsNotEmpty as $product) {
-                $brand = Brand::where('id', $product['brand_id'])->firstOrFail();
+                $brand = Brand::where('id', $product['brand_id'])->orderBy('name')->firstOrFail();
                 array_push($productsFormated, [
                     'id'               => $product['id'],
                     'brand'            => $brand['name'],

@@ -10730,7 +10730,7 @@ a.text-dark:focus {
     height: calc(100vh - 60px - 16px);
     transition: 0.7s all;
     position: fixed;
-    left: -100%;
+    right: -100%;
     width: 100%;
     top: 76px;
   }
@@ -10740,9 +10740,10 @@ a.text-dark:focus {
   }
 
   .navbar-collapse[show] {
-    position: absolute;
+    position: fixed;
     top: 76px;
-    left: 0;
+    right: 0;
+    z-index: 10000;
   }
 
   .navbar-collapse .navbar-nav .nav-item {
@@ -10753,7 +10754,7 @@ a.text-dark:focus {
 
 .main-box {
   position: relative;
-  height: calc(100vh - 60px - 12px - 65px);
+  height: calc(100vh - 60px - 16px);
   overflow-y: scroll;
   background-color: #f9f9f9;
 }
@@ -11198,38 +11199,5 @@ a.text-dark:focus {
   border-radius: 50%;
   background-color: white;
   color: black;
-}
-
-.footer-box {
-  background-color: #f1f1f1;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  width: 100%;
-  padding: 0.5rem 0.2rem;
-  position: -webkit-sticky;
-  position: sticky;
-  bottom: 0;
-  width: 100%;
-  z-index: 900000;
-}
-
-.footer-box .toggle-toolbox,
-.footer-box .toggle-collection {
-  background: linear-gradient(30deg, #F24370, #7205FC);
-  color: #f1f1f1;
-  cursor: pointer;
-  padding: 0.1rem 0.5rem;
-  font-size: 2.1rem;
-  margin-right: 0.5rem;
-  border-radius: 14px;
-  line-height: 15px;
-}
-
-.footer-box .toggle-toolbox p,
-.footer-box .toggle-collection p {
-  text-align: center;
-  font-size: 7px;
-  margin: 0;
-  position: relative;
-  top: -2px;
 }
 

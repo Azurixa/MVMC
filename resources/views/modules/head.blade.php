@@ -43,7 +43,7 @@
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}" defer></script>
 
 <!-- Fonts -->
-<link href='https://cdn.jsdelivr.net/npm/boxicons@1.9.1/css/boxicons.min.css' rel='stylesheet'>
+<link href='https://cdn.jsdelivr.net/npm/boxicons@1.9.2/css/boxicons.min.css' rel='stylesheet'>
 
 <!-- Styles -->
 <link href="{{ asset('css/app.css?v=0.83') }}" rel="stylesheet">
