@@ -3603,7 +3603,7 @@ var render = function() {
                   return _c(
                     "div",
                     {
-                      staticClass: "col-lg-3 col-12 product my-2",
+                      staticClass: "col-lg-3 col-12 product",
                       class: { empty: product.empty },
                       attrs: {
                         onClick:
