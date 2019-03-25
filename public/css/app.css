@@ -10684,6 +10684,10 @@ a.text-dark:focus {
   background: #555;
 }
 
+.btn {
+  border-radius: 14px !important;
+}
+
 @media screen and (max-width: 992px) {
   .tooltip,
   .tooltip-inner {
@@ -10728,7 +10732,7 @@ a.text-dark:focus {
     background-color: white;
     z-index: 900000;
     height: calc(100vh - 60px - 16px);
-    transition: 0.7s all;
+    transition: 0.5s all;
     position: fixed;
     right: -100%;
     width: 100%;
@@ -10762,8 +10766,8 @@ a.text-dark:focus {
 .main-box .toolbox {
   width: 100%;
   height: 100%;
-  position: absolute;
-  top: -100%;
+  position: fixed;
+  right: -100%;
   background-color: rgba(0, 0, 0, 0.5);
   overflow-y: scroll;
   transition: 0.5s all;
@@ -10771,7 +10775,7 @@ a.text-dark:focus {
 }
 
 .main-box .toolbox[show] {
-  top: 0;
+  right: 0;
 }
 
 .main-box .toolbox .inside {
@@ -10783,7 +10787,7 @@ a.text-dark:focus {
   position: absolute;
   z-index: 600;
   left: -80%;
-  transition: 0.8s all;
+  transition: 0.5s all;
   background: #f1f1f1;
   width: 80%;
   height: 100%;
@@ -10871,7 +10875,7 @@ a.text-dark:focus {
 @media screen and (max-width: 992px) {
   .main-box .collection .row .product .thumbnail {
     width: 140px;
-    height: 110px;
+    height: 120px;
   }
 }
 
@@ -11095,12 +11099,12 @@ a.text-dark:focus {
 }
 
 .main-box .activity-box .product-show .gallery .gallery-image.active {
-  width: 60%;
+  width: 66%;
   opacity: 1;
 }
 
 .main-box .activity-box .product-show .gallery .gallery-image.secondary {
-  width: 20%;
+  width: 17%;
   opacity: 0.3;
 }
 
