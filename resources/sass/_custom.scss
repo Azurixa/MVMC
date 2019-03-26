@@ -44,8 +44,13 @@
 }
 
 .level-progress {
-  .progress-bar {
-    background: linear-gradient(90deg, $dark, $darker);
+  .progress{
+    border-radius: 0;
+    height: 5px;
+    .progress-bar {
+      background: linear-gradient(90deg, $dark, $darker);
+      border-radius: 0;
+    }
   }
 }
 
@@ -76,7 +81,7 @@
     display: block !important;
     background-color: white;
     z-index: 900000;
-    height: calc(100vh - 60px - 16px);
+    height: calc(100vh - 60px - 5px);
     transition: 0.5s all;
     position: fixed;
     right: -100%;
@@ -107,7 +112,7 @@
 
 .main-box {
   position: relative;
-  height: calc(100vh - 60px - 16px);
+  height: calc(100vh - 60px - 5px);
   overflow-y: scroll;
   background-color: #f9f9f9;
 
@@ -151,9 +156,18 @@
 
     .header {
       font-size: 2.2rem;
-      padding: 1.2rem 1rem;
+      padding: 0.4rem 1rem;
       @media screen and (max-width: 992px) {
         font-size: 1.9rem;
+      }
+    }
+
+    .sorting {
+      margin-bottom: 1rem;
+      .sort{
+        &.active{
+          background-color: #4dc0b5;
+        }
       }
     }
 
@@ -199,8 +213,8 @@
 
         .thumbnail {
           background-color: #606f7b;
-          width: 84px;
-          height: 84px;
+          width: 120px;
+          height: 100px;
           margin-right: 1rem;
           margin-left: auto;
           background-size: cover;
@@ -295,13 +309,6 @@
       h1, p {
         opacity: 0.7;
         text-align: center;
-      }
-      .tips1 {
-        opacity: 0.7;
-        position: absolute;
-        bottom: 5px;
-        left: 26px;
-        font-size: 1.2rem;
       }
     }
 

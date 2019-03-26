@@ -408,6 +408,7 @@ class ApiController extends Controller
     public function getAllProducts (Request $request)
     {
         $userId = $request->user()->id;
+        $sorting = explode(',', $request->input('sort'));
 
         $toReturn = array();
 
@@ -417,9 +418,22 @@ class ApiController extends Controller
             $allProductsCount = 0;
             $emptyProductsCount = 0;
 
-            // Get all products
-            $productsNotEmpty = Product::where('category_id', $cat['id'])->where('remaining_amount', '>', '0')->orderby('brand_id')->get();
-            $productsEmpty = Product::where('category_id', $cat['id'])->where('remaining_amount', '0')->orderby('brand_id')->get();
+            $productsNotEmpty = Product::where('category_id', $cat['id'])->where('remaining_amount', '>', '0');
+            $productsEmpty = Product::where('category_id', $cat['id'])->where('remaining_amount', '0');
+
+            foreach ($sorting as $sort) {
+                if ($sort === 'panOnly') {
+                    $productsNotEmpty->where('pan', '1');
+                    $productsEmpty->where('pan', '1');
+                }
+                if ($sort === 'emptyOnly') {
+                    $productsNotEmpty->where('name', '');
+                }
+            }
+
+            $productsNotEmpty = $productsNotEmpty->orderby('brand_id')->get();
+            $productsEmpty = $productsEmpty->orderby('brand_id')->get();
+
 
             $productsFormated = array();
 
