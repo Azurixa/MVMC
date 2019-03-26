@@ -10813,13 +10813,21 @@ a.text-dark:focus {
 
 .main-box .collection .header {
   font-size: 2.2rem;
-  padding: 1.2rem 1rem;
+  padding: 0.4rem 1rem;
 }
 
 @media screen and (max-width: 992px) {
   .main-box .collection .header {
     font-size: 1.9rem;
   }
+}
+
+.main-box .collection .sorting {
+  margin-bottom: 1rem;
+}
+
+.main-box .collection .sorting .pan-only.active {
+  background-color: red;
 }
 
 .main-box .collection .category > span {

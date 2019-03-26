@@ -86,21 +86,21 @@
             </div>
 
             <div class="collection" id="collection">
-                <p class="header">My collection
+                <p class="header m-0">My collection
                     <small>({{allProductsCount}}/{{allProductsCountEmpty}})</small>
                 </p>
+                <div class="row sorting mb-3 px-0" show>
+                    <div class="col-4 p-2 text-center">
+                        <div class="pan-only card p-2" @click="sortBy('panOnly')" v-bind:class="{'active': sorting.panOnly}">
+                            <p class="m-0">Pan only</p>
+                        </div>
+                    </div>
+                </div>
                 <div class="category" v-for="item in allProducts">
                     <span onClick="this.nextSibling.nextSibling.toggleAttribute('show')" class="category">
                         <i class='bx bx-sort'></i> {{item.category.name}} <small>({{item.itemsNotEmpty}}/{{item.itemsEmpty}})</small>
                     </span>
                     <div class="row px-3">
-                        <div class="col-12 sorting">
-                            <div class="row">
-                                <div class="col" @click="sortBy('panOnly')">
-                                    <p>Pan only</p>
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-lg-4 col-12 my-1 px-0 px-lg-2" :class="{'empty': product.empty}"
                              v-for="product in item.products"
                              @click="showItem(product.id)"
@@ -232,9 +232,13 @@
                 if (name === 'panOnly') {
 
                     if (this.sorting.panOnly) {
-                        this.sorting.panOnly = true;
+                        this.sorting.panOnly = false;
+                        this.sorting.value = '';
+                        this.getCategoriesAndProducts();
                     } else {
                         this.sorting.panOnly = true;
+                        this.sorting.value = 'panOnly';
+                        this.getCategoriesAndProducts();
                     }
                 }
             },
@@ -345,13 +349,11 @@
             getCategoriesAndProducts() {
                 this.getBrands();
                 this.getCategories();
-                const formData = new FormData();
-                formData.append('sorting', this.sorting.value);
-                fetch('/api/user/products', {
+
+                fetch('/api/user/products?sort=' + this.sorting.value, {
                     headers: {
                         'Authorization': this.token,
                     },
-                    body: formData,
                 }).then(res => res.json()).then(data => {
                     this.allProducts = data;
 

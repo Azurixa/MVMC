@@ -997,9 +997,13 @@ __webpack_require__.r(__webpack_exports__);
     sortBy: function sortBy(name) {
       if (name === 'panOnly') {
         if (this.sorting.panOnly) {
-          this.sorting.panOnly = true;
+          this.sorting.panOnly = false;
+          this.sorting.value = '';
+          this.getCategoriesAndProducts();
         } else {
           this.sorting.panOnly = true;
+          this.sorting.value = 'panOnly';
+          this.getCategoriesAndProducts();
         }
       }
     },
@@ -1136,13 +1140,10 @@ __webpack_require__.r(__webpack_exports__);
 
       this.getBrands();
       this.getCategories();
-      var formData = new FormData();
-      formData.append('sorting', this.sorting.value);
-      fetch('/api/user/products', {
+      fetch('/api/user/products?sort=' + this.sorting.value, {
         headers: {
           'Authorization': this.token
-        },
-        body: formData
+        }
       }).then(function (res) {
         return res.json();
       }).then(function (data) {
@@ -4245,7 +4246,7 @@ var render = function() {
         "div",
         { staticClass: "collection", attrs: { id: "collection" } },
         [
-          _c("p", { staticClass: "header" }, [
+          _c("p", { staticClass: "header m-0" }, [
             _vm._v("My collection\n                "),
             _c("small", [
               _vm._v(
@@ -4257,6 +4258,28 @@ var render = function() {
               )
             ])
           ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "row sorting mb-3 px-0", attrs: { show: "" } },
+            [
+              _c("div", { staticClass: "col-4 p-2 text-center" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "pan-only card p-2",
+                    class: { active: _vm.sorting.panOnly },
+                    on: {
+                      click: function($event) {
+                        return _vm.sortBy("panOnly")
+                      }
+                    }
+                  },
+                  [_c("p", { staticClass: "m-0" }, [_vm._v("Pan only")])]
+                )
+              ])
+            ]
+          ),
           _vm._v(" "),
           _vm._l(_vm.allProducts, function(item) {
             return _c("div", { staticClass: "category" }, [
@@ -4287,162 +4310,143 @@ var render = function() {
               _c(
                 "div",
                 { staticClass: "row px-3" },
-                [
-                  _c("div", { staticClass: "col-12 sorting" }, [
-                    _c("div", { staticClass: "row" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "col",
-                          on: {
-                            click: function($event) {
-                              return _vm.sortBy("panOnly")
-                            }
-                          }
-                        },
-                        [_c("p", [_vm._v("Pan only")])]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(item.products, function(product) {
-                    return _c(
-                      "div",
-                      {
-                        staticClass: "col-lg-4 col-12 my-1 px-0 px-lg-2",
-                        class: { empty: product.empty },
-                        attrs: {
-                          onClick:
-                            "document.getElementById('collection').toggleAttribute('show')"
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.showItem(product.id)
-                          }
-                        }
+                _vm._l(item.products, function(product) {
+                  return _c(
+                    "div",
+                    {
+                      staticClass: "col-lg-4 col-12 my-1 px-0 px-lg-2",
+                      class: { empty: product.empty },
+                      attrs: {
+                        onClick:
+                          "document.getElementById('collection').toggleAttribute('show')"
                       },
-                      [
-                        _c("div", { staticClass: "product" }, [
-                          _c(
-                            "div",
-                            { staticClass: "d-flex align-items-center" },
-                            [
-                              _c("div", {
-                                staticClass: "thumbnail",
-                                style: {
-                                  backgroundImage:
-                                    "url(/" + product.thumbnail + ")"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "info" }, [
-                                _c(
-                                  "p",
-                                  { staticClass: "text-left" },
-                                  [
-                                    _c(
-                                      "span",
-                                      { staticClass: "brand badge badge-dark" },
-                                      [_vm._v(_vm._s(product.brand))]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("span", { staticClass: "item" }, [
-                                      _vm._v(
-                                        "\n                                        " +
-                                          _vm._s(product.name) +
-                                          "\n                                    "
-                                      )
-                                    ]),
-                                    _c("br"),
-                                    _vm._v(" "),
-                                    _vm._l(product.rating, function(index) {
-                                      return _c("i", {
-                                        staticClass: "bx bxs-star small-rating"
-                                      })
-                                    }),
+                      on: {
+                        click: function($event) {
+                          return _vm.showItem(product.id)
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "product" }, [
+                        _c(
+                          "div",
+                          { staticClass: "d-flex align-items-center" },
+                          [
+                            _c("div", {
+                              staticClass: "thumbnail",
+                              style: {
+                                backgroundImage:
+                                  "url(/" + product.thumbnail + ")"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "info" }, [
+                              _c(
+                                "p",
+                                { staticClass: "text-left" },
+                                [
+                                  _c(
+                                    "span",
+                                    { staticClass: "brand badge badge-dark" },
+                                    [_vm._v(_vm._s(product.brand))]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("span", { staticClass: "item" }, [
                                     _vm._v(
-                                      " |\n                                        " +
-                                        _vm._s(product.rating)
-                                    ),
-                                    _c("br"),
-                                    _vm._v(" "),
-                                    _c("i", {
-                                      staticClass: "bx bxs-plus-circle"
-                                    }),
-                                    _vm._v(
-                                      _vm._s(product.uses_count) +
-                                        "\n                                        "
-                                    ),
-                                    _c(
-                                      "i",
-                                      {
-                                        directives: [
-                                          {
-                                            name: "show",
-                                            rawName: "v-show",
-                                            value: product.pan,
-                                            expression: "product.pan"
-                                          }
-                                        ],
-                                        staticClass: "bx bx-expand"
-                                      },
-                                      [_vm._v("P")]
+                                      "\n                                        " +
+                                        _vm._s(product.name) +
+                                        "\n                                    "
                                     )
-                                  ],
-                                  2
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "show",
-                                        rawName: "v-show",
-                                        value: !product.empty,
-                                        expression: "!product.empty"
-                                      }
-                                    ],
-                                    staticClass: "progress amount mr-2"
-                                  },
-                                  [
-                                    _c("div", {
-                                      staticClass: "progress-bar",
-                                      style: {
-                                        width: product.remaining_amount + "%"
-                                      }
+                                  ]),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  _vm._l(product.rating, function(index) {
+                                    return _c("i", {
+                                      staticClass: "bx bxs-star small-rating"
                                     })
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "strong",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "show",
-                                        rawName: "v-show",
-                                        value: product.empty,
-                                        expression: "product.empty"
-                                      }
-                                    ],
-                                    staticClass: "text-dark text-left mb-0"
-                                  },
-                                  [
-                                    _vm._v(
-                                      "This product is\n                                        empty."
-                                    )
-                                  ]
-                                )
-                              ])
-                            ]
-                          )
-                        ])
-                      ]
-                    )
-                  })
-                ],
-                2
+                                  }),
+                                  _vm._v(
+                                    " |\n                                        " +
+                                      _vm._s(product.rating)
+                                  ),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  _c("i", {
+                                    staticClass: "bx bxs-plus-circle"
+                                  }),
+                                  _vm._v(
+                                    _vm._s(product.uses_count) +
+                                      "\n                                        "
+                                  ),
+                                  _c(
+                                    "i",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "show",
+                                          rawName: "v-show",
+                                          value: product.pan,
+                                          expression: "product.pan"
+                                        }
+                                      ],
+                                      staticClass: "bx bx-expand"
+                                    },
+                                    [_vm._v("P")]
+                                  )
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: !product.empty,
+                                      expression: "!product.empty"
+                                    }
+                                  ],
+                                  staticClass: "progress amount mr-2"
+                                },
+                                [
+                                  _c("div", {
+                                    staticClass: "progress-bar",
+                                    style: {
+                                      width: product.remaining_amount + "%"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "strong",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: product.empty,
+                                      expression: "product.empty"
+                                    }
+                                  ],
+                                  staticClass: "text-dark text-left mb-0"
+                                },
+                                [
+                                  _vm._v(
+                                    "This product is\n                                        empty."
+                                  )
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      ])
+                    ]
+                  )
+                }),
+                0
               )
             ])
           }),
