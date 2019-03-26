@@ -10742,7 +10742,7 @@ a.text-dark:focus {
     position: fixed;
     right: -100%;
     width: 100%;
-    top: 76px;
+    top: 65px;
   }
 
   .navbar-collapse.guest {
@@ -10751,7 +10751,6 @@ a.text-dark:focus {
 
   .navbar-collapse[show] {
     position: fixed;
-    top: 76px;
     right: 0;
     z-index: 10000;
   }

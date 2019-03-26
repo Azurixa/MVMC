@@ -108,11 +108,10 @@
                         <i class='bx bx-sort'></i> {{item.category.name}} <small>({{item.itemsNotEmpty}}/{{item.itemsEmpty}})</small>
                     </span>
                     <div class="row px-3">
-                        <div class="col-lg-4 col-12 my-1 px-0 px-lg-2" :class="{'empty': product.empty}"
-                             v-for="product in item.products"
+                        <div class="col-lg-4 col-12 my-1 px-0 px-lg-2" v-for="product in item.products"
                              @click="showItem(product.id)"
                              onClick="document.getElementById('collection').toggleAttribute('show')">
-                            <div class="product">
+                            <div class="product" :class="{'empty': product.empty}">
                                 <div class="d-flex align-items-center">
                                     <div class="thumbnail"
                                          :style="{backgroundImage: 'url(/' + product.thumbnail + ')'}">
@@ -244,14 +243,19 @@
                     this.sorting.panOnly = false;
                 } else if (name === 'panOnly') {
                     this.sorting.panOnly = true;
-                    this.sorting.value += 'panOnly,';
                 }
 
                 if (name === 'emptyOnly' && this.sorting.emptyOnly) {
                     this.sorting.emptyOnly = false;
                 } else if (name === 'emptyOnly') {
                     this.sorting.emptyOnly = true;
+                }
+
+                if (this.sorting.emptyOnly) {
                     this.sorting.value += 'emptyOnly,';
+                }
+                if (this.sorting.panOnly) {
+                    this.sorting.value += 'panOnly,';
                 }
 
                 this.getCategoriesAndProducts();
