@@ -8,7 +8,8 @@
                 <div class="inside">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="btn btn-info btn-block mb-4 p-2" onClick="document.getElementById('toolbox').toggleAttribute('show');">
+                            <div class="btn btn-info btn-block mb-4 p-2"
+                                 onClick="document.getElementById('toolbox').toggleAttribute('show');">
                                 <p class="m-0">
                                     Close toolbox
                                 </p>
@@ -85,36 +86,50 @@
             </div>
 
             <div class="collection" id="collection">
-                <p class="header">My collection <small>({{allProductsCount}}/{{allProductsCountEmpty}})</small></p>
+                <p class="header">My collection
+                    <small>({{allProductsCount}}/{{allProductsCountEmpty}})</small>
+                </p>
                 <div class="category" v-for="item in allProducts">
                     <span onClick="this.nextSibling.nextSibling.toggleAttribute('show')" class="category">
                         <i class='bx bx-sort'></i> {{item.category.name}} <small>({{item.itemsNotEmpty}}/{{item.itemsEmpty}})</small>
                     </span>
-                    <div class="row px-0 px-lg-4 px-3">
-                        <div class="col-lg-3 col-12 product my-1" :class="{'empty': product.empty}"
+                    <div class="row px-3">
+                        <div class="col-12 sorting">
+                            <div class="row">
+                                <div class="col" @click="sortBy('panOnly')">
+                                    <p>Pan only</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-12 my-1 px-0 px-lg-2" :class="{'empty': product.empty}"
                              v-for="product in item.products"
                              @click="showItem(product.id)"
                              onClick="document.getElementById('collection').toggleAttribute('show')">
-                            <div class="d-flex align-items-center">
-                                <div class="thumbnail" :style="{backgroundImage: 'url(/' + product.thumbnail + ')'}">
+                            <div class="product">
+                                <div class="d-flex align-items-center">
+                                    <div class="thumbnail"
+                                         :style="{backgroundImage: 'url(/' + product.thumbnail + ')'}">
 
-                                </div>
-                                <div class="info">
-                                    <p class="text-left">
-                                        <span class="brand badge badge-dark">{{product.brand}}</span>
-                                        <span class="item">
+                                    </div>
+                                    <div class="info">
+                                        <p class="text-left">
+                                            <span class="brand badge badge-dark">{{product.brand}}</span>
+                                            <span class="item">
                                             {{product.name}}
                                         </span><br>
-                                        <i class="bx bxs-star small-rating" v-for="index in product.rating"></i> | {{product.rating}}<br>
-                                        <i class="bx bxs-plus-circle"></i>{{product.uses_count}}
-                                        <i class="bx bx-expand" v-show="product.pan">P</i>
-                                    </p>
-                                    <div class="progress amount mr-2" v-show="!product.empty">
-                                        <div class="progress-bar"
-                                             :style="{width: product.remaining_amount + '%'}">
+                                            <i class="bx bxs-star small-rating" v-for="index in product.rating"></i> |
+                                            {{product.rating}}<br>
+                                            <i class="bx bxs-plus-circle"></i>{{product.uses_count}}
+                                            <i class="bx bx-expand" v-show="product.pan">P</i>
+                                        </p>
+                                        <div class="progress amount mr-2" v-show="!product.empty">
+                                            <div class="progress-bar"
+                                                 :style="{width: product.remaining_amount + '%'}">
+                                            </div>
                                         </div>
+                                        <strong v-show="product.empty" class="text-dark text-left mb-0">This product is
+                                            empty.</strong>
                                     </div>
-                                    <strong v-show="product.empty" class="text-dark text-left mb-0">This product is empty.</strong>
                                 </div>
                             </div>
                             <!--<div class="thumbnail"-->
@@ -128,7 +143,8 @@
                     </div>
 
                     <!-- Toggle of adding new stuff (+) -->
-                    <div onClick="document.getElementById('toolbox').toggleAttribute('show'); document.getElementById('collection').toggleAttribute('show')" class="text-center col-12 py-3"
+                    <div onClick="document.getElementById('toolbox').toggleAttribute('show'); document.getElementById('collection').toggleAttribute('show')"
+                         class="text-center col-12 py-3"
                          data-toggle="tooltip"
                          data-placement="top" title="Show toolbox">
                         <i class='bx bx-window'></i>
@@ -149,11 +165,6 @@
                         </h1>
                         <p>
                             Or add new products to your collection!
-                        </p>
-                    </div>
-                    <div class="tips1">
-                        <p class="m-0">
-                            <i class='bx bx-chevron-down'></i> Show collection / add new items
                         </p>
                     </div>
                 </div>
@@ -190,6 +201,10 @@
                 allProductsCountEmpty: 0,
                 categories: {},
                 brands: {},
+                sorting: {
+                    panOnly: false,
+                    value: '',
+                },
                 formData: {
                     newCategory: {
                         name: '',
@@ -210,6 +225,19 @@
             }
         },
         methods: {
+
+            // Sorting
+
+            sortBy(name) {
+                if (name === 'panOnly') {
+
+                    if (this.sorting.panOnly) {
+                        this.sorting.panOnly = true;
+                    } else {
+                        this.sorting.panOnly = true;
+                    }
+                }
+            },
 
             // Categories
 
@@ -317,10 +345,13 @@
             getCategoriesAndProducts() {
                 this.getBrands();
                 this.getCategories();
+                const formData = new FormData();
+                formData.append('sorting', this.sorting.value);
                 fetch('/api/user/products', {
                     headers: {
                         'Authorization': this.token,
                     },
+                    body: formData,
                 }).then(res => res.json()).then(data => {
                     this.allProducts = data;
 
