@@ -10826,8 +10826,8 @@ a.text-dark:focus {
   margin-bottom: 1rem;
 }
 
-.main-box .collection .sorting .pan-only.active {
-  background-color: red;
+.main-box .collection .sorting .sort.active {
+  background-color: #4dc0b5;
 }
 
 .main-box .collection .category > span {

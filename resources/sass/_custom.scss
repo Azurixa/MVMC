@@ -164,9 +164,9 @@
 
     .sorting {
       margin-bottom: 1rem;
-      .pan-only{
+      .sort{
         &.active{
-          background-color: red;
+          background-color: #4dc0b5;
         }
       }
     }

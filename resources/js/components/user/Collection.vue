@@ -86,13 +86,20 @@
             </div>
 
             <div class="collection" id="collection">
-                <p class="header m-0">My collection
+                <p class="header m-0 pt-3">My collection
                     <small>({{allProductsCount}}/{{allProductsCountEmpty}})</small>
                 </p>
-                <div class="row sorting mb-3 px-0" show>
-                    <div class="col-4 p-2 text-center">
-                        <div class="pan-only card p-2" @click="sortBy('panOnly')" v-bind:class="{'active': sorting.panOnly}">
-                            <p class="m-0">Pan only</p>
+                <div class="sorting mb-3 px-2" show>
+                    <div class="d-inline-block text-center">
+                        <div class="sort card p-2" @click="sortBy('panOnly')"
+                             v-bind:class="{'active': sorting.panOnly}">
+                            <p class="m-0"><i class='bx bxs-sort-alt'></i> Pan</p>
+                        </div>
+                    </div>
+                    <div class="d-inline-block text-center">
+                        <div class="sort card p-2" @click="sortBy('emptyOnly')"
+                             v-bind:class="{'active': sorting.emptyOnly}">
+                            <p class="m-0"><i class='bx bxs-sort-alt'></i> Empty</p>
                         </div>
                     </div>
                 </div>
@@ -203,6 +210,7 @@
                 brands: {},
                 sorting: {
                     panOnly: false,
+                    emptyOnly: false,
                     value: '',
                 },
                 formData: {
@@ -229,18 +237,24 @@
             // Sorting
 
             sortBy(name) {
-                if (name === 'panOnly') {
 
-                    if (this.sorting.panOnly) {
-                        this.sorting.panOnly = false;
-                        this.sorting.value = '';
-                        this.getCategoriesAndProducts();
-                    } else {
-                        this.sorting.panOnly = true;
-                        this.sorting.value = 'panOnly';
-                        this.getCategoriesAndProducts();
-                    }
+                this.sorting.value = '';
+
+                if (name === 'panOnly' && this.sorting.panOnly) {
+                    this.sorting.panOnly = false;
+                } else if (name === 'panOnly') {
+                    this.sorting.panOnly = true;
+                    this.sorting.value += 'panOnly,';
                 }
+
+                if (name === 'emptyOnly' && this.sorting.emptyOnly) {
+                    this.sorting.emptyOnly = false;
+                } else if (name === 'emptyOnly') {
+                    this.sorting.emptyOnly = true;
+                    this.sorting.value += 'emptyOnly,';
+                }
+
+                this.getCategoriesAndProducts();
             },
 
             // Categories

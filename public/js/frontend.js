@@ -946,6 +946,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -971,6 +978,7 @@ __webpack_require__.r(__webpack_exports__);
       brands: {},
       sorting: {
         panOnly: false,
+        emptyOnly: false,
         value: ''
       },
       formData: {
@@ -995,17 +1003,23 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     // Sorting
     sortBy: function sortBy(name) {
-      if (name === 'panOnly') {
-        if (this.sorting.panOnly) {
-          this.sorting.panOnly = false;
-          this.sorting.value = '';
-          this.getCategoriesAndProducts();
-        } else {
-          this.sorting.panOnly = true;
-          this.sorting.value = 'panOnly';
-          this.getCategoriesAndProducts();
-        }
+      this.sorting.value = '';
+
+      if (name === 'panOnly' && this.sorting.panOnly) {
+        this.sorting.panOnly = false;
+      } else if (name === 'panOnly') {
+        this.sorting.panOnly = true;
+        this.sorting.value += 'panOnly,';
       }
+
+      if (name === 'emptyOnly' && this.sorting.emptyOnly) {
+        this.sorting.emptyOnly = false;
+      } else if (name === 'emptyOnly') {
+        this.sorting.emptyOnly = true;
+        this.sorting.value += 'emptyOnly,';
+      }
+
+      this.getCategoriesAndProducts();
     },
     // Categories
     createCategory: function createCategory() {
@@ -4246,7 +4260,7 @@ var render = function() {
         "div",
         { staticClass: "collection", attrs: { id: "collection" } },
         [
-          _c("p", { staticClass: "header m-0" }, [
+          _c("p", { staticClass: "header m-0 pt-3" }, [
             _vm._v("My collection\n                "),
             _c("small", [
               _vm._v(
@@ -4259,27 +4273,39 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "row sorting mb-3 px-0", attrs: { show: "" } },
-            [
-              _c("div", { staticClass: "col-4 p-2 text-center" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "pan-only card p-2",
-                    class: { active: _vm.sorting.panOnly },
-                    on: {
-                      click: function($event) {
-                        return _vm.sortBy("panOnly")
-                      }
+          _c("div", { staticClass: "sorting mb-3 px-2", attrs: { show: "" } }, [
+            _c("div", { staticClass: "d-inline-block text-center" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "sort card p-2",
+                  class: { active: _vm.sorting.panOnly },
+                  on: {
+                    click: function($event) {
+                      return _vm.sortBy("panOnly")
                     }
-                  },
-                  [_c("p", { staticClass: "m-0" }, [_vm._v("Pan only")])]
-                )
-              ])
-            ]
-          ),
+                  }
+                },
+                [_vm._m(1)]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "d-inline-block text-center" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "sort card p-2",
+                  class: { active: _vm.sorting.emptyOnly },
+                  on: {
+                    click: function($event) {
+                      return _vm.sortBy("emptyOnly")
+                    }
+                  }
+                },
+                [_vm._m(2)]
+              )
+            ])
+          ]),
           _vm._v(" "),
           _vm._l(_vm.allProducts, function(item) {
             return _c("div", { staticClass: "category" }, [
@@ -4451,7 +4477,7 @@ var render = function() {
             ])
           }),
           _vm._v(" "),
-          _vm._m(1)
+          _vm._m(3)
         ],
         2
       ),
@@ -4473,7 +4499,7 @@ var render = function() {
               ],
               staticClass: "product-show-placeholder"
             },
-            [_vm._m(2)]
+            [_vm._m(4)]
           ),
           _vm._v(" "),
           _c("active-product", {
@@ -4515,6 +4541,24 @@ var staticRenderFns = [
           ])
         ]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "m-0" }, [
+      _c("i", { staticClass: "bx bxs-sort-alt" }),
+      _vm._v(" Pan")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "m-0" }, [
+      _c("i", { staticClass: "bx bxs-sort-alt" }),
+      _vm._v(" Empty")
     ])
   },
   function() {
