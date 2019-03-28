@@ -264,8 +264,10 @@ class ApiController extends Controller
         $userId = $request->user()->id;
 
         $image = $request->file('photo');
+
         $name = $userId . '_' . $id . '_' . str_slug($image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
-        $image->storeAs('public/products', $name);
+        Image::make($image->getRealPath())->resize(null, 1000, function ($constraint){$constraint->aspectRatio();})->save(public_path('storage/products/' . $name));
+//        $image->storeAs('public/products', $name);
 
 
         ImageOptimizer::optimize(base_path('storage/app/public/products/' . $name));
