@@ -460,6 +460,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       token: localStorage.getItem('token'),
+      gallerySize: window.gallerySize,
       productData: {
         expired: false,
         rating: 0,
@@ -3154,7 +3155,12 @@ var render = function() {
                     {
                       staticClass: "gallery-image",
                       style: {
-                        "background-image": "url(/" + photo.image + ")"
+                        "background-image":
+                          "url(/api/products/photo/" +
+                          photo.image +
+                          "?size=" +
+                          _vm.gallerySize +
+                          ")"
                       },
                       attrs: { onclick: "gallery(this)" }
                     },
@@ -4372,7 +4378,9 @@ var render = function() {
                                 staticClass: "thumbnail",
                                 style: {
                                   backgroundImage:
-                                    "url(/" + product.thumbnail + ")"
+                                    "url(/api/products/photo/" +
+                                    product.thumbnail +
+                                    "?size=300)"
                                 }
                               }),
                               _vm._v(" "),

@@ -114,7 +114,7 @@
                             <div class="product" :class="{'empty': product.empty}">
                                 <div class="d-flex align-items-center">
                                     <div class="thumbnail"
-                                         :style="{backgroundImage: 'url(/' + product.thumbnail + ')'}">
+                                         :style="{backgroundImage: 'url(/api/products/photo/' + product.thumbnail + '?size=300)'}">
 
                                     </div>
                                     <div class="info">

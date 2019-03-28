@@ -17,7 +17,7 @@ class Product extends Model
                 if ($photo !== '') {
                     $ph = explode(':', $photo);
                     array_push($imagesReturn, [
-                        'image' => 'storage/products/' . $ph[0],
+                        'image' => $ph[0],
                         'date'  => $ph[1]
                     ]);
                 }
@@ -39,9 +39,9 @@ class Product extends Model
         $photos = explode(';', $product->photos);
         if ((count($photos)) > 0 && $photos[0] !== '') {
             $ph = explode(':', $photos[count($photos) - 1]);
-            return 'storage/products/thumbnail_'.$ph[0];
+            return $ph[0];
         }
-        return 'storage/products/default.jpg';
+        return 'default.jpg';
     }
 
     public static function addPhoto ($id, $photoName)

@@ -29,6 +29,8 @@ Route::middleware('auth:api')->post('/user/delete/product', 'ApiController@delet
 Route::middleware('auth:api')->post('/user/delete/product/{id}/photo/{photoIndex}', 'ApiController@deleteProductPhoto');
 
 // Get
+Route::get('/products/photo/{name}', 'ApiController@getProductPhoto');
+// User only
 Route::middleware('auth:api')->get('/user/categories', 'ApiController@getCategories');
 Route::middleware('auth:api')->get('/user/brands', 'ApiController@getBrands');
 Route::middleware('auth:api')->get('/user/products', 'ApiController@getAllProducts');

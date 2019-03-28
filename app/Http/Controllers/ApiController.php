@@ -270,9 +270,6 @@ class ApiController extends Controller
 
         ImageOptimizer::optimize(base_path('storage/app/public/products/' . $name));
 
-        // Create thumbnail
-        Image::make($image->getRealPath())->resize(null, 300, function ($constraint){$constraint->aspectRatio();})->save(public_path('storage/products/thumbnail_' . $name));
-
         Product::addPhoto($id, $name);
         User::addExperience($userId, 10);
 
@@ -293,7 +290,6 @@ class ApiController extends Controller
         foreach ($photos as $photo) {
             $name = explode(':', $photo)[0];
             Storage::delete('public/products/' . $name);
-            Storage::delete('public/products/thumbnail_' . $name);
         }
 
         // Delete product
@@ -338,15 +334,6 @@ class ApiController extends Controller
         }
         $newPhotos .= $productPhotos[$photoIndex];
 
-        if (!file_exists(base_path('storage/app/public/products/thumbnail_' . explode(':', $productPhotos[$photoIndex])[0]))) {
-
-            $fileName = base_path('storage/app/public/products/' . explode(':', $productPhotos[$photoIndex])[0]);
-            $file = fopen($fileName, 'r');
-
-            Image::make($file)->resize(null, 300, function ($constraint){$constraint->aspectRatio();})->save(public_path('storage/products/thumbnail_' . explode(':', $productPhotos[$photoIndex])[0]));
-
-        }
-
         $product->photos = $newPhotos;
         $product->save();
 
@@ -389,7 +376,6 @@ class ApiController extends Controller
                     }
                     $name = explode(':', $photo)[0];
                     Storage::delete('public/products/' . $name);
-                    Storage::delete('public/products/thumbnail_' . $name);
                 }
             }
         }
@@ -399,6 +385,15 @@ class ApiController extends Controller
         User::addExperience($userId, -10);
 
         return json_encode(['message' => 'Photo of index ' . $photoIndex . ' from item ' . $id . ' removed!']);
+    }
+
+    public function getProductPhoto(Request $request, $name) {
+        $size = $request->input('size');
+
+        if ($size !== null) {
+            return Image::make(base_path('storage/app/public/products/' . $name))->resize(null, $size, function ($constraint){$constraint->aspectRatio();})->response('jpg');
+        }
+        return Image::make(base_path('storage/app/public/products/' . $name))->response('jpg');
     }
 
     /**
