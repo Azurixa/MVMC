@@ -36586,6 +36586,8 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+window.gallerySize = document.querySelector('html').clientHeight * 0.62;
+
 window.buttonState = function (element, actualClass, targetClass, targetText) {
   var time = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
   var afterTimeoutClass = arguments.length > 5 ? arguments[5] : undefined;

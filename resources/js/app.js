@@ -6,6 +6,8 @@
 
 require('./bootstrap');
 
+window.gallerySize = document.querySelector('html').clientHeight * 0.62;
+
 window.buttonState = (element, actualClass, targetClass, targetText, time = 0, afterTimeoutClass, afterTimeoutText) => {
     const buttonText = element.innerHTML;
     element.classList.remove(actualClass);

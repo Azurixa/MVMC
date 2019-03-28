@@ -102,7 +102,7 @@
 
                             <div v-for="(photo, index) in productData.photos"
                                  onclick="gallery(this)"
-                                 :style="{ 'background-image': 'url(/' + photo.image + ')' }"
+                                 :style="{ 'background-image': 'url(/api/products/photo/' + photo.image + '?size=' + gallerySize + ')' }"
                                  class="gallery-image">
                                 <div class="date">
                                     <p class="m-0">{{photo.date}}</p>
@@ -338,6 +338,7 @@
         data() {
             return {
                 token: localStorage.getItem('token'),
+                gallerySize: window.gallerySize,
                 productData: {
                     expired: false,
                     rating: 0,
