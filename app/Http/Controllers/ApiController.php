@@ -401,6 +401,15 @@ class ApiController extends Controller
         return json_encode(['message' => 'Photo of index ' . $photoIndex . ' from item ' . $id . ' removed!']);
     }
 
+    public function getProductPhoto(Request $request, $name) {
+        $size = $request->input('size');
+
+        if ($size !== null) {
+            return Image::make(base_path('storage/app/public/products/' . $name))->resize(null, $size, function ($constraint){$constraint->aspectRatio();})->response('jpg');
+        }
+        return Image::make(base_path('storage/app/public/products/' . $name))->response('jpg');
+    }
+
     /**
      * @param Request $request
      * @return string
