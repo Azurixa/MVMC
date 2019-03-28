@@ -10874,6 +10874,7 @@ a.text-dark:focus {
 }
 
 .main-box .collection .row .product .thumbnail {
+  background-image: unset !important;
   background-color: #606f7b;
   width: 120px;
   height: 100px;

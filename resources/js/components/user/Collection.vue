@@ -65,9 +65,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <input v-model="formData.newProduct.name" class="form-control"
-                                               placeholder="Name of new product"
-                                               @keyup.enter="createProduct()">
+                                        <input v-model="formData.newProduct.name" class="form-control" @keyup.enter="createProduct()">
                                     </div>
                                     <div class="form-group">
                                 <textarea v-model="formData.newProduct.description" class="form-control"
@@ -104,7 +102,7 @@
                     </div>
                 </div>
                 <div class="category" v-for="item in allProducts">
-                    <span onClick="this.nextSibling.nextSibling.toggleAttribute('show')" class="category">
+                    <span onClick="this.nextSibling.nextSibling.toggleAttribute('show'); this.nextElementSibling.querySelectorAll('.thumbnail').forEach( element => element.setAttribute('style', 'background-image:' + element.style.backgroundImage + ' !important'))" class="category">
                         <i class='bx bx-sort'></i> {{item.category.name}} <small>({{item.itemsNotEmpty}}/{{item.itemsEmpty}})</small>
                     </span>
                     <div class="row px-3">

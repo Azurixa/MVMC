@@ -951,8 +951,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -4180,7 +4178,6 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { placeholder: "Name of new product" },
                       domProps: { value: _vm.formData.newProduct.name },
                       on: {
                         keyup: function($event) {
@@ -4326,7 +4323,7 @@ var render = function() {
                   staticClass: "category",
                   attrs: {
                     onClick:
-                      "this.nextSibling.nextSibling.toggleAttribute('show')"
+                      "this.nextSibling.nextSibling.toggleAttribute('show'); this.nextElementSibling.querySelectorAll('.thumbnail').forEach( element => element.setAttribute('style', 'background-image:' + element.style.backgroundImage + ' !important'))"
                   }
                 },
                 [
