@@ -1381,7 +1381,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       token: localStorage.getItem('token'),
-      user: {}
+      user: {},
+      collection: false
     };
   },
   created: function created() {
@@ -1392,6 +1393,10 @@ __webpack_require__.r(__webpack_exports__);
       setInterval(function () {
         _this.getUserData();
       }, 2000);
+    }
+
+    if (document.location.pathname === '/my/collection') {
+      this.collection = true;
     }
   },
   filters: {
@@ -4800,12 +4805,25 @@ var render = function() {
     _vm._v(" "),
     _vm.level > 0
       ? _c("nav", { staticClass: "navbar navbar-expand-lg navbar-light" }, [
-          _vm._m(2),
+          _vm.collection
+            ? _c(
+                "button",
+                {
+                  staticClass: "navbar-toggler d-lg-block",
+                  attrs: {
+                    type: "button",
+                    onClick:
+                      "document.getElementById('collection').toggleAttribute('show')"
+                  }
+                },
+                [_c("i", { staticClass: "bx bx-collection h3 m-0" })]
+              )
+            : _vm._e(),
           _vm._v(" "),
           _c(
             "a",
             {
-              staticClass: "navbar-brand d-lg-none",
+              staticClass: "navbar-brand d-lg-none ml-auto",
               attrs: {
                 onclick:
                   "document.getElementById('navbarSupportedContent').toggleAttribute('show')"
@@ -4891,7 +4909,7 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _vm._m(3)
+                _vm._m(2)
               ]),
               _vm._v(" "),
               _c("ul", { staticClass: "navbar-nav ml-auto" }, [
@@ -4915,7 +4933,7 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _vm._m(4)
+                _vm._m(3)
               ])
             ]
           )
@@ -4996,23 +5014,6 @@ var staticRenderFns = [
           ])
         ])
       ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "navbar-toggler d-lg-block",
-        attrs: {
-          type: "button",
-          onClick:
-            "document.getElementById('collection').toggleAttribute('show')"
-        }
-      },
-      [_c("i", { staticClass: "bx bx-collection h3 m-0" })]
     )
   },
   function() {
