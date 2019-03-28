@@ -4372,7 +4372,9 @@ var render = function() {
                                 staticClass: "thumbnail",
                                 style: {
                                   backgroundImage:
-                                    "url(/" + product.thumbnail + ")"
+                                    "url(/api/products/photo/" +
+                                    product.thumbnail +
+                                    "?size=300)"
                                 }
                               }),
                               _vm._v(" "),
