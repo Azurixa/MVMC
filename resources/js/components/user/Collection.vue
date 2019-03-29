@@ -7,16 +7,8 @@
             <div class="toolbox" id="toolbox">
                 <div class="inside">
                     <div class="row">
-                        <div class="col-lg-12">
-                            <div class="btn btn-info btn-block mb-4 p-2"
-                                 onClick="document.getElementById('toolbox').toggleAttribute('show');">
-                                <p class="m-0">
-                                    Close toolbox
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card p-2 mb-4">
+                        <div class="col-lg-12" v-if="formData.visible.newCategory">
+                            <div class="p-2 mb-4">
 
                                 <p class="h4">
                                     Create new category
@@ -29,8 +21,9 @@
                                     <button class="btn btn-primary" @click="createCategory()">Add new category</button>
                                 </div>
                             </div>
-
-                            <div class="card p-2 mb-4">
+                        </div>
+                        <div class="col-lg-12" v-if="formData.visible.newBrand">
+                            <div class="p-2 mb-4">
                                 <p class="h4">
                                     Create new brand
                                 </p>
@@ -44,8 +37,8 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-6">
-                            <div class="card p-2">
+                        <div class="col-lg-12" v-if="formData.visible.newProduct">
+                            <div class="p-2">
                                 <p class="h4">
                                     Create new product
                                 </p>
@@ -65,7 +58,8 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <input v-model="formData.newProduct.name" class="form-control" @keyup.enter="createProduct()">
+                                        <input v-model="formData.newProduct.name" class="form-control"
+                                               @keyup.enter="createProduct()">
                                     </div>
                                     <div class="form-group">
                                 <textarea v-model="formData.newProduct.description" class="form-control"
@@ -77,8 +71,10 @@
                         </div>
                     </div>
 
-                    <i class='bx bx-x close close-adding'
-                       onClick="document.getElementById('toolbox').toggleAttribute('show')"></i>
+                    <div class="close-adding" onClick="document.getElementById('toolbox').toggleAttribute('show')" @click="showForm()">
+                        <i class="bx bx-x close"></i>
+                    </div>
+
 
                 </div>
             </div>
@@ -108,7 +104,8 @@
                     </div>
                 </div>
                 <div class="category" v-for="item in allProducts">
-                    <span onClick="this.nextSibling.nextSibling.toggleAttribute('show'); this.nextElementSibling.querySelectorAll('.thumbnail').forEach( element => element.setAttribute('style', 'background-image:' + element.style.backgroundImage + ' !important'))" class="category">
+                    <span onClick="this.nextSibling.nextSibling.toggleAttribute('show'); this.nextElementSibling.querySelectorAll('.thumbnail').forEach( element => element.setAttribute('style', 'background-image:' + element.style.backgroundImage + ' !important'))"
+                          class="category">
                         <i class='bx bx-sort'></i> {{item.category.name}} <small>({{item.itemsNotEmpty}}/{{item.itemsEmpty}})</small>
                     </span>
                     <div class="row px-3">
@@ -147,19 +144,39 @@
                         </div>
                     </div>
                 </div>
-                <div class="row m-0" show>
-                    <div class="col-12 mb-0 p-0">
-                        <hr class="mb-0">
-                    </div>
+                <div class="row mt-3 mb-2 px-3" show>
 
                     <!-- Toggle of adding new stuff (+) -->
-                    <div onClick="document.getElementById('toolbox').toggleAttribute('show'); document.getElementById('collection').toggleAttribute('show')"
-                         class="text-center col-12 py-3"
+                    <div onClick="document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').toggleAttribute('show')"
+                         @click="showForm('newCategory')"
+                         class="text-center col-4 py-3 card"
                          data-toggle="tooltip"
                          data-placement="top" title="Show toolbox">
                         <i class='bx bx-window'></i>
                         <p class="m-0">
-                            Toolbox
+                            New category
+                        </p>
+                    </div>
+                    <!-- Toggle of adding new stuff (+) -->
+                    <div onClick="document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').toggleAttribute('show')"
+                         @click="showForm('newBrand')"
+                         class="text-center col-4 py-3 card"
+                         data-toggle="tooltip"
+                         data-placement="top" title="Show toolbox">
+                        <i class='bx bx-window'></i>
+                        <p class="m-0">
+                            New brand
+                        </p>
+                    </div>
+                    <!-- Toggle of adding new stuff (+) -->
+                    <div onClick="document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').toggleAttribute('show')"
+                         @click="showForm('newProduct')"
+                         class="text-center col-4 py-3 card"
+                         data-toggle="tooltip"
+                         data-placement="top" title="Show toolbox">
+                        <i class='bx bx-window'></i>
+                        <p class="m-0">
+                            New product
                         </p>
                     </div>
                 </div>
@@ -217,6 +234,11 @@
                     value: '',
                 },
                 formData: {
+                    visible: {
+                        newCategory: false,
+                        newBrand: false,
+                        newProduct: false,
+                    },
                     newCategory: {
                         name: '',
                     },
@@ -237,8 +259,24 @@
         },
         methods: {
 
-            // Sorting
+            // Show toolbox / form
+            showForm(name) {
+                this.formData.visible.newCategory = false;
+                this.formData.visible.newBrand = false;
+                this.formData.visible.newProduct = false;
 
+                if (name === 'newCategory') {
+                    this.formData.visible.newCategory = true;
+                }
+                if (name === 'newBrand') {
+                    this.formData.visible.newBrand = true;
+                }
+                if (name === 'newProduct') {
+                    this.formData.visible.newProduct = true;
+                }
+            },
+
+            // Sorting
             sortBy(name) {
 
                 this.sorting.value = '';

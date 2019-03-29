@@ -10795,7 +10795,7 @@ a.text-dark:focus {
   height: 100%;
   position: fixed;
   right: -100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #f1f1f1;
   overflow-y: scroll;
   transition: 0.5s all;
   z-index: 100;
@@ -10803,6 +10803,12 @@ a.text-dark:focus {
 
 .main-box .toolbox[show] {
   right: 0;
+}
+
+.main-box .toolbox .close-adding {
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }
 
 .main-box .toolbox .inside {
