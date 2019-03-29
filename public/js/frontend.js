@@ -951,6 +951,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -4273,20 +4279,27 @@ var render = function() {
         "div",
         { staticClass: "collection", attrs: { id: "collection" } },
         [
-          _c("p", { staticClass: "header m-0 pt-3" }, [
-            _vm._v("My collection\n                "),
-            _c("small", [
-              _vm._v(
-                "(" +
+          _c("div", { staticClass: "header-box" }, [
+            _c("div", { staticClass: "text-center" }, [
+              _c("i", { staticClass: "bx bx-box display-1" }),
+              _vm._v(" "),
+              _c("p", { staticClass: "m-0 pt-3" }, [
+                _vm._v(
+                  "\n                        My collection\n                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("small", { staticClass: "text-muted" }, [
+                _vm._v(
                   _vm._s(_vm.allProductsCount) +
-                  "/" +
-                  _vm._s(_vm.allProductsCountEmpty) +
-                  ")"
-              )
+                    "/" +
+                    _vm._s(_vm.allProductsCountEmpty)
+                )
+              ])
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "sorting mb-3 px-2", attrs: { show: "" } }, [
+          _c("div", { staticClass: "sorting mb-3 px-3", attrs: { show: "" } }, [
             _c("div", { staticClass: "d-inline-block text-center" }, [
               _c(
                 "div",
@@ -4809,14 +4822,14 @@ var render = function() {
             ? _c(
                 "button",
                 {
-                  staticClass: "navbar-toggler d-lg-block",
+                  staticClass: "navbar-toggler d-lg-block mr-lg-2 mr-0",
                   attrs: {
                     type: "button",
                     onClick:
                       "document.getElementById('collection').toggleAttribute('show')"
                   }
                 },
-                [_c("i", { staticClass: "bx bx-collection h3 m-0" })]
+                [_c("i", { staticClass: "bx bx-box h3 m-0" })]
               )
             : _vm._e(),
           _vm._v(" "),

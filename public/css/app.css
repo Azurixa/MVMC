@@ -10732,6 +10732,28 @@ a.text-dark:focus {
   border-radius: 14px !important;
 }
 
+.header-box {
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 992px) {
+  .header-box {
+    height: 50vh;
+  }
+
+  .header-box p {
+    font-size: 2rem;
+  }
+}
+
+.header-box p {
+  margin: 0;
+  font-size: 3rem;
+}
+
 @media screen and (max-width: 992px) {
   .navbar-collapse {
     display: block !important;

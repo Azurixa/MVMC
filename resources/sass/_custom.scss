@@ -75,6 +75,25 @@
   border-radius: $brad !important;
 }
 
+.header-box {
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media screen and (max-width: 992px) {
+    height: 50vh;
+
+    p{
+      font-size: 2rem;
+    }
+  }
+
+  p{
+    margin: 0;
+    font-size: 3rem;
+  }
+}
+
 // Mobile navigation collapse
 .navbar-collapse {
   @media screen and (max-width: 992px) {

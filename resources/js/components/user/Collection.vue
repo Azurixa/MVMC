@@ -84,10 +84,16 @@
             </div>
 
             <div class="collection" id="collection">
-                <p class="header m-0 pt-3">My collection
-                    <small>({{allProductsCount}}/{{allProductsCountEmpty}})</small>
-                </p>
-                <div class="sorting mb-3 px-2" show>
+                <div class="header-box">
+                    <div class="text-center">
+                        <i class="bx bx-box display-1"></i>
+                        <p class="m-0 pt-3">
+                            My collection
+                        </p>
+                        <small class="text-muted">{{allProductsCount}}/{{allProductsCountEmpty}}</small>
+                    </div>
+                </div>
+                <div class="sorting mb-3 px-3" show>
                     <div class="d-inline-block text-center">
                         <div class="sort card p-2" @click="sortBy('panOnly')"
                              v-bind:class="{'active': sorting.panOnly}">
