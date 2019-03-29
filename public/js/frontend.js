@@ -974,6 +974,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'collection',
   created: function created() {
@@ -3974,6 +4003,36 @@ var render = function() {
       _c("div", { staticClass: "toolbox", attrs: { id: "toolbox" } }, [
         _c("div", { staticClass: "inside" }, [
           _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-lg-12 header-box" }, [
+              _c("div", { staticClass: "text-center" }, [
+                _c("i", { staticClass: "bx bx-list-plus display-1" }),
+                _vm._v(" "),
+                _vm.formData.visible.newCategory
+                  ? _c("p", [
+                      _vm._v(
+                        "\n                                Category\n                            "
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.formData.visible.newBrand
+                  ? _c("p", [
+                      _vm._v(
+                        "\n                                Brand\n                            "
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.formData.visible.newProduct
+                  ? _c("p", [
+                      _vm._v(
+                        "\n                                Product\n                            "
+                      )
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
             _vm.formData.visible.newCategory
               ? _c("div", { staticClass: "col-lg-12" }, [
                   _c("div", { staticClass: "p-2 mb-4" }, [
@@ -4026,7 +4085,7 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("div", [
+                    _c("div", { staticClass: "text-right" }, [
                       _c(
                         "button",
                         {
@@ -4037,7 +4096,11 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("Add new category")]
+                        [
+                          _vm._v(
+                            "\n                                    Create new category\n                                "
+                          )
+                        ]
                       )
                     ])
                   ])
@@ -4096,7 +4159,7 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("div", [
+                    _c("div", { staticClass: "text-right" }, [
                       _c(
                         "button",
                         {
@@ -4107,7 +4170,11 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("Add new brand")]
+                        [
+                          _vm._v(
+                            "\n                                    Create new brand\n                                "
+                          )
+                        ]
                       )
                     ])
                   ])
@@ -4299,18 +4366,24 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary",
-                          on: {
-                            click: function($event) {
-                              return _vm.createProduct()
+                      _c("div", { staticClass: "text-right" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            on: {
+                              click: function($event) {
+                                return _vm.createProduct()
+                              }
                             }
-                          }
-                        },
-                        [_vm._v("Add new product")]
-                      )
+                          },
+                          [
+                            _vm._v(
+                              "\n                                        Create new product\n                                    "
+                            )
+                          ]
+                        )
+                      ])
                     ])
                   ])
                 ])
@@ -4320,7 +4393,7 @@ var render = function() {
           _c(
             "div",
             {
-              staticClass: "close-adding",
+              staticClass: "close-adding card p-2",
               attrs: {
                 onClick:
                   "document.getElementById('toolbox').toggleAttribute('show')"
@@ -4572,95 +4645,67 @@ var render = function() {
             ])
           }),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "row mt-3 mb-2 px-3", attrs: { show: "" } },
-            [
-              _c(
-                "div",
-                {
-                  staticClass: "text-center col-4 py-3 card",
-                  attrs: {
-                    onClick:
-                      "document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').toggleAttribute('show')",
-                    "data-toggle": "tooltip",
-                    "data-placement": "top",
-                    title: "Show toolbox"
-                  },
-                  on: {
-                    click: function($event) {
-                      return _vm.showForm("newCategory")
-                    }
-                  }
+          _c("div", { staticClass: "row mt-3 mb-4", attrs: { show: "" } }, [
+            _c(
+              "div",
+              {
+                staticClass: "text-center col-4 px-2",
+                attrs: {
+                  onClick:
+                    "document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').toggleAttribute('show')",
+                  "data-toggle": "tooltip",
+                  "data-placement": "top",
+                  title: "Show toolbox"
                 },
-                [
-                  _c("i", { staticClass: "bx bx-window" }),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "m-0" }, [
-                    _vm._v(
-                      "\n                        New category\n                    "
-                    )
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "text-center col-4 py-3 card",
-                  attrs: {
-                    onClick:
-                      "document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').toggleAttribute('show')",
-                    "data-toggle": "tooltip",
-                    "data-placement": "top",
-                    title: "Show toolbox"
-                  },
-                  on: {
-                    click: function($event) {
-                      return _vm.showForm("newBrand")
-                    }
+                on: {
+                  click: function($event) {
+                    return _vm.showForm("newCategory")
                   }
+                }
+              },
+              [_vm._m(2)]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "text-center col-4 px-2",
+                attrs: {
+                  onClick:
+                    "document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').toggleAttribute('show')",
+                  "data-toggle": "tooltip",
+                  "data-placement": "top",
+                  title: "Show toolbox"
                 },
-                [
-                  _c("i", { staticClass: "bx bx-window" }),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "m-0" }, [
-                    _vm._v(
-                      "\n                        New brand\n                    "
-                    )
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "text-center col-4 py-3 card",
-                  attrs: {
-                    onClick:
-                      "document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').toggleAttribute('show')",
-                    "data-toggle": "tooltip",
-                    "data-placement": "top",
-                    title: "Show toolbox"
-                  },
-                  on: {
-                    click: function($event) {
-                      return _vm.showForm("newProduct")
-                    }
+                on: {
+                  click: function($event) {
+                    return _vm.showForm("newBrand")
                   }
+                }
+              },
+              [_vm._m(3)]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "text-center col-4 px-2",
+                attrs: {
+                  onClick:
+                    "document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').toggleAttribute('show')",
+                  "data-toggle": "tooltip",
+                  "data-placement": "top",
+                  title: "Show toolbox"
                 },
-                [
-                  _c("i", { staticClass: "bx bx-window" }),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "m-0" }, [
-                    _vm._v(
-                      "\n                        New product\n                    "
-                    )
-                  ])
-                ]
-              )
-            ]
-          )
+                on: {
+                  click: function($event) {
+                    return _vm.showForm("newProduct")
+                  }
+                }
+              },
+              [_vm._m(4)]
+            )
+          ])
         ],
         2
       ),
@@ -4682,7 +4727,7 @@ var render = function() {
               ],
               staticClass: "product-show-placeholder"
             },
-            [_vm._m(2)]
+            [_vm._m(5)]
           ),
           _vm._v(" "),
           _c("active-product", {
@@ -4718,6 +4763,46 @@ var staticRenderFns = [
     return _c("p", { staticClass: "m-0" }, [
       _c("i", { staticClass: "bx bxs-sort-alt" }),
       _vm._v(" Empty")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card py-2" }, [
+      _c("i", { staticClass: "bx bx-list-plus h3 m-0" }),
+      _vm._v(" "),
+      _c("p", { staticClass: "m-0" }, [
+        _vm._v(
+          "\n                            Category\n                        "
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card py-2" }, [
+      _c("i", { staticClass: "bx bx-list-plus h3 m-0" }),
+      _vm._v(" "),
+      _c("p", { staticClass: "m-0" }, [
+        _vm._v("\n                            Brand\n                        ")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card py-2" }, [
+      _c("i", { staticClass: "bx bx-list-plus h3 m-0" }),
+      _vm._v(" "),
+      _c("p", { staticClass: "m-0" }, [
+        _vm._v(
+          "\n                            Product\n                        "
+        )
+      ])
     ])
   },
   function() {

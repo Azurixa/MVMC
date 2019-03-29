@@ -7,9 +7,22 @@
             <div class="toolbox" id="toolbox">
                 <div class="inside">
                     <div class="row">
+                        <div class="col-lg-12 header-box">
+                            <div class="text-center">
+                                <i class="bx bx-list-plus display-1"></i>
+                                <p v-if="formData.visible.newCategory">
+                                    Category
+                                </p>
+                                <p v-if="formData.visible.newBrand">
+                                    Brand
+                                </p>
+                                <p v-if="formData.visible.newProduct">
+                                    Product
+                                </p>
+                            </div>
+                        </div>
                         <div class="col-lg-12" v-if="formData.visible.newCategory">
                             <div class="p-2 mb-4">
-
                                 <p class="h4">
                                     Create new category
                                 </p>
@@ -17,8 +30,10 @@
                                     <input v-model="formData.newCategory.name" class="form-control" placeholder="Name"
                                            @keyup.enter="createCategory()">
                                 </div>
-                                <div>
-                                    <button class="btn btn-primary" @click="createCategory()">Add new category</button>
+                                <div class="text-right">
+                                    <button class="btn btn-primary" @click="createCategory()">
+                                        Create new category
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -31,8 +46,10 @@
                                     <input v-model="formData.newBrand.name" class="form-control" placeholder="Name"
                                            @keyup.enter="createBrand()">
                                 </div>
-                                <div>
-                                    <button class="btn btn-primary" @click="createBrand()">Add new brand</button>
+                                <div class="text-right">
+                                    <button class="btn btn-primary" @click="createBrand()">
+                                        Create new brand
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -62,16 +79,22 @@
                                                @keyup.enter="createProduct()">
                                     </div>
                                     <div class="form-group">
-                                <textarea v-model="formData.newProduct.description" class="form-control"
-                                          placeholder="Product description"></textarea>
+                                        <textarea v-model="formData.newProduct.description" class="form-control"
+                                                  placeholder="Product description"></textarea>
                                     </div>
-                                    <button class="btn btn-primary" @click="createProduct()">Add new product</button>
+                                    <div class="text-right">
+                                        <button class="btn btn-primary" @click="createProduct()">
+                                            Create new product
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="close-adding" onClick="document.getElementById('toolbox').toggleAttribute('show')" @click="showForm()">
+                    <div class="close-adding card p-2"
+                         onClick="document.getElementById('toolbox').toggleAttribute('show')"
+                         @click="showForm()">
                         <i class="bx bx-x close"></i>
                     </div>
 
@@ -144,40 +167,46 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-3 mb-2 px-3" show>
+                <div class="row mt-3 mb-4" show>
 
                     <!-- Toggle of adding new stuff (+) -->
                     <div onClick="document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').toggleAttribute('show')"
                          @click="showForm('newCategory')"
-                         class="text-center col-4 py-3 card"
+                         class="text-center col-4 px-2"
                          data-toggle="tooltip"
                          data-placement="top" title="Show toolbox">
-                        <i class='bx bx-window'></i>
-                        <p class="m-0">
-                            New category
-                        </p>
+                        <div class="card py-2">
+                            <i class='bx bx-list-plus h3 m-0'></i>
+                            <p class="m-0">
+                                Category
+                            </p>
+                        </div>
                     </div>
                     <!-- Toggle of adding new stuff (+) -->
                     <div onClick="document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').toggleAttribute('show')"
                          @click="showForm('newBrand')"
-                         class="text-center col-4 py-3 card"
+                         class="text-center col-4 px-2"
                          data-toggle="tooltip"
                          data-placement="top" title="Show toolbox">
-                        <i class='bx bx-window'></i>
-                        <p class="m-0">
-                            New brand
-                        </p>
+                        <div class="card py-2">
+                            <i class='bx bx-list-plus h3 m-0'></i>
+                            <p class="m-0">
+                                Brand
+                            </p>
+                        </div>
                     </div>
                     <!-- Toggle of adding new stuff (+) -->
                     <div onClick="document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').toggleAttribute('show')"
                          @click="showForm('newProduct')"
-                         class="text-center col-4 py-3 card"
+                         class="text-center col-4 px-2"
                          data-toggle="tooltip"
                          data-placement="top" title="Show toolbox">
-                        <i class='bx bx-window'></i>
-                        <p class="m-0">
-                            New product
-                        </p>
+                        <div class="card py-2">
+                            <i class='bx bx-list-plus h3 m-0'></i>
+                            <p class="m-0">
+                                Product
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
