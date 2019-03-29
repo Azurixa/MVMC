@@ -75,11 +75,30 @@
   border-radius: $brad !important;
 }
 
+.header-box {
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media screen and (max-width: 992px) {
+    height: 50vh;
+
+    p{
+      font-size: 2rem;
+    }
+  }
+
+  p{
+    margin: 0;
+    font-size: 3rem;
+  }
+}
+
 // Mobile navigation collapse
 .navbar-collapse {
   @media screen and (max-width: 992px) {
     display: block !important;
-    background-color: white;
+    background-color: #f1f1f1s;
     z-index: 900000;
     height: calc(100vh - 60px - 5px);
     transition: 0.5s all;
@@ -106,9 +125,6 @@
 
 // CUSTOM
 
-.toolbox-show {
-}
-
 .main-box {
   position: relative;
   height: calc(100vh - 60px - 5px);
@@ -118,17 +134,26 @@
   // Toolbox
   .toolbox {
     width: 100%;
-    height: 100%;
+    height: calc(100% - 58px);
     position: fixed;
     right: -100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #f1f1f1;
     overflow-y: scroll;
     transition: 0.5s all;
     z-index: 100;
     &[show] {
       right: 0;
+      .close-adding{
+        display: block;
+      }
     }
 
+    .close-adding{
+      position: fixed;
+      top: calc(15px + 68px);
+      right: 15px;
+      display: none;
+    }
     .inside {
       padding: 2rem;
       margin: 0 auto;
@@ -151,14 +176,6 @@
     @media screen and (max-width: 992px) {
       left: -100%;
       width: 100%;
-    }
-
-    .header {
-      font-size: 2.2rem;
-      padding: 0.4rem 1rem;
-      @media screen and (max-width: 992px) {
-        font-size: 1.9rem;
-      }
     }
 
     .sorting {

@@ -25,9 +25,9 @@
 
         <nav class="navbar navbar-expand-lg navbar-light" v-if="level > 0">
 
-            <button class="navbar-toggler d-lg-block" type="button" v-if="collection"
+            <button class="navbar-toggler d-lg-block mr-lg-2 mr-0" type="button" v-if="collection"
                     onClick="document.getElementById('collection').toggleAttribute('show')">
-                <i class="bx bx-collection h3 m-0"></i>
+                <i class="bx bx-box h3 m-0"></i>
             </button>
 
             <a class="navbar-brand d-lg-none ml-auto"

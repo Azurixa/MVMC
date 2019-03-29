@@ -10732,10 +10732,32 @@ a.text-dark:focus {
   border-radius: 14px !important;
 }
 
+.header-box {
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 992px) {
+  .header-box {
+    height: 50vh;
+  }
+
+  .header-box p {
+    font-size: 2rem;
+  }
+}
+
+.header-box p {
+  margin: 0;
+  font-size: 3rem;
+}
+
 @media screen and (max-width: 992px) {
   .navbar-collapse {
     display: block !important;
-    background-color: white;
+    background-color: #f1f1f1s;
     z-index: 900000;
     height: calc(100vh - 60px - 5px);
     transition: 0.5s all;
@@ -10770,10 +10792,10 @@ a.text-dark:focus {
 
 .main-box .toolbox {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 58px);
   position: fixed;
   right: -100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #f1f1f1;
   overflow-y: scroll;
   transition: 0.5s all;
   z-index: 100;
@@ -10781,6 +10803,17 @@ a.text-dark:focus {
 
 .main-box .toolbox[show] {
   right: 0;
+}
+
+.main-box .toolbox[show] .close-adding {
+  display: block;
+}
+
+.main-box .toolbox .close-adding {
+  position: fixed;
+  top: calc(15px + 68px);
+  right: 15px;
+  display: none;
 }
 
 .main-box .toolbox .inside {
@@ -10807,17 +10840,6 @@ a.text-dark:focus {
   .main-box .collection {
     left: -100%;
     width: 100%;
-  }
-}
-
-.main-box .collection .header {
-  font-size: 2.2rem;
-  padding: 0.4rem 1rem;
-}
-
-@media screen and (max-width: 992px) {
-  .main-box .collection .header {
-    font-size: 1.9rem;
   }
 }
 
