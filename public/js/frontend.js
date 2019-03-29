@@ -4652,7 +4652,7 @@ var render = function() {
                 staticClass: "text-center col-4 px-2",
                 attrs: {
                   onClick:
-                    "document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').toggleAttribute('show')",
+                    "document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').setAttribute('show', true)",
                   "data-toggle": "tooltip",
                   "data-placement": "top",
                   title: "Show toolbox"
@@ -4672,7 +4672,7 @@ var render = function() {
                 staticClass: "text-center col-4 px-2",
                 attrs: {
                   onClick:
-                    "document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').toggleAttribute('show')",
+                    "document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').setAttribute('show', true)",
                   "data-toggle": "tooltip",
                   "data-placement": "top",
                   title: "Show toolbox"
@@ -4692,7 +4692,7 @@ var render = function() {
                 staticClass: "text-center col-4 px-2",
                 attrs: {
                   onClick:
-                    "document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').toggleAttribute('show')",
+                    "document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').setAttribute('show', true)",
                   "data-toggle": "tooltip",
                   "data-placement": "top",
                   title: "Show toolbox"
