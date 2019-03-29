@@ -265,17 +265,23 @@ class ApiController extends Controller
 
         $image = $request->file('photo');
 
-        $name = $userId . '_' . $id . '_' . str_slug($image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
-        Image::make($image->getRealPath())->resize(1000, null, function ($constraint){$constraint->aspectRatio();})->save(public_path('storage/products/' . $name));
-//        $image->storeAs('public/products', $name);
+        if(substr($image->getMimeType(), 0, 5) == 'image') {
+
+            $name = $userId . '_' . $id . '_' . str_slug($image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
+            Image::make($image->getRealPath())->resize(1000, null, function ($constraint){$constraint->aspectRatio();})->save(public_path('storage/products/' . $name));
+            //        $image->storeAs('public/products', $name);
 
 
-        ImageOptimizer::optimize(base_path('storage/app/public/products/' . $name));
+            ImageOptimizer::optimize(base_path('storage/app/public/products/' . $name));
 
-        Product::addPhoto($id, $name);
-        User::addExperience($userId, 10);
+            Product::addPhoto($id, $name);
+            User::addExperience($userId, 10);
 
-        return json_encode(['message' => base_path('storage/app/public/products/' . $name)]);
+            return json_encode(['message' => 'Image uploaded!']);
+
+        }
+
+        return json_encode(['message' => 'File is not image!']);
     }
 
     /**
