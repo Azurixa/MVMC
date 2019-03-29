@@ -170,7 +170,7 @@
                 <div class="row mt-3 mb-4" show>
 
                     <!-- Toggle of adding new stuff (+) -->
-                    <div onClick="document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').toggleAttribute('show')"
+                    <div onClick="document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').setAttribute('show', true)"
                          @click="showForm('newCategory')"
                          class="text-center col-4 px-2"
                          data-toggle="tooltip"
@@ -183,7 +183,7 @@
                         </div>
                     </div>
                     <!-- Toggle of adding new stuff (+) -->
-                    <div onClick="document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').toggleAttribute('show')"
+                    <div onClick="document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').setAttribute('show', true)"
                          @click="showForm('newBrand')"
                          class="text-center col-4 px-2"
                          data-toggle="tooltip"
@@ -196,7 +196,7 @@
                         </div>
                     </div>
                     <!-- Toggle of adding new stuff (+) -->
-                    <div onClick="document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').toggleAttribute('show')"
+                    <div onClick="document.getElementById('collection').toggleAttribute('show'); document.getElementById('toolbox').setAttribute('show', true)"
                          @click="showForm('newProduct')"
                          class="text-center col-4 px-2"
                          data-toggle="tooltip"
