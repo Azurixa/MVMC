@@ -49,16 +49,14 @@ class Product extends Model
         date_default_timezone_set('CET');
 
         $photos = Product::getPhotos($id, true);
-        $photosString = '';
         $date = date('d.m.Y');
+        $photosString = $photoName . ':' . $date;
 
         if (!empty($photos)){
             foreach ($photos as $index => $photo) {
-                $photosString .= $photo . ';';
+                $photosString .= ';' . $photo;
             }
         }
-
-        $photosString .= $photoName . ':' . $date;
 
         $product = Product::find($id);
         $product->photos = $photosString;
