@@ -1,20 +1,27 @@
 <template>
     <div class="active-product">
-        <div class="edit-box" v-show="editForm.visible">
+        <div class="edit-box" v-show="editForm.visible" :class="{'show': editForm.visible}">
 
-            <div class="form card p-4">
+            <div class="form p-4">
 
                 <i class='bx bx-x close' @click="showEdit('')"></i>
 
-                <h2 class="mb-4">
-                    Edit product
-                </h2>
+                <div class="header-box">
+                    <div class="text-center">
+                        <i class='bx bx-edit display-1'></i>
+                        <p>
+                            Edit product
+                        </p>
+                    </div>
+                </div>
 
                 <div v-show="editForm.nameVisible">
                     <div class="form-group">
                         <input type="text" class="form-control mb-2" v-model="editForm.value"
                                @keyup.enter="editConfirm()" autofocus>
-                        <button class="btn btn-primary" @click="editConfirm()">Edit name</button>
+                        <div class="text-right">
+                            <button class="btn btn-primary" @click="editConfirm()">Edit name</button>
+                        </div>
                     </div>
                 </div>
 
@@ -22,14 +29,18 @@
                     <div class="form-group">
                                 <textarea class="description form-control mb-2" v-model="editForm.value"
                                           @keydown.enter="editConfirm()" autofocus></textarea>
-                        <button class="btn btn-primary" @click="editConfirm()">Edit description</button>
+                        <div class="text-right">
+                            <button class="btn btn-primary" @click="editConfirm()">Edit description</button>
+                        </div>
                     </div>
                 </div>
 
                 <div v-show="editForm.firstImpressionsVisible">
                             <textarea class="description form-control mb-2" v-model="editForm.value"
                                       @keydown.enter="editConfirm()" autofocus></textarea>
-                    <button class="btn btn-primary" @click="editConfirm()">Edit first impressions</button>
+                    <div class="text-right">
+                        <button class="btn btn-primary" @click="editConfirm()">Edit first impressions</button>
+                    </div>
                 </div>
 
                 <div v-show="editForm.remainingAmountVisible">
@@ -37,7 +48,9 @@
                         <input class="form-control mb-2" type="number" min="0" max="100"
                                v-model="editForm.value"
                                @keydown.enter="editConfirm()" autofocus>
-                        <button class="btn btn-primary" @click="editConfirm()">Edit remaining amount</button>
+                        <div class="text-right">
+                            <button class="btn btn-primary" @click="editConfirm()">Edit remaining amount</button>
+                        </div>
                     </div>
                 </div>
 
@@ -45,7 +58,9 @@
                     <div class="form-group">
                         <input class="form-control mb-2" type="date" v-model="editForm.value"
                                @keydown.enter="editConfirm()" autofocus>
-                        <button class="btn btn-primary" @click="editConfirm()">Edit bought date</button>
+                        <div class="text-right">
+                            <button class="btn btn-primary" @click="editConfirm()">Edit bought date</button>
+                        </div>
                     </div>
                 </div>
 
@@ -54,7 +69,9 @@
                         <input class="form-control mb-2" type="number" min="0"
                                v-model="editForm.value"
                                @keydown.enter="editConfirm()" autofocus>
-                        <button class="btn btn-primary" @click="editConfirm()">Edit expire months</button>
+                        <div class="text-right">
+                            <button class="btn btn-primary" @click="editConfirm()">Edit expire months</button>
+                        </div>
                     </div>
                 </div>
 
@@ -68,7 +85,9 @@
                                 </option>
                             </select>
                         </div>
-                        <button class="btn btn-primary" @click="editConfirm()">Change category</button>
+                        <div class="text-right">
+                            <button class="btn btn-primary" @click="editConfirm()">Change category</button>
+                        </div>
                     </div>
                 </div>
 
@@ -81,7 +100,9 @@
                                 </option>
                             </select>
                         </div>
-                        <button class="btn btn-primary" @click="editConfirm()">Change brand</button>
+                        <div class="text-right">
+                            <button class="btn btn-primary" @click="editConfirm()">Change brand</button>
+                        </div>
                     </div>
                 </div>
 
@@ -317,9 +338,13 @@
                             <h4 class="mb-3">
                                 Product options
                             </h4>
-                            <button @click="showEdit('brand_id')" class="btn btn-outline-info btn-block">Change brand</button>
-                            <button @click="showEdit('category_id')" class="btn btn-outline-info btn-block">Change category</button>
-                            <button @click="deleteProduct()" class="btn btn-outline-danger btn-block">Delete product</button>
+                            <button @click="showEdit('brand_id')" class="btn btn-outline-info btn-block">Change brand
+                            </button>
+                            <button @click="showEdit('category_id')" class="btn btn-outline-info btn-block">Change
+                                category
+                            </button>
+                            <button @click="deleteProduct()" class="btn btn-outline-danger btn-block">Delete product
+                            </button>
                         </div>
 
                     </div>
@@ -557,7 +582,7 @@
                 }
             },
             removePhoto(photoIndex) {
-                if (window.confirm("Are you sure?")){
+                if (window.confirm("Are you sure?")) {
                     fetch('/api/user/delete/product/' + this.productData.id + '/photo/' + photoIndex, {
                         method: 'POST',
                         headers: {
@@ -579,7 +604,7 @@
                 });
             },
             deleteProduct() {
-                if (window.confirm("Are you sure?")){
+                if (window.confirm("Are you sure?")) {
                     const formData = new FormData();
                     formData.append('id', this.productData.id);
                     fetch('/api/user/delete/product', {

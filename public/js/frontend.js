@@ -455,6 +455,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ActiveProduct',
   data: function data() {
@@ -2672,10 +2697,11 @@ var render = function() {
             expression: "editForm.visible"
           }
         ],
-        staticClass: "edit-box"
+        staticClass: "edit-box",
+        class: { show: _vm.editForm.visible }
       },
       [
-        _c("div", { staticClass: "form card p-4" }, [
+        _c("div", { staticClass: "form p-4" }, [
           _c("i", {
             staticClass: "bx bx-x close",
             on: {
@@ -2685,9 +2711,7 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _c("h2", { staticClass: "mb-4" }, [
-            _vm._v("\n                Edit product\n            ")
-          ]),
+          _vm._m(0),
           _vm._v(" "),
           _c(
             "div",
@@ -2734,18 +2758,20 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    on: {
-                      click: function($event) {
-                        return _vm.editConfirm()
+                _c("div", { staticClass: "text-right" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function($event) {
+                          return _vm.editConfirm()
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("Edit name")]
-                )
+                    },
+                    [_vm._v("Edit name")]
+                  )
+                ])
               ])
             ]
           ),
@@ -2795,18 +2821,20 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    on: {
-                      click: function($event) {
-                        return _vm.editConfirm()
+                _c("div", { staticClass: "text-right" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function($event) {
+                          return _vm.editConfirm()
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("Edit description")]
-                )
+                    },
+                    [_vm._v("Edit description")]
+                  )
+                ])
               ])
             ]
           ),
@@ -2855,18 +2883,20 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary",
-                  on: {
-                    click: function($event) {
-                      return _vm.editConfirm()
+              _c("div", { staticClass: "text-right" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    on: {
+                      click: function($event) {
+                        return _vm.editConfirm()
+                      }
                     }
-                  }
-                },
-                [_vm._v("Edit first impressions")]
-              )
+                  },
+                  [_vm._v("Edit first impressions")]
+                )
+              ])
             ]
           ),
           _vm._v(" "),
@@ -2920,18 +2950,20 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    on: {
-                      click: function($event) {
-                        return _vm.editConfirm()
+                _c("div", { staticClass: "text-right" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function($event) {
+                          return _vm.editConfirm()
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("Edit remaining amount")]
-                )
+                    },
+                    [_vm._v("Edit remaining amount")]
+                  )
+                ])
               ])
             ]
           ),
@@ -2981,18 +3013,20 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    on: {
-                      click: function($event) {
-                        return _vm.editConfirm()
+                _c("div", { staticClass: "text-right" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function($event) {
+                          return _vm.editConfirm()
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("Edit bought date")]
-                )
+                    },
+                    [_vm._v("Edit bought date")]
+                  )
+                ])
               ])
             ]
           ),
@@ -3042,18 +3076,20 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    on: {
-                      click: function($event) {
-                        return _vm.editConfirm()
+                _c("div", { staticClass: "text-right" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function($event) {
+                          return _vm.editConfirm()
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("Edit expire months")]
-                )
+                    },
+                    [_vm._v("Edit expire months")]
+                  )
+                ])
               ])
             ]
           ),
@@ -3123,18 +3159,20 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    on: {
-                      click: function($event) {
-                        return _vm.editConfirm()
+                _c("div", { staticClass: "text-right" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function($event) {
+                          return _vm.editConfirm()
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("Change category")]
-                )
+                    },
+                    [_vm._v("Change category")]
+                  )
+                ])
               ])
             ]
           ),
@@ -3200,18 +3238,20 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    on: {
-                      click: function($event) {
-                        return _vm.editConfirm()
+                _c("div", { staticClass: "text-right" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function($event) {
+                          return _vm.editConfirm()
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("Change brand")]
-                )
+                    },
+                    [_vm._v("Change brand")]
+                  )
+                ])
               ])
             ]
           )
@@ -3347,7 +3387,7 @@ var render = function() {
                         ],
                         staticClass: "m-0"
                       },
-                      [_vm._m(0)]
+                      [_vm._m(1)]
                     )
                   ]
                 )
@@ -3749,7 +3789,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._m(1)]
+                      [_vm._m(2)]
                     ),
                     _vm._v(" "),
                     _c(
@@ -3775,7 +3815,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._m(2)]
+                      [_vm._m(3)]
                     ),
                     _vm._v(" "),
                     _c(
@@ -3915,7 +3955,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Change brand")]
+                [_vm._v("Change brand\n                        ")]
               ),
               _vm._v(" "),
               _c(
@@ -3928,7 +3968,11 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Change category")]
+                [
+                  _vm._v(
+                    "Change\n                            category\n                        "
+                  )
+                ]
               ),
               _vm._v(" "),
               _c(
@@ -3941,7 +3985,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Delete product")]
+                [_vm._v("Delete product\n                        ")]
               )
             ])
           ])
@@ -3951,6 +3995,20 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "header-box" }, [
+      _c("div", { staticClass: "text-center" }, [
+        _c("i", { staticClass: "bx bx-edit display-1" }),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v("\n                        Edit product\n                    ")
+        ])
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

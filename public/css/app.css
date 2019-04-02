@@ -10967,10 +10967,14 @@ a.text-dark:focus {
   width: 100%;
   height: 100%;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #f1f1f1;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.main-box .activity-box .edit-box.show .form .close {
+  display: block;
 }
 
 .main-box .activity-box .edit-box .form {
@@ -10981,6 +10985,13 @@ a.text-dark:focus {
   .main-box .activity-box .edit-box .form {
     width: 90%;
   }
+}
+
+.main-box .activity-box .edit-box .form .close {
+  position: fixed;
+  top: calc(15px + 68px);
+  right: 15px;
+  display: none;
 }
 
 .main-box .activity-box .product-show-placeholder {
