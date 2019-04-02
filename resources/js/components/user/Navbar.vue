@@ -55,7 +55,24 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/my/collection">My collection</a>
+                        <div class="row">
+                            <div class="col-6 col-lg-12">
+                                <a class="nav-link" href="/">Home</a>
+                            </div>
+                            <div class="col-6 d-flex align-items-center justify-content-end d-lg-none">
+                                <i class="bx bx-home"></i>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item mt-5 mt-lg-0">
+                        <div class="row">
+                            <div class="col-6 col-lg-12">
+                                <a class="nav-link" href="/my/collection">My collection</a>
+                            </div>
+                            <div class="col-6 d-flex align-items-center justify-content-end d-lg-none">
+                                <i class="bx bx-box"></i>
+                            </div>
+                        </div>
                     </li>
                 </ul>
 
@@ -65,7 +82,14 @@
                               data-placement="bottom" title="Current makeup level">{{user.level}}</span> {{user.name}}
                     </a>
                     <li class="nav-item">
-                        <a class="nav-link" href="/logout">Logout</a>
+                        <div class="row">
+                            <div class="col-6 col-lg-12">
+                                <a class="nav-link" href="/logout">Logout</a>
+                            </div>
+                            <div class="col-6 d-flex align-items-center justify-content-end d-lg-none">
+                                <i class="bx bx-log-out"></i>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>

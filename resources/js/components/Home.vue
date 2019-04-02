@@ -1,7 +1,7 @@
 <template>
 
-    <div class="container">
-        <h1>To jest dom strony!</h1>
+    <div class="container my-5">
+        <h1>My makeup collection!</h1>
     </div>
 
 </template>
@@ -10,9 +10,7 @@
     export default {
         name: 'home',
         data() {
-            return {
-
-            }
+            return {}
         }
     }
 </script>

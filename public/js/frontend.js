@@ -1475,6 +1475,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'navbar',
   props: ['level'],
@@ -2659,8 +2683,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("h1", [_vm._v("To jest dom strony!")])
+    return _c("div", { staticClass: "container my-5" }, [
+      _c("h1", [_vm._v("My makeup collection!")])
     ])
   }
 ]
@@ -5159,7 +5183,9 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _vm._m(2)
+                _vm._m(2),
+                _vm._v(" "),
+                _vm._m(3)
               ]),
               _vm._v(" "),
               _c("ul", { staticClass: "navbar-nav ml-auto" }, [
@@ -5183,7 +5209,7 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _vm._m(3)
+                _vm._m(4)
               ])
             ]
           )
@@ -5271,8 +5297,46 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link", attrs: { href: "/my/collection" } }, [
-        _vm._v("My collection")
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-6 col-lg-12" }, [
+          _c("a", { staticClass: "nav-link", attrs: { href: "/" } }, [
+            _vm._v("Home")
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "col-6 d-flex align-items-center justify-content-end d-lg-none"
+          },
+          [_c("i", { staticClass: "bx bx-home" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item mt-5 mt-lg-0" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-6 col-lg-12" }, [
+          _c(
+            "a",
+            { staticClass: "nav-link", attrs: { href: "/my/collection" } },
+            [_vm._v("My collection")]
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "col-6 d-flex align-items-center justify-content-end d-lg-none"
+          },
+          [_c("i", { staticClass: "bx bx-box" })]
+        )
       ])
     ])
   },
@@ -5281,8 +5345,21 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link", attrs: { href: "/logout" } }, [
-        _vm._v("Logout")
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-6 col-lg-12" }, [
+          _c("a", { staticClass: "nav-link", attrs: { href: "/logout" } }, [
+            _vm._v("Logout")
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "col-6 d-flex align-items-center justify-content-end d-lg-none"
+          },
+          [_c("i", { staticClass: "bx bx-log-out" })]
+        )
       ])
     ])
   }
