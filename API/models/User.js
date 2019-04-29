@@ -24,6 +24,14 @@ const userSchema = new mongoose.Schema({
     level: {
         type: Number,
         default: 1
+    },
+    brands: {
+        type: [String],
+        default: []
+    },
+    categories: {
+        type: [String],
+        default: []
     }
 });
 
