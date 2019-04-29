@@ -1,0 +1,31 @@
+{
+  "name": "mvmc-api",
+  "version": "1.0.0",
+  "description": "Makeup collection backend API",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mvtthew/mvmc.git"
+  },
+  "keywords": [
+    "Makeup",
+    "collection",
+    "collectio"
+  ],
+  "author": "Mateusz Ożóg",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mvtthew/mvmc/issues"
+  },
+  "homepage": "https://github.com/mvtthew/mvmc#readme",
+  "dependencies": {
+    "colors": "^1.3.3",
+    "express": "^4.16.4",
+    "express-fileupload": "^1.1.4",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.5.4"
+  }
+}
