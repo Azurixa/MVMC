@@ -44,6 +44,10 @@
 						aria-expanded="false"
 					>{{user.name}}</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<router-link class="dropdown-item" to="/me/dashboard">Dashboard</router-link>
+						<div class="dropdown-divider"></div>
+						<router-link class="dropdown-item" to="/me/edit">Profile edit</router-link>
+						<div class="dropdown-divider"></div>
 						<router-link class="dropdown-item" to="/logout">Logout</router-link>
 					</div>
 				</li>

@@ -64,6 +64,18 @@ export default new Router({
             },
             component: () => import('./views/user/Dashboard.vue')
         },
+        {
+            path: '/me/edit',
+            name: 'User profile edit page',
+            beforeEnter(from, to, next) {
+                if (!store.getters.loggedIn) {
+                    document.location.href = '/login';
+                } else {
+                    next();
+                }
+            },
+            component: () => import('./views/user/Edit.vue')
+        },
         // 404 path
         {
             path: '*',
