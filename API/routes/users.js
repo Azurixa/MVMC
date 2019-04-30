@@ -16,11 +16,14 @@ router.get('/me', isAuth, (req, res) => {
 
 // Edit user data
 router.put('/edit', isAuth, (req, res) => {
-    User.findOneAndUpdate(req.user._id, {
-        name: req.body.name,
-        categories: req.body.categories,
-        brands: req.body.brands
-    }).then(() => {
+    User.findOneAndUpdate(
+        { _id: req.user._id },
+        {
+            name: req.body.name,
+            categories: req.body.categories,
+            brands: req.body.brands
+        }
+    ).then(() => {
         res.json({ msg: 'User updated!' });
     });
 });

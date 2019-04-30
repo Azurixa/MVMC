@@ -69,7 +69,14 @@ export default {
 	},
 	created() {
 		if (this.$store.getters.loggedIn) {
+			this.getUserData();
+		}
+	},
+	methods: {
+		getUserData() {
+			console.log("asd");
 			this.$store.getters.user.then(user => {
+                console.log("asd");
 				this.user = user;
 			});
 		}

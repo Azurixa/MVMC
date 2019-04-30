@@ -1,6 +1,6 @@
 <template>
 	<div id="app">
-        <navbar :auth="auth"></navbar>
+        <navbar :auth="auth" ref="navbar"></navbar>
 		<div class="container-fluid my-5">
 			<router-view/>
 		</div>

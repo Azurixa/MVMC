@@ -21,7 +21,9 @@ module.exports = (req, res, next) => {
                         'exp',
                         'exp_next',
                         'level',
-                        '_id'
+                        '_id',
+                        'categories',
+                        'brands'
                     ]).then(user => {
                         req.user = user;
                         next();

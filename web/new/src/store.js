@@ -34,6 +34,7 @@ export default new Vuex.Store({
                         Authorization: state.token
                     }
                 }).then(res => res.json()).then(user => {
+                    console.log('asd');
                     resolve(user);
                 });
             });
