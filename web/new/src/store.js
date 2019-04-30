@@ -5,7 +5,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        token: localStorage.getItem('makeup-token')
+        token: localStorage.getItem('makeup-token'),
+        user: {}
     },
     mutations: {
         setToken(state, token) {
@@ -14,6 +15,19 @@ export default new Vuex.Store({
         },
         deleteToken(state) {
             localStorage.removeItem('makeup-token');
+        },
+        getUser(state) {
+            state.user = new Promise((resolve, reject) => {
+                fetch('http://localhost:3001/users/me', {
+                    headers: {
+                        Authorization: state.token
+                    }
+                })
+                    .then(res => res.json())
+                    .then(user => {
+                        resolve(user);
+                    });
+            });
         }
     },
     getters: {
@@ -28,16 +42,7 @@ export default new Vuex.Store({
             }
         },
         user(state) {
-            return new Promise((resolve, reject) => {
-                fetch('http://localhost:3001/users/me', {
-                    headers: {
-                        Authorization: state.token
-                    }
-                }).then(res => res.json()).then(user => {
-                    console.log('asd');
-                    resolve(user);
-                });
-            });
+            return state.user;
         }
     },
     actions: {}

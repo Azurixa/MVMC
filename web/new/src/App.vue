@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
-        <navbar :auth="auth" ref="navbar"></navbar>
-		<div class="container-fluid my-5">
+		<navbar :auth="auth" ref="navbar"></navbar>
+		<div class="container-fluid my-lg-5 my-3">
 			<router-view/>
 		</div>
 	</div>
@@ -10,12 +10,17 @@
 <script>
 import navbar from "./components/Navbar.vue";
 export default {
-    components: { navbar },
-    data() {
-        return {
-            auth: this.$store.getters.loggedIn
-        }
-    }
+	components: { navbar },
+	data() {
+		return {
+			auth: this.$store.getters.loggedIn
+		};
+	},
+	created() {
+		if (this.$store.getters.loggedIn) {
+			this.$store.commit("getUser");
+		}
+	}
 };
 </script>
 
@@ -23,6 +28,6 @@ export default {
 <style lang="scss">
 .btn {
 	text-transform: none;
-    cursor: pointer;
+	cursor: pointer;
 }
 </style>

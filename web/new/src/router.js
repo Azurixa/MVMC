@@ -76,6 +76,18 @@ export default new Router({
             },
             component: () => import('./views/user/Edit.vue')
         },
+        {
+            path: '/me/new',
+            name: 'Product / user creation of new cateogy / brand / product',
+            beforeEnter(from, to, next) {
+                if (!store.getters.loggedIn) {
+                    document.location.href = '/login';
+                } else {
+                    next();
+                }
+            },
+            component: () => import('./views/user/New.vue')
+        },
         // 404 path
         {
             path: '*',

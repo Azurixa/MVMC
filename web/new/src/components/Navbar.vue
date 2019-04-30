@@ -74,9 +74,8 @@ export default {
 	},
 	methods: {
 		getUserData() {
-			console.log("asd");
+			this.$store.commit("getUser");
 			this.$store.getters.user.then(user => {
-                console.log("asd");
 				this.user = user;
 			});
 		}
