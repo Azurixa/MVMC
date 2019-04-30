@@ -4,6 +4,7 @@ const hash = require('simple-sha256');
 
 // Models
 const User = require('../models/User');
+const Products = require('../models/Product');
 
 // Middleware
 const isAuth = require('../middleware/isAuth');
@@ -11,6 +12,17 @@ const isAuth = require('../middleware/isAuth');
 // Get user data
 router.get('/me', isAuth, (req, res) => {
     res.json(req.user);
+});
+
+// Edit user data
+router.put('/edit', isAuth, (req, res) => {
+    User.findOneAndUpdate(req.user._id, {
+        name: req.body.name,
+        categories: req.body.categories,
+        brands: req.body.brands
+    }).then(() => {
+        res.json({ msg: 'User updated!' });
+    });
 });
 
 // User register
