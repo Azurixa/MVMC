@@ -1,6 +1,6 @@
 <template>
 	<div id="app">
-        <navbar></navbar>
+        <navbar :auth="auth"></navbar>
 		<div class="container-fluid my-5">
 			<router-view/>
 		</div>
@@ -10,7 +10,12 @@
 <script>
 import navbar from "./components/Navbar.vue";
 export default {
-	components: { navbar }
+    components: { navbar },
+    data() {
+        return {
+            auth: this.$store.getters.loggedIn
+        }
+    }
 };
 </script>
 

@@ -1,7 +1,11 @@
 const express = require('express');
 const expressFile = require('express-fileupload');
+const cors = require('cors');
 
 const app = express();
+
+// CORS for `*`
+app.use(cors());
 
 // MongoDB connection
 require('./database/connect');

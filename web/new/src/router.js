@@ -16,10 +16,17 @@ export default new Router({
             name: 'home',
             component: Home
         },
+        // Auth routes
         {
             path: '/login',
             name: 'User login / token getting page',
             component: () => import('./views/auth/Login.vue')
+        },
+        // User routes
+        {
+            path: '/me/dashboard',
+            name: 'User dashboard page',
+            component: () => import('./views/user/Dashboard.vue')
         },
         // 404 path
         {

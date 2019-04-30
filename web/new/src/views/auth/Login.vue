@@ -25,7 +25,7 @@
 						>
 					</div>
 				</div>
-                <button class="btn btn-primary">LOGIN</button>
+				<button class="btn btn-primary">LOGIN</button>
 			</div>
 		</div>
 		<div class="col-lg-4"></div>
@@ -39,6 +39,26 @@ export default {
 			email: "",
 			password: ""
 		};
+	},
+	methods: {
+		login() {
+			const formData = {
+				email: this.email,
+				password: this.password
+			};
+
+			fetch("http://localhost:3001/auth/token", {
+				method: "POST",
+				headers: {
+					"Content-type": "application/json"
+				},
+				body: JSON.stringify(formData)
+			})
+				.then(res => res.json())
+				.then(data => {
+					console.log(data);
+				});
+		}
 	}
 };
 </script>
