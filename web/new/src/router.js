@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 
+import store from './store';
+
 Vue.use(Router);
 
 export default new Router({
@@ -20,12 +22,46 @@ export default new Router({
         {
             path: '/login',
             name: 'User login / token getting page',
+            beforeEnter(from, to, next) {
+                if (store.getters.loggedIn) {
+                    document.location.href = '/me/dashboard';
+                } else {
+                    next();
+                }
+            },
             component: () => import('./views/auth/Login.vue')
+        },
+        {
+            path: '/register',
+            name: 'User register next login / token getting page',
+            beforeEnter(from, to, next) {
+                if (store.getters.loggedIn) {
+                    document.location.href = '/me/dashboard';
+                } else {
+                    next();
+                }
+            },
+            component: () => import('./views/auth/Register.vue')
+        },
+        {
+            path: '/logout',
+            name: 'User logout and delete token',
+            beforeEnter() {
+                store.commit('deleteToken');
+                document.location.href = '/login';
+            }
         },
         // User routes
         {
             path: '/me/dashboard',
             name: 'User dashboard page',
+            beforeEnter(from, to, next) {
+                if (!store.getters.loggedIn) {
+                    document.location.href = '/login';
+                } else {
+                    next();
+                }
+            },
             component: () => import('./views/user/Dashboard.vue')
         },
         // 404 path

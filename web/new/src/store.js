@@ -9,11 +9,11 @@ export default new Vuex.Store({
     },
     mutations: {
         setToken(state, token) {
+            localStorage.setItem('makeup-token', token);
             state.token = token;
         },
         deleteToken(state) {
             localStorage.removeItem('makeup-token');
-            state.token = undefined;
         }
     },
     getters: {
@@ -21,11 +21,22 @@ export default new Vuex.Store({
             return state.token;
         },
         loggedIn(state) {
-            if (state.token) {
+            if (state.token !== null) {
                 return true;
             } else {
                 return false;
             }
+        },
+        user(state) {
+            return new Promise((resolve, reject) => {
+                fetch('http://localhost:3001/users/me', {
+                    headers: {
+                        Authorization: state.token
+                    }
+                }).then(res => res.json()).then(user => {
+                    resolve(user);
+                });
+            });
         }
     },
     actions: {}

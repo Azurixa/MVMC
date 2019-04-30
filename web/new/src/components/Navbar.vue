@@ -15,7 +15,7 @@
 
 		<div class="collapse navbar-collapse" id="navbarColor01">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active">
+				<li class="nav-item">
 					<router-link to="/" class="nav-link">Home</router-link>
 				</li>
 				<li class="nav-item dropdown" v-if="!auth">
@@ -42,15 +42,14 @@
 						data-toggle="dropdown"
 						aria-haspopup="true"
 						aria-expanded="false"
-					>User</a>
+					>{{user.name}}</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<router-link class="dropdown-item" to="/logout">Logout</router-link>
 					</div>
 				</li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="text" placeholder="Search">
-				<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+				<input class="form-control mr-sm-2" type="text" placeholder="Search in collection">
 			</form>
 		</div>
 	</nav>
@@ -58,7 +57,19 @@
 
 <script>
 export default {
-	props: [ 'auth' ]
+	props: ["auth"],
+	data() {
+		return {
+			user: {}
+		};
+	},
+	created() {
+		if (this.$store.getters.loggedIn) {
+			this.$store.getters.user.then(user => {
+				this.user = user;
+			});
+		}
+	}
 };
 </script>
 
