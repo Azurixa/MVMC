@@ -1,7 +1,7 @@
 <template>
 	<div class="user-categories">
 		<div class="row">
-			<div class="col-lg-4">
+			<div class="col-lg-3 ml-auto">
 				<div class="card">
 					<div class="card-header">
 						<h2 class="m-0">New category</h2>
@@ -14,9 +14,9 @@
 					</div>
 					<button class="btn btn-primary" @click="addCategory">Add category</button>
 				</div>
-				<div class="card mt-4">
+				<div class="card mt-3">
 					<div class="card-header">
-						<h2>Your categories</h2>
+						<h2 class="m-0">Your categories</h2>
 					</div>
 					<div class="card-body list-box">
 						<ul
@@ -33,7 +33,7 @@
 					<button class="btn btn-primary" @click="update">Save categories</button>
 				</div>
 			</div>
-			<div class="col-lg-4">
+			<div class="col-lg-3">
 				<div class="card">
 					<div class="card-header">
 						<h2 class="m-0">New brand</h2>
@@ -46,9 +46,9 @@
 					</div>
 					<button class="btn btn-primary" @click="addBrand">Add brand</button>
 				</div>
-				<div class="card mt-4">
+				<div class="card mt-3">
 					<div class="card-header">
-						<h2>Your brands</h2>
+						<h2 class="m-0">Your brands</h2>
 					</div>
 					<div class="card-body list-box">
 						<ul
@@ -65,7 +65,7 @@
 					<button class="btn btn-primary" @click="update">Save brands</button>
 				</div>
 			</div>
-			<div class="col-lg-4"></div>
+			<div class="col-lg-3 mr-auto"></div>
 		</div>
 	</div>
 </template>
@@ -96,20 +96,24 @@ export default {
 
 		// Category
 		addCategory() {
-			this.editInfo.categories.push(this.newCategory.name);
+            this.editInfo.categories.push(this.newCategory.name);
+            this.editInfo.categories.sort();
 			this.newCategory.name = "";
 		},
 		removeCategory(index) {
-			this.editInfo.categories.splice(index, 1);
+            this.editInfo.categories.splice(index, 1);
+            this.editInfo.categories.sort();
 		},
 
 		// Brand
 		addBrand() {
-			this.editInfo.brands.push(this.newBrand.name);
+            this.editInfo.brands.push(this.newBrand.name);
+            this.editInfo.brands.sort();
 			this.newBrand.name = "";
 		},
 		removeBrand(index) {
-			this.editInfo.brands.splice(index, 1);
+            this.editInfo.brands.splice(index, 1);
+            this.editInfo.brands.sort();
 		},
 
 		update() {
@@ -140,8 +144,9 @@ export default {
 		scroll-snap-type: x mandatory;
 		overflow-x: scroll;
 
-		.col-lg-4 {
+		.col-lg-3 {
 			scroll-snap-align: start;
+            margin: 0;
 		}
 	}
 }

@@ -34,11 +34,20 @@
 						aria-expanded="false"
 					>{{user.name}}</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<router-link class="dropdown-item" to="/me/dashboard">Dashboard</router-link>
+						<router-link class="dropdown-item" to="/me/new">
+							<i class='bx bx-list-plus' ></i> New
+						</router-link>
 						<div class="dropdown-divider"></div>
-						<router-link class="dropdown-item" to="/me/edit">Profile edit</router-link>
+						<router-link class="dropdown-item" to="/me/dashboard">
+							<i class="bx bx-user"></i> Dashboard
+						</router-link>
 						<div class="dropdown-divider"></div>
-						<router-link class="dropdown-item" to="/logout">Logout</router-link>
+						<router-link class="dropdown-item" to="/me/edit">
+							<i class="bx bx-user-plus"></i> Profile edit
+						</router-link>
+						<router-link class="dropdown-item" to="/logout">
+							<i class="bx bx-user-x"></i> Logout
+						</router-link>
 					</div>
 				</li>
 			</ul>

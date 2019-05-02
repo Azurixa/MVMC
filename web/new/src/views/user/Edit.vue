@@ -3,11 +3,19 @@
 		<div class="row">
 			<div class="col-lg-4"></div>
 			<div class="col-lg-4">
-				<div class="form-group">
-					<label for="name">Name</label>
-					<input id="name" class="form-control" v-model="editInfo.name">
+				<div class="card">
+					<div class="card-header">
+						<h2>Profile edit</h2>
+						<p class="m-0">Edit profile details</p>
+					</div>
+					<div class="card-body">
+						<div class="form-group">
+							<label for="name">Name</label>
+							<input id="name" class="form-control" v-model="editInfo.name">
+						</div>
+					</div>
+					<button class="btn btn-primary" @click="update">Update</button>
 				</div>
-				<button class="btn btn-primary" @click="update">Update</button>
 			</div>
 			<div class="col-lg-4"></div>
 		</div>
