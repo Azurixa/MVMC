@@ -19,19 +19,9 @@
 					<router-link to="/" class="nav-link">Home</router-link>
 				</li>
 				<li class="nav-item dropdown" v-if="!auth">
-					<a
-						class="nav-link dropdown-toggle"
-						href="#"
-						id="navbarDropdown"
-						role="button"
-						data-toggle="dropdown"
-						aria-haspopup="true"
-						aria-expanded="false"
-					>User</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<router-link class="dropdown-item" to="/login">Login</router-link>
-						<router-link class="dropdown-item" to="/register">Register</router-link>
-					</div>
+					<router-link class="nav-link" to="/auth">
+						<i class="bx bx-user"></i> Login / Register
+					</router-link>
 				</li>
 				<li class="nav-item dropdown" v-if="auth">
 					<a
@@ -52,16 +42,16 @@
 					</div>
 				</li>
 			</ul>
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="text" placeholder="Search in collection">
-			</form>
+			<navSearch v-if="auth"></navSearch>
 		</div>
 	</nav>
 </template>
 
 <script>
+import navSearch from "./NavSearch.vue";
 export default {
 	props: ["auth"],
+	components: { navSearch },
 	data() {
 		return {
 			user: {}
@@ -94,9 +84,8 @@ export default {
 .nav-item {
 	padding: 0;
 	margin-right: 0.5rem;
-
-	&:last-child {
-		margin-right: 2rem;
+	@media screen and(max-width: 800px) {
+		margin-right: 0 !important;
 	}
 }
 .nav-link {

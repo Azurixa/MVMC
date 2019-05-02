@@ -31,9 +31,7 @@
 				</div>
 				<button class="btn btn-primary" @click="login">LOGIN</button>
 			</div>
-            <p class="swipe-tooltip text-center m-0">
-                Swipe to right for REGISTER
-            </p>
+			<p class="swipe-tooltip text-center m-0">Swipe to right for REGISTER</p>
 		</div>
 		<div class="col-lg-4">
 			<div class="card">
@@ -79,9 +77,7 @@
 				</div>
 				<button class="btn btn-primary" @click="register">REGISTER</button>
 			</div>
-            <p class="swipe-tooltip text-center m-0">
-                Swipe to left for LOGIN
-            </p>
+			<p class="swipe-tooltip text-center m-0">Swipe to left for LOGIN</p>
 		</div>
 		<div class="col-lg-2"></div>
 	</div>
@@ -150,11 +146,10 @@ export default {
 
 <style lang="scss" scoped>
 .swipe-tooltip {
-    display: none;
+	display: none;
 }
 
 .row {
-
 	@media screen and(max-width: 800px) {
 		overflow-x: scroll;
 		display: grid;
@@ -170,7 +165,7 @@ export default {
 				display: block;
 				position: absolute;
 				bottom: 15px;
-                width: 100%;
+				width: 100%;
 			}
 		}
 		.col-lg-2 {
