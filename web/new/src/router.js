@@ -6,7 +6,7 @@ import store from './store';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
     mode: 'history',
     base: process.env.BASE_URL,
     scrollBehavior() {
@@ -90,3 +90,16 @@ export default new Router({
         }
     ]
 });
+
+// Global before enter
+router.beforeEach((from, to, next) => {
+    const navbar = document.querySelector('.navbar-collapse');
+    if (navbar) {
+        if (navbar.classList.contains('show')){
+            document.querySelector('.navbar-toggler').click();
+        }
+    }
+    next();
+});
+
+export default router;
