@@ -15,6 +15,7 @@ export default new Vuex.Store({
         },
         deleteToken(state) {
             localStorage.removeItem('makeup-token');
+            state.token = '';
         },
         getUser(state) {
             state.user = new Promise((resolve, reject) => {

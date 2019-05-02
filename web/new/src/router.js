@@ -20,8 +20,8 @@ export default new Router({
         },
         // Auth routes
         {
-            path: '/login',
-            name: 'User login / token getting page',
+            path: '/auth',
+            name: 'User login / register / token getting page',
             beforeEnter(from, to, next) {
                 if (store.getters.loggedIn) {
                     document.location.href = '/me/dashboard';
@@ -29,19 +29,7 @@ export default new Router({
                     next();
                 }
             },
-            component: () => import('./views/auth/Login.vue')
-        },
-        {
-            path: '/register',
-            name: 'User register next login / token getting page',
-            beforeEnter(from, to, next) {
-                if (store.getters.loggedIn) {
-                    document.location.href = '/me/dashboard';
-                } else {
-                    next();
-                }
-            },
-            component: () => import('./views/auth/Register.vue')
+            component: () => import('./views/auth/Auth.vue')
         },
         {
             path: '/logout',

@@ -134,25 +134,21 @@ export default {
 <style lang="scss" scoped>
 .row {
 	@media screen and(max-width: 800px) {
-        display: grid;
-        grid-template-columns: repeat(3, 100%);
-        transition: 0.1s all;
-        scroll-snap-type: x mandatory;
-        overflow-x: scroll;
+		display: grid;
+		grid-template-columns: repeat(3, 100%);
+		transition: 2s all;
+		scroll-snap-type: x mandatory;
+		overflow-x: scroll;
 
-        .col-lg-4 {
-            scroll-snap-align: start;
-        }
-    }
+		.col-lg-4 {
+			scroll-snap-align: start;
+		}
+	}
 }
 
 .list-box {
 	height: 40vh;
 	overflow-y: scroll;
 	scroll-snap-type: y proximity;
-
-	li {
-		scroll-snap-align: start;
-	}
 }
 </style>
