@@ -4,6 +4,40 @@
 			<div class="col-lg-3 ml-auto">
 				<div class="card">
 					<div class="card-header">
+						<h2 class="m-0">New product</h2>
+					</div>
+					<div class="card-body">
+						<div class="form-group">
+							<label for="category">Category</label>
+							<select class="form-control" id="category">
+								<option
+									:value="category"
+									v-for="(category, index) in editInfo.categories"
+									:key="'newItemCategory_' + index"
+								>{{category}}</option>
+							</select>
+						</div>
+                        <div class="form-group">
+							<label for="brand">Brand</label>
+							<select class="form-control" id="brand">
+								<option
+									:value="brand"
+									v-for="(brand, index) in editInfo.brands"
+									:key="'newItemBrand_' + index"
+								>{{brand}}</option>
+							</select>
+						</div>
+                        <div class="form-group">
+							<label for="name">Name</label>
+							<input type="text" class="form-control" id="name">
+						</div>
+					</div>
+                    <button class="btn btn-primary">Add item</button>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="card">
+					<div class="card-header">
 						<h2 class="m-0">New category</h2>
 					</div>
 					<div class="card-body">
@@ -14,7 +48,7 @@
 					</div>
 					<button class="btn btn-primary" @click="addCategory">Add category</button>
 				</div>
-				<div class="card mt-3">
+				<div class="card mt-4">
 					<div class="card-header">
 						<h2 class="m-0">Your categories</h2>
 					</div>
@@ -30,10 +64,9 @@
 							</li>
 						</ul>
 					</div>
-					<button class="btn btn-primary" @click="update">Save categories</button>
 				</div>
 			</div>
-			<div class="col-lg-3">
+			<div class="col-lg-3 mr-auto">
 				<div class="card">
 					<div class="card-header">
 						<h2 class="m-0">New brand</h2>
@@ -46,7 +79,7 @@
 					</div>
 					<button class="btn btn-primary" @click="addBrand">Add brand</button>
 				</div>
-				<div class="card mt-3">
+				<div class="card mt-4">
 					<div class="card-header">
 						<h2 class="m-0">Your brands</h2>
 					</div>
@@ -62,10 +95,8 @@
 							</li>
 						</ul>
 					</div>
-					<button class="btn btn-primary" @click="update">Save brands</button>
 				</div>
 			</div>
-			<div class="col-lg-3 mr-auto"></div>
 		</div>
 	</div>
 </template>
@@ -96,24 +127,28 @@ export default {
 
 		// Category
 		addCategory() {
-            this.editInfo.categories.push(this.newCategory.name);
-            this.editInfo.categories.sort();
-			this.newCategory.name = "";
+			this.editInfo.categories.push(this.newCategory.name);
+			this.editInfo.categories.sort();
+            this.newCategory.name = "";
+            this.update();
 		},
 		removeCategory(index) {
-            this.editInfo.categories.splice(index, 1);
+			this.editInfo.categories.splice(index, 1);
             this.editInfo.categories.sort();
+            this.update();
 		},
 
 		// Brand
 		addBrand() {
-            this.editInfo.brands.push(this.newBrand.name);
-            this.editInfo.brands.sort();
-			this.newBrand.name = "";
+			this.editInfo.brands.push(this.newBrand.name);
+			this.editInfo.brands.sort();
+            this.newBrand.name = "";
+            this.update();
 		},
 		removeBrand(index) {
-            this.editInfo.brands.splice(index, 1);
+			this.editInfo.brands.splice(index, 1);
             this.editInfo.brands.sort();
+            this.update();
 		},
 
 		update() {
@@ -146,13 +181,13 @@ export default {
 
 		.col-lg-3 {
 			scroll-snap-align: start;
-            margin: 0;
+			margin: 0;
 		}
 	}
 }
 
 .list-box {
-	height: 40vh;
+	height: 45vh;
 	overflow-y: scroll;
 	scroll-snap-type: y proximity;
 }
