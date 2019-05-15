@@ -36,6 +36,9 @@
 							aria-expanded="false"
 						>{{user.name}}</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <router-link class="dropdown-item" to="/me/collection">
+								<i class="bx bx-list"></i> Collection
+							</router-link>
 							<router-link class="dropdown-item" to="/me/new">
 								<i class="bx bx-list-plus"></i> New
 							</router-link>

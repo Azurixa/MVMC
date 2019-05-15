@@ -76,6 +76,18 @@ const router = new Router({
             },
             component: () => import('./views/user/New.vue')
         },
+        {
+            path: '/me/collection',
+            name: 'User products collection',
+            beforeEnter(from, to, next) {
+                if (!store.getters.loggedIn) {
+                    document.location.href = '/login';
+                } else {
+                    next();
+                }
+            },
+            component: () => import('./views/user/Collection.vue')
+        },
         // 404 path
         {
             path: '*',
@@ -95,7 +107,7 @@ const router = new Router({
 router.beforeEach((from, to, next) => {
     const navbar = document.querySelector('.navbar-collapse');
     if (navbar) {
-        if (navbar.classList.contains('show')){
+        if (navbar.classList.contains('show')) {
             document.querySelector('.navbar-toggler').click();
         }
     }
