@@ -30,7 +30,17 @@ const productSchema = new mongoose.Schema({
         default: 0
     },
     photos: {
-        type: [String],
+        type: [
+            {
+                src: {
+                    type: String,
+                },
+                date: {
+                    type: Date,
+                    default: Date.now
+                }
+            }
+        ],
         default: []
     },
     remaining_amount: {
