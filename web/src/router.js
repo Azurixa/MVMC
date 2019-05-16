@@ -62,7 +62,7 @@ const router = new Router({
                     next();
                 }
             },
-            component: () => import('./views/user/Edit.vue')
+            component: () => import('./views/user/EditProfile.vue')
         },
         {
             path: '/me/new',
@@ -87,6 +87,18 @@ const router = new Router({
                 }
             },
             component: () => import('./views/user/Collection.vue')
+        },
+        {
+            path: '/me/p/:id',
+            name: 'User product show',
+            beforeEnter(from, to, next) {
+                if (!store.getters.loggedIn) {
+                    document.location.href = '/login';
+                } else {
+                    next();
+                }
+            },
+            component: () => import('./views/user/Product.vue')
         },
         // 404 path
         {

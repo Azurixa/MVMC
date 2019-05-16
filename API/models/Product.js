@@ -28,7 +28,11 @@ const productSchema = new mongoose.Schema({
     rating: {
         type: Number,
         default: 0
-    },
+	},
+	thumbnail: {
+		type: String,
+		default: ''
+	},
     photos: {
         type: [
             {
@@ -42,18 +46,20 @@ const productSchema = new mongoose.Schema({
             }
         ],
         default: []
-    },
-    remaining_amount: {
-        type: Number,
-        default: 100
-    },
-    uses_count: {
+	},
+	status: {
+		name: {
+			type: String,
+			default: 'Using'
+		},
+		color: {
+			type: String,
+			default: '#ffff00'
+		}
+	},
+	uses_count: {
         type: Number,
         default: 0
-    },
-    pan: {
-        type: Boolean,
-        default: false
     },
     bought_at: {
         type: Date,
