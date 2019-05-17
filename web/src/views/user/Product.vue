@@ -6,12 +6,13 @@
 		<div class="photos">
 			<div
 				class="photo"
-				v-for="index in 2"
-				@click="changeImage(index - 1)"
+				v-for="(photo, index) in product.photos"
+				:key="photo._id"
+				@click="changeImage(index)"
 			>
-				{{ index }}
+				{{ photo.src }}
 			</div>
-			<div class="photo new" @click="changeImage(2)">
+			<div class="photo new" @click="changeImage(product.photos.length)">
 				<div class="card">
 					<div class="card-header">
 						<h2>
@@ -46,6 +47,7 @@
 </template>
 
 <script>
+import { setTimeout } from "timers";
 export default {
 	data() {
 		return {
@@ -55,9 +57,6 @@ export default {
 	},
 	created() {
 		this.getProduct();
-	},
-	mounted() {
-		this.initGallery();
 	},
 	methods: {
 		handleFileUpload() {
@@ -75,7 +74,12 @@ export default {
 				body: formData
 			})
 				.then(res => res.json())
-				.then(data => console.log(data));
+				.then(data => {
+					if (data.err) {
+					} else {
+						this.getProduct();
+					}
+				});
 		},
 		getProduct() {
 			fetch(
@@ -93,6 +97,10 @@ export default {
 						document.location.href = "/404";
 					} else {
 						this.product = data;
+						setTimeout(() => {
+							this.initGallery();
+							this.changeImage(0);
+						}, 10);
 					}
 				});
 		},
@@ -150,7 +158,6 @@ export default {
 			width: 15%;
 		}
 		&.new {
-			overflow: hidden;
 			background-color: white;
 
 			.card {
