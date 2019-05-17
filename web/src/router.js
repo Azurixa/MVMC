@@ -100,6 +100,18 @@ const router = new Router({
             },
             component: () => import('./views/user/Product.vue')
         },
+        {
+            path: '/me/p/:id/edit',
+            name: 'User product edit',
+            beforeEnter(from, to, next) {
+                if (!store.getters.loggedIn) {
+                    document.location.href = '/auth';
+                } else {
+                    next();
+                }
+            },
+            component: () => import('./views/user/ProductEdit.vue')
+        },
         // 404 path
         {
             path: '*',

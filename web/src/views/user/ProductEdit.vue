@@ -1,8 +1,11 @@
 <template>
-	<div class="product">
-		<router-link :to="'/me/p/' + this.$route.params.id + '/edit'">
-			Edit product
+	<div class="product-edit">
+		<router-link :to="'/me/p/' + $route.params.id">
+			Back to product
 		</router-link>
+		<p>
+			EDIT PRODUCT
+		</p>
 		<p>
 			{{ product }}
 		</p>
@@ -38,7 +41,11 @@ export default {
 						this.product = data;
 					}
 				});
+		},
+		updateProduct() {
+			console.log("OK");
 		}
 	}
 };
 </script>
+
