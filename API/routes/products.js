@@ -30,6 +30,33 @@ router.post('/new', isAuth, (req, res) => {
     }
 });
 
+// Edit product by sending PRODUCT object
+router.put('/edit', isAuth, (req, res) => {
+    const product = req.body.product;
+    if (product) {
+        Product.findOneAndUpdate({_id: product._id}, {
+            status: product.status,
+            description: product.description,
+            first_impressions: product.first_impressions,
+            rating: product.rating,
+            thumbnail: product.thumbnail,
+            uses_count: product.uses_count,
+            bought_at: product.bought_at,
+            expire_months: product.expire_months,
+            pans: product.pans,
+            name: product.name,
+            brand: product.brand,
+            category: product.category,
+            photos: product.photos,
+        }).then(done => {
+            res.json(done);
+        });
+    } else {
+        res.json({ err: 'You need to send updated product informations' });
+    }
+});
+
+// Add photo to product
 router.post('/photo', isAuth, (req, res) => {
     const id = req.body._id;
     if (id) {
@@ -46,14 +73,13 @@ router.post('/photo', isAuth, (req, res) => {
                     ];
 
                     if (allowedMimetypes.includes(photo.mimetype)) {
-                        const fileName = req.user._id + product._id + photo.name
+                        const fileName =
+                            req.user._id + product._id + photo.name;
                         photo.mv(path.resolve('./') + '/storage/' + fileName);
-                        product.photos.push(
-                            {
-                                src: fileName
-                            }
-                        );
-                        product.save((err) => {
+                        product.photos.push({
+                            src: fileName
+                        });
+                        product.save(err => {
                             if (err) {
                                 console.log(err);
                             }

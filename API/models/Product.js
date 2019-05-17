@@ -56,7 +56,17 @@ const productSchema = new mongoose.Schema({
 			type: String,
 			default: '#ffff00'
 		}
-	},
+    },
+    pans: {
+        all: {
+            type: Number,
+            default: 0
+        },
+        done: {
+            type: Number,
+            default: 0
+        }
+    },
 	uses_count: {
         type: Number,
         default: 0
