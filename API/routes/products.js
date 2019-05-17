@@ -31,7 +31,7 @@ router.post('/new', isAuth, (req, res) => {
 });
 
 // Get specific product info
-router.get('/:id', isAuth, (req, res) => {
+router.get('/product/:id', isAuth, (req, res) => {
     const id = req.params.id;
 
     if (id) {
