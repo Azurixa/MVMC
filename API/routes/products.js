@@ -30,25 +30,45 @@ router.post('/new', isAuth, (req, res) => {
     }
 });
 
+// Get specific product info
+router.get('/:id', isAuth, (req, res) => {
+    const id = req.params.id;
+
+    if (id) {
+        Product.findOne({ user_id: req.user._id, _id: id }, {user_id: 0})
+            .then(product => {
+                res.json(product);
+            })
+            .catch(() => {
+                res.json({ err: 'Invalid product ID' });
+            });
+    } else {
+        res.json({ err: 'You need to provide product ID' });
+    }
+});
+
 // Edit product by sending PRODUCT object
 router.put('/edit', isAuth, (req, res) => {
     const product = req.body.product;
     if (product) {
-        Product.findOneAndUpdate({_id: product._id}, {
-            status: product.status,
-            description: product.description,
-            first_impressions: product.first_impressions,
-            rating: product.rating,
-            thumbnail: product.thumbnail,
-            uses_count: product.uses_count,
-            bought_at: product.bought_at,
-            expire_months: product.expire_months,
-            pans: product.pans,
-            name: product.name,
-            brand: product.brand,
-            category: product.category,
-            photos: product.photos,
-        }).then(done => {
+        Product.findOneAndUpdate(
+            { _id: product._id },
+            {
+                status: product.status,
+                description: product.description,
+                first_impressions: product.first_impressions,
+                rating: product.rating,
+                thumbnail: product.thumbnail,
+                uses_count: product.uses_count,
+                bought_at: product.bought_at,
+                expire_months: product.expire_months,
+                pans: product.pans,
+                name: product.name,
+                brand: product.brand,
+                category: product.category,
+                photos: product.photos
+            }
+        ).then(done => {
             res.json(done);
         });
     } else {
