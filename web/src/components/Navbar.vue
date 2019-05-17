@@ -43,7 +43,7 @@
 								<i class="bx bx-list-plus"></i> New
 							</router-link>
 							<div class="dropdown-divider"></div>
-							<router-link class="dropdown-item" to="/me/dashboard">
+							<router-link class="dropdown-item" to="/me">
 								<i class="bx bx-user"></i> Dashboard
 							</router-link>
 							<div class="dropdown-divider"></div>

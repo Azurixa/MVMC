@@ -36,16 +36,16 @@ const router = new Router({
             name: 'User logout and delete token',
             beforeEnter() {
                 store.commit('deleteToken');
-                document.location.href = '/login';
+                document.location.href = '/auth';
             }
         },
         // User routes
         {
-            path: '/me/dashboard',
+            path: '/me',
             name: 'User dashboard page',
             beforeEnter(from, to, next) {
                 if (!store.getters.loggedIn) {
-                    document.location.href = '/login';
+                    document.location.href = '/auth';
                 } else {
                     next();
                 }
@@ -57,7 +57,7 @@ const router = new Router({
             name: 'User profile edit page',
             beforeEnter(from, to, next) {
                 if (!store.getters.loggedIn) {
-                    document.location.href = '/login';
+                    document.location.href = '/auth';
                 } else {
                     next();
                 }
@@ -69,7 +69,7 @@ const router = new Router({
             name: 'Product / user creation of new cateogy / brand / product',
             beforeEnter(from, to, next) {
                 if (!store.getters.loggedIn) {
-                    document.location.href = '/login';
+                    document.location.href = '/auth';
                 } else {
                     next();
                 }
@@ -81,7 +81,7 @@ const router = new Router({
             name: 'User products collection',
             beforeEnter(from, to, next) {
                 if (!store.getters.loggedIn) {
-                    document.location.href = '/login';
+                    document.location.href = '/auth';
                 } else {
                     next();
                 }
@@ -93,7 +93,7 @@ const router = new Router({
             name: 'User product show',
             beforeEnter(from, to, next) {
                 if (!store.getters.loggedIn) {
-                    document.location.href = '/login';
+                    document.location.href = '/auth';
                 } else {
                     next();
                 }

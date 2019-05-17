@@ -134,7 +134,7 @@ export default {
 						const token = data.token_type + " " + data.token;
 						console.log(token);
 						this.$store.commit("setToken", token);
-						document.location.href = "/me/dashboard";
+						document.location.href = "/me";
 					} else {
 						console.log(data.err);
 					}
