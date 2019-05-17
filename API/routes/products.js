@@ -68,8 +68,8 @@ router.put('/edit', isAuth, (req, res) => {
                 category: product.category,
                 photos: product.photos
             }
-        ).then(done => {
-            res.json(done);
+        ).then(() => {
+            res.json({ msg: 'Product successfully updated' });
         });
     } else {
         res.json({ err: 'You need to send updated product informations' });
