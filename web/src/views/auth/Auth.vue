@@ -1,7 +1,6 @@
 <template>
 	<div class="row">
-		<div class="col-lg-2"></div>
-		<div class="col-lg-4">
+		<div class="col-lg-6">
 			<div class="card">
 				<div class="card-header">
 					<h2>Login</h2>
@@ -33,7 +32,7 @@
 			</div>
 			<p class="swipe-tooltip text-center m-0">Swipe to right for REGISTER</p>
 		</div>
-		<div class="col-lg-4">
+		<div class="col-lg-6">
 			<div class="card">
 				<div class="card-header">
 					<h2>Register</h2>
@@ -79,7 +78,6 @@
 			</div>
 			<p class="swipe-tooltip text-center m-0">Swipe to left for LOGIN</p>
 		</div>
-		<div class="col-lg-2"></div>
 	</div>
 </template>
 

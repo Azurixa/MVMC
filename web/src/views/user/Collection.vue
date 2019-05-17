@@ -4,8 +4,7 @@
 			My Collection
 		</h1>
 		<div class="row">
-			<div class="col-lg-1"></div>
-			<div class="col-lg-10">
+			<div class="col-lg-12">
 				<div class="row">
 					<div
 						class="col-lg-4"
@@ -30,7 +29,6 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-1"></div>
 		</div>
 	</div>
 </template>

@@ -1,8 +1,8 @@
 <template>
 	<div id="app">
 		<navbar :auth="auth" ref="navbar"></navbar>
-		<div class="container-fluid my-lg-5 my-3">
-			<router-view/>
+		<div class="container my-lg-5 my-3">
+			<router-view />
 		</div>
 	</div>
 </template>
@@ -29,5 +29,10 @@ export default {
 .btn {
 	text-transform: none;
 	cursor: pointer;
+}
+.container {
+	@media (min-width: 1200px) {
+		max-width: 1500px;
+	}
 }
 </style>

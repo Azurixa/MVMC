@@ -1,7 +1,7 @@
 <template>
 	<div class="user-categories">
 		<div class="row">
-			<div class="col-lg-3 ml-auto">
+			<div class="col-lg-4">
 				<div class="card">
 					<div class="card-header">
 						<h2 class="m-0">New product</h2>
@@ -51,7 +51,7 @@
 					<button class="btn btn-primary" @click="addProduct()">Add item</button>
 				</div>
 			</div>
-			<div class="col-lg-3">
+			<div class="col-lg-4">
 				<div class="card">
 					<div class="card-header">
 						<h2 class="m-0">New category</h2>
@@ -91,7 +91,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-3 mr-auto">
+			<div class="col-lg-4">
 				<div class="card">
 					<div class="card-header">
 						<h2 class="m-0">New brand</h2>
@@ -240,7 +240,7 @@ export default {
 		scroll-snap-type: x mandatory;
 		overflow-x: scroll;
 
-		.col-lg-3 {
+		.col-lg-4 {
 			scroll-snap-align: start;
 			margin: 0;
 		}

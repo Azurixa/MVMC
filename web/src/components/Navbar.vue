@@ -2,6 +2,7 @@
 	<div>
         <div class="fix"></div>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
 			<router-link class="navbar-brand" to="/">Make-up Collection</router-link>
 			<button
 				class="navbar-toggler"
@@ -58,6 +59,7 @@
 				</ul>
 				<navSearch v-if="auth"></navSearch>
 			</div>
+            </div>
 		</nav>
 	</div>
 </template>

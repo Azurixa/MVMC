@@ -1,8 +1,7 @@
 <template>
 	<div class="user-edit">
 		<div class="row">
-			<div class="col-lg-4"></div>
-			<div class="col-lg-4">
+			<div class="col-lg-8">
 				<div class="card">
 					<div class="card-header">
 						<h2>Profile edit</h2>
@@ -11,13 +10,18 @@
 					<div class="card-body">
 						<div class="form-group">
 							<label for="name">Name</label>
-							<input id="name" class="form-control" v-model="editInfo.name">
+							<input
+								id="name"
+								class="form-control"
+								v-model="editInfo.name"
+							/>
 						</div>
 					</div>
-					<button class="btn btn-primary" @click="update">Update</button>
+					<button class="btn btn-primary" @click="update">
+						Update
+					</button>
 				</div>
 			</div>
-			<div class="col-lg-4"></div>
 		</div>
 	</div>
 </template>
