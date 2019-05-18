@@ -29,10 +29,18 @@ export default {
 .btn {
 	text-transform: none;
 	cursor: pointer;
+    border-radius: 1.5rem;
 }
 .container {
 	@media (min-width: 1200px) {
 		max-width: 1500px;
 	}
+}
+.card {
+    border-radius: 1.5rem;
+
+    .card-header {
+        border-radius: 1.5rem 1.5rem 0 0;
+    }
 }
 </style>

@@ -12,7 +12,7 @@
 			<div class="photo new" @click="changeImage(product.photos.length)">
 				<div class="card">
 					<div class="card-header">
-						<h2>
+						<h2 class="m-0">
 							NEW
 						</h2>
 					</div>
@@ -21,7 +21,6 @@
 							Add new photo
 						</p>
 						<div class="form-group">
-							<label for="newPhoto">Photo</label>
 							<input
 								type="file"
 								id="newPhoto"
@@ -53,6 +52,50 @@
 					</div>
 					<div class="body">
 						<div class="pane">
+							<div class="content">
+								<p>
+									<small>Rating</small><br />
+									<span
+										v-for="index in 10"
+										:key="'rating_' + index"
+										@click="rate(index)"
+									>
+										<i
+											v-if="index <= product.rating"
+											class="bx bxs-star h2 text-primary m-0"
+										></i>
+										<i
+											v-if="index > product.rating"
+											class="bx bx-star h2 text-primary m-0"
+										></i>
+									</span>
+								</p>
+								<div class="m-0">
+									<small>Pans</small><br />
+									<div class="row">
+										<div class="col-6">
+											<span class="h1 m-0">
+												{{ product.pans.done }}
+											</span>
+											<span class="h1 m-0">
+												/ {{ product.pans.all }}
+											</span>
+										</div>
+										<div class="col-6 text-right">
+											<i
+												class="bx bx-plus-circle h1 m-0 mr-2"
+												@click="pan(1)"
+											></i>
+											<i
+												@click="pan(-1)"
+												class="bx bx-minus-circle h1 m-0"
+											></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="pane">
 							<div class="header">
 								<p>Description</p>
 							</div>
@@ -71,7 +114,7 @@
 						</div>
 						<div class="pane">
 							<div class="header">
-								<p>first_impressions</p>
+								<p>First impressions</p>
 							</div>
 							<p class="content">
 								<router-link
@@ -86,11 +129,23 @@
 								{{ product.first_impressions }}
 							</p>
 						</div>
-						<router-link
-							:to="'/me/p/' + this.$route.params.id + '/edit'"
-						>
-							Edit product
-						</router-link>
+						<div class="pane">
+							<div class="header">
+								<p>Product settings</p>
+							</div>
+							<div class="body">
+								<router-link
+									:to="
+										'/me/p/' +
+											this.$route.params.id +
+											'/edit'
+									"
+									class="btn btn-block btn-primary"
+								>
+									Edit product
+								</router-link>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -103,7 +158,12 @@ import { setTimeout } from "timers";
 export default {
 	data() {
 		return {
-			product: {},
+			product: {
+				pans: {
+					done: 0,
+					all: 0
+				}
+			},
 			newPhoto: null
 		};
 	},
@@ -176,13 +236,43 @@ export default {
 		},
 		initGallery() {
 			const photos = document.querySelectorAll(".photo");
-            photos[0].setAttribute("show", true);
+			photos[0].setAttribute("show", true);
 			if (photos.length > 1) {
 				photos[1].setAttribute("less", true);
 			}
 			if (photos.length > 2) {
 				photos[2].setAttribute("less", true);
 			}
+		},
+		rate(number) {
+			if (number > 0 && number < 11) {
+				this.product.rating = number;
+				this.update();
+			}
+		},
+		pan(action) {
+			if (action == 1) {
+				if (this.product.pans.done < this.product.pans.all) {
+					this.product.pans.done++;
+					this.update();
+				}
+			}
+			if (action == -1) {
+				if (this.product.pans.done > 0) {
+					this.product.pans.done--;
+					this.update();
+				}
+			}
+		},
+		update() {
+			fetch("http://localhost:3001/products/edit", {
+				method: "PUT",
+				headers: {
+					Authorization: this.$store.getters.token,
+					"Content-type": "application/json"
+				},
+				body: JSON.stringify({ product: this.product })
+			});
 		}
 	}
 };
@@ -198,7 +288,7 @@ export default {
 		position: sticky;
 		top: 59px;
 		display: flex;
-		background-color: #fcfcfc;
+		background-color: #fff;
 		border: {
 			bottom: 1px solid rgba(#000, 0.1);
 		}
@@ -226,17 +316,16 @@ export default {
 			}
 			.name {
 				width: 100%;
-				font-weight: 800;
+				font-weight: 1000;
 				font-size: 1.2rem;
 				height: 2.4rem;
 				line-height: 2.4rem;
 				margin: 0;
+				color: black;
 			}
 		}
 	}
 	> .body {
-		height: 100rem;
-
 		.pane {
 			border: {
 				bottom: 1px solid rgba(#000, 0.1);
@@ -277,10 +366,22 @@ export default {
 			width: 15%;
 		}
 		&.new {
+			word-wrap: none;
 			background-color: white;
+			&[show] {
+				.card {
+					.card-body {
+						opacity: 1;
+					}
+				}
+			}
 
 			.card {
 				height: 100%;
+
+				.card-body {
+					opacity: 0;
+				}
 			}
 		}
 	}
