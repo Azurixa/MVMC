@@ -10,7 +10,7 @@ const isAuth = require('../middleware/isAuth');
 
 // Create new product
 router.post('/new', isAuth, (req, res) => {
-    const { name, brand, category, description, first_impressions } = req.body;
+    const { name, brand, category, description, first_impressions, pans_all} = req.body;
 
     if (name && brand && category) {
         Product.create({
@@ -19,7 +19,11 @@ router.post('/new', isAuth, (req, res) => {
             brand,
             category,
             description,
-            first_impressions
+			first_impressions,
+			pans: {
+				done: 0,
+				all: pans_all
+			}
         }).then(product => {
             res.json(product);
         });
