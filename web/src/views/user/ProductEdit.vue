@@ -171,7 +171,7 @@ export default {
 .eddited {
 	position: sticky;
 	z-index: 2000;
-	bottom: 20px;
+	bottom: 75px;
 }
 </style>
 
