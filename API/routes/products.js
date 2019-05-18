@@ -35,7 +35,7 @@ router.get('/product/:id', isAuth, (req, res) => {
     const id = req.params.id;
 
     if (id) {
-        Product.findOne({ user_id: req.user._id, _id: id }, {user_id: 0})
+        Product.findOne({ user_id: req.user._id, _id: id }, { user_id: 0 })
             .then(product => {
                 res.json(product);
             })
@@ -124,10 +124,10 @@ router.post('/photo', isAuth, (req, res) => {
 router.get('/my', isAuth, (req, res) => {
     const allProducts = [];
 
-    req.user.categories.forEach((category, index) => {
+    req.user.categories.forEach(function(category, index) {
         Product.find({ user_id: req.user._id, category }, [], {
             sort: { brand: 1 }
-        }).then(products => {
+        }).then(function(products) {
             allProducts.push({
                 category,
                 products
