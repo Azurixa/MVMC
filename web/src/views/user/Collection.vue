@@ -1,6 +1,6 @@
 <template>
 	<div class="my-collection">
-		<h1 class="text-center mb-4">
+		<h1 class="text-center mb-4 mt-5">
 			My Collection
 		</h1>
 		<div class="row">
