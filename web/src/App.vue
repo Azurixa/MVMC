@@ -4,13 +4,15 @@
 		<div class="container my-lg-5 my-3">
 			<router-view />
 		</div>
+        <footerMobile></footerMobile>
 	</div>
 </template>
 
 <script>
 import navbar from "./components/Navbar.vue";
+import footerMobile from './components/FooterMobile.vue';
 export default {
-	components: { navbar },
+	components: { navbar, footerMobile },
 	data() {
 		return {
 			auth: this.$store.getters.loggedIn

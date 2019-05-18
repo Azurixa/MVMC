@@ -248,7 +248,7 @@ export default {
 }
 
 .list-box {
-	height: 45vh;
+	height: 40vh;
 	overflow-y: scroll;
 	scroll-snap-type: y proximity;
 }
