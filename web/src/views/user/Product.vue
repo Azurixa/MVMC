@@ -1,5 +1,6 @@
 <template>
 	<div class="product-show">
+        <loading :visible="loading" :text="'Loading product'"></loading>
 		<div class="photos mb-3">
 			<div
 				class="photo"
@@ -154,10 +155,12 @@
 </template>
 
 <script>
-import { setTimeout } from "timers";
+import loading from "../../components/Loading.vue";
 export default {
+	components: { loading },
 	data() {
 		return {
+            loading: true,
 			product: {
 				pans: {
 					done: 0,
@@ -208,7 +211,8 @@ export default {
 					if (data.err) {
 						document.location.href = "/404";
 					} else {
-						this.product = data;
+                        this.product = data;
+                        this.loading = false;
 						setTimeout(() => {
 							this.initGallery();
 							this.changeImage(0);

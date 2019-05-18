@@ -1,5 +1,6 @@
 <template>
 	<div class="my-collection">
+		<loading :visible="loading" :text="'Loading collection'"></loading>
 		<h1 class="text-center mb-4 mt-5">
 			My Collection
 		</h1>
@@ -51,9 +52,12 @@
 </template>
 
 <script>
+import loading from "../../components/Loading.vue";
 export default {
+	components: { loading },
 	data() {
 		return {
+			loading: true,
 			collection: []
 		};
 	},
@@ -70,6 +74,7 @@ export default {
 				.then(res => res.json())
 				.then(data => {
 					this.collection = data;
+					this.loading = false;
 				});
 		}
 	}
@@ -99,12 +104,12 @@ export default {
 	}
 	.category-body {
 		height: 0;
-        opacity: 0;
-        overflow: hidden;
-        transition: 0.3s all;
+		opacity: 0;
+		overflow: hidden;
+		transition: 0.3s all;
 		&[show] {
 			height: 10%;
-            opacity: 1;
+			opacity: 1;
 		}
 
 		.product {
@@ -117,9 +122,9 @@ export default {
 			}
 			border-radius: 1rem;
 			margin-bottom: 1.2rem;
-            &:first-child{
-                margin-top: 1rem;
-            }
+			&:first-child {
+				margin-top: 1rem;
+			}
 			&:last-child {
 				margin-bottom: 0;
 			}
