@@ -1,14 +1,17 @@
 <template>
 	<div class="product-edit">
-		<router-link :to="'/me/p/' + $route.params.id">
-			Back to product
+		<router-link
+			:to="'/me/p/' + $route.params.id"
+			class="btn btn-info mb-3"
+		>
+			Back
 		</router-link>
 		<div class="row">
 			<div class="col-lg-8">
 				<div class="card">
 					<div class="card-header">
 						<h1 class="m-0">
-							Product edit
+							Edit product
 						</h1>
 					</div>
 					<div class="card-body">
@@ -20,6 +23,7 @@
 								id="name"
 								class="form-control"
 								v-model="product.name"
+								@keydown="edditedChange"
 							/>
 						</div>
 						<div class="form-group">
@@ -28,6 +32,7 @@
 								class="form-control"
 								id="category"
 								v-model="product.category"
+								@change="edditedChange"
 							>
 								<option
 									v-for="(category, index) in user.categories"
@@ -44,6 +49,7 @@
 								class="form-control"
 								id="brand"
 								v-model="product.brand"
+								@change="edditedChange"
 							>
 								<option
 									v-for="(brand, index) in user.brands"
@@ -54,8 +60,44 @@
 								</option>
 							</select>
 						</div>
+						<div class="form-group">
+							<label for="description">Description</label>
+							<textarea
+								name="description"
+								id="description"
+								rows="6"
+								class="form-control"
+								v-model="product.description"
+								@keydown="edditedChange"
+							></textarea>
+						</div>
+						<div class="form-group">
+							<label for="description">First impressions</label>
+							<textarea
+								name="description"
+								id="description"
+								rows="6"
+								class="form-control"
+								v-model="product.first_impressions"
+								@keydown="edditedChange"
+							></textarea>
+						</div>
+						<div class="form-group">
+							<label for="pans">All pans amount</label>
+							<input
+								type="number"
+								id="pans"
+								v-model="product.pans.all"
+								class="form-control"
+								@keydown="edditedChange"
+							/>
+						</div>
 					</div>
-					<button class="btn btn-primary" @click="updateProduct">
+					<button
+						class="btn btn-primary"
+						@click="updateProduct"
+						:class="{ eddited: eddited }"
+					>
 						Save product
 					</button>
 				</div>
@@ -68,7 +110,12 @@
 export default {
 	data() {
 		return {
-			product: {},
+			eddited: false,
+			product: {
+				pans: {
+					all: 0
+				}
+			},
 			user: {}
 		};
 	},
@@ -108,9 +155,24 @@ export default {
 				body: JSON.stringify({ product: this.product })
 			})
 				.then(res => res.json())
-				.then(data => console.log(data));
+				.then(data => {
+					//console.log(data);
+					this.eddited = false;
+				});
+		},
+		edditedChange() {
+			this.eddited = true;
 		}
 	}
 };
 </script>
+
+<style lang="scss" scoped>
+.eddited {
+	position: sticky;
+	z-index: 2000;
+	bottom: 20px;
+}
+</style>
+
 
