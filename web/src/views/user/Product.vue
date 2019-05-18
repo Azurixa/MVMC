@@ -1,9 +1,6 @@
 <template>
-	<div class="product">
-		<router-link :to="'/me/p/' + this.$route.params.id + '/edit'">
-			Edit product
-		</router-link>
-		<div class="photos">
+	<div class="product-show">
+		<div class="photos mb-3">
 			<div
 				class="photo"
 				v-for="(photo, index) in product.photos"
@@ -40,9 +37,64 @@
 				</div>
 			</div>
 		</div>
-		<p>
-			{{ product }}
-		</p>
+		<div class="row">
+			<div class="col-12 p-0">
+				<div class="product">
+					<div class="header">
+						<div class="thumbnail"></div>
+						<div class="name">
+							<p class="brand">
+								{{ product.brand }}
+							</p>
+							<p class="name">
+								{{ product.name }}
+							</p>
+						</div>
+					</div>
+					<div class="body">
+						<div class="pane">
+							<div class="header">
+								<p>Description</p>
+							</div>
+							<p class="content">
+								<router-link
+									:to="
+										'/me/p/' +
+											this.$route.params.id +
+											'/edit'
+									"
+									v-if="product.description == ''"
+									>Add description...</router-link
+								>
+								{{ product.description }}
+							</p>
+						</div>
+						<div class="pane">
+							<div class="header">
+								<p>first_impressions</p>
+							</div>
+							<p class="content">
+								<router-link
+									:to="
+										'/me/p/' +
+											this.$route.params.id +
+											'/edit'
+									"
+									v-if="product.first_impressions == ''"
+									>Add first impressions...</router-link
+								>
+								{{ product.first_impressions }}
+							</p>
+						</div>
+						<router-link
+							:to="'/me/p/' + this.$route.params.id + '/edit'"
+						>
+							Edit product
+						</router-link>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -124,12 +176,11 @@ export default {
 		},
 		initGallery() {
 			const photos = document.querySelectorAll(".photo");
-			console.log(photos);
-			photos[0].setAttribute("show", true);
-			if (photos.length >= 1) {
+            photos[0].setAttribute("show", true);
+			if (photos.length > 1) {
 				photos[1].setAttribute("less", true);
 			}
-			if (photos.length >= 2) {
+			if (photos.length > 2) {
 				photos[2].setAttribute("less", true);
 			}
 		}
@@ -138,6 +189,74 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.product {
+	position: relative;
+	width: 100%;
+
+	> .header {
+		width: 100%;
+		position: sticky;
+		top: 59px;
+		display: flex;
+		background-color: #fcfcfc;
+		border: {
+			bottom: 1px solid rgba(#000, 0.1);
+		}
+		z-index: 2000;
+		border-radius: 0 0 1rem 1rem;
+
+		.thumbnail {
+			width: 20%;
+			background: red;
+			border-radius: 0 0 0 1rem;
+		}
+		> .name {
+			width: 80%;
+			overflow: hidden;
+			padding: 0 1rem;
+
+			.brand {
+				width: 100%;
+				font-weight: 100;
+				font-size: 0.8rem;
+				margin: {
+					bottom: 0;
+					top: 0.5rem;
+				}
+			}
+			.name {
+				width: 100%;
+				font-weight: 800;
+				font-size: 1.2rem;
+				height: 2.4rem;
+				line-height: 2.4rem;
+				margin: 0;
+			}
+		}
+	}
+	> .body {
+		height: 100rem;
+
+		.pane {
+			border: {
+				bottom: 1px solid rgba(#000, 0.1);
+				top: 1px solid rgba(#000, 0.1);
+			}
+			border-radius: 1rem;
+			padding: 1rem;
+			margin-top: 1rem;
+
+			.header {
+				font-size: 1.1rem;
+				font-weight: 800;
+			}
+			.content {
+				margin: 0;
+			}
+		}
+	}
+}
+
 .photos {
 	width: 100%;
 	height: 30vh;
