@@ -124,7 +124,8 @@ router.post('/photo', isAuth, (req, res) => {
 router.get('/my', isAuth, (req, res) => {
     const allProducts = [];
 
-    req.user.categories.forEach(function(category, index) {
+    let counter = 0;
+    req.user.categories.forEach(function(category) {
         Product.find({ user_id: req.user._id, category }, [], {
             sort: { brand: 1 }
         }).then(function(products) {
@@ -132,7 +133,8 @@ router.get('/my', isAuth, (req, res) => {
                 category,
                 products
             });
-            if (index == req.user.categories.length - 1) {
+            counter++;
+            if (counter == req.user.categories.length) {
                 res.json(allProducts);
             }
         });
