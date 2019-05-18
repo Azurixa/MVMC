@@ -301,7 +301,7 @@ export default {
 
 		.thumbnail {
 			width: 20%;
-			background: red;
+			background: teal;
 			border-radius: 0 0 0 1rem;
 		}
 		> .name {

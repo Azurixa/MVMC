@@ -133,7 +133,7 @@ export default {
 				width: 35%;
 				//height: 100%;
 				display: inline-block;
-				background-color: red;
+				background-color: teal;
 				border-radius: 1rem 0 0 1rem;
 			}
 			.info {
