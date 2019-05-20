@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const fs = require('fs');
 const path = require('path');
 
 // Models
@@ -128,6 +129,30 @@ router.post('/photo', isAuth, (req, res) => {
         });
     } else {
         res.json({ err: 'You need to provide product id' });
+    }
+});
+
+router.delete('/photo', isAuth, (req, res) => {
+    const _id = req.body._id;
+    const photos = req.body.photos;
+    const photoName = req.body.photoName;
+
+    if (_id) {
+        Product.findOne({ user_id: req.user._id, _id }, err => {
+            if (err) {
+                res.json({ err: 'Product does not exist' });
+            } else {
+                fs.unlink(path.resolve('./') + '/storage/' + photoName, err => {
+                    if (err) {
+                        res.json({ err: 'Photo does not exist' });
+                    } else {
+                        res.json({ msg: 'Photo successfully deleted' });
+                    }
+                });
+            }
+        });
+    } else {
+        res.json({ err: 'Product id is required' });
     }
 });
 

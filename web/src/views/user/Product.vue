@@ -12,8 +12,15 @@
 						'url(http://localhost:3001/images/' + photo.src + ')'
 				}"
 			>
-				<div class="set-thumbnail" @click="setThumbnail(index)">
+				<div
+					class="set-thumbnail"
+					@click="setThumbnail(index)"
+					:class="{ active: photo.src == product.thumbnail }"
+				>
 					<i class="bx bxs-image-alt"></i>
+				</div>
+				<div class="remove" @click="removePhoto(index)">
+					<i class="bx bxs-trash-alt"></i>
 				</div>
 			</div>
 			<div class="photo new" @click="changeImage(product.photos.length)">
@@ -55,6 +62,7 @@
 									this.product.thumbnail +
 									')'
 							}"
+							v-show="this.product.thumbnail != ''"
 						></div>
 						<div class="name">
 							<p class="brand">
@@ -68,7 +76,7 @@
 					<div class="body">
 						<div class="pane">
 							<div class="content">
-								<p>
+								<p class="rating">
 									<small>Rating</small><br />
 									<span
 										v-for="index in 10"
@@ -77,11 +85,11 @@
 									>
 										<i
 											v-if="index <= product.rating"
-											class="bx bxs-star h2 text-primary m-0"
+											class="rating-mark bx bxs-star h2 text-primary"
 										></i>
 										<i
 											v-if="index > product.rating"
-											class="bx bx-star h2 text-primary m-0"
+											class="rating-mark bx bx-star h2 text-primary"
 										></i>
 									</span>
 								</p>
@@ -184,7 +192,9 @@ export default {
 				pans: {
 					done: 0,
 					all: 0
-				}
+				},
+				photos: [],
+				thumbnail: ""
 			},
 			newPhoto: null
 		};
@@ -323,6 +333,27 @@ export default {
 			this.changeImage(0);
 			this.update();
 		},
+		removePhoto(index) {
+			if (this.product.thumbnail === this.product.photos[index].src) {
+				this.product.thumbnail = "";
+			}
+
+			fetch("http://localhost:3001/products/photo", {
+				method: "DELETE",
+				headers: {
+					Authorization: this.$store.getters.token,
+					"Content-type": "application/json"
+				},
+				body: JSON.stringify({
+					_id: this.product._id,
+					photoName: this.product.photos[index].src
+				})
+			}).then(() => {
+				this.product.photos.splice(index, 1);
+				this.update();
+				this.changeImage(0);
+			});
+		},
 		update() {
 			fetch("http://localhost:3001/products/edit", {
 				method: "PUT",
@@ -360,7 +391,7 @@ export default {
 			border-radius: 0 0 0 1rem;
 			background-position: center;
 			background-size: cover;
-            background-repeat: no-repeat;
+			background-repeat: no-repeat;
 			width: 0%;
 			transition: 0.3s all;
 			&[show] {
@@ -410,6 +441,18 @@ export default {
 				margin: 0;
 			}
 		}
+		.rating {
+			margin: {
+				bottom: 0;
+			}
+
+			.rating-mark {
+				margin: {
+					right: -4px;
+                    bottom: 0;
+				}
+			}
+		}
 	}
 }
 
@@ -428,14 +471,15 @@ export default {
 		background-color: black;
 		background-position: center;
 		background-size: cover;
-        background-repeat: no-repeat;
+		background-repeat: no-repeat;
 		position: relative;
 		opacity: 0.3;
 		&[show] {
 			width: 70%;
 			opacity: 1;
 
-			.set-thumbnail {
+			.set-thumbnail,
+			.remove {
 				display: flex;
 			}
 		}
@@ -462,7 +506,8 @@ export default {
 			}
 		}
 
-		.set-thumbnail {
+		.set-thumbnail,
+		.remove {
 			display: none;
 			position: absolute;
 			bottom: 5px;
@@ -476,9 +521,19 @@ export default {
 			border-radius: 50%;
 			background-color: rgba(#fff, 0.7);
 			color: black;
+            transition: 0.5s all;
 			&:hover {
 				background-color: white;
 			}
+		}
+		.set-thumbnail {
+			&.active {
+				background-color: black;
+                color: white;
+			}
+		}
+		.remove {
+			bottom: 45px;
 		}
 	}
 }
