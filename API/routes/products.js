@@ -18,10 +18,11 @@ router.post('/new', isAuth, (req, res) => {
         category,
         description,
         first_impressions,
-        pans_all
+        pans_all,
+        type
     } = req.body;
 
-    if (name && brand && category) {
+    if (name && brand && category && type) {
         Product.create({
             user_id: req.user._id,
             name,
@@ -29,6 +30,7 @@ router.post('/new', isAuth, (req, res) => {
             category,
             description,
             first_impressions,
+            type,
             pans: {
                 done: 0,
                 all: pans_all
@@ -205,9 +207,13 @@ router.get('/my', isAuth, (req, res) => {
 
     let counter = 0;
     req.user.categories.forEach(function(category) {
-        Product.find({ user_id: req.user._id, category }, [], {
-            sort: { brand: 1 }
-        }).then(function(products) {
+        Product.find(
+            { user_id: req.user._id, category, type: 'collection' },
+            [],
+            {
+                sort: { brand: 1 }
+            }
+        ).then(function(products) {
             allProducts.push({
                 category,
                 products

@@ -153,6 +153,7 @@ export default {
 				name: "",
 				category: "",
                 brand: "",
+                type: "collection",
                 pans_all: 1
 			},
 			newCategory: {

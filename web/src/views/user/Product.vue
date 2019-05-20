@@ -224,6 +224,7 @@ export default {
 				.then(data => {
 					if (data.err) {
 					} else {
+                        this.newPhoto = null;
 						this.getProduct();
 					}
 				});
