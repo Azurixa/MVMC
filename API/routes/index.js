@@ -1,6 +1,11 @@
 // Index ROUTES
 const router = require('express').Router();
 
+// Api welcome
+router.get('/', (req, res) => {
+    res.json({ msg: 'Welcome to MVMC - CRUD API' });
+});
+
 // Users routes
 router.use('/users', require('./users'));
 
@@ -10,8 +15,7 @@ router.use('/auth', require('./auth'));
 // Products routes
 router.use('/products', require('./products'));
 
-router.get('/', (req, res) => {
-    res.json({ msg: 'Welcome to API!' });
-});
+// Static images routes
+router.use('/images', require('./images'));
 
 module.exports = router;
