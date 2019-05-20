@@ -129,20 +129,32 @@ router.post('/photo', isAuth, (req, res) => {
                                                 fs.unlink(
                                                     path.resolve('./') +
                                                         '/storage/temp/' +
-                                                        fileName
-                                                );
-                                                product.photos.push({
-                                                    src: fileName
-                                                });
-                                                product.save(err => {
-                                                    if (err) {
-                                                        console.log(err);
+                                                        fileName,
+                                                    err => {
+                                                        if (err)
+                                                            console.log(err);
+                                                        else {
+                                                            product.photos.push(
+                                                                {
+                                                                    src: fileName
+                                                                }
+                                                            );
+                                                            product.save(
+                                                                err => {
+                                                                    if (err) {
+                                                                        console.log(
+                                                                            err
+                                                                        );
+                                                                    }
+                                                                    res.json({
+                                                                        msg:
+                                                                            'Successfully uploaded a photo'
+                                                                    });
+                                                                }
+                                                            );
+                                                        }
                                                     }
-                                                    res.json({
-                                                        msg:
-                                                            'Successfully uploaded a photo'
-                                                    });
-                                                });
+                                                );
                                             }
                                         }
                                     );
