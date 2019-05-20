@@ -16,6 +16,4 @@ router.use('/auth', require('./auth'));
 // Products routes
 router.use('/products', require('./products'));
 
-router.use('/images', express.static(__dirname + '/storage/'));
-
 module.exports = router;
