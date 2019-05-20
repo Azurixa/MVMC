@@ -317,6 +317,10 @@ export default {
 		},
 		setThumbnail(index) {
 			this.product.thumbnail = this.product.photos[index].src;
+			const tmp = this.product.photos[index];
+			this.$set(this.product.photos, index, this.product.photos[0]);
+			this.$set(this.product.photos, 0, tmp);
+			this.changeImage(0);
 			this.update();
 		},
 		update() {
