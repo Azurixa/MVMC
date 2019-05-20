@@ -50,11 +50,19 @@
 										<p class="brand">{{ product.brand }}</p>
 										<p class="name">{{ product.name }}</p>
 										<p class="rating">
+											<span>
+												{{ product.rating }}
+											</span>
 											<span
 												class="bx bxs-star"
 												v-for="index in product.rating"
-                                                :key="product.thumbnail + index"
+												:key="product.thumbnail + index"
 											></span>
+										</p>
+										<p class="pans">
+											<i class="bx bx-download"></i>
+											{{ product.pans.done }} /
+											{{ product.pans.all }}
 										</p>
 									</div>
 								</router-link>
@@ -158,7 +166,7 @@ export default {
 			.info {
 				width: 70%;
 				overflow: hidden;
-                padding-left: 0.5rem;
+				padding-left: 0.5rem;
 
 				.brand {
 					font-weight: 100;
@@ -173,11 +181,15 @@ export default {
 					font-size: 1.1rem;
 				}
 				.rating {
-                    margin: 0;
+					margin: 0;
 
 					span {
 						margin-right: -3px;
 					}
+				}
+
+				.pans {
+					margin: 0;
 				}
 			}
 		}

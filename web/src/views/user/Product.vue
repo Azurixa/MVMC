@@ -98,7 +98,7 @@
 									<div class="row">
 										<div class="col-6">
 											<span class="h1 m-0">
-												{{ product.pans.done }}
+												<i class='bx bx-download' ></i> {{ product.pans.done }}
 											</span>
 											<span class="h1 m-0">
 												/ {{ product.pans.all }}
