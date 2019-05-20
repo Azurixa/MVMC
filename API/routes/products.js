@@ -10,7 +10,14 @@ const isAuth = require('../middleware/isAuth');
 
 // Create new product
 router.post('/new', isAuth, (req, res) => {
-    const { name, brand, category, description, first_impressions, pans_all} = req.body;
+    const {
+        name,
+        brand,
+        category,
+        description,
+        first_impressions,
+        pans_all
+    } = req.body;
 
     if (name && brand && category) {
         Product.create({
@@ -19,11 +26,11 @@ router.post('/new', isAuth, (req, res) => {
             brand,
             category,
             description,
-			first_impressions,
-			pans: {
-				done: 0,
-				all: pans_all
-			}
+            first_impressions,
+            pans: {
+                done: 0,
+                all: pans_all
+            }
         }).then(product => {
             res.json(product);
         });
@@ -139,10 +146,21 @@ router.get('/my', isAuth, (req, res) => {
             });
             counter++;
             if (counter == req.user.categories.length) {
+                allProducts.sort(compare);
                 res.json(allProducts);
             }
         });
     });
 });
+
+function compare(a, b) {
+    if (a.category > b.category) {
+        return 1;
+    }
+    if (a.category < b.category) {
+        return -1;
+    }
+    return 0;
+}
 
 module.exports = router;
