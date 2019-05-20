@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const fs = require('fs');
+const sharp = require('sharp');
 const path = require('path');
 
 // Models
@@ -107,16 +108,46 @@ router.post('/photo', isAuth, (req, res) => {
                     if (allowedMimetypes.includes(photo.mimetype)) {
                         const fileName =
                             req.user._id + product._id + photo.name;
-                        photo.mv(path.resolve('./') + '/storage/' + fileName);
-                        product.photos.push({
-                            src: fileName
-                        });
-                        product.save(err => {
-                            if (err) {
-                                console.log(err);
+                        photo.mv(
+                            path.resolve('./') + '/storage/temp/' + fileName,
+                            () => {
+                                sharp(
+                                    path.resolve('./') +
+                                        '/storage/temp/' +
+                                        fileName
+                                )
+                                    .resize(800)
+                                    .jpeg()
+                                    .toFile(
+                                        path.resolve('./') +
+                                            '/storage/' +
+                                            fileName,
+                                        err => {
+                                            if (err) {
+                                                console.log(err);
+                                            } else {
+                                                fs.unlink(
+                                                    path.resolve('./') +
+                                                        '/storage/temp/' +
+                                                        fileName
+                                                );
+                                                product.photos.push({
+                                                    src: fileName
+                                                });
+                                                product.save(err => {
+                                                    if (err) {
+                                                        console.log(err);
+                                                    }
+                                                    res.json({
+                                                        msg:
+                                                            'Successfully uploaded a photo'
+                                                    });
+                                                });
+                                            }
+                                        }
+                                    );
                             }
-                            res.json({ msg: 'Successfully uploaded a photo' });
-                        });
+                        );
                     } else {
                         res.json({ err: 'File must be a allowed image type' });
                     }

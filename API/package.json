@@ -28,6 +28,7 @@
     "express-fileupload": "^1.1.4",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.4",
+    "sharp": "^0.22.1",
     "simple-sha256": "^1.0.0"
   }
 }
