@@ -1,15 +1,14 @@
 <template>
 	<div class="product-show">
-        <loading :visible="loading" :text="'Loading product'"></loading>
+		<loading :visible="loading" :text="'Loading product'"></loading>
 		<div class="photos mb-3">
 			<div
 				class="photo"
 				v-for="(photo, index) in product.photos"
 				:key="photo._id"
 				@click="changeImage(index)"
-			>
-				{{ photo.src }}
-			</div>
+				:style="{ 'background-image': 'url(http://localhost:3001/images/' + photo.src + ')' }"
+			></div>
 			<div class="photo new" @click="changeImage(product.photos.length)">
 				<div class="card">
 					<div class="card-header">
@@ -160,7 +159,7 @@ export default {
 	components: { loading },
 	data() {
 		return {
-            loading: true,
+			loading: true,
 			product: {
 				pans: {
 					done: 0,
@@ -211,8 +210,8 @@ export default {
 					if (data.err) {
 						document.location.href = "/404";
 					} else {
-                        this.product = data;
-                        this.loading = false;
+						this.product = data;
+						this.loading = false;
 						setTimeout(() => {
 							this.initGallery();
 							this.changeImage(0);

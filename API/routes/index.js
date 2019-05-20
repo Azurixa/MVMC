@@ -1,4 +1,5 @@
 // Index ROUTES
+const express = require('express');
 const router = require('express').Router();
 
 // Api welcome
@@ -15,7 +16,6 @@ router.use('/auth', require('./auth'));
 // Products routes
 router.use('/products', require('./products'));
 
-// Static images routes
-router.use('/images', require('./images'));
+router.use('/images', express.static(__dirname + '/storage/'));
 
 module.exports = router;

@@ -17,6 +17,8 @@ app.use(expressFile());
 
 // Routes
 app.use(require('./routes'));
+// Static images serve
+app.use('/images', express.static(__dirname + '/storage/'));
 
 // API init
 const PORT = process.env.PORT || 3001;
