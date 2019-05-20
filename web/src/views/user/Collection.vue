@@ -37,9 +37,25 @@
 									:key="product._id"
 									:to="'/me/p/' + product._id"
 								>
-									<div class="thumbnail"></div>
+									<div
+										class="thumbnail"
+										:style="{
+											'background-image':
+												'url(http://localhost:3001/images/' +
+												product.thumbnail +
+												')'
+										}"
+									></div>
 									<div class="info">
+										<p class="brand">{{ product.brand }}</p>
 										<p class="name">{{ product.name }}</p>
+										<p class="rating">
+											<span
+												class="bx bxs-star"
+												v-for="index in product.rating"
+                                                :key="product.thumbnail + index"
+											></span>
+										</p>
 									</div>
 								</router-link>
 							</div>
@@ -130,22 +146,38 @@ export default {
 			}
 
 			.thumbnail {
-				width: 35%;
+				width: 30%;
 				//height: 100%;
 				display: inline-block;
 				background-color: teal;
 				border-radius: 1rem 0 0 1rem;
+				background-position: center;
+				background-size: cover;
+				background-repeat: no-repeat;
 			}
 			.info {
-				width: 65%;
+				width: 70%;
 				overflow: hidden;
+                padding-left: 0.5rem;
 
+				.brand {
+					font-weight: 100;
+					height: 1rem;
+					margin: 0;
+				}
 				.name {
-					font-weight: 800;
+					font-weight: 1000;
 					height: 1.2rem;
 					overflow: hidden;
 					word-wrap: break-word;
 					font-size: 1.1rem;
+				}
+				.rating {
+                    margin: 0;
+
+					span {
+						margin-right: -3px;
+					}
 				}
 			}
 		}

@@ -360,6 +360,7 @@ export default {
 			border-radius: 0 0 0 1rem;
 			background-position: center;
 			background-size: cover;
+            background-repeat: no-repeat;
 			width: 0%;
 			transition: 0.3s all;
 			&[show] {
@@ -427,6 +428,7 @@ export default {
 		background-color: black;
 		background-position: center;
 		background-size: cover;
+        background-repeat: no-repeat;
 		position: relative;
 		opacity: 0.3;
 		&[show] {
