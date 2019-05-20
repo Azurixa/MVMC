@@ -7,8 +7,15 @@
 				v-for="(photo, index) in product.photos"
 				:key="photo._id"
 				@click="changeImage(index)"
-				:style="{ 'background-image': 'url(http://localhost:3001/images/' + photo.src + ')' }"
-			></div>
+				:style="{
+					'background-image':
+						'url(http://localhost:3001/images/' + photo.src + ')'
+				}"
+			>
+				<div class="set-thumbnail" @click="setThumbnail(index)">
+					<i class="bx bxs-image-alt"></i>
+				</div>
+			</div>
 			<div class="photo new" @click="changeImage(product.photos.length)">
 				<div class="card">
 					<div class="card-header">
@@ -40,7 +47,15 @@
 			<div class="col-12 p-0">
 				<div class="product">
 					<div class="header">
-						<div class="thumbnail"></div>
+						<div
+							class="thumbnail"
+							:style="{
+								'background-image':
+									'url(http://localhost:3001/images/' +
+									this.product.thumbnail +
+									')'
+							}"
+						></div>
 						<div class="name">
 							<p class="brand">
 								{{ product.brand }}
@@ -132,6 +147,11 @@
 						<div class="pane">
 							<div class="header">
 								<p>Product settings</p>
+								<div class="jumbotron"></div>
+								<div class="jumbotron"></div>
+								<div class="jumbotron"></div>
+								<div class="jumbotron"></div>
+								<div class="jumbotron"></div>
 							</div>
 							<div class="body">
 								<router-link
@@ -171,6 +191,9 @@ export default {
 	},
 	created() {
 		this.getProduct();
+	},
+	mounted() {
+		this.initScroll();
 	},
 	methods: {
 		handleFileUpload() {
@@ -247,6 +270,31 @@ export default {
 				photos[2].setAttribute("less", true);
 			}
 		},
+		initScroll() {
+			if (document.documentElement.scrollTop > window.innerHeight / 3) {
+				document
+					.querySelector(".product > .header .thumbnail")
+					.setAttribute("show", true);
+			} else {
+				document
+					.querySelector(".product > .header .thumbnail")
+					.removeAttribute("show");
+			}
+			document.addEventListener("scroll", () => {
+				if (
+					document.documentElement.scrollTop >
+					window.innerHeight / 3
+				) {
+					document
+						.querySelector(".product > .header .thumbnail")
+						.setAttribute("show", true);
+				} else {
+					document
+						.querySelector(".product > .header .thumbnail")
+						.removeAttribute("show");
+				}
+			});
+		},
 		rate(number) {
 			if (number > 0 && number < 11) {
 				this.product.rating = number;
@@ -266,6 +314,10 @@ export default {
 					this.update();
 				}
 			}
+		},
+		setThumbnail(index) {
+			this.product.thumbnail = this.product.photos[index].src;
+			this.update();
 		},
 		update() {
 			fetch("http://localhost:3001/products/edit", {
@@ -302,6 +354,13 @@ export default {
 			width: 20%;
 			background: teal;
 			border-radius: 0 0 0 1rem;
+			background-position: center;
+			background-size: cover;
+			width: 0%;
+			transition: 0.3s all;
+			&[show] {
+				width: 20%;
+			}
 		}
 		> .name {
 			width: 80%;
@@ -362,8 +421,17 @@ export default {
 		transition: 0.3s all;
 		transition-timing-function: cubic-bezier(0.895, 0.03, 0.685, 0.22);
 		background-color: black;
+		background-position: center;
+		background-size: cover;
+		position: relative;
+		opacity: 0.3;
 		&[show] {
 			width: 70%;
+			opacity: 1;
+
+			.set-thumbnail {
+				display: flex;
+			}
 		}
 		&[less] {
 			width: 15%;
@@ -385,6 +453,25 @@ export default {
 				.card-body {
 					opacity: 0;
 				}
+			}
+		}
+
+		.set-thumbnail {
+			display: none;
+			position: absolute;
+			bottom: 5px;
+			right: 5px;
+			font-size: 1.2rem;
+			width: 35px;
+			height: 35px;
+			align-items: center;
+			justify-content: center;
+			border: 1px solid rgba(#000, 0.1);
+			border-radius: 50%;
+			background-color: rgba(#fff, 0.7);
+			color: black;
+			&:hover {
+				background-color: white;
 			}
 		}
 	}
