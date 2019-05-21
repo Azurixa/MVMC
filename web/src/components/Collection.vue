@@ -84,11 +84,15 @@
 										v-if="product.thumbnail != ''"
 										:style="{
 											'background-image':
-												'url(http://localhost:3001/images/' +
+												'url(' +
+												$store.getters.apiUrl +
+												'images/' +
 												product.thumbnail +
 												')'
 										}"
-                                        :class="{'empty': product.status == '10empty'}"
+										:class="{
+											empty: product.status == '10empty'
+										}"
 									></div>
 									<div class="info">
 										<p class="brand">{{ product.brand }}</p>
@@ -157,7 +161,7 @@ export default {
 		},
 		getCollection() {
 			this.loading = true;
-			fetch("http://localhost:3001/products/my/" + this.type, {
+			fetch(this.$store.getters.apiUrl + "products/my/" + this.type, {
 				method: "POST",
 				headers: {
 					Authorization: this.$store.getters.token,
@@ -259,9 +263,9 @@ export default {
 				background-position: center;
 				background-size: cover;
 				background-repeat: no-repeat;
-                &.empty {
-                    filter: grayscale(100%);
-                }
+				&.empty {
+					filter: grayscale(100%);
+				}
 			}
 			.info {
 				width: 70%;

@@ -6,7 +6,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         token: localStorage.getItem('makeup-token'),
-        user: {}
+        user: {},
+        apiUrl: 'http://mvtthew.pl:5050/'
     },
     mutations: {
         setToken(state, token) {
@@ -18,8 +19,8 @@ export default new Vuex.Store({
             state.token = '';
         },
         getUser(state) {
-            state.user = new Promise((resolve) => {
-                fetch('http://localhost:3001/users/me', {
+            state.user = new Promise(resolve => {
+                fetch(state.apiUrl + 'users/me', {
                     headers: {
                         Authorization: state.token
                     }
@@ -32,6 +33,9 @@ export default new Vuex.Store({
         }
     },
     getters: {
+        apiUrl(state) {
+            return state.apiUrl;
+        },
         token(state) {
             return state.token;
         },

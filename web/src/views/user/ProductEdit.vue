@@ -199,7 +199,7 @@ export default {
 	methods: {
 		getProduct() {
 			fetch(
-				"http://localhost:3001/products/product/" +
+				this.$store.getters.apiUrl + "products/product/" +
 					this.$route.params.id,
 				{
 					headers: {
@@ -217,7 +217,7 @@ export default {
 				});
 		},
 		removeProduct() {
-			fetch("http://localhost:3001/products/remove", {
+			fetch(this.$store.getters.apiUrl + "products/remove", {
 				method: "DELETE",
 				headers: {
 					Authorization: this.$store.getters.token,
@@ -231,7 +231,7 @@ export default {
 				});
 		},
 		updateProduct() {
-			fetch("http://localhost:3001/products/edit", {
+			fetch(this.$store.getters.apiUrl + "products/edit", {
 				method: "PUT",
 				headers: {
 					Authorization: this.$store.getters.token,

@@ -6,7 +6,7 @@
 				v-if="user.photo != ''"
 				:style="{
 					'background-image':
-						'url(http://localhost:3001/images/profile/' +
+						'url(' + $store.getters.apiUrl + 'images/profile/' +
 						user.photo +
 						')'
 				}"

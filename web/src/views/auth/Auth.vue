@@ -100,7 +100,7 @@ export default {
 					password: this.password
 				};
 
-				fetch("http://localhost:3001/users/register", {
+				fetch(this.$store.getters.apiUrl + "users/register", {
 					method: "POST",
 					headers: {
 						"Content-type": "application/json"
@@ -119,7 +119,7 @@ export default {
 				password: this.password
 			};
 
-			fetch("http://localhost:3001/auth/token", {
+			fetch(this.$store.getters.apiUrl + "auth/token", {
 				method: "POST",
 				headers: {
 					"Content-type": "application/json"

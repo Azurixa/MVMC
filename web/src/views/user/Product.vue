@@ -9,7 +9,11 @@
 				@click="changeImage(index)"
 				:style="{
 					'background-image':
-						'url(http://localhost:3001/images/' + photo.src + ')'
+						'url(' +
+						$store.getters.apiUrl +
+						'images/' +
+						photo.src +
+						')'
 				}"
 			>
 				<div
@@ -58,7 +62,9 @@
 							class="thumbnail"
 							:style="{
 								'background-image':
-									'url(http://localhost:3001/images/' +
+									'url(' +
+									$store.getters.apiUrl +
+									'images/' +
 									this.product.thumbnail +
 									')'
 							}"
@@ -355,7 +361,7 @@ export default {
 			const formData = new FormData();
 			formData.append("_id", this.product._id);
 			formData.append("photo", this.newPhoto);
-			fetch("http://localhost:3001/products/photo", {
+			fetch(this.$store.getters.apiUrl + "products/photo", {
 				method: "POST",
 				headers: {
 					Authorization: this.$store.getters.token
@@ -374,7 +380,8 @@ export default {
 		},
 		getProduct() {
 			fetch(
-				"http://localhost:3001/products/product/" +
+				this.$store.getters.apiUrl +
+					"products/product/" +
 					this.$route.params.id,
 				{
 					headers: {
@@ -513,7 +520,7 @@ export default {
 				this.product.thumbnail = "";
 			}
 
-			fetch("http://localhost:3001/products/photo", {
+			fetch(this.$store.getters.apiUrl + "products/photo", {
 				method: "DELETE",
 				headers: {
 					Authorization: this.$store.getters.token,
@@ -530,7 +537,7 @@ export default {
 			});
 		},
 		update() {
-			fetch("http://localhost:3001/products/edit", {
+			fetch(this.$store.getters.apiUrl + "products/edit", {
 				method: "PUT",
 				headers: {
 					Authorization: this.$store.getters.token,

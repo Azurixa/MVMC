@@ -57,7 +57,7 @@ export default {
 		uploadProfilePhoto() {
 			const bodyData = new FormData();
 			bodyData.append("photo", this.photo);
-			fetch("http://localhost:3001/users/photo", {
+			fetch(this.$store.getters.apiUrl + "users/photo", {
 				method: "POST",
 				headers: {
 					Authorization: this.$store.getters.token
@@ -68,12 +68,12 @@ export default {
 				.then(data => {
 					if (data.err) {
 						console.log(data.err);
-                    }
-                    window.location.href = "/me";
+					}
+					window.location.href = "/me";
 				});
 		},
 		update() {
-			fetch("http://localhost:3001/users/edit", {
+			fetch(this.$store.getters.apiUrl + "users/edit", {
 				method: "PUT",
 				headers: {
 					Authorization: this.$store.getters.token,
@@ -86,8 +86,8 @@ export default {
 					if (this.photo != null) {
 						this.uploadProfilePhoto();
 					} else {
-                        window.location.href = "/me";
-                    }
+						window.location.href = "/me";
+					}
 					this.$parent.$refs.navbar.getUserData();
 					this.$parent.$refs.footbar.getUserData();
 				});

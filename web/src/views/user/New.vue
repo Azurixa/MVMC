@@ -254,7 +254,7 @@ export default {
             if (this.newProduct.type == 'wishlist') {
                 this.newProduct.bought_at = null;
             }
-			fetch("http://localhost:3001/products/new", {
+			fetch(this.$store.getters.apiUrl + "products/new", {
 				method: "POST",
 				headers: {
 					Authorization: this.$store.getters.token,
@@ -301,7 +301,7 @@ export default {
 		},
 
 		updateUser() {
-			fetch("http://localhost:3001/users/edit", {
+			fetch(this.$store.getters.apiUrl + "users/edit", {
 				method: "PUT",
 				headers: {
 					Authorization: this.$store.getters.token,
