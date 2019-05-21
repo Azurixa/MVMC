@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     },
     exp_next: {
         type: Number,
-        default: 150
+        default: 350
     },
     level: {
         type: Number,

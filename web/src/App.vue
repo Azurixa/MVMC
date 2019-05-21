@@ -4,7 +4,7 @@
 		<div class="container my-lg-5 my-3">
 			<router-view />
 		</div>
-        <footerMobile :auth="auth" ref="footbar"></footerMobile>
+        <footerMobile v-if="auth" ref="footbar"></footerMobile>
 	</div>
 </template>
 

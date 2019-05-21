@@ -23,7 +23,7 @@
 				</router-link>
 			</div>
 			<div class="level">
-				<div class="progress" :style="{'width': ((this.user.exp%150)/150) + '%'}"></div>
+				<div class="progress" :style="{'width': ((this.user.exp%350)/350)*100 + '%'}"></div>
 			</div>
 		</div>
 	</div>
