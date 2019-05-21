@@ -9,6 +9,7 @@ const User = require('../models/User');
 
 // Middleware
 const isAuth = require('../middleware/isAuth');
+const experience = require('../middleware/experience');
 
 // Create new product
 router.post('/new', isAuth, (req, res) => {
@@ -36,6 +37,7 @@ router.post('/new', isAuth, (req, res) => {
                 all: pans_all
             }
         }).then(product => {
+            experience(req.user._id, 120);
             res.json(product);
         });
     } else {
@@ -66,6 +68,9 @@ router.get('/product/:id', isAuth, (req, res) => {
 router.put('/edit', isAuth, (req, res) => {
     const product = req.body.product;
     if (product) {
+        if (product.expAdd) {
+            experience(req.user._id, product.expAdd);
+        }
         Product.findOneAndUpdate(
             { _id: product._id },
             {

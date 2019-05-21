@@ -291,7 +291,8 @@ export default {
 				},
 				photos: [],
 				uses: [],
-				thumbnail: ""
+                thumbnail: "",
+                expAdd: 0
 			},
 			newPhoto: null
 		};
@@ -429,23 +430,27 @@ export default {
 		pan(action) {
 			if (action == 1) {
 				if (this.product.pans.done < this.product.pans.all) {
-					this.product.pans.done++;
+                    this.product.pans.done++;
+                    this.product.expAdd += 30;
 					this.update();
 				}
 			}
 			if (action == -1) {
 				if (this.product.pans.done > 0) {
-					this.product.pans.done--;
+                    this.product.pans.done--;
+                    this.product.expAdd -= 30;
 					this.update();
 				}
 			}
 		},
 		use(action) {
 			if (action == 1) {
-				this.product.uses.push(Date.now());
+                this.product.uses.push(Date.now());
+                this.product.expAdd += 10;
 			} else if (action == -1) {
 				if (this.product.uses.length > 0) {
-					this.product.uses.splice(this.product.uses.length - 1, 1);
+                    this.product.uses.splice(this.product.uses.length - 1, 1);
+                    this.product.expAdd -= 10;
 				}
 			}
 			this.update();
@@ -487,6 +492,9 @@ export default {
 					"Content-type": "application/json"
 				},
 				body: JSON.stringify({ product: this.product })
+			}).then(() => {
+                this.$parent.$refs.navbar.getUserData();
+                this.product.expAdd = 0;
 			});
 		}
 	}

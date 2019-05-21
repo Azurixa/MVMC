@@ -86,6 +86,7 @@
 
 <script>
 import navSearch from "./NavSearch.vue";
+import { setInterval } from 'timers';
 export default {
 	props: ["auth"],
 	components: { navSearch },
@@ -96,7 +97,7 @@ export default {
 	},
 	created() {
 		if (this.$store.getters.loggedIn) {
-			this.getUserData();
+            this.getUserData();
 		}
 	},
 	methods: {

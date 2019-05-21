@@ -47,7 +47,7 @@
 								v-model="newProduct.name"
 							/>
 						</div>
-                        <div class="form-group">
+						<div class="form-group">
 							<label for="name">Pans amount</label>
 							<input
 								type="number"
@@ -57,7 +57,9 @@
 							/>
 						</div>
 					</div>
-					<button class="btn btn-primary" @click="addProduct()">Add item</button>
+					<button class="btn btn-primary" @click="addProduct()">
+						Add item
+					</button>
 				</div>
 			</div>
 			<div class="col-lg-4">
@@ -152,9 +154,9 @@ export default {
 			newProduct: {
 				name: "",
 				category: "",
-                brand: "",
-                type: "collection",
-                pans_all: 1
+				brand: "",
+				type: "collection",
+				pans_all: 1
 			},
 			newCategory: {
 				name: ""
@@ -194,6 +196,8 @@ export default {
 						this.newProduct.category = "";
 						this.newProduct.brand = "";
 						this.newProduct.pans_all = 1;
+						this.$parent.$refs.navbar.getUserData();
+						this.$parent.$refs.footbar.getUserData();
 					}
 				});
 		},

@@ -38,13 +38,10 @@ export default {
         }
     },
     mounted() {
-        this.getUser();
-        setInterval(() => {
-            this.getUser();
-        }, 1000);
+        this.getUserData();
     },
     methods: {
-        getUser() {
+        getUserData() {
             this.$store.getters.user.then(user => {
                 this.user = Object.assign({}, user);
             });
