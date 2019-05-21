@@ -97,31 +97,44 @@
 									<small>Pans</small><br />
 									<div class="row">
 										<div class="col-6">
-											<span class="h1 m-0">
+											<span class="h2 m-0">
 												<i class="bx bx-download"></i>
-												{{ product.pans.done }}
 											</span>
-											<span class="h1 m-0">
-												/ {{ product.pans.all }}
+											<span
+												class="h2 m-0"
+												v-if="
+													product.type != 'wishlist'
+												"
+											>
+												{{ product.pans.done }} /
+											</span>
+											<span class="h2 m-0">
+												{{ product.pans.all }}
 											</span>
 										</div>
-										<div class="col-6 text-right">
+										<div
+											class="col-6 text-right"
+											v-if="product.type != 'wishlist'"
+										>
 											<i
-												class="bx bx-plus-circle h1 m-0 mr-2"
+												class="bx bx-plus-circle h2 m-0 mr-2"
 												@click="pan(1)"
 											></i>
 											<i
 												@click="pan(-1)"
-												class="bx bx-minus-circle h1 m-0"
+												class="bx bx-minus-circle h2 m-0"
 											></i>
 										</div>
 									</div>
 								</div>
-								<div class="m-0">
+								<div
+									class="m-0"
+									v-if="product.type != 'wishlist'"
+								>
 									<small>Uses</small><br />
 									<div class="row">
 										<div class="col-6">
-											<span class="h1 m-0">
+											<span class="h2 m-0">
 												<i class="bx bx-check"></i>
 												{{ product.uses.length }}
 											</span>
@@ -130,19 +143,36 @@
 											<span>
 												<i
 													@click="use(1)"
-													class="bx bx-plus-circle h1 m-0 mr-2"
+													class="bx bx-plus-circle h2 m-0 mr-2"
 												></i>
 												<i
 													@click="use(-1)"
-													class="bx bx-minus-circle h1 m-0"
+													class="bx bx-minus-circle h2 m-0"
 												></i>
 											</span>
 										</div>
 									</div>
 								</div>
+
+								<small>Price</small><br />
+
+								<span class="h2" v-if="product.price != 0"
+									>{{ product.price }}
+									<small>PLN</small></span
+								>
+								<router-link
+									:to="
+										'/me/p/' +
+											this.$route.params.id +
+											'/edit'
+									"
+									class="btn btn-sm btn-outline-primary"
+									v-if="product.price == 0"
+									>Add price</router-link
+								>
 							</div>
 						</div>
-						<div class="pane">
+						<div class="pane" v-if="product.type != 'wishlist'">
 							<div class="header">
 								<div v-if="bought_date.getFullYear() > 2000">
 									<p class="text-danger mb-2" v-if="expired">
@@ -231,7 +261,7 @@
 								{{ product.description }}
 							</p>
 						</div>
-						<div class="pane">
+						<div class="pane" v-if="product.type != 'wishlist'">
 							<div class="header">
 								<p>First impressions</p>
 							</div>
@@ -254,6 +284,13 @@
 								<p>Product settings</p>
 							</div>
 							<div class="body">
+								<button
+									class="btn btn-success btn-block"
+									v-if="product.type == 'wishlist'"
+									@click="addToCollection"
+								>
+									Add to collection
+								</button>
 								<router-link
 									:to="
 										'/me/p/' +
@@ -291,9 +328,9 @@ export default {
 				},
 				photos: [],
 				uses: [],
-                thumbnail: "",
-            },
-            expAdd: 0,
+				thumbnail: ""
+			},
+			expAdd: 0,
 			newPhoto: null
 		};
 	},
@@ -304,6 +341,11 @@ export default {
 		this.initScroll();
 	},
 	methods: {
+        addToCollection() {
+            this.product.type = 'collection';
+            this.expAdd = 120;
+            this.update();
+        },
 		handleFileUpload() {
 			this.newPhoto = this.$refs.newPhoto.files[0];
 		},
@@ -430,27 +472,27 @@ export default {
 		pan(action) {
 			if (action == 1) {
 				if (this.product.pans.done < this.product.pans.all) {
-                    this.product.pans.done++;
-                    this.expAdd += 30;
+					this.product.pans.done++;
+					this.expAdd += 30;
 					this.update();
 				}
 			}
 			if (action == -1) {
 				if (this.product.pans.done > 0) {
-                    this.product.pans.done--;
-                    this.expAdd -= 30;
+					this.product.pans.done--;
+					this.expAdd -= 30;
 					this.update();
 				}
 			}
 		},
 		use(action) {
 			if (action == 1) {
-                this.product.uses.push(Date.now());
-                this.expAdd += 10;
+				this.product.uses.push(Date.now());
+				this.expAdd += 10;
 			} else if (action == -1) {
 				if (this.product.uses.length > 0) {
-                    this.product.uses.splice(this.product.uses.length - 1, 1);
-                    this.expAdd -= 10;
+					this.product.uses.splice(this.product.uses.length - 1, 1);
+					this.expAdd -= 10;
 				}
 			}
 			this.update();
@@ -491,11 +533,14 @@ export default {
 					Authorization: this.$store.getters.token,
 					"Content-type": "application/json"
 				},
-				body: JSON.stringify({ product: this.product, expAdd: this.expAdd })
+				body: JSON.stringify({
+					product: this.product,
+					expAdd: this.expAdd
+				})
 			}).then(() => {
-                this.$parent.$refs.navbar.getUserData();
-                this.$parent.$refs.footbar.getUserData();
-                this.expAdd = 0;
+				this.$parent.$refs.navbar.getUserData();
+				this.$parent.$refs.footbar.getUserData();
+				this.expAdd = 0;
 			});
 		}
 	}
@@ -549,8 +594,8 @@ export default {
 			.name {
 				width: 100%;
 				font-weight: 1000;
-				font-size: 1.2rem;
-				height: 2.4rem;
+				font-size: 1.5rem;
+				height: 2.8rem;
 				line-height: 2.4rem;
 				margin: 0;
 				color: black;

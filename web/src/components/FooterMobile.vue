@@ -3,19 +3,25 @@
 		<div class="fix"></div>
 		<div class="footer">
 			<div class="row">
-				<router-link to="/me/new" class="col-4 item">
+				<router-link to="/me/new" class="col-3 item">
 					<i class="bx bx-list-plus icon"></i>
 					<p class="name">
 						Add
 					</p>
 				</router-link>
-				<router-link to="/me/collection" class="col-4 item">
+				<router-link to="/me/wishlist" class="col-3 item">
+					<i class="bx bx-list-check icon"></i>
+					<p class="name">
+						Wishlist
+					</p>
+				</router-link>
+				<router-link to="/me/collection" class="col-3 item">
 					<i class="bx bx-box icon"></i>
 					<p class="name">
 						Collection
 					</p>
 				</router-link>
-				<router-link to="/me" class="col-4 item">
+				<router-link to="/me" class="col-3 item">
 					<i class="bx bx-user icon"></i>
 					<p class="name">
 						Profile
@@ -23,31 +29,36 @@
 				</router-link>
 			</div>
 			<div class="level">
-				<div class="progress" :style="{'width': ((this.user.exp%350)/350)*100 + '%'}"></div>
+				<div
+					class="progress"
+					:style="{
+						width: ((this.user.exp % 350) / 350) * 100 + '%'
+					}"
+				></div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-import { setInterval } from 'timers';
+import { setInterval } from "timers";
 export default {
-    data() {
-        return {
-            user: {}
-        }
-    },
-    mounted() {
-        this.getUserData();
-    },
-    methods: {
-        getUserData() {
-            this.$store.getters.user.then(user => {
-                this.user = Object.assign({}, user);
-            });
-        }
-    }
-}
+	data() {
+		return {
+			user: {}
+		};
+	},
+	mounted() {
+		this.getUserData();
+	},
+	methods: {
+		getUserData() {
+			this.$store.getters.user.then(user => {
+				this.user = Object.assign({}, user);
+			});
+		}
+	}
+};
 </script>
 
 
@@ -73,7 +84,7 @@ export default {
 
 			.progress {
 				transition: 0.5s all;
-				background-color: darkcyan;
+				background-color: black;
 				height: 5px;
 			}
 		}

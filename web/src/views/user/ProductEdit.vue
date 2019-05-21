@@ -83,6 +83,16 @@
 							></textarea>
 						</div>
 						<div class="form-group">
+							<label for="price">Price (PLN)</label>
+							<input
+								type="number"
+								id="price"
+								v-model="product.price"
+								class="form-control"
+								@keydown="edditedChange"
+							/>
+						</div>
+						<div class="form-group">
 							<label for="pans">All pans amount</label>
 							<input
 								type="number"
@@ -216,6 +226,7 @@ export default {
 				.then(data => {
 					//console.log(data);
 					this.eddited = false;
+					window.location.href = "/me/p/" + this.$route.params.id;
 				});
 		},
 		edditedChange() {
@@ -234,15 +245,15 @@ export default {
 .danger-zone {
 	.content {
 		height: 0px;
-        overflow: hidden;
-        .btn {
-            display: none;
-        }
+		overflow: hidden;
+		.btn {
+			display: none;
+		}
 		&[show] {
 			height: unset;
-            .btn {
-                display: block;
-            }
+			.btn {
+				display: block;
+			}
 		}
 	}
 }

@@ -28,6 +28,9 @@ export default {
 
 
 <style lang="scss">
+small {
+    text-transform: none !important;
+}
 .btn {
 	text-transform: none;
 	cursor: pointer;

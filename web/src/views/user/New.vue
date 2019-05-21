@@ -7,6 +7,26 @@
 						<h2 class="m-0">New product</h2>
 					</div>
 					<div class="card-body">
+						<div class="mb-3">
+							<span
+								class="type"
+								:class="{
+									active: newProduct.type == 'collection'
+								}"
+								@click="changeType('collection')"
+							>
+								Collection
+							</span>
+							<span
+								class="type"
+								:class="{
+									active: newProduct.type == 'wishlist'
+								}"
+								@click="changeType('wishlist')"
+							>
+								Wishlist
+							</span>
+						</div>
 						<div class="form-group">
 							<label for="category">Category</label>
 							<select
@@ -47,23 +67,32 @@
 								v-model="newProduct.name"
 							/>
 						</div>
-						<div class="form-group">
-							<label for="name">Pans amount</label>
+                        <div class="form-group">
+							<label for="price">Price (PLN)</label>
 							<input
 								type="number"
 								class="form-control"
-								id="name"
-								v-model="newProduct.pans_all"
+								id="price"
+								v-model="newProduct.price"
 							/>
 						</div>
 						<div class="form-group">
+							<label for="pans">Pans amount</label>
+							<input
+								type="number"
+								class="form-control"
+								id="pans"
+								v-model="newProduct.pans_all"
+							/>
+						</div>
+						<div class="form-group" v-if="newProduct.type == 'collection'">
 							<div>
-								<label for="name">Bought at</label>
+								<label for="bought_at">Bought at</label>
 								<input
 									v-if="!bought_today"
 									type="date"
 									class="form-control"
-									id="name"
+									id="bought_at"
 									v-model="newProduct.bought_at"
 								/>
 							</div>
@@ -79,12 +108,12 @@
 								</label>
 							</div>
 						</div>
-						<div class="form-group">
-							<label for="name">Expire months</label>
+						<div class="form-group" v-if="newProduct.type == 'collection'">
+							<label for="expire_months">Expire months</label>
 							<input
 								type="number"
 								class="form-control"
-								id="name"
+								id="expire_months"
 								v-model="newProduct.expire_months"
 							/>
 						</div>
@@ -185,13 +214,15 @@ export default {
 			editInfo: {},
 			bought_today: false,
 			newProduct: {
+				type: "collection",
 				name: "",
 				category: "",
 				brand: "",
 				type: "collection",
 				pans_all: 1,
 				bought_at: new Date(),
-				expire_months: 0
+                expire_months: 0,
+                price: 0
 			},
 			newCategory: {
 				name: ""
@@ -210,13 +241,20 @@ export default {
 			this.$store.getters.user.then(user => {
 				this.editInfo = Object.assign({}, user);
 			});
-		},
+        },
+
+        changeType(to) {
+            this.newProduct.type = to;
+        },
 
 		// Product
 		addProduct() {
 			if (this.bought_today) {
 				this.newProduct.bought_at = new Date();
-			}
+            }
+            if (this.newProduct.type == 'wishlist') {
+                this.newProduct.bought_at = null;
+            }
 			fetch("http://localhost:3001/products/new", {
 				method: "POST",
 				headers: {
@@ -230,14 +268,9 @@ export default {
 					if (data.err) {
 						console.log(data.err);
 					} else {
-						this.newProduct.name = "";
-						this.newProduct.category = "";
-						this.newProduct.brand = "";
-						this.newProduct.pans_all = 1;
-						this.newProduct.expire_months = 0;
-						this.newProduct.bought_at = new Date();
 						this.$parent.$refs.navbar.getUserData();
-						this.$parent.$refs.footbar.getUserData();
+                        this.$parent.$refs.footbar.getUserData();
+                        window.location.href = '/me/p/' + data._id;
 					}
 				});
 		},
@@ -288,6 +321,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.type {
+	padding: 0.5rem;
+	background-color: #f7f7f7;
+	border: 1px solid rgba($color: #000000, $alpha: 0.1);
+	margin-right: 0.5rem;
+	display: inline-block;
+	border-radius: 1.5rem;
+	font-weight: 1000;
+	&.active {
+		background-color: black;
+		color: white;
+	}
+}
 .row {
 	@media screen and(max-width: 800px) {
 		display: grid;

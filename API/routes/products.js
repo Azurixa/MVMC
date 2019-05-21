@@ -22,7 +22,8 @@ router.post('/new', isAuth, (req, res) => {
         pans_all,
         type,
         bought_at,
-        expire_months
+        expire_months,
+        price
     } = req.body;
 
     if (name && brand && category && type) {
@@ -39,9 +40,12 @@ router.post('/new', isAuth, (req, res) => {
                 all: pans_all
             },
             bought_at,
-            expire_months
+            expire_months,
+            price
         }).then(product => {
-            experience(req.user._id, 120);
+            if (type != 'wishlist') {
+                experience(req.user._id, 120);
+            }
             res.json(product);
         });
     } else {
@@ -92,7 +96,9 @@ router.put('/edit', isAuth, (req, res) => {
                 brand: product.brand,
                 category: product.category,
                 photos: product.photos,
-                uses: product.uses
+                uses: product.uses,
+                price: product.price,
+                type: product.type
             }
         ).then(() => {
             res.json({ msg: 'Product successfully updated' });
@@ -239,17 +245,17 @@ router.delete('/photo', isAuth, (req, res) => {
 });
 
 // Get user all products
-router.get('/my', isAuth, (req, res) => {
+router.get('/my/:type', isAuth, (req, res) => {
     const allProducts = [];
 
     let counter = 0;
     if (req.user.categories.length > 0) {
         req.user.categories.forEach(function(category) {
             Product.find(
-                { user_id: req.user._id, category, type: 'collection' },
+                { user_id: req.user._id, category, type: req.params.type },
                 [],
                 {
-                    sort: { brand: 1 }
+                    sort: { brand: 1, name: 1 }
                 }
             ).then(function(products) {
                 allProducts.push({

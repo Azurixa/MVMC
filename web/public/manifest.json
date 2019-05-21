@@ -1,0 +1,17 @@
+{
+    "short_name": "MMC",
+    "name": "My makeup collection",
+    "icons": [
+      {
+        "src": "/makeup-icon.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": "/",
+    "background_color": "#F1F1F1",
+    "display": "standalone",
+    "scope": "/",
+    "orientation": "landscape",
+    "theme_color": "#F1F1F1"
+}

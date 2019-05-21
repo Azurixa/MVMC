@@ -32,6 +32,10 @@ const userSchema = new mongoose.Schema({
     categories: {
         type: [String],
         default: []
+    },
+    photo: {
+        type: String,
+        default: ''
     }
 });
 

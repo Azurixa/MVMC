@@ -1,6 +1,6 @@
 <template>
 	<div class="my-collection">
-		<collection :type="'collection'"></collection>
+		<collection :type="'wishlist'"></collection>
 	</div>
 </template>
 

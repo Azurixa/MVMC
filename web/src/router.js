@@ -89,6 +89,18 @@ const router = new Router({
             component: () => import('./views/user/Collection.vue')
         },
         {
+            path: '/me/wishlist',
+            name: 'User products wishlist',
+            beforeEnter(from, to, next) {
+                if (!store.getters.loggedIn) {
+                    document.location.href = '/auth';
+                } else {
+                    next();
+                }
+            },
+            component: () => import('./views/user/Wishlist.vue')
+        },
+        {
             path: '/me/p/:id',
             name: 'User product show',
             beforeEnter(from, to, next) {

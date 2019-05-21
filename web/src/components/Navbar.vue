@@ -116,7 +116,7 @@ export default {
 	position: relative;
 	top: -2px;
 	margin-right: 5px;
-	border-radius: 40%;
+	border-radius: 12px;
 	font-size: 1rem;
 }
 .navbar {

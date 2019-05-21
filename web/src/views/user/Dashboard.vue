@@ -1,14 +1,28 @@
 <template>
 	<div class="user-dashboard">
 		<div class="pane text-center">
-            <div class="profile-image mx-auto"></div>
+			<div
+				class="profile-image mx-auto"
+				v-if="user.photo != ''"
+				:style="{
+					'background-image':
+						'url(http://localhost:3001/images/profile/' +
+						user.photo +
+						')'
+				}"
+			></div>
 			<div class="user-name">
-                {{ user.name }}
-                <span class="badge badge-primary">
-                    {{ user.level }}
-                </span>
-            </div>
+				{{ user.name }}
+				<span class="badge badge-primary">
+					{{ user.level }}
+				</span>
+			</div>
 		</div>
+        <div class="pane">
+            <router-link to="/me/edit" class="btn btn-primary btn-block">
+                Edit profile
+            </router-link>
+        </div>
 	</div>
 </template>
 
@@ -16,7 +30,9 @@
 export default {
 	data() {
 		return {
-			user: {}
+			user: {
+                photo: ''
+            }
 		};
 	},
 	created() {
@@ -30,20 +46,24 @@ export default {
 
 <style lang="scss" scoped>
 .user-name {
-    font-weight: 900;
-    font-size: 1.4rem;
-    color: black;
+	font-weight: 900;
+	font-size: 1.4rem;
+	color: black;
 }
 .profile-image {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background-color: teal;
-    margin-bottom: 1rem;
+	width: 180px;
+	height: 180px;
+	border-radius: 50%;
+	margin-bottom: 1rem;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 .badge {
-    position: relative;
-    top: -2px;
+	position: relative;
+	top: -2px;
+    border-radius: 12px;
+    font-size: 1.2rem;
 }
 .pane {
 	border: {
