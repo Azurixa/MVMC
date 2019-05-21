@@ -76,6 +76,9 @@
 					<div class="body">
 						<div class="pane">
 							<div class="content">
+								<p class="status">
+									{{ product.status }}
+								</p>
 								<p class="rating">
 									<small>Rating</small><br />
 									<span
@@ -619,6 +622,15 @@ export default {
 			.content {
 				margin: 0;
 			}
+		}
+		.status {
+			margin-right: 0.5rem;
+			padding: 0.5rem;
+			border: 1px solid rgba(#000, 0.1);
+			border-radius: 1.5rem;
+			display: inline-block;
+			background: #000;
+			color: white;
 		}
 		.rating {
 			margin: {

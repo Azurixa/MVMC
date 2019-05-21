@@ -19,6 +19,14 @@
 			</div>
 		</div>
         <div class="pane">
+            <p class="header">
+                Experience
+            </p>
+            <p class="content">
+                {{user.exp}} / {{user.exp_next}}
+            </p>
+        </div>
+        <div class="pane">
             <router-link to="/me/edit" class="btn btn-primary btn-block">
                 Edit profile
             </router-link>

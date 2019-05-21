@@ -16,6 +16,23 @@
 					</div>
 					<div class="card-body">
 						<div class="form-group">
+							<label for="status">Status</label><br>
+							<div
+								class="status"
+								:class="{ active: product.status == '1inuse' }"
+								@click="changeStatus('1inuse')"
+							>
+								In use
+							</div>
+							<div
+								class="status"
+								:class="{ active: product.status == '10empty' }"
+								@click="changeStatus('10empty')"
+							>
+								Empty
+							</div>
+						</div>
+						<div class="form-group">
 							<label for="name">Name</label>
 							<input
 								type="text"
@@ -231,12 +248,27 @@ export default {
 		},
 		edditedChange() {
 			this.eddited = true;
+		},
+		changeStatus(status) {
+			this.product.status = status;
+			this.eddited = true;
 		}
 	}
 };
 </script>
 
 <style lang="scss" scoped>
+.status {
+	margin-right: 0.5rem;
+	padding: 0.5rem;
+	border: 1px solid rgba(#000, 0.1);
+	border-radius: 1.5rem;
+    display: inline-block;
+	&.active {
+		background: #000;
+		color: white;
+	}
+}
 .eddited {
 	position: sticky;
 	z-index: 2000;

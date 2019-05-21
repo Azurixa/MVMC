@@ -9,22 +9,42 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="row">
-					<div class="empty mt-4 mx-auto" v-if="empty">
-						<p>
-							Your
-							<span v-if="type == 'collection'">collection</span>
-							<span v-if="type == 'wishlist'">wishlist</span> is
-							empty!
-						</p>
-						<router-link
-							to="/me/new"
-							class="btn btn-primary btn-block"
-						>
-							<i class="bx bx-plus-circle"></i> Add something
-						</router-link>
+					<div class="col-12 p-0">
+						<div class="empty mt-4 text-center mb-4" v-if="empty">
+							<p>
+								Your
+								<span v-if="type == 'collection'"
+									>collection</span
+								>
+								<span v-if="type == 'wishlist'">wishlist</span>
+								is empty!
+							</p>
+							<p>
+								Try adjusting filters or add new items!
+							</p>
+							<router-link to="/me/new" class="btn btn-primary">
+								<i class="bx bx-plus-circle"></i> Add something
+							</router-link>
+						</div>
+						<div class="filters" v-if="type != 'wishlist'">
+							<div
+								class="filter"
+								:class="{ active: filters.includes('10empty') }"
+								@click="toggleFilter('10empty')"
+							>
+								Empty
+							</div>
+							<div
+								class="filter"
+								:class="{ active: filters.includes('1inuse') }"
+								@click="toggleFilter('1inuse')"
+							>
+								In use
+							</div>
+						</div>
 					</div>
 					<div
-						class="col-lg-4 p-1"
+						class="col-lg-4 p-2"
 						v-for="(category, index) in collection"
 						:key="'category_' + index"
 					>
@@ -68,6 +88,7 @@
 												product.thumbnail +
 												')'
 										}"
+                                        :class="{'empty': product.status == '10empty'}"
 									></div>
 									<div class="info">
 										<p class="brand">{{ product.brand }}</p>
@@ -117,6 +138,7 @@ export default {
 		return {
 			empty: false,
 			loading: true,
+			filters: ["1inuse"],
 			productsCounter: 0,
 			collection: []
 		};
@@ -125,11 +147,23 @@ export default {
 		this.getCollection();
 	},
 	methods: {
+		toggleFilter(filter) {
+			if (this.filters.includes(filter)) {
+				this.filters.splice(this.filters.indexOf(filter), 1);
+			} else {
+				this.filters.push(filter);
+			}
+			this.getCollection();
+		},
 		getCollection() {
+			this.loading = true;
 			fetch("http://localhost:3001/products/my/" + this.type, {
+				method: "POST",
 				headers: {
-					Authorization: this.$store.getters.token
-				}
+					Authorization: this.$store.getters.token,
+					"Content-type": "application/json"
+				},
+				body: JSON.stringify({ filters: this.filters })
 			})
 				.then(res => res.json())
 				.then(data => {
@@ -139,11 +173,14 @@ export default {
 				});
 		},
 		countProducts() {
+			this.productsCounter = 0;
 			this.collection.forEach(category => {
 				this.productsCounter += category.products.length;
 			});
 			if (this.productsCounter == 0) {
 				this.empty = true;
+			} else {
+				this.empty = false;
 			}
 		}
 	}
@@ -151,6 +188,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.filters {
+	margin: 0.5rem;
+	display: block;
+	.filter {
+		padding: 0.5rem;
+		border: 1px solid rgba(#000, 0.1);
+		border-radius: 1.5rem;
+		display: inline-block;
+		margin-right: 0.5rem;
+		&.active {
+			background: #000;
+			color: white;
+		}
+	}
+}
 .category {
 	border: 1px solid rgba(#000, 0.1);
 	border-radius: 1.5rem;
@@ -207,6 +259,9 @@ export default {
 				background-position: center;
 				background-size: cover;
 				background-repeat: no-repeat;
+                &.empty {
+                    filter: grayscale(100%);
+                }
 			}
 			.info {
 				width: 70%;

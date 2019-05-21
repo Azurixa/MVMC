@@ -56,14 +56,8 @@ const productSchema = new mongoose.Schema({
         default: []
 	},
 	status: {
-		name: {
-			type: String,
-			default: 'Using'
-		},
-		color: {
-			type: String,
-			default: '#ffff00'
-		}
+        type: String,
+        default: '1inuse'
     },
     pans: {
         all: {

@@ -245,8 +245,9 @@ router.delete('/photo', isAuth, (req, res) => {
 });
 
 // Get user all products
-router.get('/my/:type', isAuth, (req, res) => {
+router.post('/my/:type', isAuth, (req, res) => {
     const allProducts = [];
+    const { filters } = req.body;
 
     let counter = 0;
     if (req.user.categories.length > 0) {
@@ -255,9 +256,19 @@ router.get('/my/:type', isAuth, (req, res) => {
                 { user_id: req.user._id, category, type: req.params.type },
                 [],
                 {
-                    sort: { brand: 1, name: 1 }
+                    sort: { status: -1, brand: 1, name: -1 }
                 }
             ).then(function(products) {
+                // filters
+                if (req.params.type != 'wishlist') {
+                    if (!filters.includes('10empty')) {
+                        products = products.filter(filterEmpty);
+                    }
+                    if (!filters.includes('1inuse')) {
+                        products = products.filter(filterInUse);
+                    }
+                }
+
                 allProducts.push({
                     category,
                     products
@@ -273,6 +284,13 @@ router.get('/my/:type', isAuth, (req, res) => {
         res.json([]);
     }
 });
+
+function filterEmpty(a) {
+    return a.status != '10empty';
+}
+function filterInUse(a) {
+    return a.status != '1inuse';
+}
 
 function compare(a, b) {
     if (a.category > b.category) {
