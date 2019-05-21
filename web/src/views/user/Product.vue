@@ -117,6 +117,94 @@
 										</div>
 									</div>
 								</div>
+								<div class="m-0">
+									<small>Uses</small><br />
+									<div class="row">
+										<div class="col-6">
+											<span class="h1 m-0">
+												<i class="bx bx-check"></i>
+												{{ product.uses.length }}
+											</span>
+										</div>
+										<div class="col-6 text-right">
+											<span>
+												<i
+													@click="use(1)"
+													class="bx bx-plus-circle h1 m-0 mr-2"
+												></i>
+												<i
+													@click="use(-1)"
+													class="bx bx-minus-circle h1 m-0"
+												></i>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="pane">
+							<div class="header">
+								<p class="text-danger mb-2" v-if="expired">
+									<i class="bx bx-x"></i> Product expired
+								</p>
+								<p class="text-success mb-2" v-if="!expired">
+									<i class="bx bx-check"></i> Product is good
+								</p>
+							</div>
+							<div class="content">
+								<div
+									class="dates"
+									v-if="bought_date.getFullYear() > 2000"
+								>
+									<div class="row">
+										<div class="col-6">
+											<i class="bx bx-calendar-plus"></i>
+											Bought date
+										</div>
+										<div class="col-6">
+											<strong>{{
+												bought_date
+													.toGMTString()
+													.substr(5, 11)
+											}}</strong>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-6">
+											<i class="bx bx-calendar-x"></i>
+											Expire date
+										</div>
+										<div class="col-6">
+											<strong>{{
+												expire_date
+													.toGMTString()
+													.substr(5, 11)
+											}}</strong>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-6">
+											<i class="bx bx-calendar"></i>
+											Expire months
+										</div>
+										<div class="col-6">
+											<strong>{{
+												product.expire_months
+											}}</strong>
+										</div>
+									</div>
+								</div>
+								<router-link
+									:to="
+										'/me/p/' +
+											this.$route.params.id +
+											'/edit'
+									"
+									v-if="bought_date.getFullYear() < 2000"
+									class="btn btn-outline-primary btn-block"
+								>
+									Add dates
+								</router-link>
 							</div>
 						</div>
 						<div class="pane">
@@ -131,7 +219,8 @@
 											'/edit'
 									"
 									v-if="product.description == ''"
-									>Add description...</router-link
+									class="btn btn-outline-primary btn-block"
+									>Add description</router-link
 								>
 								{{ product.description }}
 							</p>
@@ -148,7 +237,8 @@
 											'/edit'
 									"
 									v-if="product.first_impressions == ''"
-									>Add first impressions...</router-link
+									class="btn btn-outline-primary btn-block"
+									>Add first impressions</router-link
 								>
 								{{ product.first_impressions }}
 							</p>
@@ -156,11 +246,6 @@
 						<div class="pane">
 							<div class="header">
 								<p>Product settings</p>
-								<div class="jumbotron"></div>
-								<div class="jumbotron"></div>
-								<div class="jumbotron"></div>
-								<div class="jumbotron"></div>
-								<div class="jumbotron"></div>
 							</div>
 							<div class="body">
 								<router-link
@@ -184,17 +269,22 @@
 
 <script>
 import loading from "../../components/Loading.vue";
+import { constants } from "crypto";
 export default {
 	components: { loading },
 	data() {
 		return {
 			loading: true,
+			bought_date: new Date(),
+			expire_date: new Date(),
+			expired: false,
 			product: {
 				pans: {
 					done: 0,
 					all: 0
 				},
 				photos: [],
+				uses: [],
 				thumbnail: ""
 			},
 			newPhoto: null
@@ -247,12 +337,24 @@ export default {
 					} else {
 						this.product = data;
 						this.loading = false;
+						this.bought_date = new Date(data.bought_at);
+						this.checkExpired(new Date(data.bought_at));
 						setTimeout(() => {
 							this.initGallery();
 							this.changeImage(0);
 						}, 10);
 					}
 				});
+		},
+		checkExpired(date) {
+			this.expire_date = new Date(
+				date.setMonth(date.getMonth() + this.product.expire_months)
+			);
+			if (this.expire_date < Date.now()) {
+				this.expired = true;
+			} else {
+				this.expired = false;
+			}
 		},
 		changeImage(index) {
 			const photos = document.querySelectorAll(".photo");
@@ -293,7 +395,10 @@ export default {
 					.removeAttribute("show");
 			}
 			document.addEventListener("scroll", () => {
-				if (document.location.href.includes("/me/p/") && !document.location.href.includes("/edit")) {
+				if (
+					document.location.href.includes("/me/p/") &&
+					!document.location.href.includes("/edit")
+				) {
 					if (
 						document.documentElement.scrollTop >
 						window.innerHeight / 3
@@ -328,6 +433,16 @@ export default {
 					this.update();
 				}
 			}
+		},
+		use(action) {
+			if (action == 1) {
+				this.product.uses.push(Date.now());
+			} else if (action == -1) {
+				if (this.product.uses.length > 0) {
+					this.product.uses.splice(this.product.uses.length - 1, 1);
+				}
+			}
+			this.update();
 		},
 		setThumbnail(index) {
 			this.product.thumbnail = this.product.photos[index].src;
@@ -464,6 +579,7 @@ export default {
 	width: 100%;
 	height: 30vh;
 	display: block;
+	overflow: hidden;
 
 	.photo {
 		height: 100%;
@@ -471,7 +587,6 @@ export default {
 		display: inline-block;
 		overflow: hidden;
 		transition: 0.3s all;
-		transition-timing-function: cubic-bezier(0.895, 0.03, 0.685, 0.22);
 		background-color: black;
 		background-position: center;
 		background-size: cover;

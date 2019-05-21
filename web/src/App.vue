@@ -32,6 +32,7 @@ export default {
 	text-transform: none;
 	cursor: pointer;
     border-radius: 1.5rem;
+    padding: 0.5rem;
 }
 .container {
 	@media (min-width: 1200px) {
@@ -44,5 +45,9 @@ export default {
     .card-header {
         border-radius: 1.5rem 1.5rem 0 0;
     }
+}
+strong {
+    font-weight: 1000;
+    color: black;
 }
 </style>

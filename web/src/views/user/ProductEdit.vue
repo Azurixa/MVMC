@@ -92,6 +92,50 @@
 								@keydown="edditedChange"
 							/>
 						</div>
+						<div class="form-group">
+							<label for="bought_at">Bought date</label>
+							<input
+								type="date"
+								id="bought_at"
+								v-model="product.bought_at"
+								class="form-control"
+								@change="edditedChange"
+							/>
+						</div>
+						<div class="form-group">
+							<label for="expire_months">Expire months</label>
+							<input
+								type="number"
+								id="expire_months"
+								v-model="product.expire_months"
+								class="form-control"
+								@keydown="edditedChange"
+							/>
+						</div>
+					</div>
+					<div class="danger-zone card m-2">
+						<div
+							class="card-header"
+							onClick="this.nextElementSibling.toggleAttribute('show')"
+						>
+							<div class="row">
+								<div class="col-6">
+									<span>Danger zone</span>
+								</div>
+								<div class="col-6 text-right">
+									<i class="bx bx-sort"></i>
+								</div>
+							</div>
+						</div>
+
+						<div class="card-body content">
+							<button
+								class="btn btn-danger btn-block"
+								@click="removeProduct"
+							>
+								Remove product
+							</button>
+						</div>
 					</div>
 					<button
 						class="btn btn-primary"
@@ -145,6 +189,20 @@ export default {
 					}
 				});
 		},
+		removeProduct() {
+			fetch("http://localhost:3001/products/remove", {
+				method: "DELETE",
+				headers: {
+					Authorization: this.$store.getters.token,
+					"Content-type": "application/json"
+				},
+				body: JSON.stringify({ _id: this.product._id })
+			})
+				.then(res => res.json())
+				.then(() => {
+					window.location.href = "/my/collection/";
+				});
+		},
 		updateProduct() {
 			fetch("http://localhost:3001/products/edit", {
 				method: "PUT",
@@ -172,6 +230,21 @@ export default {
 	position: sticky;
 	z-index: 2000;
 	bottom: 75px;
+}
+.danger-zone {
+	.content {
+		height: 0px;
+        overflow: hidden;
+        .btn {
+            display: none;
+        }
+		&[show] {
+			height: unset;
+            .btn {
+                display: block;
+            }
+		}
+	}
 }
 </style>
 

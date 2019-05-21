@@ -81,7 +81,8 @@ router.put('/edit', isAuth, (req, res) => {
                 name: product.name,
                 brand: product.brand,
                 category: product.category,
-                photos: product.photos
+                photos: product.photos,
+                uses: product.uses
             }
         ).then(() => {
             res.json({ msg: 'Product successfully updated' });
