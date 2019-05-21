@@ -200,7 +200,7 @@ export default {
 			})
 				.then(res => res.json())
 				.then(() => {
-					window.location.href = "/my/collection/";
+					window.location.href = "/me/collection";
 				});
 		},
 		updateProduct() {
