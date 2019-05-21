@@ -67,9 +67,10 @@ router.get('/product/:id', isAuth, (req, res) => {
 // Edit product by sending PRODUCT object
 router.put('/edit', isAuth, (req, res) => {
     const product = req.body.product;
+    const expAdd = req.body.expAdd;
     if (product) {
-        if (product.expAdd) {
-            experience(req.user._id, product.expAdd);
+        if (expAdd) {
+            experience(req.user._id, expAdd);
         }
         Product.findOneAndUpdate(
             { _id: product._id },
