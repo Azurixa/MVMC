@@ -144,12 +144,18 @@
 						</div>
 						<div class="pane">
 							<div class="header">
-								<p class="text-danger mb-2" v-if="expired">
-									<i class="bx bx-x"></i> Product expired
-								</p>
-								<p class="text-success mb-2" v-if="!expired">
-									<i class="bx bx-check"></i> Product is good
-								</p>
+								<div v-if="bought_date.getFullYear() > 2000">
+									<p class="text-danger mb-2" v-if="expired">
+										<i class="bx bx-x"></i> Product expired
+									</p>
+									<p
+										class="text-success mb-2"
+										v-if="!expired"
+									>
+										<i class="bx bx-check"></i> Product is
+										good
+									</p>
+								</div>
 							</div>
 							<div class="content">
 								<div
