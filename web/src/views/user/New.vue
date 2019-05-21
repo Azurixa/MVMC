@@ -2,7 +2,7 @@
 	<div class="user-categories">
 		<div class="row">
 			<div class="col-lg-4">
-				<div class="card">
+				<div class="card new-form">
 					<div class="card-header">
 						<h2 class="m-0">New product</h2>
 					</div>
@@ -54,6 +54,38 @@
 								class="form-control"
 								id="name"
 								v-model="newProduct.pans_all"
+							/>
+						</div>
+						<div class="form-group">
+							<div>
+								<label for="name">Bought at</label>
+								<input
+									v-if="!bought_today"
+									type="date"
+									class="form-control"
+									id="name"
+									v-model="newProduct.bought_at"
+								/>
+							</div>
+							<div class="form-check mt-1">
+								<label class="form-check-label">
+									<input
+										type="checkbox"
+										class="form-check-input"
+										id="bought_today"
+										v-model="bought_today"
+									/>
+									Today
+								</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="name">Expire months</label>
+							<input
+								type="number"
+								class="form-control"
+								id="name"
+								v-model="newProduct.expire_months"
 							/>
 						</div>
 					</div>
@@ -151,12 +183,15 @@ export default {
 	data() {
 		return {
 			editInfo: {},
+			bought_today: false,
 			newProduct: {
 				name: "",
 				category: "",
 				brand: "",
 				type: "collection",
-				pans_all: 1
+				pans_all: 1,
+				bought_at: new Date(),
+				expire_months: 0
 			},
 			newCategory: {
 				name: ""
@@ -179,6 +214,9 @@ export default {
 
 		// Product
 		addProduct() {
+			if (this.bought_today) {
+				this.newProduct.bought_at = new Date();
+			}
 			fetch("http://localhost:3001/products/new", {
 				method: "POST",
 				headers: {
@@ -196,6 +234,8 @@ export default {
 						this.newProduct.category = "";
 						this.newProduct.brand = "";
 						this.newProduct.pans_all = 1;
+						this.newProduct.expire_months = 0;
+						this.newProduct.bought_at = new Date();
 						this.$parent.$refs.navbar.getUserData();
 						this.$parent.$refs.footbar.getUserData();
 					}
@@ -256,6 +296,18 @@ export default {
 		scroll-snap-type: x mandatory;
 		overflow-x: scroll;
 
+		.new-form {
+			max-height: 76vh;
+			overflow-y: scroll;
+			padding-bottom: 0.2rem;
+
+			.card-header {
+				position: sticky;
+				top: 0;
+				z-index: 2000;
+				background-color: #f7f7f7;
+			}
+		}
 		.col-lg-4 {
 			scroll-snap-align: start;
 			margin: 0;

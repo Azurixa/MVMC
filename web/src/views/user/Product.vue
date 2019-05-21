@@ -153,7 +153,7 @@
 										v-if="!expired"
 									>
 										<i class="bx bx-check"></i> Product is
-										good
+										not expired
 									</p>
 								</div>
 							</div>

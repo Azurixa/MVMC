@@ -20,7 +20,9 @@ router.post('/new', isAuth, (req, res) => {
         description,
         first_impressions,
         pans_all,
-        type
+        type,
+        bought_at,
+        expire_months
     } = req.body;
 
     if (name && brand && category && type) {
@@ -35,7 +37,9 @@ router.post('/new', isAuth, (req, res) => {
             pans: {
                 done: 0,
                 all: pans_all
-            }
+            },
+            bought_at,
+            expire_months
         }).then(product => {
             experience(req.user._id, 120);
             res.json(product);
