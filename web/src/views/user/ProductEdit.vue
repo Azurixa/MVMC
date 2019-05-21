@@ -223,7 +223,7 @@ export default {
 				body: JSON.stringify({ product: this.product })
 			})
 				.then(res => res.json())
-				.then(data => {
+				.then(() => {
 					//console.log(data);
 					this.eddited = false;
 					window.location.href = "/me/p/" + this.$route.params.id;

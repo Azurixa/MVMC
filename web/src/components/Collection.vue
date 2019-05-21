@@ -39,9 +39,10 @@
 								<div class="row">
 									<div class="col-10">
 										<h3 class="m-0">
-											{{ category.category }} <small>
-                                                x{{category.products.length}}
-                                            </small>
+											{{ category.category }}
+											<small>
+												x{{ category.products.length }}
+											</small>
 										</h3>
 									</div>
 									<div class="col-2">

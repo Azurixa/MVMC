@@ -82,7 +82,7 @@ export default {
 				body: JSON.stringify(this.editInfo)
 			})
 				.then(res => res.json())
-				.then(data => {
+				.then(() => {
 					if (this.photo != null) {
 						this.uploadProfilePhoto();
 					} else {

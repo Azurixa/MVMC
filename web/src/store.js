@@ -18,7 +18,7 @@ export default new Vuex.Store({
             state.token = '';
         },
         getUser(state) {
-            state.user = new Promise((resolve, reject) => {
+            state.user = new Promise((resolve) => {
                 fetch('http://localhost:3001/users/me', {
                     headers: {
                         Authorization: state.token

@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import { setInterval } from "timers";
 export default {
 	data() {
 		return {

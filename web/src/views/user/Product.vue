@@ -312,7 +312,6 @@
 
 <script>
 import loading from "../../components/Loading.vue";
-import { constants } from "crypto";
 export default {
 	components: { loading },
 	data() {
@@ -341,11 +340,11 @@ export default {
 		this.initScroll();
 	},
 	methods: {
-        addToCollection() {
-            this.product.type = 'collection';
-            this.expAdd = 120;
-            this.update();
-        },
+		addToCollection() {
+			this.product.type = "collection";
+			this.expAdd = 120;
+			this.update();
+		},
 		handleFileUpload() {
 			this.newPhoto = this.$refs.newPhoto.files[0];
 		},
@@ -363,6 +362,7 @@ export default {
 				.then(res => res.json())
 				.then(data => {
 					if (data.err) {
+						console.log(data.err);
 					} else {
 						this.newPhoto = null;
 						this.getProduct();

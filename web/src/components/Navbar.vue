@@ -86,7 +86,6 @@
 
 <script>
 import navSearch from "./NavSearch.vue";
-import { setInterval } from 'timers';
 export default {
 	props: ["auth"],
 	components: { navSearch },

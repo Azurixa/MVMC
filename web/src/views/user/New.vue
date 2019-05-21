@@ -218,7 +218,6 @@ export default {
 				name: "",
 				category: "",
 				brand: "",
-				type: "collection",
 				pans_all: 1,
 				bought_at: new Date(),
                 expire_months: 0,
@@ -311,7 +310,7 @@ export default {
 				body: JSON.stringify(this.editInfo)
 			})
 				.then(res => res.json())
-				.then(data => {
+				.then(() => {
 					this.getUser();
 					this.newCategory.created = [];
 				});
