@@ -98,7 +98,8 @@
 									<div class="row">
 										<div class="col-6">
 											<span class="h1 m-0">
-												<i class='bx bx-download' ></i> {{ product.pans.done }}
+												<i class="bx bx-download"></i>
+												{{ product.pans.done }}
 											</span>
 											<span class="h1 m-0">
 												/ {{ product.pans.all }}
@@ -224,7 +225,7 @@ export default {
 				.then(data => {
 					if (data.err) {
 					} else {
-                        this.newPhoto = null;
+						this.newPhoto = null;
 						this.getProduct();
 					}
 				});
@@ -292,17 +293,19 @@ export default {
 					.removeAttribute("show");
 			}
 			document.addEventListener("scroll", () => {
-				if (
-					document.documentElement.scrollTop >
-					window.innerHeight / 3
-				) {
-					document
-						.querySelector(".product > .header .thumbnail")
-						.setAttribute("show", true);
-				} else {
-					document
-						.querySelector(".product > .header .thumbnail")
-						.removeAttribute("show");
+				if (document.location.href.includes("/me/p/") && !document.location.href.includes("/edit")) {
+					if (
+						document.documentElement.scrollTop >
+						window.innerHeight / 3
+					) {
+						document
+							.querySelector(".product > .header .thumbnail")
+							.setAttribute("show", true);
+					} else {
+						document
+							.querySelector(".product > .header .thumbnail")
+							.removeAttribute("show");
+					}
 				}
 			});
 		},
@@ -450,7 +453,7 @@ export default {
 			.rating-mark {
 				margin: {
 					right: -4px;
-                    bottom: 0;
+					bottom: 0;
 				}
 			}
 		}
@@ -522,7 +525,7 @@ export default {
 			border-radius: 50%;
 			background-color: rgba(#fff, 0.7);
 			color: black;
-            transition: 0.5s all;
+			transition: 0.5s all;
 			&:hover {
 				background-color: white;
 			}
@@ -530,7 +533,7 @@ export default {
 		.set-thumbnail {
 			&.active {
 				background-color: black;
-                color: white;
+				color: white;
 			}
 		}
 		.remove {

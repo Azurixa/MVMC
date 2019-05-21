@@ -71,9 +71,9 @@ const productSchema = new mongoose.Schema({
             default: 0
         }
     },
-	uses_count: {
-        type: Number,
-        default: 0
+	uses: {
+        type: [Date],
+        default: []
     },
     bought_at: {
         type: Date,
