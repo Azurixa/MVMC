@@ -239,25 +239,29 @@ router.get('/my', isAuth, (req, res) => {
     const allProducts = [];
 
     let counter = 0;
-    req.user.categories.forEach(function(category) {
-        Product.find(
-            { user_id: req.user._id, category, type: 'collection' },
-            [],
-            {
-                sort: { brand: 1 }
-            }
-        ).then(function(products) {
-            allProducts.push({
-                category,
-                products
+    if (req.user.categories.length > 0) {
+        req.user.categories.forEach(function(category) {
+            Product.find(
+                { user_id: req.user._id, category, type: 'collection' },
+                [],
+                {
+                    sort: { brand: 1 }
+                }
+            ).then(function(products) {
+                allProducts.push({
+                    category,
+                    products
+                });
+                counter++;
+                if (counter == req.user.categories.length) {
+                    allProducts.sort(compare);
+                    res.json(allProducts);
+                }
             });
-            counter++;
-            if (counter == req.user.categories.length) {
-                allProducts.sort(compare);
-                res.json(allProducts);
-            }
         });
-    });
+    } else {
+        res.json([]);
+    }
 });
 
 function compare(a, b) {

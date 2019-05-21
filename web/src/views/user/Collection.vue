@@ -7,6 +7,17 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="row">
+					<div class="empty mt-4 mx-auto" v-if="collection.length == 0">
+						<p>
+							Your collection is empty!
+						</p>
+						<router-link
+							to="/me/new"
+							class="btn btn-primary btn-block"
+						>
+							<i class="bx bx-plus-circle"></i> Add something
+						</router-link>
+					</div>
 					<div
 						class="col-lg-4 p-1"
 						v-for="(category, index) in collection"
