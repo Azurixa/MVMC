@@ -92,6 +92,32 @@ router.put('/edit', isAuth, (req, res) => {
     }
 });
 
+// Remove product
+router.delete('/remove', isAuth, (req, res) => {
+    const _id = req.body;
+    if (_id) {
+        Product.findOne({ user_id: req.user._id, _id })
+            .then(product => {
+                product.photos.forEach(photo => {
+                    fs.unlink(
+                        path.resolve('./') + '/storage/' + photo.src,
+                        err => {
+                            if (err) console.log(err);
+                        }
+                    );
+                });
+                Product.findOneAndRemove({ _id }).then(() => {
+                    res.json({ msg: 'Product successfully removed' });
+                });
+            })
+            .catch(err => {
+                res.json({ err: 'This product does not exist' });
+            });
+    } else {
+        res.json({ err: 'You need to provide product id' });
+    }
+});
+
 // Add photo to product
 router.post('/photo', isAuth, (req, res) => {
     const id = req.body._id;
