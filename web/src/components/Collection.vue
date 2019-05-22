@@ -29,8 +29,8 @@
 						<div class="filters" v-if="type != 'wishlist'">
 							<div
 								class="filter"
-								:class="{ active: filters.includes('10empty') }"
-								@click="toggleFilter('10empty')"
+								:class="{ active: filters.includes('9empty') }"
+								@click="toggleFilter('9empty')"
 							>
 								Empty
 							</div>
@@ -91,7 +91,7 @@
 												')'
 										}"
 										:class="{
-											empty: product.status == '10empty'
+											empty: product.status == '9empty'
 										}"
 									></div>
 									<div class="info">

@@ -261,7 +261,7 @@ router.post('/my/:type', isAuth, (req, res) => {
             ).then(function(products) {
                 // filters
                 if (req.params.type != 'wishlist') {
-                    if (!filters.includes('10empty')) {
+                    if (!filters.includes('9empty')) {
                         products = products.filter(filterEmpty);
                     }
                     if (!filters.includes('1inuse')) {
@@ -286,7 +286,7 @@ router.post('/my/:type', isAuth, (req, res) => {
 });
 
 function filterEmpty(a) {
-    return a.status != '10empty';
+    return a.status != '9empty';
 }
 function filterInUse(a) {
     return a.status != '1inuse';

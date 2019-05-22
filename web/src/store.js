@@ -1,13 +1,15 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+const config = require('./config/config.js');
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
         token: localStorage.getItem('makeup-token'),
         user: {},
-        apiUrl: 'http://mvtthew.pl:5050/'
+        apiUrl: config.API_URL
     },
     mutations: {
         setToken(state, token) {

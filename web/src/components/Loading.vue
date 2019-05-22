@@ -1,7 +1,8 @@
 <template>
 	<div class="loading" v-if="visible">
 		<div>
-			<i class="bx bx-loader-alt bx-spin"></i>
+			<i class="bx bx-loader-alt bx-spin" v-if="!icon"></i>
+			<i v-if="icon" class="bx bx-spin" :class="icon"></i>
 			<p v-if="text != ''">{{ text }}</p>
 		</div>
 	</div>
@@ -9,7 +10,7 @@
 
 <script>
 export default {
-	props: { visible: Boolean, text: String }
+	props: { visible: Boolean, text: String, icon: String }
 };
 </script>
 

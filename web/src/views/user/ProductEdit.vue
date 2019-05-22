@@ -26,8 +26,8 @@
 							</div>
 							<div
 								class="status"
-								:class="{ active: product.status == '10empty' }"
-								@click="changeStatus('10empty')"
+								:class="{ active: product.status == '9empty' }"
+								@click="changeStatus('9empty')"
 							>
 								Empty
 							</div>

@@ -89,7 +89,7 @@
 							<div>
 								<label for="bought_at">Bought at</label>
 								<input
-									v-if="!bought_today"
+									v-if="bought_radio == 'date'"
 									type="date"
 									class="form-control"
 									id="bought_at"
@@ -97,14 +97,35 @@
 								/>
 							</div>
 							<div class="form-check mt-1">
-								<label class="form-check-label">
+								<label class="form-check-label py-1 d-block">
 									<input
-										type="checkbox"
+										type="radio"
 										class="form-check-input"
 										id="bought_today"
-										v-model="bought_today"
+                                        value="date"
+										v-model="bought_radio"
+									/>
+									Choose
+								</label>
+								<label class="form-check-label py-1 d-block">
+									<input
+										type="radio"
+										class="form-check-input"
+										id="bought_today"
+                                        value="today"
+										v-model="bought_radio"
 									/>
 									Today
+								</label>
+                                <label class="form-check-label py-1 d-block">
+									<input
+										type="radio"
+										class="form-check-input"
+										id="bought_today"
+                                        value="never"
+										v-model="bought_radio"
+									/>
+									Don't remember
 								</label>
 							</div>
 						</div>
@@ -153,10 +174,10 @@
 							:key="'yourCat_' + index"
 						>
 							<li class="list-group-item">
-								<i
+								<!-- <i
 									class="bx bx-x"
 									@click="removeCategory(index)"
-								></i>
+								></i> -->
 								{{ category }}
 							</li>
 						</ul>
@@ -193,10 +214,10 @@
 							:key="'yourBrand_' + index"
 						>
 							<li class="list-group-item">
-								<i
+								<!-- <i
 									class="bx bx-x"
 									@click="removeBrand(index)"
-								></i>
+								></i> -->
 								{{ brand }}
 							</li>
 						</ul>
@@ -212,7 +233,7 @@ export default {
 	data() {
 		return {
 			editInfo: {},
-			bought_today: false,
+			bought_radio: 'never',
 			newProduct: {
 				type: "collection",
 				name: "",
@@ -248,8 +269,11 @@ export default {
 
 		// Product
 		addProduct() {
-			if (this.bought_today) {
-				this.newProduct.bought_at = new Date();
+			if (this.bought_radio == 'never') {
+				this.newProduct.bought_at = new Date(1);
+            }
+            if (this.bought_radio == 'today') {
+                this.newProduct.bought_at = new Date();
             }
             if (this.newProduct.type == 'wishlist') {
                 this.newProduct.bought_at = null;
@@ -342,8 +366,6 @@ export default {
 		overflow-x: scroll;
 
 		.new-form {
-			max-height: 76vh;
-			overflow-y: scroll;
 			padding-bottom: 0.2rem;
 
 			.card-header {

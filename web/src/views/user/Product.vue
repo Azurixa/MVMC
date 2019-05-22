@@ -1,6 +1,11 @@
 <template>
 	<div class="product-show">
 		<loading :visible="loading" :text="'Loading product'"></loading>
+		<loading
+			:visible="sendingPhoto"
+			:text="'Sending photo'"
+			:icon="'bx-camera'"
+		></loading>
 		<div class="photos mb-3">
 			<div
 				class="photo"
@@ -28,16 +33,13 @@
 				</div>
 			</div>
 			<div class="photo new" @click="changeImage(product.photos.length)">
-				<div class="card">
+				<div class="card no-radius">
 					<div class="card-header">
 						<h2 class="m-0">
-							NEW
+							<i class="bx bx-plus"></i>
 						</h2>
 					</div>
 					<div class="card-body">
-						<p>
-							Add new photo
-						</p>
 						<div class="form-group">
 							<input
 								type="file"
@@ -82,42 +84,58 @@
 					<div class="body">
 						<div class="pane">
 							<div class="content">
-								<p class="status">
-									{{ product.status }}
-								</p>
-								<p class="rating">
-									<small>Rating</small><br />
-									<span
-										v-for="index in 10"
-										:key="'rating_' + index"
-										@click="rate(index)"
-									>
-										<i
-											v-if="index <= product.rating"
-											class="rating-mark bx bxs-star h2 text-primary"
-										></i>
-										<i
-											v-if="index > product.rating"
-											class="rating-mark bx bx-star h2 text-primary"
-										></i>
-									</span>
-								</p>
+								<div class="row">
+									<div class="col-9 pr-0">
+										<p class="rating">
+											<small>Rating</small><br />
+											<span
+												v-for="index in 10"
+												:key="'rating_' + index"
+												@click="rate(index)"
+											>
+												<i
+													v-if="
+														index <= product.rating
+													"
+													class="rating-mark bx bxs-star h2 text-primary"
+												></i>
+												<i
+													v-if="
+														index > product.rating
+													"
+													class="rating-mark bx bx-star h2 text-primary"
+												></i>
+											</span>
+										</p>
+									</div>
+									<div class="col-3 pr-2 text-right">
+										<p class="mb-0 mt-3">
+											<span v-if="product.status == '1inuse'" class="badge badge-outline-primary status">
+                                                In use
+                                            </span>
+											<span v-if="product.status == '9empty'" class="badge badge-dark status">
+                                                Empty
+                                            </span>
+										</p>
+									</div>
+								</div>
+
 								<div class="m-0">
 									<small>Pans</small><br />
 									<div class="row">
 										<div class="col-6">
-											<span class="h2 m-0">
+											<span class="h3 m-0">
 												<i class="bx bx-download"></i>
 											</span>
 											<span
-												class="h2 m-0"
+												class="h3 m-0"
 												v-if="
 													product.type != 'wishlist'
 												"
 											>
 												{{ product.pans.done }} /
 											</span>
-											<span class="h2 m-0">
+											<span class="h3 m-0">
 												{{ product.pans.all }}
 											</span>
 										</div>
@@ -143,7 +161,7 @@
 									<small>Uses</small><br />
 									<div class="row">
 										<div class="col-6">
-											<span class="h2 m-0">
+											<span class="h3 m-0">
 												<i class="bx bx-check"></i>
 												{{ product.uses.length }}
 											</span>
@@ -339,7 +357,8 @@ export default {
 				thumbnail: ""
 			},
 			expAdd: 0,
-			newPhoto: null
+			newPhoto: null,
+			sendingPhoto: false
 		};
 	},
 	created() {
@@ -358,6 +377,7 @@ export default {
 			this.newPhoto = this.$refs.newPhoto.files[0];
 		},
 		uploadNewPhoto() {
+			this.sendingPhoto = true;
 			const formData = new FormData();
 			formData.append("_id", this.product._id);
 			formData.append("photo", this.newPhoto);
@@ -374,6 +394,7 @@ export default {
 						console.log(data.err);
 					} else {
 						this.newPhoto = null;
+						this.sendingPhoto = false;
 						this.getProduct();
 					}
 				});
@@ -635,9 +656,10 @@ export default {
 			padding: 0.5rem;
 			border: 1px solid rgba(#000, 0.1);
 			border-radius: 1.5rem;
+            font-size: 1rem;
 			display: inline-block;
-			background: #000;
-			color: white;
+			//background: #000;
+			//color: white;
 		}
 		.rating {
 			margin: {
@@ -697,6 +719,13 @@ export default {
 
 			.card {
 				height: 100%;
+				&.no-radius {
+					border-radius: 0;
+					.card-header {
+						border-radius: 0;
+						padding: 15px;
+					}
+				}
 
 				.card-body {
 					opacity: 0;
