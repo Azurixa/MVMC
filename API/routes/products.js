@@ -79,7 +79,7 @@ router.put('/edit', isAuth, (req, res) => {
 	if (product.user_id) {
 		const user_id = product.user_id;
 	} else {
-		user_id = req.user._id;
+		const user_id = req.user._id;
 	}
 
     if (product) {
