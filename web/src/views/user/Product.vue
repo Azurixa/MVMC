@@ -262,7 +262,7 @@
 										</div>
 										<div class="col-10 name text-black">
 											{{ fromUser.name }}
-											<span class="badge badge-primary">
+											<span class="badge badge-primary ml-2">
 												{{ fromUser.level }}
 											</span>
 										</div>

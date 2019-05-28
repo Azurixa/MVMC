@@ -22,7 +22,7 @@ router.get('/find/:email', isAuth, (req, res) => {
     const email = req.params.email;
 
     if (email) {
-        User.findOne({ email }, ['name', 'photo', '_id', 'email', 'level']).then(
+        User.findOne({ email }, ['name', 'photo', '_id', 'email', 'level', 'categories']).then(
             user => {
                 if (user) {
                     res.json(user);
@@ -39,7 +39,7 @@ router.get('/findID/:id', isAuth, (req, res) => {
     const id = req.params.id;
 
     if (id) {
-        User.findOne({ _id: id }, ['name', 'photo', '_id', 'email', 'level']).then(
+        User.findOne({ _id: id }, ['name', 'photo', '_id', 'email', 'level', 'categories']).then(
             user => {
                 if (user) {
                     res.json(user);

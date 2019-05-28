@@ -40,20 +40,17 @@
 						Back
 					</button>
 					<p>
-						Product name: <br />
+						Product name <br />
 						<strong>
 							{{ product.name }}
 						</strong>
 					</p>
-					<div class="form-group">
-						<label for="confirm">Type product name</label>
-						<input
-							type="text"
-							id="confirm"
-							class="form-control"
-							v-model="confirmName"
-						/>
-					</div>
+					<p>
+						New category <br />
+						<strong>
+							{{ product.category }}
+						</strong>
+					</p>
 					<button
 						class="btn btn-danger btn-block"
 						@click="declutterConfirm"
@@ -144,6 +141,25 @@
 									{{ userGive.name }}
 								</p>
 							</div>
+							<div class="form-group text-left mt-2">
+								<label for="cagtegory"
+									>New category of product</label
+								>
+								<select
+									name="category"
+									id="category"
+									v-model="product.category"
+									class="form-control"
+								>
+									<option
+										:value="category"
+										v-for="category in userGive.categories"
+										:key="category"
+									>
+										{{ category }}
+									</option>
+								</select>
+							</div>
 						</div>
 					</div>
 					<button
@@ -168,7 +184,7 @@ export default {
 			eddited: false,
 			userGive: {
 				_id: ""
-            },
+			},
 			userGiveEmail: "",
 			what: "remove",
 			confirmName: "",
@@ -188,21 +204,20 @@ export default {
 	},
 	methods: {
 		declutter() {
-			console.log("OK");
 			if (this.what == "remove") {
 				this.showConfirm = true;
 			} else if (this.what == "give") {
-				if (this.userGive._id != "") {
+				if (this.userGive._id != "" && this.product.category != "") {
 					this.showConfirm = true;
 				}
 			}
 		},
 		declutterConfirm() {
-			if (this.confirmName == this.product.name) {
-				if (this.what == "remove") {
-					this.product.status = "8declutter";
-					this.updateProduct();
-				} else if (this.what == "give") {
+			if (this.what == "remove") {
+				this.product.status = "8declutter";
+				this.updateProduct();
+			} else if (this.what == "give") {
+				if (this.product.category != "") {
 					this.product.from_user_id = this.user._id;
 					this.product.user_id = this.userGive._id;
 					this.product.status = "7gift";
@@ -222,6 +237,7 @@ export default {
 				.then(res => res.json())
 				.then(user => {
 					this.userGive = Object.assign({}, user);
+					this.product.category = "";
 				});
 		},
 		getProduct() {
@@ -288,7 +304,7 @@ export default {
 	background-repeat: no-repeat;
 	background-size: cover;
 	margin: 0 auto;
-    border-radius: 50%;
+	border-radius: 50%;
 }
 </style>
 
