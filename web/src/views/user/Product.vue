@@ -548,7 +548,7 @@ export default {
 				});
 		},
 		acceptGift() {
-			this.product.status = "0inuse";
+			this.product.status = "1inuse";
 			fetch(this.$store.getters.apiUrl + "products/edit", {
 				method: "PUT",
 				headers: {

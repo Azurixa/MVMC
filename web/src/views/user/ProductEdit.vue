@@ -31,6 +31,13 @@
 							>
 								Empty
 							</div>
+							<div
+								class="status"
+								:class="{ active: product.status == '8declutter' }"
+								@click="changeStatus('8declutter')"
+							>
+								Declutter
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="name">Name</label>

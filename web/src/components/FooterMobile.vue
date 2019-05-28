@@ -69,14 +69,14 @@ export default {
 	.footer {
 		position: fixed;
 		z-index: 3000;
-		bottom: 0;
+		bottom: -2px;
 		width: 100%;
 		background-color: #fcfcfc;
 		border-top: 1px solid rgba($color: #000, $alpha: 0.1);
 		padding: 0.3rem 0 0 0;
 
 		.level {
-			height: 5px;
+			height: 6px;
 			width: 100%;
 			border-top: 1px solid rgba($color: #000, $alpha: 0.1);
 			margin-top: 0.25rem;
