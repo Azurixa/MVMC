@@ -288,6 +288,7 @@ export default {
 	background-repeat: no-repeat;
 	background-size: cover;
 	margin: 0 auto;
+    border-radius: 50%;
 }
 </style>
 

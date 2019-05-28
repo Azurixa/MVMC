@@ -262,21 +262,24 @@
 										</div>
 										<div class="col-10 name text-black">
 											{{ fromUser.name }}
+											<span class="badge badge-primary">
+												{{ fromUser.level }}
+											</span>
 										</div>
+									</div>
+									<div
+										class="gift mt-4"
+										v-if="product.status == '7gift'"
+									>
+										<button
+											class="btn btn-success btn-block p-3 mt-3"
+											@click="acceptGift"
+										>
+											Accept gift
+										</button>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="gift" v-if="product.status == '7gift'">
-							<p class="text-center mt-3">
-								From <strong>{{ fromUser.name }}</strong>
-							</p>
-							<button
-								class="btn btn-success btn-block p-2 mt-3"
-								@click="acceptGift"
-							>
-								Accept gift
-							</button>
 						</div>
 						<div v-if="product.status != '7gift'">
 							<div class="pane" v-if="product.type != 'wishlist'">
@@ -790,6 +793,7 @@ export default {
 				background-size: cover;
 				background-position: center;
 				background-repeat: no-repeat;
+				border-radius: 50%;
 			}
 			.name {
 				display: flex;
