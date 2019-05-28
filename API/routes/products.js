@@ -98,7 +98,8 @@ router.put('/edit', isAuth, (req, res) => {
                 photos: product.photos,
                 uses: product.uses,
                 price: product.price,
-                type: product.type
+                type: product.type,
+                from_user_id: product.from_user_id
             }
         ).then(() => {
             res.json({ msg: 'Product successfully updated' });
@@ -264,6 +265,12 @@ router.post('/my/:type', isAuth, (req, res) => {
                     if (!filters.includes('9empty')) {
                         products = products.filter(filterEmpty);
                     }
+                    if (!filters.includes('8declutter')) {
+                        products = products.filter(filterDecluttered);
+                    }
+                    if (!filters.includes('7gift')) {
+                        products = products.filter(filterGifts);
+                    }
                     if (!filters.includes('1inuse')) {
                         products = products.filter(filterInUse);
                     }
@@ -287,6 +294,12 @@ router.post('/my/:type', isAuth, (req, res) => {
 
 function filterEmpty(a) {
     return a.status != '9empty';
+}
+function filterDecluttered(a) {
+    return a.status != '8declutter';
+}
+function filterGifts(a) {
+    return a.status != '7gift';
 }
 function filterInUse(a) {
     return a.status != '1inuse';

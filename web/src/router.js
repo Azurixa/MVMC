@@ -124,6 +124,18 @@ const router = new Router({
             },
             component: () => import('./views/user/ProductEdit.vue')
         },
+        {
+            path: '/me/p/:id/declutter',
+            name: 'User product declutter',
+            beforeEnter(from, to, next) {
+                if (!store.getters.loggedIn) {
+                    document.location.href = '/auth';
+                } else {
+                    next();
+                }
+            },
+            component: () => import('./views/user/ProductDeclutter.vue')
+        },
         // 404 path
         {
             path: '*',

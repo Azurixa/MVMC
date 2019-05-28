@@ -36,6 +36,22 @@
 							</div>
 							<div
 								class="filter"
+								:class="{
+									active: filters.includes('8declutter')
+								}"
+								@click="toggleFilter('8declutter')"
+							>
+								Decluttered
+							</div>
+							<div
+								class="filter"
+								:class="{ active: filters.includes('7gift') }"
+								@click="toggleFilter('7gift')"
+							>
+								Gifts
+							</div>
+							<div
+								class="filter"
 								:class="{ active: filters.includes('1inuse') }"
 								@click="toggleFilter('1inuse')"
 							>
@@ -152,11 +168,13 @@ export default {
 	},
 	methods: {
 		toggleFilter(filter) {
-			if (this.filters.includes(filter)) {
-				this.filters.splice(this.filters.indexOf(filter), 1);
-			} else {
-				this.filters.push(filter);
-			}
+            this.filters = [];
+			// if (this.filters.includes(filter)) {
+			// 	this.filters.splice(this.filters.indexOf(filter), 1);
+			// } else {
+			// 	this.filters.push(filter);
+            // }
+            this.filters.push(filter);
 			this.getCollection();
 		},
 		getCollection() {

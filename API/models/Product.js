@@ -59,6 +59,9 @@ const productSchema = new mongoose.Schema({
         type: String,
         default: '1inuse'
     },
+    from_user_id: {
+        type: String
+    },
     pans: {
         all: {
             type: Number,

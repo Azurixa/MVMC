@@ -85,7 +85,7 @@
 						<div class="pane">
 							<div class="content">
 								<div class="row">
-									<div class="col-9 pr-0">
+									<div class="col-8 pr-0">
 										<p class="rating">
 											<small>Rating</small><br />
 											<span
@@ -108,14 +108,39 @@
 											</span>
 										</p>
 									</div>
-									<div class="col-3 pr-2 text-right">
+									<div class="col-4 pr-2 text-right">
 										<p class="mb-0 mt-3">
-											<span v-if="product.status == '1inuse'" class="badge badge-outline-primary status">
-                                                In use
-                                            </span>
-											<span v-if="product.status == '9empty'" class="badge badge-dark status">
-                                                Empty
-                                            </span>
+											<span
+												v-if="
+													product.status == '1inuse'
+												"
+												class="badge badge-outline-primary status"
+											>
+												In use
+											</span>
+											<span
+												v-if="
+													product.status ==
+														'8declutter'
+												"
+												class="badge badge-dark status"
+											>
+												Declutter
+											</span>
+											<span
+												v-if="product.status == '7gift'"
+												class="badge badge-dark status"
+											>
+												Gift
+											</span>
+											<span
+												v-if="
+													product.status == '9empty'
+												"
+												class="badge badge-dark status"
+											>
+												Empty
+											</span>
 										</p>
 									</div>
 								</div>
@@ -130,7 +155,10 @@
 											<span
 												class="h3 m-0"
 												v-if="
-													product.type != 'wishlist'
+													product.type !=
+														'wishlist' &&
+														product.status !=
+															'8declutter'
 												"
 											>
 												{{ product.pans.done }} /
@@ -141,7 +169,12 @@
 										</div>
 										<div
 											class="col-6 text-right"
-											v-if="product.type != 'wishlist'"
+											v-if="
+												product.type != 'wishlist' &&
+													product.status !=
+														'8declutter' &&
+													product.status != '7gift'
+											"
 										>
 											<i
 												class="bx bx-plus-circle h2 m-0 mr-2"
@@ -166,7 +199,14 @@
 												{{ product.uses.length }}
 											</span>
 										</div>
-										<div class="col-6 text-right">
+										<div
+											class="col-6 text-right"
+											v-if="
+												product.status !=
+													'8declutter' &&
+													product.status != '7gift'
+											"
+										>
 											<span>
 												<i
 													@click="use(1)"
@@ -194,140 +234,200 @@
 											'/edit'
 									"
 									class="btn btn-sm btn-outline-primary"
-									v-if="product.price == 0"
+									v-if="
+										product.price == 0 &&
+											product.status != '7gift'
+									"
 									>Add price</router-link
 								>
-							</div>
-						</div>
-						<div class="pane" v-if="product.type != 'wishlist'">
-							<div class="header">
-								<div v-if="bought_date.getFullYear() > 2000">
-									<p class="text-danger mb-2" v-if="expired">
-										<i class="bx bx-x"></i> Product expired
-									</p>
-									<p
-										class="text-success mb-2"
-										v-if="!expired"
-									>
-										<i class="bx bx-check"></i> Product is
-										not expired
-									</p>
-								</div>
-							</div>
-							<div class="content">
+
 								<div
-									class="dates"
-									v-if="bought_date.getFullYear() > 2000"
+									v-if="fromUser.name != ''"
+									class="mt-2 from"
 								>
+									<small>From</small>
 									<div class="row">
-										<div class="col-6">
-											<i class="bx bx-calendar-plus"></i>
-											Bought date
+										<div class="col-2 text-center">
+											<div
+												class="from-photo"
+												:style="{
+													'background-image':
+														'url(' +
+														$store.getters.apiUrl +
+														'images/profile/' +
+														fromUser.photo +
+														')'
+												}"
+											></div>
 										</div>
-										<div class="col-6">
-											<strong>{{
-												bought_date
-													.toGMTString()
-													.substr(5, 11)
-											}}</strong>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-6">
-											<i class="bx bx-calendar-x"></i>
-											Expire date
-										</div>
-										<div class="col-6">
-											<strong>{{
-												expire_date
-													.toGMTString()
-													.substr(5, 11)
-											}}</strong>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-6">
-											<i class="bx bx-calendar"></i>
-											Expire months
-										</div>
-										<div class="col-6">
-											<strong>{{
-												product.expire_months
-											}}</strong>
+										<div class="col-10 name text-black">
+											{{ fromUser.name }}
 										</div>
 									</div>
 								</div>
-								<router-link
-									:to="
-										'/me/p/' +
-											this.$route.params.id +
-											'/edit'
-									"
-									v-if="bought_date.getFullYear() < 2000"
-									class="btn btn-outline-primary btn-block"
-								>
-									Add dates
-								</router-link>
 							</div>
 						</div>
-						<div class="pane">
-							<div class="header">
-								<p>Description</p>
-							</div>
-							<p class="content">
-								<router-link
-									:to="
-										'/me/p/' +
-											this.$route.params.id +
-											'/edit'
-									"
-									v-if="product.description == ''"
-									class="btn btn-outline-primary btn-block"
-									>Add description</router-link
-								>
-								{{ product.description }}
+						<div class="gift" v-if="product.status == '7gift'">
+							<p class="text-center mt-3">
+								From <strong>{{ fromUser.name }}</strong>
 							</p>
+							<button
+								class="btn btn-success btn-block p-2 mt-3"
+								@click="acceptGift"
+							>
+								Accept gift
+							</button>
 						</div>
-						<div class="pane" v-if="product.type != 'wishlist'">
-							<div class="header">
-								<p>First impressions</p>
+						<div v-if="product.status != '7gift'">
+							<div class="pane" v-if="product.type != 'wishlist'">
+								<div class="header">
+									<div
+										v-if="bought_date.getFullYear() > 2000"
+									>
+										<p
+											class="text-danger mb-2"
+											v-if="expired"
+										>
+											<i class="bx bx-x"></i> Product
+											expired
+										</p>
+										<p
+											class="text-success mb-2"
+											v-if="!expired"
+										>
+											<i class="bx bx-check"></i> Product
+											is not expired
+										</p>
+									</div>
+								</div>
+								<div class="content">
+									<div
+										class="dates"
+										v-if="bought_date.getFullYear() > 2000"
+									>
+										<div class="row">
+											<div class="col-6">
+												<i
+													class="bx bx-calendar-plus"
+												></i>
+												Bought date
+											</div>
+											<div class="col-6">
+												<strong>{{
+													bought_date
+														.toGMTString()
+														.substr(5, 11)
+												}}</strong>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-6">
+												<i class="bx bx-calendar-x"></i>
+												Expire date
+											</div>
+											<div class="col-6">
+												<strong>{{
+													expire_date
+														.toGMTString()
+														.substr(5, 11)
+												}}</strong>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-6">
+												<i class="bx bx-calendar"></i>
+												Expire months
+											</div>
+											<div class="col-6">
+												<strong>{{
+													product.expire_months
+												}}</strong>
+											</div>
+										</div>
+									</div>
+									<router-link
+										:to="
+											'/me/p/' +
+												this.$route.params.id +
+												'/edit'
+										"
+										v-if="bought_date.getFullYear() < 2000"
+										class="btn btn-outline-primary btn-block"
+									>
+										Add dates
+									</router-link>
+								</div>
 							</div>
-							<p class="content">
-								<router-link
-									:to="
-										'/me/p/' +
-											this.$route.params.id +
-											'/edit'
-									"
-									v-if="product.first_impressions == ''"
-									class="btn btn-outline-primary btn-block"
-									>Add first impressions</router-link
-								>
-								{{ product.first_impressions }}
-							</p>
-						</div>
-						<div class="pane">
-							<div class="header">
-								<p>Product settings</p>
+							<div class="pane">
+								<div class="header">
+									<p>Description</p>
+								</div>
+								<p class="content">
+									<router-link
+										:to="
+											'/me/p/' +
+												this.$route.params.id +
+												'/edit'
+										"
+										v-if="product.description == ''"
+										class="btn btn-outline-primary btn-block"
+										>Add description</router-link
+									>
+									{{ product.description }}
+								</p>
 							</div>
-							<div class="body">
-								<button
-									class="btn btn-success btn-block"
-									v-if="product.type == 'wishlist'"
-									@click="addToCollection"
-								>
-									Add to collection
-								</button>
-								<router-link
-									:to="
-										'/me/p/' +
-											this.$route.params.id +
-											'/edit'
-									"
-									class="btn btn-block btn-primary"
-								>
-									Edit product
-								</router-link>
+							<div class="pane" v-if="product.type != 'wishlist'">
+								<div class="header">
+									<p>First impressions</p>
+								</div>
+								<p class="content">
+									<router-link
+										:to="
+											'/me/p/' +
+												this.$route.params.id +
+												'/edit'
+										"
+										v-if="product.first_impressions == ''"
+										class="btn btn-outline-primary btn-block"
+										>Add first impressions</router-link
+									>
+									{{ product.first_impressions }}
+								</p>
+							</div>
+							<div class="pane">
+								<div class="header">
+									<p>Product settings</p>
+								</div>
+								<div class="body">
+									<button
+										class="btn btn-success btn-block"
+										v-if="product.type == 'wishlist'"
+										@click="addToCollection"
+									>
+										Add to collection
+									</button>
+									<router-link
+										:to="
+											'/me/p/' +
+												this.$route.params.id +
+												'/edit'
+										"
+										class="btn btn-block btn-primary"
+									>
+										Edit product
+									</router-link>
+									<router-link
+										:to="
+											'/me/p/' +
+												this.$route.params.id +
+												'/declutter'
+										"
+										class="btn btn-block btn-outline-danger"
+										v-if="product.status != '8declutter'"
+									>
+										Declutter
+									</router-link>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -347,6 +447,10 @@ export default {
 			bought_date: new Date(),
 			expire_date: new Date(),
 			expired: false,
+			fromUser: {
+				photo: "",
+				name: ""
+			},
 			product: {
 				pans: {
 					done: 0,
@@ -415,6 +519,9 @@ export default {
 					if (data.err) {
 						document.location.href = "/404";
 					} else {
+						if (data.from_user_id != null) {
+							this.getFromUser(data.from_user_id);
+						}
 						this.product = data;
 						this.loading = false;
 						this.bought_date = new Date(data.bought_at);
@@ -425,6 +532,28 @@ export default {
 						}, 10);
 					}
 				});
+		},
+		getFromUser(userId) {
+			fetch(this.$store.getters.apiUrl + "users/findID/" + userId, {
+				headers: {
+					Authorization: this.$store.getters.token
+				}
+			})
+				.then(res => res.json())
+				.then(user => {
+					this.fromUser = Object.assign({}, user);
+				});
+		},
+		acceptGift() {
+			this.product.status = "0inuse";
+			fetch(this.$store.getters.apiUrl + "products/edit", {
+				method: "PUT",
+				headers: {
+					Authorization: this.$store.getters.token,
+					"Content-type": "application/json"
+				},
+				body: JSON.stringify({ product: this.product })
+			});
 		},
 		checkExpired(date) {
 			this.expire_date = new Date(
@@ -474,25 +603,6 @@ export default {
 					.querySelector(".product > .header .thumbnail")
 					.removeAttribute("show");
 			}
-			document.addEventListener("scroll", () => {
-				if (
-					document.location.href.includes("/me/p/") &&
-					!document.location.href.includes("/edit")
-				) {
-					if (
-						document.documentElement.scrollTop >
-						window.innerHeight / 3
-					) {
-						document
-							.querySelector(".product > .header .thumbnail")
-							.setAttribute("show", true);
-					} else {
-						document
-							.querySelector(".product > .header .thumbnail")
-							.removeAttribute("show");
-					}
-				}
-			});
 		},
 		rate(number) {
 			if (number > 0 && number < 11) {
@@ -656,7 +766,7 @@ export default {
 			padding: 0.5rem;
 			border: 1px solid rgba(#000, 0.1);
 			border-radius: 1.5rem;
-            font-size: 1rem;
+			font-size: 1rem;
 			display: inline-block;
 			//background: #000;
 			//color: white;
@@ -671,6 +781,22 @@ export default {
 					right: -4px;
 					bottom: 0;
 				}
+			}
+		}
+		.from {
+			.from-photo {
+				width: 50px;
+				height: 50px;
+				background-size: cover;
+				background-position: center;
+				background-repeat: no-repeat;
+			}
+			.name {
+				display: flex;
+				align-items: center;
+				font-weight: 1000;
+				font-size: 1.2rem;
+				color: black;
 			}
 		}
 	}
