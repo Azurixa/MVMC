@@ -99,7 +99,8 @@ router.put('/edit', isAuth, (req, res) => {
                 uses: product.uses,
                 price: product.price,
                 type: product.type,
-                from_user_id: product.from_user_id
+                from_user_id: product.from_user_id,
+                user_id: product.user_id
             }
         ).then(() => {
             res.json({ msg: 'Product successfully updated' });
