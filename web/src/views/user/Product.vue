@@ -97,13 +97,13 @@
 													v-if="
 														index <= product.rating
 													"
-													class="rating-mark bx bxs-star h2 text-primary"
+													class="rating-mark bx bxs-star h3 text-primary"
 												></i>
 												<i
 													v-if="
 														index > product.rating
 													"
-													class="rating-mark bx bx-star h2 text-primary"
+													class="rating-mark bx bx-star h3 text-primary"
 												></i>
 											</span>
 										</p>
@@ -262,7 +262,9 @@
 										</div>
 										<div class="col-10 name text-black">
 											{{ fromUser.name }}
-											<span class="badge badge-primary ml-2">
+											<span
+												class="badge badge-primary ml-2"
+											>
 												{{ fromUser.level }}
 											</span>
 										</div>
@@ -606,6 +608,20 @@ export default {
 					.querySelector(".product > .header .thumbnail")
 					.removeAttribute("show");
 			}
+			document.addEventListener("scroll", () => {
+				if (
+					document.documentElement.scrollTop >
+					window.innerHeight / 3
+				) {
+					document
+						.querySelector(".product > .header .thumbnail")
+						.setAttribute("show", true);
+				} else {
+					document
+						.querySelector(".product > .header .thumbnail")
+						.removeAttribute("show");
+				}
+			});
 		},
 		rate(number) {
 			if (number > 0 && number < 11) {

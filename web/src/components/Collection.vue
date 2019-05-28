@@ -74,12 +74,12 @@
 							>
 								<div class="row">
 									<div class="col-10">
-										<h3 class="m-0">
+										<h4 class="m-0">
 											{{ category.category }}
 											<small>
 												x{{ category.products.length }}
 											</small>
-										</h3>
+										</h4>
 									</div>
 									<div class="col-2">
 										<h3 class="m-0">
@@ -239,7 +239,7 @@ export default {
 		background-color: #fefefe;
 		width: 100%;
 		margin-top: 3px;
-		padding: 1rem;
+		padding: 0.5rem 1rem;
 		border: {
 			bottom: 1px solid rgba(#000, 0.1);
 		}
