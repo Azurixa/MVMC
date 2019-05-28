@@ -76,10 +76,9 @@ router.get('/product/:id', isAuth, (req, res) => {
 router.put('/edit', isAuth, (req, res) => {
     const product = req.body.product;
 	const expAdd = req.body.expAdd;
+	let user_id = req.user._id;
 	if (product.user_id) {
-		const user_id = product.user_id;
-	} else {
-		const user_id = req.user._id;
+		user_id = product.user_id;
 	}
 
     if (product) {
@@ -106,7 +105,7 @@ router.put('/edit', isAuth, (req, res) => {
                 price: product.price,
                 type: product.type,
                 from_user_id: product.from_user_id,
-                user_id
+                user_id: user_id
             }
         ).then(() => {
             res.json({ msg: 'Product successfully updated' });
