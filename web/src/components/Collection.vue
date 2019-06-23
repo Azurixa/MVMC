@@ -281,9 +281,9 @@ export default {
 				background-position: center;
 				background-size: cover;
 				background-repeat: no-repeat;
-				&.empty {
-					filter: grayscale(100%);
-				}
+				// &.empty {
+				// 	filter: grayscale(100%);
+				// }
 			}
 			.info {
 				width: 70%;

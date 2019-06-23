@@ -236,7 +236,8 @@
 									class="btn btn-sm btn-outline-primary"
 									v-if="
 										product.price == 0 &&
-											product.status != '7gift'
+											product.status != '7gift' &&
+											product.status != '8declutter'
 									"
 									>Add price</router-link
 								>
@@ -279,6 +280,33 @@
 										>
 											Accept gift
 										</button>
+									</div>
+								</div>
+
+								<div v-if="toUser.name != ''" class="mt-2 from">
+									<small>Given to</small>
+									<div class="row">
+										<div class="col-2 text-center">
+											<div
+												class="from-photo"
+												:style="{
+													'background-image':
+														'url(' +
+														$store.getters.apiUrl +
+														'images/profile/' +
+														toUser.photo +
+														')'
+												}"
+											></div>
+										</div>
+										<div class="col-10 name text-black">
+											{{ toUser.name }}
+											<span
+												class="badge badge-primary ml-2"
+											>
+												{{ toUser.level }}
+											</span>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -356,7 +384,10 @@
 												this.$route.params.id +
 												'/edit'
 										"
-										v-if="bought_date.getFullYear() < 2000"
+										v-if="
+											bought_date.getFullYear() < 2000 &&
+												product.status != '8declutter'
+										"
 										class="btn btn-outline-primary btn-block"
 									>
 										Add dates
@@ -374,7 +405,10 @@
 												this.$route.params.id +
 												'/edit'
 										"
-										v-if="product.description == ''"
+										v-if="
+											product.description == '' &&
+												product.status != '8declutter'
+										"
 										class="btn btn-outline-primary btn-block"
 										>Add description</router-link
 									>
@@ -392,14 +426,20 @@
 												this.$route.params.id +
 												'/edit'
 										"
-										v-if="product.first_impressions == ''"
+										v-if="
+											product.first_impressions == '' &&
+												product.status != '8declutter'
+										"
 										class="btn btn-outline-primary btn-block"
 										>Add first impressions</router-link
 									>
 									{{ product.first_impressions }}
 								</p>
 							</div>
-							<div class="pane">
+							<div
+								class="pane"
+								v-if="product.status != '8declutter'"
+							>
 								<div class="header">
 									<p>Product settings</p>
 								</div>
@@ -428,7 +468,6 @@
 												'/declutter'
 										"
 										class="btn btn-block btn-outline-danger"
-										v-if="product.status != '8declutter'"
 									>
 										Declutter
 									</router-link>
@@ -453,6 +492,10 @@ export default {
 			expire_date: new Date(),
 			expired: false,
 			fromUser: {
+				photo: "",
+				name: ""
+			},
+			toUser: {
 				photo: "",
 				name: ""
 			},
@@ -527,6 +570,9 @@ export default {
 						if (data.from_user_id != null) {
 							this.getFromUser(data.from_user_id);
 						}
+						if (data.to_user_id != null) {
+							this.getToUser(data.to_user_id);
+						}
 						this.product = data;
 						this.loading = false;
 						this.bought_date = new Date(data.bought_at);
@@ -547,6 +593,17 @@ export default {
 				.then(res => res.json())
 				.then(user => {
 					this.fromUser = Object.assign({}, user);
+				});
+		},
+		getToUser(userId) {
+			fetch(this.$store.getters.apiUrl + "users/findID/" + userId, {
+				headers: {
+					Authorization: this.$store.getters.token
+				}
+			})
+				.then(res => res.json())
+				.then(user => {
+					this.toUser = Object.assign({}, user);
 				});
 		},
 		acceptGift() {
