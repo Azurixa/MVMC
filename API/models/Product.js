@@ -62,6 +62,9 @@ const productSchema = new mongoose.Schema({
     from_user_id: {
         type: String
     },
+    to_user_id: {
+        type: String
+    },
     pans: {
         all: {
             type: Number,

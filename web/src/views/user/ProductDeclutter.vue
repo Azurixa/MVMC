@@ -218,10 +218,50 @@ export default {
 				this.updateProduct();
 			} else if (this.what == "give") {
 				if (this.product.category != "") {
+					// Create new product with decluttered flag for this user
+					const oldDecluttered = Object.assign({}, this.product);
+					oldDecluttered.to_user_id = this.userGive._id;
+
+					// Edit source product
 					this.product.from_user_id = this.user._id;
 					this.product.user_id = this.userGive._id;
 					this.product.status = "7gift";
-					this.updateProduct();
+
+					fetch(this.$store.getters.apiUrl + "products/new", {
+						method: "POST",
+						headers: {
+							Authorization: this.$store.getters.token,
+							"Content-type": "application/json"
+						},
+						body: JSON.stringify(oldDecluttered)
+					})
+						.then(res => res.json())
+						.then(data => {
+							// After creating product update this product with old stats
+							oldDecluttered._id = data._id;
+							oldDecluttered.status = "8declutter";
+
+							fetch(
+								this.$store.getters.apiUrl + "products/edit",
+								{
+									method: "PUT",
+									headers: {
+										Authorization: this.$store.getters
+											.token,
+										"Content-type": "application/json"
+									},
+									body: JSON.stringify({
+										product: oldDecluttered
+									})
+								}
+							)
+								.then(res => res.json())
+								.then(data => {
+									// update final product
+
+									this.updateProduct();
+								});
+						});
 				}
 			}
 		},

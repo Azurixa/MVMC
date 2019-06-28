@@ -23,7 +23,8 @@ router.post('/new', isAuth, (req, res) => {
         type,
         bought_at,
         expire_months,
-        price
+        price,
+        status
     } = req.body;
 
     if (name && brand && category && type) {
@@ -41,7 +42,8 @@ router.post('/new', isAuth, (req, res) => {
             },
             bought_at,
             expire_months,
-            price
+            price,
+            status
         }).then(product => {
             if (type != 'wishlist') {
                 experience(req.user._id, 120);
@@ -105,6 +107,7 @@ router.put('/edit', isAuth, (req, res) => {
                 price: product.price,
                 type: product.type,
                 from_user_id: product.from_user_id,
+                to_user_id: product.to_user_id,
                 user_id: user_id
             }
         ).then(() => {

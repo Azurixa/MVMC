@@ -666,17 +666,19 @@ export default {
 					.removeAttribute("show");
 			}
 			document.addEventListener("scroll", () => {
-				if (
-					document.documentElement.scrollTop >
-					window.innerHeight / 3
-				) {
-					document
-						.querySelector(".product > .header .thumbnail")
-						.setAttribute("show", true);
-				} else {
-					document
-						.querySelector(".product > .header .thumbnail")
-						.removeAttribute("show");
+				if (document.querySelector(".product-show") != null) {
+					if (
+						document.documentElement.scrollTop >
+						window.innerHeight / 3
+					) {
+						document
+							.querySelector(".product > .header .thumbnail")
+							.setAttribute("show", true);
+					} else {
+						document
+							.querySelector(".product > .header .thumbnail")
+							.removeAttribute("show");
+					}
 				}
 			});
 		},
