@@ -227,6 +227,7 @@ router.post('/photo', isAuth, (req, res) => {
     }
 });
 
+// Prouct DELETE
 router.delete('/photo', isAuth, (req, res) => {
     const _id = req.body._id;
     const photos = req.body.photos;
