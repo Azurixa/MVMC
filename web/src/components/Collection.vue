@@ -63,11 +63,9 @@
 						class="col-lg-4 p-2"
 						v-for="(category, index) in collection"
 						:key="'category_' + index"
+						v-if="category.products.length > 0"
 					>
-						<div
-							class="category"
-							v-if="category.products.length > 0"
-						>
+						<div class="category">
 							<div
 								class="category-header"
 								onClick="this.nextElementSibling.toggleAttribute('show')"
@@ -112,7 +110,27 @@
 									></div>
 									<div class="info">
 										<p class="brand">{{ product.brand }}</p>
-										<p class="name">{{ product.name }}</p>
+										<p class="name">
+											{{ product.name }}
+											<span
+												class="badge badge-info mr-1"
+												v-if="
+													product.from_user_id != null
+												"
+												><i
+													class="bx bx-cloud-download"
+												></i
+											></span>
+											<span
+												class="badge badge-success"
+												v-if="
+													product.to_user_id != null
+												"
+												><i
+													class="bx bx-cloud-upload"
+												></i
+											></span>
+										</p>
 										<p class="rating">
 											<span>
 												{{ product.rating }}
@@ -168,13 +186,13 @@ export default {
 	},
 	methods: {
 		toggleFilter(filter) {
-            this.filters = [];
+			this.filters = [];
 			// if (this.filters.includes(filter)) {
 			// 	this.filters.splice(this.filters.indexOf(filter), 1);
 			// } else {
 			// 	this.filters.push(filter);
-            // }
-            this.filters.push(filter);
+			// }
+			this.filters.push(filter);
 			this.getCollection();
 		},
 		getCollection() {
@@ -244,6 +262,10 @@ export default {
 			bottom: 1px solid rgba(#000, 0.1);
 		}
 		border-radius: 0 0 1rem 1rem;
+
+        h4, h3 {
+            font-size: 1rem;
+        }
 	}
 	.category-body {
 		height: 0;
@@ -292,15 +314,16 @@ export default {
 
 				.brand {
 					font-weight: 100;
+                    font-size: 0.8rem;
 					height: 1rem;
 					margin: 0;
 				}
 				.name {
 					font-weight: 1000;
-					height: 1.9rem;
+					height: 1.3rem;
 					overflow: hidden;
 					word-wrap: break-word;
-					font-size: 1.4rem;
+					font-size: 1rem;
 				}
 				.rating {
 					margin: 0;

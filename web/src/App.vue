@@ -31,6 +31,9 @@ export default {
 small {
     text-transform: none !important;
 }
+.badge {
+    border-radius: 50%;
+}
 .btn {
 	text-transform: none;
 	cursor: pointer;
